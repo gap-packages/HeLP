@@ -1,3 +1,10 @@
+Changes v2.1 -> v2.2
+
+* Package can be loaded even if zsolve was not found.  An error is indicated explaining thesituation when a function is called that needs zsolve but zsolve was not found when loading the package.
+
+* The functions HeLP_WithGivenOrderSConstant and HeLP_VerifySolution give more output in InfoLevel 1 or higher on the number of solutions
+
+
 Changes v2.0 -> v2.1
 
 * HeLP_WithGivenOrder always returns a value (in the case there are infinitely many solutions, the function returns "infinite", in case the function can't be applied -- the characteristic of the Brauer table divides the order or s-constant characters can't be used -- the function returns "non-admissible")

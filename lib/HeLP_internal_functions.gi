@@ -6,14 +6,16 @@ MakeReadWriteGlobal("HeLP_sol");
 
 # the global varaiable "HeLP_settings" contains as first entry a boolean determining whether redund will be used and as second entry the precision with which 4ti2 is called
 
-if IO_FindExecutable( "zsolve" ) = fail then
-  Error("The executable 'zsolve' provided by the software 4ti2 (www.4ti2.de) was not found.\n  Please make sure that it is installed in a directory contained in the PATH variable.");
-fi;
 if IO_FindExecutable( "redund" ) = fail then
   BindGlobal("HeLP_settings", [false, "32"] );
-  Print("The executable 'redund' (from the software lrslib, http://cgm.cs.mcgill.ca/~avis/C/lrs.html) was not found.\nThe calculations will be performed without using 'redund'.\n We recommend to get the lrslib-package installed in a directory contained in the PATH variable, as the use of it can make the calculations significantly faster.\n");
+#  Print("The executable 'redund' (from the software lrslib, http://cgm.cs.mcgill.ca/~avis/C/lrs.html) was not found.\nThe calculations will be performed without using 'redund'.\n We recommend to get the lrslib-package installed in a directory contained in the PATH variable, as the use of it can make the calculations significantly faster.\n");
 else
   BindGlobal("HeLP_settings", [true, "32"] );
+fi;
+if IO_FindExecutable( "zsolve" ) = fail then
+  BindGlobal("HeLP_INTERNAL_zsolve_available", false);
+else
+  BindGlobal("HeLP_INTERNAL_zsolve_available", true);
 fi;
 
 ########################################################################################################
@@ -186,7 +188,11 @@ if HeLP_settings[1] then        # if possible, use redund first to minimize the 
 else                      # redund is not used
   temp := HeLP_INTERNAL_DuplicateFreeSystem(T, a);      # remove multiple times occuring inequalities
 fi;
-solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[2]);
+if HeLP_INTERNAL_zsolve_available then
+  solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[2]);
+else
+  Error("This functionality is not avaialable as 'zsolve' provided by 4ti2 (www.4ti2.de) was not found.  Please make sure that it is installed in a directory contained in the PATH variable.");
+fi;
 # there are infinitely many solutions if there is a base-point, i.e. solutions[1] <> [], and there are translations,
 # i.e. solutions[2] <> [] or solutions[3] <> [] s.t. T*x + a is integral with x = b + \sum l_c v_c 
 # (b \in solutions[1], v_c \in \solutions[2] and l_c non-negative integers (w.l.o.g. l_c < k)).
