@@ -981,23 +981,59 @@ end);
 
 
 ##############################################################################################################
+InstallGlobalFunction(HeLP_Solver, function(arg)
+# Arguments: none or a string
+# return: nothing
+# changes the value of HeLP_settings[1] to the value of the argument of the function
+local h1, h2, h3, h4;
+if arg = [] then
+  Print(HeLP_settings[1], "\n");
+elif Size(arg) = 1 and arg[1] in ["4ti2", "normaliz"] then
+  h1 := HeLP_settings[1];
+  h2 := HeLP_settings[2];
+  h3 := HeLP_settings[3];
+  h4 := HeLP_settings[4];
+  MakeReadWriteGlobal("HeLP_settings");  
+  UnbindGlobal("HeLP_settings");
+  if arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) <> fail then
+    BindGlobal("HeLP_settings", ["4ti2", h2, h3, h4]);
+    Print("'4ti2' will be used from now on.\n");
+  elif arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) = fail then
+    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
+    Print("The executable 'zsolve' (from 4ti2) was not found.\nPlease install 4ti2 in a directory contained in the PATH variable.\nThe calculations will be performed as before.\n");
+  elif arg[1] = "normaliz" and LoadPackage("normaliz") then
+    BindGlobal("HeLP_settings", ["normaliz", h2, h3, h4]);
+    Print("'normaliz' will be used from now on.\n");
+  elif arg[1] = "normaliz" and LoadPackage("normaliz") = fail then
+    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
+    Print("The executable 'ConeOderSo' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.\n");
+  fi;
+else
+  Print("Argument of 'HeLP_Solver' must be empty or \"4ti2\" or \"normaliz\".\n"); 
+fi;
+end);
+
+
+##############################################################################################################
 InstallGlobalFunction(HeLP_UseRedund, function(b)
 # Arguments: boolean
 # return: nothing
-# changes the value of HeLP_settings[1] to the value of the argument of the function
-local h;
+# changes the value of HeLP_settings[2] to the value of the argument of the function
+local h1, h3, h4;
 if IsBool(b) then
-  h := HeLP_settings[2];
+  h1 := HeLP_settings[1];
+  h3 := HeLP_settings[3];
+  h4 := HeLP_settings[4];
   MakeReadWriteGlobal("HeLP_settings");  
   UnbindGlobal("HeLP_settings");
   if b and IO_FindExecutable( "redund" ) <> fail then
-    BindGlobal("HeLP_settings", [b, h]);
+    BindGlobal("HeLP_settings", [h1, b, h3, h4]);
     Print("'redund' will be used from now on.\n");
   elif b and IO_FindExecutable( "redund" ) = fail then
-    BindGlobal("HeLP_settings", [false, h]);
+    BindGlobal("HeLP_settings", [h1, false, h3, h4]);
     Print("The executable 'redund' (from package the lrslib-package) was not found.\nPlease install 'redund' in a directory contained in the PATH variable.\nThe calculations will be performed without using 'redund'.\n");
   else
-    BindGlobal("HeLP_settings", [false, h]);
+    BindGlobal("HeLP_settings", [h1, false, h3, h4]);
     Print("The calculations will be performed without using 'redund' from now on.\n");
   fi;
 else
@@ -1010,16 +1046,43 @@ end);
 InstallGlobalFunction(HeLP_Change4ti2Precision, function(string)
 # Arguments: string
 # return: nothing
-# changes the value of HeLP_settings[2] to the value of the argument
-local h;
+# changes the value of HeLP_settings[3] to the value of the argument
+local h1, h2, h4;
 if string in ["32", "64", "gmp"] then
-  h := HeLP_settings[1];
+  h1 := HeLP_settings[1];
+  h2 := HeLP_settings[2];
+  h4 := HeLP_settings[4];
   MakeReadWriteGlobal("HeLP_settings");
   UnbindGlobal("HeLP_settings");
-  BindGlobal("HeLP_settings", [h, string]);
+  BindGlobal("HeLP_settings", [h1, h2, string, h4]);
   Print("The calculations of 4ti2 will be performed with precision ", string, " from now on.\n");
 else
   Print("Only \"32\", \"64\" and \"gmp\" are allowed as argument of 'HeLP_Change4ti2Precision'.\n");
+fi;
+end);
+
+##############################################################################################################
+InstallGlobalFunction(HeLP_Vertices, function(string)
+# Arguments: string
+# return: nothing
+# changes the value of HeLP_settings[4] to the value of the argument
+local h1, h2, h3;
+if string in ["vertices", "novertices", "default"] then
+  h1 := HeLP_settings[1];
+  h2 := HeLP_settings[2];
+  h3 := HeLP_settings[3];
+  MakeReadWriteGlobal("HeLP_settings");
+  UnbindGlobal("HeLP_settings");
+  BindGlobal("HeLP_settings", [h1, h2, h3, string]);
+  if string = "vertices" then
+    Print("The calculations of normaliz will always compute VerticesOfPolyhedron from now on.\n");
+  elif string = "novertices" then
+    Print("The calculations of normaliz will not compute VerticesOfPolyhedron from now on.\n");
+  elif string = "default" then
+    Print("The calculations of normaliz will compute VerticesOfPolyhedron, if there is a trivial solution, from now on.\n");
+  fi;
+else
+  Print("Only \"vertices\", \"novertices\" and \"default\" are allowed as argument of 'HeLP_Change4ti2Precision'.\n");
 fi;
 end);
 

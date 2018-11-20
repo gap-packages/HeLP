@@ -91,27 +91,11 @@ HeLP_ZC(G);
 #! #I  ZC can't be solved, using the given data, for the orders: [ 4 ].
 #! false
 Size(HeLP_sol[4]);
-#! 20
+#! 10
 #! @EndExample
 
 #!  The group SmallGroup(48,30) is the smallest group for which the HeLP method does not suffice to prove the Zassenhaus Conjecture. However
 #!  (ZC) was proved for this group in <Cite Key="HoefertKimmerle"/>, Proposition 4.2.
-
-#! @BeginExample
-G := SmallGroup(96,65);;
-HeLP_ZC(G);
-#! #I  (ZC) can't be solved, using the given data, for the orders: [ 8 ].
-#! false
-Size(HeLP_sol[8]);
-#! 40
-G := SmallGroup(160,13);;
-HeLP_ZC(G);
-#! true
-#! @EndExample
-#! The Zassenhaus Conjecture for the first group in the above example,
-#! i.e. SmallGroup(96,65), was proved by A. Herman and G. Singh <Cite Key="HermanSingh"/>.
-#! They did not do all the computations for SmallGroup(160,13).
-
 
 #! @BeginExample
 C1 := CharacterTable(SymmetricGroup(5));
@@ -179,7 +163,7 @@ C := CharacterTable("L2(19)");
 HeLP_PQ(C);                   
 #! true
 HeLP_ZC(C);
-#! #I  For the following orders ZC can not be solved, using the given data: [ 10 ].
+#! #I  (ZC) can't be solved, using the given data, for the orders: [ 10 ].
 #! false
 HeLP_sol[10];
 #! [ [ [ 1 ], [ 0, 1 ], [ 0, -1, 1, 0, 1 ] ], 
@@ -238,7 +222,7 @@ HeLP_PQ(C);
 #! false
 #! @EndExample
 #! This example shows the limitations of the program. Using the Brauer table for the prime 7 one can prove (PQ) for PSL(2,49), but this data is not available in GAP at the moment.
-#! The fact that there are no torsion units of order 10 and 15 was proved in <Cite Key="HertweckBrauer"/>, Proposition 6.7. See also the example in Section <Ref Sect='Chapter_Extended_examples_Section_Non-standard_characters'/>.
+#! The fact that there are no torsion units of order 10 and 15 was proved in <Cite Key="HertweckBrauer"/>, Proposition 6.7. See also the example in Section <Ref Sect='Chapter_Extended_examples_Section_Non-standard_characters'/>. The other critical orders were handled in a more general context in <Cite Key="BaMa4prI"/>.
 #! @EndChunk
 
 
@@ -251,7 +235,7 @@ HeLP_WithGivenOrder(C, 5);
 #! [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ]
 HeLP_PrintSolution(5);
 #! Solutions for elements of order 5:
-#! [ [               u ],
+#! [ [               u ],.
 #!   [  [ "5a", "5b" ] ],
 #!   [             --- ],
 #!   [        [ 0, 1 ] ],
@@ -298,6 +282,8 @@ HeLP_sol[4]; HeLP_sol[6];
 #! @BeginExample
 C := CharacterTable("L2(49).2_1");   
 #! CharacterTable( "L2(49).2_1" )
+HeLP_WithGivenOrder(Irr(C), 7);;
+#! #I  Number of solutions for elements of order 7: 1; stored in HeLP_sol[7].
 HeLP_WithGivenOrder(Irr(C){[2]}, 14);
 #! #I  The given data admit infinitely many solutions for elements of order 14.
 HeLP_WithGivenOrder(Irr(C){[44]}, 14);
@@ -456,15 +442,15 @@ IsBound(HeLP_sol[31]);
 
 #! @BeginChunk AllOrdersExample
 #! @BeginExample
-C := CharacterTable("L2(7)");
-#! CharacterTable( "L3(2)" )
-HeLP_WithGivenOrder(C,6);
-#! #I  Number of solutions for elements of order 6: 1; stored in HeLP_sol[6].
-#! [ [ [ 1 ], [ 1 ], [ -2, 3 ] ] ]
-HeLP_AllOrders(C);
+C := CharacterTable(PSL(2,7));         
+#! CharacterTable( Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8) ]) )
+HeLP_ZC(C);        
+#! #I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
 #! #I  (ZC) can't be solved, using the given data, for the orders: [ 6 ].
 #! false
-HeLP_ZC(C);
+HeLP_sol[6] := [ ];
+#! [  ]
+HeLP_AllOrders(C);
 #! true
 #! @EndExample
 #! @EndChunk
