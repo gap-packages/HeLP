@@ -150,6 +150,29 @@ DeclareGlobalFunction( "HeLP_WithGivenOrderAndPA" );
 #! @InsertChunk PAExample
 
 
+#! @Description
+#!  Calculates the admissible partial augmentations for elements of 
+#!  order <A>ord</A> using only the data given in the first argument.
+#!  The first argument is a list, which can contains as entries characters or pairs with first entry a character
+#!  and second entrie an integer or a mixture of these.
+#!  The first argument is understood as follows: If a character <M>\chi</M> is not given in a pair all
+#!  inequalities obtainable by this character are used. If it is given in a pair with the integer <M>m</M>
+#!  the inequalities obtainable from the multiplicity of <K>E(ord)</K> taken to the power <M>m</M>
+#!  as an eigenvalue of a representation affording <M>\chi</M> are used.   
+#!  The function uses the partial augmentations for the powers <M>u^d</M> with <M>d</M>
+#!  divisors of <M>k</M> different from <M>1</M> and <M>k</M> given in <A>partaugs</A>.
+#!  Here, the <M>d</M>'s have to be in a descending order (i.e. the orders of the $u^d$'s
+#!  are ascending). 
+#!  This function only uses the constraints of the HeLP method, but does not apply
+#!  the Wagner test <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+#!  Note that this function will not affect <K>HeLP_sol</K>.
+#! @Arguments list ord partaugs [b]
+#! @Returns List of admissible partial augmentations
+DeclareGlobalFunction( "HeLP_WithGivenOrderAndPAAndSpecificSystem" );
+
+#! @InsertChunk PASSExample
+
+
 #! @Section Checks for specific orders with s-constant characters
 
 #! When considering elements of order $st$ (in absence of elements of this order in the group
