@@ -102,14 +102,15 @@
 
 @Section The Wagner test
 
- In 1995 R. Wagner proved in his Diplomarbeit <Cite Key="Wa"/> a further restriction on the partial augmentations
- of torsion units. His result was however never properly published and is not very well-known. 
- The result is however often helpful,
- so we included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/> and <Ref Func='HeLP_WagnerTest'/> and call it "Wagner test". <P/>
- **Theorem:** (R. Wagner) For a torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M> of order
- <M>p^k*m</M>, where <M>p</M> is a prime number and <M>m \not= 1</M>, the sum of all partial augmentations 
- at conjugacy classes of elements of order <M>p^s</M> is congruent <M>0</M> modulo <M>p</M> for all 
- <M>0\leq s\leq k</M>.<P/>
+ We also included a result motivated by a theorem R. Wagner proved 1995 in his Diplomarbeit <Cite Key="Wa"/>. 
+ This result gives a further restriction on the partial augmentations
+ of torsion units. We included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, 
+ <Ref Func='HeLP_AllOrders'/>, <Ref Func='HeLP_AllOrdersPQ'/> and <Ref Func='HeLP_WagnerTest'/> and call it "Wagner test". <P/>
+ **Theorem:** For a torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M>, a group element $s$,
+ a prime $p$  and a natural number $j$  we have
+ $$ \sum\limits_{x^{p^j} \sim s} \varepsilon_x(u) \equiv \varepsilon_s(u^{p^j}) \ \ \ {\rm{mod}} \ \ p. $$
+ Combining the Theorem with the HeLP-method may only give new insight, if $p^j$ is a proper divisor of the order of $u$.
+ Wagner did obtain this result for $s = 1$, when $\varepsilon_s(u) = 0$ by the Berman-Higman Theorem. 
  In the case that $u$ is of prime power order this is a result of J.A. Cohn and D. Livingstone <Cite Key="CohnLivingstone"/>.
 
  

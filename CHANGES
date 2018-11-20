@@ -1,12 +1,26 @@
+Changes v2.0 -> v2.1
+
+* HeLP_WithGivenOrder always returns a value (in the case there are infinitely many solutions, the function returns "infinite", in case the function can't be applied -- the characteristic of the Brauer table divides the order or s-constant characters can't be used -- the function returns "non-admissible")
+
+* Functionality of the Wagner-Test essentialy improved.
+
+* New function "HeLP_WithGivenOrderAndPAAndSpecificSystem"
+ 
+
+
 Changes v1.0 -> v2.0
 
 * The package now provides an interface to redund from the lrslib software to remove redundant inequalities before solving the system obtained by the HeLP-method.
+
 * There is a new global variable HeLP_settings determining whether 'redund' will be used or not to get rid of redundant equations before using 4ti2.  The variable has true as default value, whenever the executable redund is found by GAP, false otherwise (so that the package can still be used without lrslib being installed).  It also stores the precision with which 4ti2 will be called.  Here, the default value is "32".  The value of HeLP_settings can be influenced by the new functions HeLP_UseRedund and HeLP_Change4ti2Precision.
+
 * HeLP_ZC and HeLP_PQ do not use solutions, which were previously calculated for the group or character table in question, but start all calculations from scratch.
+
 * Bug in HeLP_VerifySolution and related functions fixed (when checking for elements of order k the global factor 1/k was missing)
+
 * New function 'HeLP_PossiblePartialAugmentationsOfPowers' to calculate the possibel partial augmentations for the powers
+
 
 
 TODO:
 * (s,t)-constant characters.
-* function to print the (used) system of the HeLP-equations

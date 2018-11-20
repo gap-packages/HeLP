@@ -388,6 +388,35 @@ HeLP_WithGivenOrderAndPA(C, 12, [ [ 1, 0 ],  [ 0, 1 ], [ 0, 0, 0, 1, 0 ],
 #! @EndChunk
 
 
+#! @BeginChunk PASSExample
+#! @BeginExample
+C := CharacterTable("A5");
+#! CharacterTable( "A5" )
+chi := Irr(C)[2];; psi := Irr(C)[4];
+#! Character( CharacterTable( "A5" ), [ 4, 0, 1, -1, -1 ] )
+HeLP_WithGivenOrderAndPAAndSpecificSystem([[chi, 1], [chi, 2]],
+ 5, [ ], true);
+#! [ [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [ [ -3/5, 2/5 ], [ 2/5, -3/5 ] ], [ 3/5, 3/5 ] ]
+sol5 := HeLP_WithGivenOrderAndPAAndSpecificSystem([[chi, 1], [chi, 2]], 
+ 5, [ ]);      
+#! [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ]
+#! @EndExample
+#! The inequalities in the above examples are:
+#! $$\frac{-3}{5}\varepsilon_{5a}(u) + \frac{2}{5}\varepsilon_{5b}(u) + \frac{3}{5} \in \mathbb{Z}_{\geq 0} \ \ {\rm{and}} \ \ \frac{2}{5}\varepsilon_{5a}(u) + \frac{-3}{5}\varepsilon_{5b}(u) + \frac{3}{5} \in \mathbb{Z}_{\geq 0}. $$
+#! Continuing the above example:
+#! @BeginExample
+HeLP_WithGivenOrderAndPAAndSpecificSystem([psi], 
+ 2*5, [[1], sol5[1][1]], true);     
+#! [ [  ], [ [ 0, -2/5, -2/5 ], [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ],
+#!  [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ], [ 0, 2/5, 2/5 ], 
+#!  [ 0, 1/10, 1/10 ], [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ], 
+#! [ 0, -1/10, -1/10 ] ], [ 0, 1/2, 1/2, 1/2, 1/2, 0, 1/2, 1/2, 1/2, 1/2 ] ]
+HeLP_WithGivenOrderAndPAAndSpecificSystem([[psi, 0], [psi, 2], [psi, 5]], 
+ 2*5, [[1], sol5[2][1]], true); 
+#! [ [  ], [ [ 0, -2/5, -2/5 ], [ 0, 1/10, 1/10 ], [ 0, 2/5, 2/5 ] ], [ 0, 1/2, 0 ] ]
+#! @EndExample
+#! @EndChunk
+
 #! @BeginChunk SCExample
 
 #! @BeginExample
@@ -502,7 +531,23 @@ C := CharacterTable("M22");
 HeLP_WagnerTest(12, [ [ [1], [1], [1,0], [0,0,1], [-3,3,2,3,-4] ] ],C);
 #! [  ]
 #! @EndExample
-#! This example is taken from the appendix of <Cite Key="KonovalovM22"/>.
+#! This example is taken from the appendix of <Cite Key="KonovalovM22"/>.<P/>
+#! Sometimes the Wagner-Test may even prove the Zassenhaus Conjecture:
+#! @BeginExample
+G := SmallGroup(96,187);
+#! <pc group of size 96 with 6 generators>
+C := CharacterTable(G);
+#! CharacterTable( <pc group of size 96 with 6 generators> )
+HeLP_WithGivenOrder(C,4);;
+#! #I  Number of solutions for elements of order 4: 34; stored in HeLP_sol[4].
+HeLP_WagnerTest(4);       
+#! [ [ [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1 ] ],
+#!   [ [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0 ] ],
+#!   [ [ 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0 ] ], 
+#!   [ [ 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0 ] ] ]
+HeLP_ZC(C);
+#! true
+#! @EndExample
 #! @EndChunk
 
 

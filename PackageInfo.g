@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "2.0",
-Date           := "29/07/2015",
+Version        := "2.1",
+Date           := "30/09/2015",
 
 ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
@@ -80,8 +80,8 @@ AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute con
 Dependencies := rec(
   GAP                    := ">=4.7.4",
   NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"] ],
-  SuggestedOtherPackages := [],
-  ExternalConditions     := []
+  SuggestedOtherPackages := [ ],
+  ExternalConditions     := [ ]
 ),
 
 AvailabilityTest := function()
