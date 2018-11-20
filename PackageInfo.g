@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.1",
-Date           := "12/01/2017",
+Version        := "3.2",
+Date           := "20/11/2017",
 
 ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
