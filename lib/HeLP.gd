@@ -26,7 +26,7 @@
 
 #!  This function checks whether the Zassenhaus Conjecture ((ZC) for short, cf. Section
 #!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/>) can be proved
-#!  using the HeLP-method with the data available in GAP.
+#!  using the HeLP method with the data available in GAP.
 
 #! @Description
 #!  <K>HeLP_ZC</K> checks whether the Zassenhaus Conjecture can be solved for
@@ -224,7 +224,8 @@ DeclareGlobalFunction( "HeLP_AddGaloisCharacterSums" );
 #! @Description
 #!  This function does almost the same as <Ref Func='HeLP_ZC'/>. It checks whether the Zassenhaus
 #!  Conjecture can be verified for a group, but does not compute the partial augmentations
-#!  of elements of order $k$, if <K>HeLP_sol[k]</K> already exists.
+#!  of elements of order $k$, if <K>HeLP_sol[k]</K> already exists. It does however verify the solutions
+#!  given in <K>HeLP_sol</K> using all available tables for the group, see <Ref Func='HeLP_VerifySolution'/>. 
 #!  Thus some precalculations using e.g. <Ref Func='HeLP_WithGivenOrder'/> are respected.
 #!  In contrast to <Ref Func='HeLP_ZC'/> 
 #!  this function also does not check whether the group is nilpotent to use the Weiss-result to have an 
@@ -283,15 +284,37 @@ DeclareGlobalFunction( "HeLP_Reset" );
 
 #! @Section Influencing how the Systems of Inequalities are solved
 
-#! HeLP uses currently two external programs (i.e. programs that are not part of the GAP-system):
-#! zsolve from 4ti2 to solve the systems of linear inequalities and redund from lrslib to simplify the  
-#! inequlities before handing them over to zsolve (HeLP can also be used without lrslib installed, but in
-#! general it is recommanded to have lrslib installed).  The following functions can be used to influence
+#! HeLP uses currently three external programs (i.e. programs that are not part of the GAP-system):
+#! zsolve from 4ti2 and/or normaliz to solve the systems of linear inequalities and redund from lrslib to simplify the  
+#! inequlities before handing them over to the solver (HeLP can also be used without lrslib installed. In
+#! general it is recommanded to have lrslib installed, if 4ti2 is used as the solver). The following functions can be used to influence
 #! the behaviour of these external programms.
 
+
 #! @Description
-#!  The function changes the maximum precision of the calculations of 4ti2 to solve the occurring systems of
-#!  linear inequalities.  The possible arguments are <K>"32"</K>, <K>"64"</K> and <K>"gmp"</K>.  After calling the function
+#! This function can be used to change the solver used for the HeLP-system between 4ti2 and normaliz. 
+#! If the function is called without an argument it prints which solver is currently used.
+#! If the argument it is called with is one of the stings "4ti2" or "normaliz", then the solver used
+#! for future calculations is changed to the one given as argument in case this solver is found by the HeLP-package.
+#! If both solvers are found when the package is loaded normaliz is taken as default.
+#! @Arguments [string]
+#! @Returns nothing
+DeclareGlobalFunction("HeLP_Solver");
+
+#! @Description
+#!  This function determines whether HeLP uses 'redund' from the lrslib-package to remove redundant 
+#!  equations from the HeLP system.  If <A>bool</A> is <K>true</K> 'redund' will be used in all calculation that follow,
+#!  if it is <K>false</K>, 'redund' will not be used (which might take significantly longer).  
+#!  If 'redund' was not found by GAP a warning will be 
+#!  printed and the calculations will be performed without 'redund'.
+#!  As default 'redund' will be used in all calculations, if 4ti2 is the chosen solver, and 'redund' will not be used, if normaliz is used.
+#! @Arguments bool
+#! @Returns nothing
+DeclareGlobalFunction("HeLP_UseRedund");
+
+#! @Description
+#!  This function changes the maximum precision of the calculations of 4ti2 to solve the occurring systems of
+#!  linear inequalities. The possible arguments are <K>"32"</K>, <K>"64"</K> and <K>"gmp"</K>.  After calling the function
 #!  the new precision will be used until this function is used again. The default value is <K>"32"</K>. 
 #!  A higher precision causes slower calculations. 
 #!  But this function might be used to increase the precision of 4ti2, when one gets an error message like
@@ -299,22 +322,20 @@ DeclareGlobalFunction( "HeLP_Reset" );
 #!  Results were near maximum precision (32bit).
 #!  Please restart with higher precision!"
 #!  stating that the results were close to the maximum 4ti2-precision.
+#!  normaliz does automatically change its precision, when it reaches an overflow.
 #! @Arguments string
 #! @Returns nothing
 DeclareGlobalFunction("HeLP_Change4ti2Precision");
 
-#! @Description
-#!  The function determines whether HeLP uses 'redund' from the lrslib-package to remove redundant 
-#!  equations from the HeLP system.  If <A>bool</A> is <K>true</K> 'redund' will be used in all calculation that follow,
-#!  if it is <K>false</K>, 'redund' will not be used (which might take significantly longer).  
-#!  If 'redund' was not found by GAP a warning will be 
-#!  printed and the calculations will be performed without 'redund'.
-#!  As default 'redund' will be used in all calculations.
-#! @Arguments bool
-#! @Returns nothing
-DeclareGlobalFunction("HeLP_UseRedund");
-
 #! @InsertChunk PRExample
+
+#! @Description
+#! If normlaiz is used as the solver of the HeLP-system this function influences, whether the "VerticesOfPolyhedron"
+#! are computed by normaliz. By default these are only computed, if the system has a trivial solution.
+#! The function takes "vertices", "novertices" and "default" as arguments. If you do not understand what this means, don't worry.
+#! @Arguments string
+#! @Returns nothing
+DeclareGlobalFunction("HeLP_Vertices");
 
 
 #! @Section Checking solutions, calculating and checking solutions

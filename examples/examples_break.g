@@ -9,6 +9,8 @@
 #! @BeginExample
 C := CharacterTable(SmallGroup(392,30));
 #! CharacterTable( <pc group of size 392 with 5 generators> )
+HeLP_Solver("4ti2");
+#! '4ti2' will be used from now on.
 HeLP_UseRedund(false);
 #! The calculations will be performed without using 'redund' from now on.
 HeLP_ZC(C);
@@ -37,3 +39,4 @@ HeLP_ZC(C);
 
 HeLP_UseRedund(true);
 HeLP_Change4ti2Precision("32");
+

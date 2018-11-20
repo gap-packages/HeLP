@@ -1,6 +1,13 @@
+Changes v2.2 -> v3.0
+
+* Normaliz is included as a possible solver. 
+
+* Functions included to switch between the solvers. For normaliz a function is included, to influence whether normaliz computes vertices of polyhedra.
+
+
 Changes v2.1 -> v2.2
 
-* Package can be loaded even if zsolve was not found.  An error is indicated explaining thesituation when a function is called that needs zsolve but zsolve was not found when loading the package.
+* Package can be loaded even if zsolve was not found.  An error is indicated explaining the situation when a function is called that needs zsolve but zsolve was not found when loading the package.
 
 * The functions HeLP_WithGivenOrderSConstant and HeLP_VerifySolution give more output in InfoLevel 1 or higher on the number of solutions
 

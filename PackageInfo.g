@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "2.2",
-Date           := "23/12/2015",
+Version        := "3.0",
+Date           := "03/03/2016",
 
 ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
@@ -68,7 +68,7 @@ rec(
      )
 ],
 
-Status := "dev",
+Status := "deposited",
 
 README_URL := 
   Concatenation( ~.PackageWWWHome, "README" ),
@@ -78,8 +78,8 @@ PackageInfoURL :=
 AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.",
                   
 Dependencies := rec(
-  GAP                    := ">=4.7.4",
-  NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"] ],
+  GAP                    := ">=4.8.2",
+  NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),
@@ -96,14 +96,15 @@ Keywords := ["HeLP method", "torsion units",
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-                    "&copyright; 2015 by Andreas Bächle and Leo Margolis<P/>\n\n",
+                    "&copyright; 2016 by Andreas Bächle and Leo Margolis<P/>\n\n",
                     "This package is free software and may be distributed under the terms and conditions of the\n",
                     "GNU Public License Version 2.\n"
                 ),
         Acknowledgements := Concatenation(
-                    "The authors are grateful to Sebastian Gutsche for endowing GAP with the 4ti2-Interface.\n",
-                    "We also would like to thank him for many very helpful discussions.\n",
-                    "We also want to give credits to the developers of the software 4ti2.\n",
+                    "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
+                    "with a 4ti2-Interface and a normlaiz-Interface.\n",
+                    "We also would like to thank Gutsche and Söger for many very helpful discussions.\n",
+                    "We also want to give credits to the developers of the softwares 4ti2 and normaliz.\n",
                     "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",
                     "We moreover thank Wolfgang Kimmerle for introducing us to the beautiful world of group rings.\n",
                     "The development of this package was partially supported by the Research Foundation Flanders \n",

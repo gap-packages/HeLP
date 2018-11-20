@@ -134,93 +134,96 @@ HeLP_sol;
 @Section Saving time
 The most time consuming operation when using the functions of this package is solving 
 the system of inequalities given by the HeLP method, see Section <Ref Sect='Chapter_Background_Section_The_HeLP_equations'/>.
-This package uses the program 4ti2 to do this and it is not completely clear to the authors of this package
-which input is solved faster by 4ti2. In any case it is helpful to reduce the number of variables, using 
+This package uses the programs 4ti2 and/or normaliz to do this and it is not completely clear to the authors of this package
+which input is solved faster by these programs. In any case it is helpful to reduce the number of variables, using 
 e.g. $p$-constant characters, and in many situations it is useful to reduce the number of inequalities, i.e. of used characters. <P/>
 To measure the time a function needs we use <K>IO_gettimeofday</K> from the IO-package rather than functions like <K>time</K> or <K>Runtime</K>,
-since these measure only the GAP time, but do not return the time the functions spend using 4ti2.
+since these measure only the GAP time, but do not return the time the functions spend using 4ti2 or normaliz.
 We used the following function (which is essentially due to Alexander Konovalov) to meassure the time used for the computation:
 @BeginExample
 #! TimeFunction := function(f, args)
-#! # input: the function of which the computing time should be measured 
-#! #        and the list of arguments for this function
-#! # output: time needed for the calculations in seconds
-#! local start;
-#! start := IO_gettimeofday();
-#! CallFuncList(f,args);
-#! return IO_gettimeofday().tv_sec - start.tv_sec;
-#! end; 
+#!  # input: the function of which the computing time should be measured 
+#!  #        and the list of arguments for this function
+#!  # output: time needed for the calculations in seconds
+#!  local start;
+#!  start := IO_gettimeofday();
+#!  CallFuncList(f,args);
+#!  return IO_gettimeofday().tv_sec - start.tv_sec;
+#!  end; 
 @EndExample
-All times will be given in seconds. The computations were perfomed on an 1,6 GHz kernel.<P/>
+All times will be given in seconds. The computations were perfomed on an a machine with four 2,6 GHz kernels.<P/>
 A lot of time might be saved by testing only a few characters instead of a whole character table:
 @BeginExample
 C := CharacterTable("L2(49)");;
-TimeFunction(HeLP_WithGivenOrder, [C,35]);
+HeLP_Solver("normaliz");
+#! 'normaliz' will be used from now on.
+TimeFunction(HeLP_WithGivenOrder, [C,35]);           
 #! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
-#! 7                 # I.e.: The computation took 7 seconds.
-TimeFunction(HeLP_FindAndVerifySolution, [C,35]);
+#! 6  # I.e.: The computation took 6 seconds.
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[2]}, 35]);
 #! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
-#! 1
-TimeFunction(HeLP_FindAndVerifySolution, [Irr(C){[2]}, 35]);
+#! 0
+HeLP_Solver("4ti2");                                 
+#! '4ti2' will be used from now on.
+TimeFunction(HeLP_WithGivenOrder, [C,35]);           
+#! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+#! 6
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[2]}, 35]);
 #! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
 #! 1
 @EndExample
-I.e.: Using only one character instead of all of them is about seven times faster in this situation and 
+
+I.e.: Using only one character instead of all of them is about six times faster in this situation and 
 this is also quickly found by <K>HeLP_FindAndVerifySolution</K>. <P/> 
 Using only a few characters might even be a life saver:
 @BeginExample
-C := CharacterTable("L4(3).2^2");
-#! CharacterTable( "L4(3).2^2" )
+C := CharacterTable("L4(3).2^2");;
 HeLP_WithGivenOrder(C, 3);;
 #! #I  Number of solutions for elements of order 3: 63; stored in HeLP_sol[3].
 HeLP_WithGivenOrder(C, 13);;
 #! #I  Number of solutions for elements of order 13: 198; stored in HeLP_sol[13].
 SetInfoLevel(HeLP_Info,4);
+HeLP_Solver("4ti2");
+#! '4ti2' will be used from now on.
+HeLP_UseRedund(true);
+#! 'redund' will be used from now on.
 TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
 #! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
-#! 1301
+#! 438
 HeLP_UseRedund(false);
+#! The calculations will be performed without using 'redund' from now on.
 TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
 #! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
-#! 670
-@EndExample
-The command <K>HeLP_WithGivenOrder(C,39);</K> started at the same time on another kernel was at possibility 
-1228 out of 12474 when the above example was already finished. Started without redund it was at possibility 5 out of 12474 and is probably still computing while you read this. <P/> 
-If you want to check, if the solutions you found using only a few characters satisfy the constraints of all characters, you can use <Ref Func='HeLP_VerifySolution'/>:
-@BeginExample
-C := CharacterTable("L3(7).2");
-#! CharacterTable( "L3(7).2" )
-HeLP_WithGivenOrder(C,7);;
-#! #I  Number of solutions for elements of order 7: 153; stored in HeLP_sol[7].
-SetInfoLevel(HeLP_Info,4);
-TimeFunction(HeLP_WithGivenOrder, [Irr(C){[3,7,9,10]}, 21]);
-#! #I  Number of solutions for elements of order 21: 416; stored in HeLP_sol[21].
-#! 2757
-Set(Filtered(OrdersClassRepresentatives(C), x -> IsPrime(x))); 
-#! [ 2, 3, 7, 19 ] # The primes dividing the order of the group
-HeLP_VerifySolution(C mod 2, 21);;
-HeLP_VerifySolution(C mod 19, 21);;
-Size(HeLP_sol[21]);
-#! 416
-@EndExample
-#! Thus the computed partial augmentations are best possible using HeLP. Compare the time to:
-@BeginExample
-TimeFunction(HeLP_WithGivenOrder, [C, 21]);
-#! #I  Number of solutions for elements of order 21: 416; stored in HeLP_sol[21].
-#! 3460
+#! 430
+HeLP_Solver("normaliz");
+#! 'normaliz' will be used from now on.
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+#! 340
+HeLP_UseRedund(true); 
+#! 'redund' will be used from now on.
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+#! 419
+HeLP_UseRedund(false);
+#! The calculations will be performed without using 'redund' from now on.
+HeLP_Solver("normaliz");
+#! 'normaliz' will be used from now on.
+TimeFunction(HeLP_WithGivenOrder, [Irr(C), 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+#! 6234
 @EndExample
 
 Sometimes it is helpful to look at groups containing the group of interest:
 @BeginExample
-C := CharacterTable("2F4(2)'");
-#! CharacterTable( "2F4(2)'" )
+C := CharacterTable("2F4(2)'");;
 HeLP_WithGivenOrder(C, 13);;
 #! #I  Number of solutions for elements of order 13: 316; stored in HeLP_sol[13].
 HeLP_WithGivenOrder(C, 3);;
 #! #I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].
 TimeFunction(HeLP_WithGivenOrder, [C, 39]);
 #! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].
-#! 1946
+#! 80
 C:=CharacterTable("2F4(2)'.2");
 #! CharacterTable( "2F4(2)'.2" )
 TimeFunction(HeLP_WithGivenOrder, [C, 39]);
@@ -233,26 +236,32 @@ This is also a good example to use $p$-constant characters:
 C:=CharacterTable("2F4(2)'");
 #! CharacterTable( "2F4(2)'" )
 TimeFunction(HeLP_WithGivenOrderSConstant, [C, 13, 3]);
-#! #I    Partial augmentations for elements of order 3 not yet calculated.  Restart
-#!  for this order.
 #! #I    Number of non-trivial 13-constant characters in the list: 19.           
 #! 0
 @EndExample
 
-For some groups switching redund on and off gives major improvements.
+If using 4ti2, for some groups switching redund on and off gives major improvements.
 @BeginExample
-C := CharacterTable(SmallGroup(160,91));
-#! CharacterTable( <pc group of size 160 with 6 generators> )
+HeLP_Solver("4ti2");
+#! '4ti2' will be used from now on.
+HeLP_UseRedund(true);
+#! 'redund' will be used from now on.
+C := CharacterTable(SmallGroup(160,91));;
 TimeFunction(HeLP_ZC, [C]);
-#! 41                                                                            
+#! 26
+HeLP_Solver("normaliz");
+#! 'normaliz' will be used from now on.                                                                            
+TimeFunction(HeLP_ZC, [C]);
+#! 12
 @EndExample
-Without redund <K>HeLP_ZC(C)</K> ran for over 400 hours without a result.
+Using 4ti2 but not redund <K>HeLP_ZC(C)</K> ran for over 400 hours without a result.
 @BeginExample
-C := CharacterTable(SmallGroup(96,12));
-#! CharacterTable( <pc group of size 96 with 6 generators> )
+C := CharacterTable(SmallGroup(96,12));;
 HeLP_UseRedund(false);
+#! The calculations will be performed without using 'redund' from now on.
+HeLP_Solver("4ti2");;
 TimeFunction(HeLP_ZC, [C]);
-#! 6                                                                            
+#! 2                                                                            
 @EndExample
 Running this example using redund the computations does not proceed for elements of order 12.
 

@@ -4,19 +4,12 @@ MakeReadWriteGlobal("HeLP_sol");
 # HeLP_sol will be set as global variable when loading the package to have a warning in case it is already ued as a variable
 # afterwards it is made RaedWrite so that the user can also change its value.
 
-# the global varaiable "HeLP_settings" contains as first entry a boolean determining whether redund will be used and as second entry the precision with which 4ti2 is called
+# the global varaiable "HeLP_settings" contains as first entry a string telling which solver to use,
+# as a second entry a boolean determining whether redund will be used, as a third entry the precision with which 4ti2 is called
+# and finally as the fourth entry whether normaliz will compute VerticesOfPolyhedron
 
-if IO_FindExecutable( "redund" ) = fail then
-  BindGlobal("HeLP_settings", [false, "32"] );
-#  Print("The executable 'redund' (from the software lrslib, http://cgm.cs.mcgill.ca/~avis/C/lrs.html) was not found.\nThe calculations will be performed without using 'redund'.\n We recommend to get the lrslib-package installed in a directory contained in the PATH variable, as the use of it can make the calculations significantly faster.\n");
-else
-  BindGlobal("HeLP_settings", [true, "32"] );
-fi;
-if IO_FindExecutable( "zsolve" ) = fail then
-  BindGlobal("HeLP_INTERNAL_zsolve_available", false);
-else
-  BindGlobal("HeLP_INTERNAL_zsolve_available", true);
-fi;
+BindGlobal("HeLP_settings", ["normaliz", false, "32", "default"]); # Normally redund does not speed up normaliz-computations
+
 
 ########################################################################################################
 # InstallGlobalFunction(HeLP_INTERNAL_IsIntVect, function(v)
@@ -152,7 +145,8 @@ BindGlobal("HeLP_INTERNAL_TestSystem",  function(T,a,k,pa)
 # Output: The possible partial augmentations given by the HeLP-method for this partial augmentations of the powers. 
 # This function is internal.
 # It relies on the 4ti2-interface and program. 
-local solutions, v, mue, intersol, Tscaled, ascaled, HeLP_TestConeForIntegralSolutionsINTERNAL, temp;
+local solutions, v, mue, intersol, Tscaled, ascaled, HeLP_TestConeForIntegralSolutionsINTERNAL, temp, T_temp, D, t, s, solext, uneq, interintersol, temptemp, HB, DoVertices;
+
 
 HeLP_TestConeForIntegralSolutionsINTERNAL := function(b, c, k, T, a)
 # Arguments: set of basepoints, set of translations in non-negative direction,  order of the unit, matrix, vector of HeLP-system
@@ -180,7 +174,7 @@ return int;
 end;
 
 
-if HeLP_settings[1] then        # if possible, use redund first to minimize the system
+if HeLP_settings[2] then        # if wished, use redund first to minimize the system
   temp := HeLP_INTERNAL_Redund(T,a);
   if temp = "nosystem" then
     return [ ];
@@ -188,35 +182,110 @@ if HeLP_settings[1] then        # if possible, use redund first to minimize the 
 else                      # redund is not used
   temp := HeLP_INTERNAL_DuplicateFreeSystem(T, a);      # remove multiple times occuring inequalities
 fi;
-if HeLP_INTERNAL_zsolve_available then
-  solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[2]);
-else
-  Error("This functionality is not avaialable as 'zsolve' provided by 4ti2 (www.4ti2.de) was not found.  Please make sure that it is installed in a directory contained in the PATH variable.");
-fi;
-# there are infinitely many solutions if there is a base-point, i.e. solutions[1] <> [], and there are translations,
-# i.e. solutions[2] <> [] or solutions[3] <> [] s.t. T*x + a is integral with x = b + \sum l_c v_c 
-# (b \in solutions[1], v_c \in \solutions[2] and l_c non-negative integers (w.l.o.g. l_c < k)).
-if solutions[1] = [] then       # No solutions at all
-  return [];
-elif solutions[2] = [] and solutions[3] = [] then # finitely many solutions
-  intersol := [];
-  for v in solutions[1] do
+
+if HeLP_settings[1] = "normaliz" then
+  T_temp := ListWithIdenticalEntries(Size(T[1]), 1);
+  Add(T_temp,-1);
+  temptemp := [ ];
+  for t in [1..Size(temp[1])] do
+    Add(temptemp, ShallowCopy(temp[1][t]));
+    Add(temptemp[t], temp[2][t]);
+  od;
+  if HeLP_settings[4] = "vertices" then
+    DoVertices := true;
+  elif HeLP_settings[4] = "novertices" then
+    DoVertices := false;
+  else  
+    DoVertices := false;  # Test, wheter there exists a trivial solution. In this case VerticesOfPolyhedron may be a life saver.
+    s := Size(T_temp) - 1;
+    for t in [1..s] do
+      solext := true;
+      intersol := ListWithIdenticalEntries(s, 0);
+      intersol[t] := 1;
+      Add(intersol, 1);
+      for uneq in temptemp do
+        if uneq*intersol < 0 then
+          solext := false;
+          break;
+        fi;
+      od;
+      if solext then
+        DoVertices := true; 
+        break;
+      fi;
+    od;
+  fi;
+
+  D := NmzCone(["inhom_equations", [T_temp], "inhom_inequalities", temptemp]); #Solve the system
+  if DoVertices then
+    NmzCompute(D, ["DualMode", "HilbertBasis", "ModuleGenerators", "MaximalSubspace", "VerticesOfPolyhedron"]);
+  else
+    NmzCompute(D, ["DualMode", "HilbertBasis", "ModuleGenerators", "MaximalSubspace"]);
+  fi;
+
+  if NmzModuleGenerators(D) = [ ] then       # No solutions at all
+    return [ ];
+  elif NmzHilbertBasis(D) = [ ] and NmzMaximalSubspace(D) = [ ] then # finitely many solutions
+    intersol := [ ];
+    interintersol := NmzModuleGenerators(D);
+    interintersol := List(interintersol, x -> x{[1..Size(x)-1]});
     Tscaled := 1/k*T;
     ascaled := 1/k*a;
-    mue := Tscaled*v + ascaled;		# calculating the multiplicities of the eigenvalues
-    if HeLP_INTERNAL_IsIntVect(mue) then	# checking if the other condition, i.e. the multiplicities are integers, of HeLP are satisfied
-      Append(intersol, [Concatenation(pa, [v])]);	# why do we need to put '[v]' here and not just 'v'? v should already be a vector?
+    for v in interintersol do
+      mue := Tscaled*v + ascaled;		# calculating the multiplicities of the eigenvalues
+      if HeLP_INTERNAL_IsIntVect(mue) then	# checking if the other condition, i.e. the multiplicities are integers, of HeLP are satisfied
+        Append(intersol, [Concatenation(pa, [v])]);	# why do we need to put '[v]' here and not just 'v'? v should already be a vector?
+      fi;
+    od;
+    return intersol;
+  else
+    interintersol := NmzModuleGenerators(D);
+    interintersol := List(interintersol, x -> x{[1..Size(x)-1]});
+    if NmzHilbertBasis(D) <> [ ] then
+      HB := List(NmzHilbertBasis(D), x -> x{[1..Size(x)-1]});
+    else
+      HB := [ ];
     fi;
-  od;
-  return intersol;
-else 
-  Tscaled := 1/k*T;
-  ascaled := 1/k*a;
-  if HeLP_TestConeForIntegralSolutionsINTERNAL(solutions[1], solutions[2], k, Tscaled, ascaled) then # infinitely many integral solutions
-    return "infinite";
-  else    # infinitely many solutions for the system, but none of them integral
-    return [ ]; 
+    Tscaled := 1/k*T;
+    ascaled := 1/k*a; 
+    if HeLP_TestConeForIntegralSolutionsINTERNAL(interintersol, HB, k, Tscaled, ascaled) then # infinitely many integral solutions
+      return "infinite";
+    else    # infinitely many solutions for the system, but none of them integral
+      return [ ]; 
+    fi;
   fi;
+
+elif HeLP_settings[1] = "4ti2" then
+  solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[3]);
+  # there are infinitely many solutions if there is a base-point, i.e. solutions[1] <> [], and there are translations,
+  # i.e. solutions[2] <> [] or solutions[3] <> [] s.t. T*x + a is integral with x = b + \sum l_c v_c 
+  # (b \in solutions[1], v_c \in \solutions[2] and l_c non-negative integers (w.l.o.g. l_c < k)).
+  if solutions[1] = [] then       # No solutions at all
+    return [];
+  elif solutions[2] = [] and solutions[3] = [] then # finitely many solutions
+    intersol := [];
+    for v in solutions[1] do
+      Tscaled := 1/k*T;
+      ascaled := 1/k*a;
+      mue := Tscaled*v + ascaled;		# calculating the multiplicities of the eigenvalues
+      if HeLP_INTERNAL_IsIntVect(mue) then	# checking if the other condition, i.e. the multiplicities are integers, of HeLP are satisfied
+        Append(intersol, [Concatenation(pa, [v])]);	# why do we need to put '[v]' here and not just 'v'? v should already be a vector?
+      fi;
+    od;
+    return intersol;
+  else 
+    Tscaled := 1/k*T;
+    ascaled := 1/k*a;
+    if HeLP_TestConeForIntegralSolutionsINTERNAL(solutions[1], solutions[2], k, Tscaled, ascaled) then # infinitely many integral solutions
+      return "infinite";
+    else    # infinitely many solutions for the system, but none of them integral
+      return [ ]; 
+    fi;
+  fi;
+
+else
+  Print("No solver found or specified. Please install 4ti2 or normaliz such that GAP can use it.");
+
 fi;
 end);
 

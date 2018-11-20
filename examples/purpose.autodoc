@@ -1,5 +1,9 @@
 @Chapter Background
 
+In this chapter we give a brief overview of the Zassenhaus Conjecture and 
+the Prime Graph Questions and the techniques used in this package. 
+For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
+
 @Section The Zassenhaus Conjecture and the Prime Graph Question
 
  Let $G$ be a finite group and let <M>\mathbb{Z}G</M> denote its
@@ -47,7 +51,7 @@
  $$ \varepsilon_x \colon \mathbb{Z}G \to \mathbb{Z}, \ \ \sum\limits_{g \in G} z_g g \mapsto \sum\limits_{g \in x^G} z_g. $$ 
  
  Let <M>u</M> be a torsion element in <M>\mathrm{V}(\mathbb{Z}G)</M>. By results of G. Higman, S.D. Berman and M. Hertweck the following is known for the partial augmentations of $u$: <P/>
- **Theorem:** (<Cite Key="SehgalBook2"/>, Proposition (1.4); <Cite Key="HertweckBrauer"/>, Proposition 2.2) 
+ **Theorem:** (<Cite Key="SehgalBook2"/>, Proposition (1.4); <Cite Key="HertweckBrauer"/>, Theorem 2.3) 
  $\varepsilon_1(u) = 0$ if $u \not= 1$ and $\varepsilon_x(u) = 0$ if the order of $x$ does not divides the order of $u$.
  <P/>
  Partial  augmentations are connected to (ZC) and (PQ) via the following result, which 
@@ -87,7 +91,8 @@
  As this multiplicity is a non-negative integer, we have the constraints $$\mu_l(u,\chi) \in \mathbb{Z}_{\geq 0}$$
  for all ordinary characters $\chi$ and all $l$. 
  This formula was given by I.S. Luthar and I.B.S. Passi <Cite Key="LP"/>. <P/>
- Later M. Hertweck showed that it may also be used for a representation over a field of characteristic $p > 0$ with character $\varphi$,
+ Later M. Hertweck showed that it may also be used for a representation over a field of characteristic $p > 0$
+ with Brauer character $\varphi$,
  if $p$ is coprime to $k$ <Cite Key="HertweckBrauer"/>, § 4. In that case one has to ignore the $p$-singular conjugacy classes (i.e. the classes of elements with an order divisible by $p$) and the above formula becomes
   $$ \mu_l(u,\varphi) = \frac{1}{k} \sum_{1 \not= d \mid k} {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\varphi(u^d)\zeta^{-dl}) + \frac{1}{k} \sum_{x^G,\ p \nmid o(x)} \varepsilon_x(u) {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\varphi(x)\zeta^{-l}).$$  
  Again, as this multiplicity is a non-negative integer, we have the constraints $$\mu_l(u,\varphi) \in \mathbb{Z}_{\geq 0}$$
@@ -104,7 +109,9 @@
 
  We also included a result motivated by a theorem R. Wagner proved 1995 in his Diplomarbeit <Cite Key="Wa"/>. 
  This result gives a further restriction on the partial augmentations
- of torsion units. We included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, 
+ of torsion units. Though the results was actually available before Wagner's work, cf. <Cite Key="BovdiHertweck"/> Remark 6, we named the test
+ after him, since he was the first to use the HeLP-method on a computer.
+ We included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, 
  <Ref Func='HeLP_AllOrders'/>, <Ref Func='HeLP_AllOrdersPQ'/> and <Ref Func='HeLP_WagnerTest'/> and call it "Wagner test". <P/>
  **Theorem:** For a torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M>, a group element $s$,
  a prime $p$  and a natural number $j$  we have
@@ -116,7 +123,7 @@
  
 @Section s-constant (and (s,t)-constant) characters
 
-If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one is studying the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
+If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one studies the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
 There is also the concept of $(s,t)$-constant characters, being constant on both, the conjugacy classes of elements of order $s$ and on the conjugacy classes of elements of order $t$. The implementation of this is however not yet part of this package.
 
 
@@ -132,14 +139,15 @@ With this reductions in mind the Zassenhaus Conjecture is known for:
 * Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
 * Groups $X \rtimes A$, where $X$ is abelian, $A$ elementary abelian and $A$ acts faithfully and irreducibly on $X$ <Cite Key="SehgalWeiss"/>,
 * Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
-* All groups of order up to 159 and some other groups of order up to 200 listed in <Cite Key="HermanSingh"/>,
-* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> / <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/> and some extensions of these groups.
+* All groups of order up to 71 <Cite Key="HoefertKimmerle"/>, 
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/> and some extensions of these groups.
 
 For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
 **Theorem:** Assume the Prime Graph Question holds for all almost simple images of a group $G$. Then (PQ) also holds for $G.$<P/>
 Here a group $G$ is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group $S$. I.e. $Inn(S) \leq G \leq Aut(S).$ Keeping this reduction in mind (PQ) is known for:
 * Solvable groups <Cite Key="KimmiPQ"/>,
-* The groups $PSL(2,p)$ where $p$ denotes a prime <Cite Key="HertweckBrauer"/>,
-* Half of the sporadic simple groups and their automorphism groups, for an overview see <Cite Key="KonovalovKimmiStAndrews"/>,
-* The groups $A_7, A_8$ <Cite Key="SalimA7A8"/>, $A_9, A_{10}$ <Cite Key="SalimA9A10"/>,
+* Groups whose socle is isomorphic to a group $PSL(2,p)$ or $PSL(2,p^2)$, where $p$ denotes a prime, <Cite Key="HertweckBrauer"/>, <Cite Key="BaMa4prI"/>.
+* Half of the sporadic simple groups and their automorphism groups; for an overview see <Cite Key="KonovalovKimmiStAndrews"/>,
+* Groups whose socle is isomorphic to an alternating group of degree at most 17, <Cite Key="SalimA7A8"/> <Cite Key="SalimA9A10"/><Cite Key="BaCa"/>, 
 * Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)
+* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/>
