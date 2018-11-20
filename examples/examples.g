@@ -571,6 +571,11 @@ SetInfoLevel(HeLP_Info, 1);
 
 #! @EndChunk
 
+
+
+
+
+
 #! @BeginChunk CSExample
 #! @BeginExample
 C := CharacterTable("A6");;
@@ -599,6 +604,24 @@ Size(HeLP_sol[2]);
 #! since in that case a bigger system of inequalities must be solved.
 #! @EndChunk
 
+#! @BeginChunk PPExample
+#! @BeginExample
+SetInfoLevel(HeLP_Info,4);
+C := CharacterTable(SmallGroup(160,91));
+#! CharacterTable( <pc group of size 160 with 6 generators> )
+HeLP_WithGivenOrder(C,4);;
+#! #I      Solutions for order 2 not yet calculated.  Restart for this order.
+#! #I  Number of solutions for elements of order 4: 22; stored in HeLP_sol[4].   
+HeLP_WithGivenOrder(C,10);;
+#! #I      Solutions for order 5 not yet calculated.  Restart for this order.
+#! #I  Number of solutions for elements of order 10: 6; stored in HeLP_sol[10].  
+LP := HeLP_PossiblePartialAugmentationsOfPowers(20);;
+HeLP_WithGivenOrderAndPA(Irr(C){[2..20]},20,LP[1]);
+#! #I  Number of solutions for elements of order 20 with these partial augmentations
+#!  for the powers: 0.
+#! [  ]
+#! @EndExample
+#! @EndChunk
 
 #! @BeginChunk PSExample
 #! @BeginExample

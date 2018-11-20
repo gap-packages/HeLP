@@ -95,8 +95,8 @@ DeclareGlobalFunction( "HeLP_PQ" );
 #
 ####################################
 
-#! A short remark is probably in order on the two global variables the package is using: 
-#! <K>HeLP_CT</K> and <K>HeLP_sol</K>. The first one stores the character table for
+#! A short remark is probably in order on the three global variables the package is using: 
+#! <K>HeLP_CT</K>, <K>HeLP_sol</K> and <K>HeLP_settings</K>. The first one stores the character table for
 #! which the last calculations were performed, the second one containing at the <K>k</K>'s spot the already calculated 
 #! admissible partial augmentations of elements of order $k$ (and its powers $u^d$ for $d \not= k$ a divisor of $k$).  If a function of the HeLP-package is called with 
 #! a character table different from the one saved in <K>HeLP_CT</K> then the package tries to check if the character tables
@@ -105,7 +105,7 @@ DeclareGlobalFunction( "HeLP_PQ" );
 #! For a more detailed account see Sections <Ref Sect='Chapter_Extended_examples_Section_The_behavior_of_the_variable_HeLP_sol'/>,
 #! <Ref Sect='Chapter_Background_Section_Partial_augmentations_and_the_structure_of_HeLP_sol'/> and <Ref Func='HeLP_ChangeCharKeepSols'/>.
 #! In most situations, the user does not have to worry about this, the program will 
-#! take care of it as far as possible.
+#! take care of it as far as possible. <K>HeLP_settings</K> is a varaible which is used to store some settings of the program.
 
 
 #! @Section Checks for specific orders 
@@ -258,6 +258,41 @@ DeclareGlobalFunction( "HeLP_ChangeCharKeepSols" );
 DeclareGlobalFunction( "HeLP_Reset" );
 
 
+#! @Section Influencing how the Systems of Inequalities are solved
+
+#! HeLP uses currently two external programs (i.e. programs that are not part of the GAP-system):
+#! zsolve from 4ti2 to solve the systems of linear inequalities and redund from lrslib to simplify the  
+#! inequlities before handing them over to zsolve (HeLP can also be used without lrslib installed, but in
+#! general it is recommanded to have lrslib installed).  The following functions can be used to influence
+#! the behaviour of these external programms.
+
+#! @Description
+#!  The function changes the maximum precision of the calculations of 4ti2 to solve the occurring systems of
+#!  linear inequalities.  The possible arguments are <K>"32"</K>, <K>"64"</K> and <K>"gmp"</K>.  After calling the function
+#!  the new precision will be used until this function is used again. The default value is <K>"32"</K>. 
+#!  A higher precision causes slower calculations. 
+#!  But this function might be used to increase the precision of 4ti2, when one gets an error message like
+#!  "Error, 4ti2 Error:
+#!  Results were near maximum precision (32bit).
+#!  Please restart with higher precision!"
+#!  stating that the results were close to the maximum 4ti2-precision.
+#! @Arguments string
+#! @Returns nothing
+DeclareGlobalFunction("HeLP_Change4ti2Precision");
+
+#! @Description
+#!  The function determines whether HeLP uses 'redund' from the lrslib-package to remove redundant 
+#!  equations from the HeLP system.  If <A>bool</A> is <K>true</K> 'redund' will be used in all calculation that follow,
+#!  if it is <K>false</K>, 'redund' will not be used (which might take significantly longer).  
+#!  If 'redund' was not found by GAP a warning will be 
+#!  printed and the calculations will be performed without 'redund'.
+#!  As default 'redund' will be used in all calculations.
+#! @Arguments bool
+#! @Returns nothing
+DeclareGlobalFunction("HeLP_UseRedund");
+
+#! @InsertChunk PRExample
+
 
 #! @Section Checking solutions, calculating and checking solutions
 
@@ -291,7 +326,18 @@ DeclareGlobalFunction( "HeLP_FindAndVerifySolution" );
 
 #! @InsertChunk FCExample
 
+#! @Description
+#! This function provides the possible partial augmentations of the powers of units of a given order $n,$  
+#! if the partial augmentations if units of order $n/p$ have been already computed for all primes $p$ 
+#! dividing $n.$ The possibilities are sorted in the same way as, if the order $n$ is checked with any other 
+#! function like e.g. <Ref Func='HeLP_WithGivenOrder'/> or <Ref Func='HeLP_ZC'/>. Thus, if the InfoLevel is 
+#! high enough and one obtains that the computation of some possibility is taking too long, one can check it 
+#! using <Ref Func='HeLP_WithGivenOrderAndPA'/>.  
+#! @Arguments n
+#! @Returns List of partial augmentations of powers.
+DeclareGlobalFunction( "HeLP_PossiblePartialAugmentationsOfPowers" ); 
 
+#! @InsertChunk PPExample
 
 #! @Section The Wagner test
 
@@ -322,7 +368,6 @@ DeclareGlobalFunction( "HeLP_PrintSolution" );
 #! @InsertChunk PSExample
 
 
-
 #! @Section Eigenvalue multiplicities and character values 
 
 #! @Description
@@ -343,7 +388,7 @@ DeclareGlobalFunction( "HeLP_CharacterValue" );
 
 # The following function is the only internal one, which is
 # defined via DeclareGlobalFunction / InstallGlobalFunction 
-# as it seems otherwise not possible to define it recursively
-DeclareGlobalFunction( "HeLP_WithGivenOrderINTERNAL" );
+# as it seems otherwise not possible use define it recursively
+DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrder" );
 
 #E
