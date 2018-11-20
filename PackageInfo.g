@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.2",
-Date           := "20/11/2017",
+Version        := "3.3",
+Date           := "11/12/2017",
 
 ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
@@ -84,7 +84,7 @@ Dependencies := rec(
   ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),
 
-TestFile := "examples/examples.g",
+TestFile := "tst/testall.g",
 
 AvailabilityTest := function()
     return true;

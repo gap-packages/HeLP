@@ -2,7 +2,7 @@ gap> OldHeLPInfoLevel := InfoLevel(HeLP_Info);;
 gap> SetInfoLevel(HeLP_Info, 1);
 
 gap> HeLP_ZC(CyclicGroup(6));
- Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.
+#I  Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.
  true
 
 gap> C := CharacterTable("M22");;

@@ -1,3 +1,8 @@
+Changes v3.2 -> v3.3
+
+* testfile in PackageInfo.g changed to "tst/testall.g"
+
+
 Changes v3.1 -> v3.2
 
 * Solely line 542 in "expamples/examples.g" corrected
