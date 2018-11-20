@@ -1,0 +1,432 @@
+@Chapter Extended examples
+
+ We will give some more examples which are intended to 
+ give the user an idea of the behavior on different inputs and
+ the variable HeLP_sol. We also give hints how to use the package 
+ more efficiently, to use characters
+ not available in libraries and how InfoLevels can be helpful.
+
+@Section The Character Table Library
+
+@BeginExample
+G := SL(2,7);
+#! SL(2,7)
+HeLP_ZC(G);
+#! #I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#! #I  (ZC) can't be solved, using the given data, for the orders: [ 8 ].
+#! false
+C1 := CharacterTable(G);
+#! CharacterTable( SL(2,7) )
+HeLP_ZC(C1);
+#! #I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#! #I  (ZC) can't be solved, using the given data, for the orders: [ 8 ].
+#! false
+C2 := CharacterTable("2.L2(7)");
+#! CharacterTable( "2.L3(2)" )
+HeLP_ZC(C2);
+#! true
+@EndExample
+
+Note that the first and the second call of <Ref Func='HeLP_ZC'/> are equivalent -- the only 
+difference being that in the first version the character table of the group is
+also calculated by the function, in the second version the calculations are 
+performed with the given character table.
+For the third call of <Ref Func='HeLP_ZC'/> a character table for SL2(7) is used which comes
+from the character table library.  The different result is due to the fact, that 
+in the third version the Brauer tables are available (the Brauer table for the 
+prime $p = 7$ is needed to rule out some non-trivial partial augmentations for 
+elements of order 8), whereas for the first and the second call no Brauer tables
+are available in GAP.
+
+@Section The behavior of the variable HeLP_sol
+This sections demonstrates when the global variable <K>HeLP_sol</K> is reset. This is the case
+if calculations are performed using (the character table of) another group than before:
+@BeginExample
+C := CharacterTable("A5");
+#! CharacterTable( "A5" )
+HeLP_ZC(C);
+#! true
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ],, 
+#!   [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [  ],,,, [  ],,,,, [  ],,,,,,,,,,,,,,, [  ] 
+#!  ]
+C := CharacterTable("L3(7).2");
+#! CharacterTable( "L3(7).2" )
+HeLP_WithGivenOrderAndPA(Irr(C){[3,7,9,10]},21,[[1],[3,9,-11]]);
+#! #I  Number of solutions for elements of order 21 with these partial augmentation
+#! s for the powers: 1.
+#! [ [ [ 1 ], [ 3, 9, -11 ], [ -6, 0, 3, 4 ] ] ]
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ] ]
+@EndExample
+The function <Ref Func='HeLP_WithGivenOrderAndPA'/> does not write a result in <K>HeLP_sol[k]</K> (as it does not calculate
+all possible solutions of order $k$).  However <K>HeLP_sol</K> is reset as a different character table is used. We continue the above example.
+@BeginExample
+HeLP_WithGivenOrder(C,3);
+#! #I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].
+#! [ [ [ 1 ] ] ]
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ],, [ [ [ 1 ] ] ] ]
+@EndExample
+If HeLP detects that the table used belongs to the same group, <K>HeLP_sol</K> is not reset:
+@BeginExample
+HeLP_WithGivenOrder(C mod 7, 19);
+#! #I  Number of solutions for elements of order 19: 3; stored in HeLP_sol[19].
+#! [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ]
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ],, [ [ [ 1 ] ] ],,,,,,,,,,,,,,,, 
+#!   [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ] ]
+#! # the previously calaculated result for order 3 is still there.
+@EndExample
+HeLP can detect that the character tables belong to the same group, if they are identical objects in GAP or if both
+are tables of the same group from the ATLAS and their InfoText begins with "origin: ATLAS of finite groups" (which is usually the case for ATLAS tables).
+If the program can verify that the character table which is used at the current call of a function belongs to the 
+same group as in the previous call of a function, the solutions stored in <K>HeLP_sol</K> are kept. 
+If the character table belongs to another group or it can not be made sure that the character tabel belongs to the same group,
+<K>HeLP_sol</K> is reset to the initial value <K>[ [ [1] ] ]</K> representing the trivial solution for units of order $1$.<P/>
+Not reseting <K>HeLP_sol</K> can also be achieved using <Ref Func='HeLP_ChangeCharKeepSols'/>. 
+However, caution should be exercised when using this command since it may manipulate <K>HeLP_sol</K> into something meaningless.
+@BeginExample
+G := PSL(2,7);
+#! Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8) ])
+HeLP_ZC(G);
+#! #I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].
+#! #I  (ZC) can't be solved, using the given data, for the orders: [ 6 ].
+#! false
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+#!   [ [ [ 1 ], [ 1 ], [ -2, 3 ] ] ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, 
+#!   [  ],,,,,,, [  ],,,,,,, [  ],,,,,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#!   ,,,,,,,,,,,,, [  ] ]
+C := CharacterTable("L2(7)") mod 7;
+#! BrauerTable( "L3(2)", 7 )
+HeLP_ChangeCharKeepSols(C); #This table belongs to the same group.
+HeLP_WithGivenOrder(C,6);
+#! #I  Number of solutions for elements of order 6: 0; stored in HeLP_sol[6].
+#! [  ]
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+#!   [  ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, [  ],,,,,,, [  ],,,,,,, 
+#!   [  ],,,,,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, [  ] ]
+C := CharacterTable("L3(7).2") mod 7;
+#! BrauerTable( "L3(7).2", 7 )
+HeLP_ChangeCharKeepSols(C); #This table is from a different group
+HeLP_WithGivenOrder(C,19);
+#! #I  Number of solutions for elements of order 19: 3; stored in HeLP_sol[19].
+#! [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ]
+HeLP_sol;
+#! [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ], [ 0, 1 ] ] ],, 
+#!   [  ], [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ],,,,, [  ],, [  ],,,,, 
+#!   [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ],, [  ],,,,,,, [  ],,,,
+#!   ,,,,,,,,,, [  ],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, [  ] ]
+#! # The content of HeLP_sol does not have a mathematical value anymore.
+@EndExample
+ The following functions manipulate the variable <K>HeLP_sol</K>: <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, <Ref Func='HeLP_WithGivenOrder'/>,
+ <Ref Func='HeLP_WithGivenOrderSConstant'/>  (for elements of order $t$ and if the existence of elements of order
+ $st$ can be excluded also for this order), <Ref Func='HeLP_AllOrders'/>, <Ref Func='HeLP_AllOrdersPQ'/>, 
+ <Ref Func='HeLP_VerifySolution'/> (if existing solutions were checked), <Ref Func='HeLP_FindAndVerifySolution'/>.
+ Note that the functions only will write results in <K>HeLP_sol[k]</K> if $k$ 
+ is a divisor of the exponent of the group as this information is enough to decide whether (ZC) and (PQ) are valid for the group
+ in consideration. In all other cases an empty list will be returned but no value will be written in <K>HeLP_sol[k]</K>. <P/>
+
+
+
+@Section Saving time
+The most time consuming operation when using the functions of this package is solving 
+the system of inequalities given by the HeLP method, see Section <Ref Sect='Chapter_Background_Section_The_HeLP_equations'/>.
+This package uses the program 4ti2 to do this and it is not completely clear to the authors of this package
+which input is solved faster by 4ti2. In any case it is helpful to reduce the number of variables, using 
+e.g. $p$-constant characters, and in many situations it is useful to reduce the number of inequalities, i.e. of used characters. <P/>
+To measure the time a function needs we use <K>IO_gettimeofday</K> from the IO-package rather than functions like <K>time</K> or <K>Runtime</K>,
+since these measure only the GAP time, but do not return the time the functions spend using 4ti2.
+We used the following function (which is essentially due to Alexander Konovalov) to meassure the time used for the computation:
+@BeginExample
+#! TimeFunction := function(f, args)
+#! # input: the function of which the computing time should be measured 
+#! #        and the list of arguments for this function
+#! # output: time needed for the calculations in seconds
+#! local start;
+#! start := IO_gettimeofday();
+#! CallFuncList(f,args);
+#! return IO_gettimeofday().tv_sec - start.tv_sec;
+#! end; 
+@EndExample
+All times will be given in seconds. The computations were perfomed on an 1,6 GHz kernel.<P/>
+A lot of time might be saved by testing only a few characters instead of a whole character table:
+@BeginExample
+C := CharacterTable("L2(49)");;
+TimeFunction(HeLP_WithGivenOrder, [C,35]);
+#! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+#! 7                 # I.e.: The computation took 7 seconds.
+TimeFunction(HeLP_FindAndVerifySolution, [C,35]);
+#! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+#! 1
+TimeFunction(HeLP_FindAndVerifySolution, [Irr(C){[2]}, 35]);
+#! #I  Number of solutions for elements of order 35: 0; stored in HeLP_sol[35].
+#! 1
+@EndExample
+I.e.: Using only one character instead of all of them is about seven times faster in this situation and 
+this is also quickly found by <K>HeLP_FindAndVerifySolution</K>. <P/> 
+Using only a few characters might even be a life saver:
+@BeginExample
+C := CharacterTable("L4(3).2^2");
+#! CharacterTable( "L4(3).2^2" )
+HeLP_WithGivenOrder(C, 3);;
+#! #I  Number of solutions for elements of order 3: 63; stored in HeLP_sol[3].
+HeLP_WithGivenOrder(C, 13);;
+#! #I  Number of solutions for elements of order 13: 198; stored in HeLP_sol[13].
+SetInfoLevel(HeLP_Info,4);
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+#! 670
+@EndExample
+The command <K>HeLP_WithGivenOrder(C,39);</K> started at the same time on another kernel was at possibility 5 out of 12474 when the above example was already finished and is probably still computing while you read this. <P/> 
+If you want to check, if the solutions you found using only a few characters satisfy the constraints of all characters, you can use <Ref Func='HeLP_VerifySolution'/>:
+@BeginExample
+C := CharacterTable("L3(7).2");
+#! CharacterTable( "L3(7).2" )
+HeLP_WithGivenOrder(C,7);;
+#! #I  Number of solutions for elements of order 7: 153; stored in HeLP_sol[7].
+SetInfoLevel(HeLP_Info,4);
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[3,7,9,10]}, 21]);
+#! #I  Number of solutions for elements of order 21: 416; stored in HeLP_sol[21].
+#! 2757
+Set(Filtered(OrdersClassRepresentatives(C), x -> IsPrime(x))); 
+#! [ 2, 3, 7, 19 ] # The primes dividing the order of the group
+HeLP_VerifySolution(C mod 2, 21);;
+HeLP_VerifySolution(C mod 19, 21);;
+Size(HeLP_sol[21]);
+#! 416
+@EndExample
+#! Thus the computed partial augmentations are best possible using HeLP. Compare the time to:
+@BeginExample
+TimeFunction(HeLP_WithGivenOrder, [C, 21]);
+#! #I  Number of solutions for elements of order 21: 416; stored in HeLP_sol[21].
+#! 3460
+@EndExample
+
+Sometimes it is helpful to look at groups containing the group of interest:
+@BeginExample
+C := CharacterTable("2F4(2)'");
+#! CharacterTable( "2F4(2)'" )
+HeLP_WithGivenOrder(C, 13);;
+#! #I  Number of solutions for elements of order 13: 316; stored in HeLP_sol[13].
+HeLP_WithGivenOrder(C, 3);;
+#! #I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].
+TimeFunction(HeLP_WithGivenOrder, [C, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].
+#! 1946
+C:=CharacterTable("2F4(2)'.2");
+#! CharacterTable( "2F4(2)'.2" )
+TimeFunction(HeLP_WithGivenOrder, [C, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].
+#! 1
+@EndExample
+
+This is also a good example to use $p$-constant characters:
+@BeginExample
+C:=CharacterTable("2F4(2)'");
+#! CharacterTable( "2F4(2)'" )
+TimeFunction(HeLP_WithGivenOrderSConstant, [C, 13, 3]);
+#! #I    Partial augmentations for elements of order 3 not yet calculated.  Restart
+#!  for this order.
+#! #I    Number of non-trivial 13-constant characters in the list: 19.           
+#! 0
+@EndExample
+
+
+@Section Using InfoLevels
+HeLP provides different InfoLevels for different situations. The variable controlling the InfoLevel is <K>HeLP_Info</K> and it might be changed using <K>SetInfoLevel(HeLP_Info, n)</K> to set the InfoLevel to n. The maximal <K>HeLP_Info</K> entry is 5, the default InfoLevel is 1. The examples below give some idea, how one can use <K>HeLP_Info</K>, but do not give complete information on all possibilities.<P/>
+If one is only interested whether (ZC) or (PQ) can be solved using the HeLP method, one can set <K>HeLP_Info</K> to 0:
+@BeginExample
+C := CharacterTable("M11");
+#! CharacterTable( "M11" )
+HeLP_ZC(C);
+#! #I  ZC can't be solved, using the given data, for the orders: [ 4, 6, 8 ].
+#! false
+SetInfoLevel(HeLP_Info, 0);
+HeLP_ZC(C);
+#! false
+@EndExample
+If the InfoLevel is set to 2, the functions <Ref Func='HeLP_ZC'/> and <Ref Func='HeLP_PQ'/> print information which order of torsion units is currently considered, so that the user can keep track of the progress. This may be used for bigger groups to see, if the calculations might finish at some point. Continuing the above example:
+@BeginExample
+SetInfoLevel(HeLP_Info, 2);
+HeLP_PQ(C);
+#! #I  Checking order 2.
+#! #I  Checking order 3.
+#! #I  Checking order 5.
+#! #I  Checking order 10.
+#! #I  Checking order 11.
+#! #I  Checking order 15.
+#! #I  Checking order 22.
+#! #I  Checking order 33.
+#! #I  Checking order 55.
+#! true
+@EndExample
+<K>HeLP_Info</K> at InfoLevel 3 provides also some information about the used ordinary character table or Brauer tables:
+@BeginExample
+SetInfoLevel(HeLP_Info, 3);
+HeLP_PQ(C);
+#! #I  Checking order 2.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I  Checking order 3.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I    Using table BrauerTable( "M11", 11 ).
+#! #I  Checking order 5.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I  Checking order 10.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I  Checking order 11.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I  Checking order 15.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I    Using table BrauerTable( "M11", 11 ).
+#! #I  Checking order 22.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I  Checking order 33.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! #I    Using table BrauerTable( "M11", 11 ).
+#! #I    Using table BrauerTable( "M11", 2 ).
+#! #I  Checking order 55.
+#! #I    Using table BrauerTable( "M11", 3 ).
+#! true
+@EndExample
+Setting <K>HeLP_Info</K> to 4 is useful when there are many possibilities for the partial augmentations of the powers of some unit. A good example is the example on "L4(3).2^2" in the section on Time Saving <Ref Sect='Chapter_Extended_examples_Section_Saving_time'/>, see above: If you see quickly that almost nothing is happening, you might want to change your strategy.<P/>
+<K>HeLP_Info</K> at level 5 informs the user on all changes of the used character table. Using it makes sense, if you work with the command <Ref Func='HeLP_ChangeCharKeepSols'/>.
+
+
+@Section Non-standard characters
+The package also allows using characters even if the whole character table is not available. E.g. induced characters:
+@BeginExample
+C := CharacterTable("U3(8)");
+#! CharacterTable( "U3(8)" )
+G := PSU(3,8);               
+#! <permutation group of size 5515776 with 2 generators>
+A := AutomorphismGroup(G);
+#! <group of size 99283968 with 4 generators>
+AllCharacterTableNames(Size,Size(A));
+#! [ "3.U3(8).6", "3.U3(8).S3" ]
+@EndExample
+This means: The character table of the automorphism group A of PSU(3,8) is not available in GAP. However one can use induced characters: 
+@BeginExample
+NN := NormalSubgroups(A);
+#! [ <trivial group>, <group of size 5515776 with 2 generators>, 
+#!   <group with 3 generators>, <group of size 16547328 with 3 generators>, 
+#!   <group of size 49641984 with 4 generators>, 
+#!   <group of size 33094656 with 4 generators>, 
+#!   <group of size 99283968 with 4 generators> ]
+H := NN[2];      #Subgroup of A isomorphic to G              
+#! <group of size 5515776 with 2 generators>
+CharacterTableWithStoredGroup(H,C); 
+#! CharacterTable( <group of size 5515776 with 2 generators> )
+D := CharacterTable(H);      
+#! CharacterTable( <group of size 5515776 with 2 generators> )
+chi := InducedClassFunction(Irr(D)[2],A);
+#! Character( CharacterTable( <group of size 99283968 with 4 generators> ),
+#!  [ 1008, -144, -126, 18, 0, 0, 0, 0, 36, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+#!   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -18, 0, 0, 
+#!   0, 0 ] )
+HeLP_WithGivenOrder([chi],7*19);
+#! #I  Number of solutions for elements of order 133: 0; stored in HeLP_sol[133].
+#! [  ]
+@EndExample
+One can also use characters, which are not available in GAP, but are entered manually:
+@BeginExample
+C := CharacterTable("L2(49)");
+#! CharacterTable( "L2(49)" )
+HeLP_WithGivenOrder(C,15);;
+#! #I  Number of solutions for elements of order 15: 56; stored in HeLP_sol[15].
+C7 := C mod 7;
+#! fail
+@EndExample
+The Brauer characters for the prime 7 are well known, see e.g. <Cite Key="SrinivasanPSL"/> , but are not yet available in GAP.
+@BeginExample
+OrdersClassRepresentatives(C);
+#! [ 1, 2, 3, 4, 5, 5, 6, 7, 7, 8, 8, 12, 12, 24, 24, 24, 24, 25, 25, 25, 25, 
+#!   25, 25, 25, 25, 25, 25 ]
+chi := ClassFunction(C, [ 3, 0, -1, 0, -E(5)^2-E(5)^3, -E(5)-E(5)^4, 0,  
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);
+#! ClassFunction( CharacterTable( "L2(49)" ),
+#!  [ 3, 0, -1, 0, -E(5)^2-E(5)^3, -E(5)-E(5)^4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+#!   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ] )
+HeLP_WithGivenOrder([chi],15);
+#! #I  Number of solutions for elements of order 15: 0; stored in HeLP_sol[15].
+#! [  ]
+@EndExample
+The class function <K>chi</K> above is of course not a proper character of the group, but the values coincide with 
+the values of a 7-Brauer character of the group on the conjugacy classes of order 1, 3 and 5,
+i.e. the one needed to use HeLP for order 15. All functions of the HeLP-package only access values of class functions 
+on conjugacy classes of elements with an order dividing the order of the unit in question. That is why this class function <K>chi</K> can be used in this setting.
+
+@Section A complete example: (PQ) for the MacLaughlin simple group
+This section gives a demonstration of many functions of the package. The goal is to verify the Prime Graph
+Question for the McLaughlin simple group, which was proved in <Cite Key="KonovalovMcL"/> <P/>
+@BeginExample
+C := CharacterTable("McL");
+#! CharacterTable( "McL" )
+SetInfoLevel(HeLP_Info,4);
+@EndExample
+The function <K>HeLP_PQ(C)</K> would take really long. Instead one can use <K>HeLP_AllOrdersPQ(C)</K> several times on a high
+InfoLevel. Any time you see the function needs long, just try some manual calculations. Compute first the partial augmentations of
+elements of prime order:
+@BeginExample
+HeLP_WithGivenOrder(C,2);;
+#! #I  Number of solutions for elements of order 2: 1; stored in HeLP_sol[2].    
+HeLP_WithGivenOrder(C mod 2,3);;
+#! #I  Number of solutions for elements of order 3: 4; stored in HeLP_sol[3].    
+HeLP_WithGivenOrder(C mod 3,5);;
+#! #I  Number of solutions for elements of order 5: 6; stored in HeLP_sol[5].    
+HeLP_WithGivenOrder(C mod 3,7);;
+#! #I  Number of solutions for elements of order 7: 174; stored in HeLP_sol[7].  
+HeLP_WithGivenOrder(C mod 3,11);;
+#! #I  Number of solutions for elements of order 11: 20; stored in HeLP_sol[11].
+@EndExample  
+For mixed order in most situations <M>p</M>-constant characters are interesting. Check the tables for such characters of small degree.
+@BeginExample
+HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},7,3);
+#! #I    Number of non-trivial 7-constant characters in the list: 4.
+#! [  ]
+HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},11,2);
+#! #I    Number of non-trivial 11-constant characters in the list: 4.
+#! [  ]                                                                          
+HeLP_WithGivenOrderSConstant(Irr(C){[2,3,4,5]},11,3);
+#! #I    Number of non-trivial 11-constant characters in the list: 4.
+#! [  ]  
+HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},7,5);
+#! #I    Number of non-trivial 7-constant characters in the list: 4.
+#! [  ]  
+HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},7,11);
+#! #I    Number of non-trivial 7-constant characters in the list: 4.
+#! [  ] 
+HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},11,5);
+#! #I    Number of non-trivial 11-constant characters in the list: 2.
+#! [  ] 
+@EndExample
+This calculations are enough to obtain the Prime Graph Question:
+@BeginExample
+HeLP_AllOrdersPQ(C);
+#! #I  Checking order 2.
+#! #I    Using the known solutions for elements of order 2.
+#! #I  Checking order 3.
+#! #I    Using the known solutions for elements of order 3.
+#! #I  Checking order 5.
+#! #I    Using the known solutions for elements of order 5.
+#! #I  Checking order 7.
+#! #I    Using the known solutions for elements of order 7.
+#! #I  Checking order 11.
+#! #I    Using the known solutions for elements of order 11.
+#! #I  Checking order 21.
+#! #I    Using the known solutions for elements of order 21.
+#! #I  Checking order 22.
+#! #I    Using the known solutions for elements of order 22.
+#! #I  Checking order 33.
+#! #I    Using the known solutions for elements of order 33.
+#! #I  Checking order 35.
+#! #I    Using the known solutions for elements of order 35.
+#! #I  Checking order 55.
+#! #I    Using the known solutions for elements of order 55.
+#! #I  Checking order 77.
+#! #I    Using the known solutions for elements of order 77.
+#! true
+@EndExample
+Checking this computations takes a few minutes.  
