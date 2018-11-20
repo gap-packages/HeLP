@@ -536,6 +536,17 @@ HeLP_ZC(C);
 #! @EndExample
 #! @EndChunk
 
+#! @BeginChunk AOExample
+#! @BeginExample
+C := CharacterTable("A6");;
+gap> HeLP_WithGivenOrder(C, 6);
+#! #I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].
+#! [ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ]
+#! gap> HeLP_AutomorphismOrbits(C, 6);
+#! [ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ] ]
+#! @EndExample
+#! @EndChunk
+
 
 #! @BeginChunk CCExample
 #! To keep track of the change of the character tables one can set HeLP_Info to level 5.
@@ -651,6 +662,28 @@ HeLP_WithGivenOrderAndPA(Irr(C){[2..20]},20,LP[1]);
 #! #I  Number of solutions for elements of order 20 with these partial augmentations
 #!  for the powers: 0.
 #! [  ]
+#! @EndExample
+#! @EndChunk
+
+#! @BeginChunk TSExample
+#! With the character tables that are currently available in GAP, the Zassenhaus Conjecture
+#! for elements of order $4$ in $\text{PSL}(2,49)$ cannot be solved. However it was proved in
+#! <Cite Key="HertweckBrauer"/> using the Brauer table modulo $7$.
+#! @BeginExample
+C := CharacterTable("L2(49)");
+#! CharacterTable( "L2(49)" )
+HeLP_WithGivenOrder(C, 4);
+#! #I  Number of solutions for elements of order 4: 14; stored in HeLP_sol[4].
+#! [ [ [ 1 ], [ -6, 7 ] ], [ [ 1 ], [ -5, 6 ] ], [ [ 1 ], [ -4, 5 ] ], 
+#!   [ [ 1 ], [ -3, 4 ] ], [ [ 1 ], [ -2, 3 ] ], [ [ 1 ], [ -1, 2 ] ], 
+#!   [ [ 1 ], [ 0, 1 ] ], [ [ 1 ], [ 1, 0 ] ], [ [ 1 ], [ 2, -1 ] ], 
+#!   [ [ 1 ], [ 3, -2 ] ], [ [ 1 ], [ 4, -3 ] ], [ [ 1 ], [ 5, -4 ] ], 
+#!   [ [ 1 ], [ 6, -5 ] ], [ [ 1 ], [ 7, -6 ] ] ]
+C mod 7;
+#! fail
+HeLP_WriteTrivialSolution(C, 4);;
+HeLP_sol[4];
+#! [ [ [ 1 ], [ 0, 1 ] ] ]
 #! @EndExample
 #! @EndChunk
 

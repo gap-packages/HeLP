@@ -19,7 +19,7 @@ if not IsOrdinaryTable(GC) then
     Error( "Function HeLP_ZC has to be called with an ordinary character table or a group.");
   else
     if IsNilpotent(GC) then # if the group is nilpotent then ZC is true by [Weiss91]
-      Print("Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.\n");
+      Info( HeLP_Info, 1, "Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.");
       return true;
     else
       C := CharacterTable(GC);
@@ -30,7 +30,7 @@ if not IsOrdinaryTable(GC) then
   fi;
 else
   if IsNilpotent(GC) then  # if the group belonging to the character table given is nilpotent then ZC is true by [Weiss91]
-    Print("Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.\n");
+    Info( HeLP_Info, 1, "Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.");
     return true;
   else
      C := GC;
@@ -118,7 +118,7 @@ if not IsOrdinaryTable(GC) then
     Error( "Function HeLP_PQ has to be called with an ordinary character table or a group.");
   else
     if IsSolvable(GC) then # if the group is solvable then PQ has an affirmative answer by [Kimmerle06]
-      Print("Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.\n");  
+      Info( HeLP_Info, 1, "Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.");  
       return true;
     else
       C := CharacterTable(GC);
@@ -129,14 +129,14 @@ if not IsOrdinaryTable(GC) then
   fi;
 else
   if IsSolvable(GC) then # if the group belnging to the character table given is solvable then PQ has an affirmative answer by [Kimmerle06]
-    Print("Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.\n");  
+    Info( HeLP_Info, 1, "Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.");  
     return true;
   else
     C := GC;
   fi;
 fi;
 if IsSolvable(C) then # if the group is solvable then PQ has an affirmative answer by [Kimmerle06]
-  Print("Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.\n");  
+  Info( HeLP_Info, 1, "Since the group is solvable, the Prime Graph Question has an affirmative answer for this group by a result of W. Kimmerle.");  
   return true;
 fi;
 ord := OrdersClassRepresentatives(C);
@@ -300,7 +300,7 @@ od;
 result_orders := List(posords, k -> [k, HeLP_INTERNAL_IsTrivialSolution(HeLP_sol[k], k, ord)]);
 critical_orders := List(Filtered(result_orders, w -> w[2] = false), v -> v[1]);
 if critical_orders <> [] and BT_not_available <> [] then
-  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".\n");
+  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
 fi;
 if critical_orders <> [] then
   Info( HeLP_Info, 1, "(ZC) can't be solved, using the given data, for the orders: ", critical_orders, ".");
@@ -429,11 +429,11 @@ fi;
 k := arg[2];
 UCT := UnderlyingCharacterTable(C[1]);
 if IsBrauerTable(UCT) and not Gcd(k, UnderlyingCharacteristic(UCT)) = 1 then
-  Print("HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.\n");
+  Info( HeLP_Info, 1, "HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.");
   return "non-admissible";
 fi;
 if not Lcm(OrdersClassRepresentatives(UCT)) mod k = 0 then
-  Print("There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.\n");
+  Info( HeLP_Info, 1, "There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.");
   return [ ];
 fi;
 HeLP_INTERNAL_CheckChar(C);
@@ -456,7 +456,7 @@ InstallGlobalFunction(HeLP_WithGivenOrderAndPA, function(arg)
 # arguments: arg[1] is a character table or a list of class functions
 # arg[2] is the order of the unit in question
 # arg[3] partial augmentations of the powers
-local C, k, divisors, W, UCT, intersol;
+local C, k, W, UCT, intersol;
 if IsCharacterTable(arg[1]) then
   C := Irr(arg[1]);
 elif IsList(arg[1]) then
@@ -468,15 +468,14 @@ fi;
 k := arg[2];
 UCT := UnderlyingCharacterTable(C[1]);
 if IsBrauerTable(UCT) and not Gcd(k, UnderlyingCharacteristic(UCT)) = 1 then
-  Print("HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.\n");
+  Info( HeLP_Info, 1, "HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.");
   return "infinite";
 fi;
 if not IsPosInt(Lcm(OrdersClassRepresentatives(UCT))/k) then
-    Print("There is no unit of order ", k, " in ZG as it does not divide the exponent ", Lcm(OrdersClassRepresentatives(UCT)), " of the group G.\n");
+    Info( HeLP_Info, 1, "There is no unit of order ", k, " in ZG as it does not divide the exponent ", Lcm(OrdersClassRepresentatives(UCT)), " of the group G.");
     return [];
 fi;
 HeLP_INTERNAL_CheckChar(C);
-divisors := DivisorsInt(k);
 W := HeLP_INTERNAL_MakeSystem(C, k, UCT, arg[3]);
 if W = "infinite" then
   return "infinite";
@@ -489,6 +488,119 @@ else
   Info(HeLP_Info, 1,  "Number of solutions for elements of order ", k, " with these partial augmentations for the powers: ", Size(intersol), ".");
   return intersol;
 fi;
+end);
+
+
+########################################################################################################
+
+InstallGlobalFunction(HeLP_WithGivenOrderAndPAAllTables, function(CT, ord, pas)
+# arguments: CT ordinay character table
+# ord is the order of the unit in question
+# pas list of partial augmentations of the powers
+local C, relevant_primes, tables, B, p, BT_not_available, intersol, CAct;
+if not IsCharacterTable(CT) then
+  Error("The first argument of 'HeLP_WithGivenOrderAndPAAllTables' has to be a character table.");
+fi;
+if not IsPosInt(ord) then
+  Error("Second argument of 'HeLP_WithGivenOrderAndPAAllTables' has to be positive integer.\n");
+fi;
+if IsOrdinaryTable(CT) then
+  C := CT;
+  CAct := CT;
+else
+  C := OrdinaryCharacterTable(CT);
+  if Gcd(UnderlyingCharacteristic(CT), ord) > 1 then
+    CAct := C;
+  else
+    CAct := CT;
+  fi;
+fi;
+tables := [ ];
+if not IsSolvable(C) then
+  relevant_primes := Filtered( PrimeDivisors(Size(C)), p -> Gcd(p, ord) = 1);
+  BT_not_available := [ ];
+  for p in relevant_primes do
+    B := C mod p;
+    if B = fail then
+      Add(BT_not_available, p);
+    else
+      Add(tables, B);
+    fi;
+  od;
+fi;
+intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
+if intersol = "infinite" then
+  # This case should never occur.
+  Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
+  return "infinite";
+else
+  if IsSolvable(C) then
+     Info( HeLP_Info, 1, "The group is solvable, so only the given character table was used.");   
+  fi;
+  if BT_not_available <> [ ] then 
+    Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+  fi;
+  Info(HeLP_Info, 1,  "Number of solutions for elements of order ", ord, " with these partial augmentations for the powers: ", Size(intersol), ".");
+  return intersol;
+fi;
+end);
+
+########################################################################################################
+
+InstallGlobalFunction(HeLP_WithGivenOrderAllTables, function(CT, ord)
+local C, CAct, B, BT_not_available, relevant_primes, p, tables, properdivisors, intersol, d, presol;
+if not IsCharacterTable(CT) then
+  Error("First argument of 'HeLP_WithGivenOrderAllTables' has to be a character table.\n");
+fi;
+if not IsPosInt(ord) then
+  Error("Second argument of 'HeLP_WithGivenOrderAllTables' has to be positive integer.\n");
+fi;
+if IsOrdinaryTable(CT) then
+  C := CT;
+  CAct := CT;
+else
+  C := OrdinaryCharacterTable(CT);
+  if Gcd(UnderlyingCharacteristic(CT), ord) > 1 then
+    CAct := C;
+  else
+    CAct := CT;
+  fi;
+fi;
+tables := [ ];
+if not IsSolvable(C) then
+  if not IsPrimePowerInt(ord) then
+    relevant_primes := PrimeDivisors(Size(C));
+  else
+    relevant_primes := Difference( PrimeDivisors(Size(C)), PrimeDivisors(ord) );
+  fi;
+  BT_not_available := [ ];
+  for p in relevant_primes do
+    B := C mod p;
+    if B = fail then
+      Add(BT_not_available, p);
+    else
+      Add(tables, B);
+    fi;
+  od;
+fi;
+HeLP_INTERNAL_CheckChar(Irr(C));
+intersol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
+if intersol = "infinite" then
+  # This case should never occur.
+  Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
+  return "infinite";
+else
+  if IsSolvable(C) then
+     Info( HeLP_Info, 1, "The group is solvable, so only the given character table was used.");   
+  fi;
+  if BT_not_available <> [ ] then 
+    Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+  fi;
+  Info(HeLP_Info, 1,  "Number of solutions for elements of order ", ord, " with these partial augmentations for the powers: ", Size(intersol), ".");
+  HeLP_sol[ord] := intersol;
+  return HeLP_sol[ord];
+fi;
+
 end);
 
 
@@ -595,23 +707,23 @@ if not (IsPosInt(s) and IsPosInt(t) and IsPrime(s) and IsPrime(t)) or s = t then
 fi;
 o := OrdersClassRepresentatives(UCT);
 if Size(Positions(o, s)) = 0 then
-  Print("There are no elements of order ", s, " in G.\n");
+  Info( HeLP_Info, 1, "There are no elements of order ", s, " in G.");
   return "non-admissible";
 fi;
 if Size(Positions(o, t)) = 0 then
-  Print("There are no elements of order ", t, " in G.\n");
+  Info( HeLP_Info, 1, "There are no elements of order ", t, " in G.");
   return "non-admissible";
 fi;
 if Size(Positions(o, s*t)) <> 0 then
-  Print("There are elements of order ", s*t, " in G.\n");
+  Info( HeLP_Info, 1, "There are elements of order ", s*t, " in G.");
   return "non-admissible";
 fi;
 if not IsBound(HeLP_sol[t]) then 
   Info( HeLP_Info, 2, "  Partial augmentations for elements of order ", t, " not yet calculated.  Restart for this order.");
   tintersol := HeLP_INTERNAL_WithGivenOrder(C, t);
   if tintersol = "infinite" then
-    Print("Solutions for elements of order ", t, " were not calculated.  When using the characters given in the first argument, there are infinitely many solutions for elements of order ", t, ".\n");
-    Print("Calculate first a finite list for elements of order ", t, ".\n");
+    Info( HeLP_Info, 1, "Solutions for elements of order ", t, " were not calculated.  When using the characters given in the first argument, there are infinitely many solutions for elements of order ", t, ".\n");
+    Info( HeLP_Info, 1, "Calculate first a finite list for elements of order ", t, ".");
     return "non-admissible";   
   else 
     HeLP_sol[t] := tintersol;
@@ -619,7 +731,7 @@ if not IsBound(HeLP_sol[t]) then
 fi;
 chars := HeLP_INTERNAL_SConstantCharacters(Filtered(C, c -> not Set(ValuesOfClassFunction(c)) = [1]),  s, UCT);
 if chars = [] then
-  Print("There are no non-trivial irreducible ", s, "-constant characters in the list given.");
+  Info( HeLP_Info, 1, "There are no non-trivial irreducible ", s, "-constant characters in the list given.");
   return "non-admissible";
 fi;
 Info( HeLP_Info, 3, "  Number of non-trivial ", s, "-constant characters in the list: ", Size(chars), ".");
@@ -636,7 +748,7 @@ for paq in HeLP_sol[t] do
   fi;
   intersol := HeLP_INTERNAL_TestSystem(W[1], W[2], s*t, [[1], paq[1]]);
   if intersol = "infinite" then
-    Print("The given data admits infinitely many solutions.\n");
+    Info( HeLP_Info, 1, "The given data admits infinitely many solutions.");
     return "infinite";
   else 
     Append(spq, intersol);
@@ -712,7 +824,7 @@ primediv := PrimeDivisors(k);
 npa := [];
 for p in primediv do
   if not IsBound(HeLP_sol[k/p]) then
-    Print("No partial augmentations for elements of order ", k/p, " knwon yet. Please compute them first.\n");
+    Info( HeLP_Info, 1, "No partial augmentations for elements of order ", k/p, " known yet. Please compute them first.");
     return fail;
   fi;
   Add(npa, HeLP_sol[k/p]); 
@@ -721,6 +833,48 @@ npa := Cartesian(npa);
 npa := List(npa, x -> HeLP_INTERNAL_CompatiblePartialAugmentations(x,k));
 npa := Filtered(npa, x -> not x = fail);
 return npa;
+end);
+
+###########################################################################################################
+InstallGlobalFunction(HeLP_WriteTrivialSolution, function(C, k)
+## HeLP_WriteTrivialSolution(C, k)
+## C an ordinary character table, k a positive integer
+## calculates the partial augmentations of units of order k that are rationally conjugate to group elements and stores this in HeLP_sol[k]
+local nontrivialdivisors, o, posconjclasses, d, solution, x, l, a, s, t, all_solutions;
+if not IsOrdinaryTable(C) then
+  Error("The first argument of HeLP_WriteTrivialSolution has to be a character table.");
+fi;
+if not IsPosInt(k) then
+  Error("The second argument of HeLP_WriteTrivialSolution has to be a positive integer.");
+fi;
+o := OrdersClassRepresentatives(C);
+if not k in o then
+  HeLP_sol[k] := [ ];
+  return HeLP_sol[k];
+fi;
+nontrivialdivisors := HeLP_INTERNAL_DivNotOne(k);
+posconjclasses := [];
+for d in nontrivialdivisors do
+  posconjclasses[d] := Positions(o, d);
+od;
+all_solutions := [ ];
+for x in posconjclasses[k] do
+  solution := [ ];
+  # a := [ ];
+  for l in nontrivialdivisors do
+    # create list with right length and 0 entries
+    a := ListWithIdenticalEntries( Sum( List( HeLP_INTERNAL_DivNotOne(l), e -> Size(posconjclasses[e]) ) ), 0);
+    # number of conjugacy classes of strictly smaller order
+    s := Sum( List( HeLP_INTERNAL_ProperDiv(l), e -> Size(posconjclasses[e]) ) );
+    # Position of the conjugacy class of u^(k/l) in the conjugacy classes of order l
+    t := Position(posconjclasses[l], PowerMap(C, k/l)[x]);
+    a[s + t] := 1;
+    Add(solution, a);
+  od;
+  Add(all_solutions, solution);
+od;
+HeLP_sol[k] := all_solutions;
+return HeLP_sol[k];
 end);
 
 
@@ -836,11 +990,11 @@ else
 fi;
 UCT := UnderlyingCharacterTable(chars[1]);
 if IsBrauerTable(UCT) and Gcd(k, UnderlyingCharacteristic(UCT)) > 1 then
-  Print("HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.\n");
+  Info( HeLP_Info, 1, "HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.");
   return "non-admissible";
 fi;
 if not Lcm(OrdersClassRepresentatives(UCT)) mod k = 0 then
-  Print("There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.\n");
+  Info( HeLP_Info, 1, "There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.");
   return [];
 fi;
 asol := [];    # stores the solutions which fulfill the conditions of the HeLP equations
@@ -884,11 +1038,11 @@ else
 fi;
 UCT := UnderlyingCharacterTable(chars[1]);
 if IsBrauerTable(UCT) and not Gcd(k, UnderlyingCharacteristic(UCT)) = 1 then
-  Print("HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.\n");
+  Info( HeLP_Info, 1, "HeLP can't be applied in this case as the characteristic of the Brauer table divides the order of the unit in question.");
   return ;
 fi;
 if not Lcm(OrdersClassRepresentatives(UCT)) mod k = 0 then
-  Print("There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.\n");
+  Info( HeLP_Info, 1, "There is no unit of order ", k, " in ZG as it does not divide the exponent of the group G.");
   return [];
 fi;
 HeLP_INTERNAL_CheckChar(chars);
@@ -896,7 +1050,7 @@ D := DuplicateFreeList(Filtered(chars, c -> not Set(ValuesOfClassFunction(c)) = 
 for d in Filtered(DivisorsInt(k), e -> not (e = 1 or e = k)) do
   if not IsBound(HeLP_sol[d]) then
     if HeLP_FindAndVerifySolution(D, d) = "infinite" then
-      Print("There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.\n");
+      Info( HeLP_Info, 1, "There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.");
       return "infinite";
     fi;
   fi; 
@@ -947,7 +1101,7 @@ elif IsInt(arg[1]) then
   k := arg[1];
   if IsBound(HeLP_sol[k]) then
     if HeLP_sol[k] = [] then
-      Print("There are no admissible partial augmentations for elements of order ", k, ".\n");
+      Info( HeLP_Info, 1, "There are no admissible partial augmentations for elements of order ", k, "." );
     else
       w1 := [ ];
       w2 := [ ];
@@ -969,12 +1123,12 @@ elif IsInt(arg[1]) then
                   f -> ClassNames(HeLP_CT){Positions(OrdersClassRepresentatives(HeLP_CT), f)})));
           Add(w3, "---");
         od;
-        Print("Solutions for elements of order ", k, ":\n");
+        Info( HeLP_Info, 1, "Solutions for elements of order ", k, ":");
         PrintArray(Concatenation([w1], [w2], [w3], HeLP_sol[k]));
       fi;     
     fi;
   else
-    Print("Solutions for order ", k, " are not yet calculated.\n");      
+    Info( HeLP_Info, 1, "Solutions for order ", k, " are not yet calculated.");      
   fi;
 fi;
 end);
@@ -987,7 +1141,7 @@ InstallGlobalFunction(HeLP_Solver, function(arg)
 # changes the value of HeLP_settings[1] to the value of the argument of the function
 local h1, h2, h3, h4;
 if arg = [] then
-  Print(HeLP_settings[1], "\n");
+  Info( HeLP_Info, 1, HeLP_settings[1]);
 elif Size(arg) = 1 and arg[1] in ["4ti2", "normaliz"] then
   h1 := HeLP_settings[1];
   h2 := HeLP_settings[2];
@@ -997,19 +1151,19 @@ elif Size(arg) = 1 and arg[1] in ["4ti2", "normaliz"] then
   UnbindGlobal("HeLP_settings");
   if arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) <> fail then
     BindGlobal("HeLP_settings", ["4ti2", h2, h3, h4]);
-    Print("'4ti2' will be used from now on.\n");
+    Info( HeLP_Info, 1, "'4ti2' will be used from now on.");
   elif arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) = fail then
     BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
-    Print("The executable 'zsolve' (from 4ti2) was not found.\nPlease install 4ti2 in a directory contained in the PATH variable.\nThe calculations will be performed as before.\n");
+    Info( HeLP_Info, 1, "The executable 'zsolve' (from 4ti2) was not found.\nPlease install 4ti2 in a directory contained in the PATH variable.\nThe calculations will be performed as before.");
   elif arg[1] = "normaliz" and LoadPackage("normaliz") then
     BindGlobal("HeLP_settings", ["normaliz", h2, h3, h4]);
-    Print("'normaliz' will be used from now on.\n");
+    Info( HeLP_Info, 1, "'normaliz' will be used from now on.");
   elif arg[1] = "normaliz" and LoadPackage("normaliz") = fail then
     BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
-    Print("The executable 'ConeOderSo' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.\n");
+    Info( HeLP_Info, 1, "The executable 'BNmzCone' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.");
   fi;
 else
-  Print("Argument of 'HeLP_Solver' must be empty or \"4ti2\" or \"normaliz\".\n"); 
+  Info( HeLP_Info, 1, "Argument of 'HeLP_Solver' must be empty or \"4ti2\" or \"normaliz\"."); 
 fi;
 end);
 
@@ -1028,16 +1182,16 @@ if IsBool(b) then
   UnbindGlobal("HeLP_settings");
   if b and IO_FindExecutable( "redund" ) <> fail then
     BindGlobal("HeLP_settings", [h1, b, h3, h4]);
-    Print("'redund' will be used from now on.\n");
+    Info( HeLP_Info, 1, "'redund' will be used from now on.");
   elif b and IO_FindExecutable( "redund" ) = fail then
     BindGlobal("HeLP_settings", [h1, false, h3, h4]);
-    Print("The executable 'redund' (from package the lrslib-package) was not found.\nPlease install 'redund' in a directory contained in the PATH variable.\nThe calculations will be performed without using 'redund'.\n");
+    Info( HeLP_Info, 1, "The executable 'redund' (from package the lrslib-package) was not found.\nPlease install 'redund' in a directory contained in the PATH variable.\nThe calculations will be performed without using 'redund'.");
   else
     BindGlobal("HeLP_settings", [h1, false, h3, h4]);
-    Print("The calculations will be performed without using 'redund' from now on.\n");
+    Info( HeLP_Info, 1, "The calculations will be performed without using 'redund' from now on.");
   fi;
 else
-  Print("Argument of 'HeLP_UseRedund' must be a boolean.\n");
+  Info( HeLP_Info, 1, "Argument of 'HeLP_UseRedund' must be a boolean.");
 fi;
 end);
 
@@ -1055,9 +1209,9 @@ if string in ["32", "64", "gmp"] then
   MakeReadWriteGlobal("HeLP_settings");
   UnbindGlobal("HeLP_settings");
   BindGlobal("HeLP_settings", [h1, h2, string, h4]);
-  Print("The calculations of 4ti2 will be performed with precision ", string, " from now on.\n");
+  Info( HeLP_Info, 1, "The calculations of 4ti2 will be performed with precision ", string, " from now on.");
 else
-  Print("Only \"32\", \"64\" and \"gmp\" are allowed as argument of 'HeLP_Change4ti2Precision'.\n");
+  Info( HeLP_Info, 1, "Only \"32\", \"64\" and \"gmp\" are allowed as argument of 'HeLP_Change4ti2Precision'.");
 fi;
 end);
 
@@ -1075,15 +1229,128 @@ if string in ["vertices", "novertices", "default"] then
   UnbindGlobal("HeLP_settings");
   BindGlobal("HeLP_settings", [h1, h2, h3, string]);
   if string = "vertices" then
-    Print("The calculations of normaliz will always compute VerticesOfPolyhedron from now on.\n");
+    Info( HeLP_Info, 1, "The calculations of normaliz will always compute VerticesOfPolyhedron from now on.");
   elif string = "novertices" then
-    Print("The calculations of normaliz will not compute VerticesOfPolyhedron from now on.\n");
+    Info( HeLP_Info, 1, "The calculations of normaliz will not compute VerticesOfPolyhedron from now on.");
   elif string = "default" then
-    Print("The calculations of normaliz will compute VerticesOfPolyhedron, if there is a trivial solution, from now on.\n");
+    Info( HeLP_Info, 1, "The calculations of normaliz will compute VerticesOfPolyhedron, if there is a trivial solution, from now on.");
   fi;
 else
-  Print("Only \"vertices\", \"novertices\" and \"default\" are allowed as argument of 'HeLP_Change4ti2Precision'.\n");
+  Info( HeLP_Info, 1, "Only \"vertices\", \"novertices\" and \"default\" are allowed as argument of 'HeLP_Change4ti2Precision'.");
 fi;
+end);
+
+
+##############################################################################################################
+InstallGlobalFunction(HeLP_AutomorphismOrbits,  function( arg )
+# Arguments: charactertable, order [, partial augmentations]
+# return: list
+# returns a list of representatives of the orbits of the possible partial augmentations under the action of the automorphism group of G
+local C, ord, sols, G, Conj, A, I, rep, classes, images, a, pos, ocr, classnames, orignames, orbit, solorbits, perms, s, pis, res;
+C := arg[1];
+ord := arg[2];
+if not IsCharacterTable(C) or not IsInt(ord) then
+  Error("The first argument has to be a character table, the second has to be a positive integer.");
+fi;
+if Size(arg) > 2 then
+  sols := arg[3];
+else
+  if not IsBound(HeLP_sol[ord]) then
+    HeLP_WithGivenOrder(C, ord);
+  fi;
+  sols := HeLP_sol[ord];
+fi;
+solorbits := [];
+if "UnderlyingGroup" in KnownAttributesOfObject(C) then
+  G := UnderlyingGroup(C);
+elif "Identifier" in KnownAttributesOfObject(C) then
+  G := AtlasGroup(Identifier(C));
+  C := CharacterTableWithStoredGroup(G, C);
+  if G = fail then
+    Info( HeLP_Info, 1, "The underlying group of the character table could not be determined.");
+    return fail;
+  fi;
+else
+  Info( HeLP_Info, 1, "The underlying group of the character table could not be determined.");
+  return fail;
+fi;
+Conj := ConjugacyClasses(C);;
+ocr := OrdersClassRepresentatives(C);
+A := AutomorphismGroup(G);
+I := InnerAutomorphismsAutomorphismGroup(A);;
+rep := RightTransversal(A, I);
+
+pos := List(Difference(DivisorsInt(ord), [1]), 
+       d -> Flat(List(Difference(DivisorsInt(d), [1]), e -> Positions(ocr, e))));
+
+classes := List(pos, k -> List(Conj{k}, cl -> Representative(cl)));
+images := [];
+for a in rep do
+  Add(images, List(classes, k -> List(k,  c -> PositionProperty(Conj, cl -> c^a in cl))));
+od;
+images := Set(images);
+# if Size(arg) = 2 then
+#  classnames := ClassNames(C);
+#  orignames := List(pos, k -> classnames{k});
+#  return List(images, k -> [orignames, "->", List(k, cl -> classnames{cl})]);
+# fi;
+#if Size(arg) = 3 then
+  perms := List(images, k -> List([1..Size(k)], d -> PermListList(pos[d], k[d])));
+  while sols <> []  do
+    s := sols[1];
+    Add(solorbits, s);
+    orbit := [];
+    for pis in perms do
+      res := List([1..Size(s)], j -> Permuted(s[j], pis[j]));
+      Add(orbit, res);
+    od;
+    sols := Difference(sols, orbit);
+  od;   
+  return solorbits;
+# fi;
+end);
+
+
+
+
+##############################################################################################################
+InstallGlobalFunction(HeLP_IsZCKnown, function(G)
+local primes, p, P, NT, CNT, ANT, N;
+if IsNilpotent(G) then
+  Info(HeLP_Info, 1, "G is nilpotent, hence the Zassenhaus Conjecture holds by A. Weiss, 'Torsion units in integral group rings', J. Reine Angew. Math., 415, 175--187, 1991.");
+  return true;
+fi;
+primes := PrimeDivisors(Order(G));
+for p in primes do
+  P := SylowSubgroup(G, p);
+  if IsNormal(G, P) and IsAbelian(G/P) then
+    Info(HeLP_Info, 1, "G has a normal Sylow ", p, "-subgroup with abelian complement, hence the Zassenhaus Conjecture holds by M. Hertweck, 'On the torsion units of some integral group rings', Algebra Colloq., 13(2), 329--348, 2006.");
+    return true;
+  fi;
+od;
+NT := NormalSubgroups(G);
+CNT := Filtered(NT, N -> IsCyclic(N));
+for N in CNT do
+  if IsAbelian(G/N) then
+    Info(HeLP_Info, 1, "G is cyclic-by-abelain, hence the Zassenhaus Conjecture holds by M. Caicedo, L. Margolis, A. del Rio,  'Zassenhaus conjecture for cyclic-by-abelian groups', J. Lond. Math. Soc. (2), 88(1), 65--78, 2013.");
+    return true;
+  fi;
+od;
+ANT := Filtered(NT, N -> IsCyclic(N));
+for N in ANT do
+  if IsPrime(Index(G, N)) then
+    p :=Index(G, N);
+    if Set(List(PrimeDivisors(Order(N)), p -> Index(G, N) < p)) = [true] then
+      Info(HeLP_Info, 1, "G has a normal abelian subgroup A with complement of order a prime q such that each prime divisor of |A| is greater than q, hence the Zassenhaus Conjecture holds by Z. Marciniak, J. Ritter, S.K. Sehgal,  A. Weiss, 'Torsion units in integral group rings of some metabelian groups. II.',  J. Number Theory 25 (1987), no. 3, 340–352.");
+      return true;     
+    fi;
+  fi;
+od;
+if Order(G) < 144 then
+  Info(HeLP_Info, 1, "G has order smaller than 144, hence the Zassenhaus Conjecture holds by A. Bächle, A. Herman, A. Konovalov, L. Margolis, G. Singh, 'The status of the Zassenhaus conjecture for small groups', arXiv:1609.00042, 2016.");
+  return true;
+fi;
+return false;
 end);
 
 #E

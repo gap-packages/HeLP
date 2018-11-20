@@ -3,7 +3,7 @@
 ##                                                               HeLP package
 ##
 ##                                 Andreas Bächle, Vrije Universiteit Brussel
-##                                        Leo Margolis, Universität Stuttgart
+##                                        Leo Margolis, Universidad de Murcia
 ##
 #############################################################################
 
@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.0",
-Date           := "03/03/2016",
+Version        := "3.1",
+Date           := "12/01/2017",
 
 ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
@@ -58,13 +58,13 @@ rec(
        Email         := "Leo.Margolis@mathematik.uni-stuttgart.de",
        WWWHome       := "http://www.igt.uni-stuttgart.de/LstDiffgeo/Margolis/",
        PostalAddress := Concatenation( [
-                        "Institut für Algebra und Zahlentheorie\n",
-                        "Universität Stuttgart\n",
-                        "Pfaffenwaldring 57\n",
-                        "D-70569 Stuttgart\n",
-                        "Germany"] ),
-       Place         := "Stuttgart",
-       Institution   := "Universität Stuttgart"
+                        "Departamento de Matemáticas\n",
+                        "Facultad de Matemáticas\n",
+                        "Universidad de Murcia\n",
+                        "Murcia 30100\n",
+                        "Spain" ] ),
+       Place         := "Murcia",
+       Institution   := "Universidad de Murcia"
      )
 ],
 
@@ -96,7 +96,7 @@ Keywords := ["HeLP method", "torsion units",
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
-                    "&copyright; 2016 by Andreas Bächle and Leo Margolis<P/>\n\n",
+                    "&copyright; 2017 by Andreas Bächle and Leo Margolis<P/>\n\n",
                     "This package is free software and may be distributed under the terms and conditions of the\n",
                     "GNU Public License Version 2.\n"
                 ),

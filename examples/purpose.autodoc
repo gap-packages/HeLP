@@ -121,13 +121,13 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  In the case that $u$ is of prime power order this is a result of J.A. Cohn and D. Livingstone <Cite Key="CohnLivingstone"/>.
 
  
-@Section s-constant (and (s,t)-constant) characters
+@Section s-constant characters
 
 If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one studies the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
 There is also the concept of $(s,t)$-constant characters, being constant on both, the conjugacy classes of elements of order $s$ and on the conjugacy classes of elements of order $t$. The implementation of this is however not yet part of this package.
 
 
-@Section Known results about (ZC) and (PQ)
+@Section Known results about the Zassenhaus Conjecture and the Prime Graph Question
  
 At the moment as this documentation was written, to the best of our knowledge, the following results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
 For the Zassenhaus Conjecture only the following reduction is available: <P/><P/>
@@ -137,10 +137,9 @@ With this reductions in mind the Zassenhaus Conjecture is known for:
 * Cyclic-By-Abelian groups <Cite Key="CyclicByAbelian"/>,
 * Groups containing a normal Sylow subgroup with abelian complement <Cite Key="HertweckColloq"/>,
 * Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
-* Groups $X \rtimes A$, where $X$ is abelian, $A$ elementary abelian and $A$ acts faithfully and irreducibly on $X$ <Cite Key="SehgalWeiss"/>,
 * Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
-* All groups of order up to 71 <Cite Key="HoefertKimmerle"/>, 
-* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/> and some extensions of these groups.
+* All groups of order up to 143 <Cite Key="BaHeKoMaSi"/>, 
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>.
 
 For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
 **Theorem:** Assume the Prime Graph Question holds for all almost simple images of a group $G$. Then (PQ) also holds for $G.$<P/>
@@ -150,4 +149,4 @@ Here a group $G$ is called almost simple, if it is sandwiched between the inner 
 * Half of the sporadic simple groups and their automorphism groups; for an overview see <Cite Key="KonovalovKimmiStAndrews"/>,
 * Groups whose socle is isomorphic to an alternating group of degree at most 17, <Cite Key="SalimA7A8"/> <Cite Key="SalimA9A10"/><Cite Key="BaCa"/>, 
 * Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)
-* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/>
+* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/><Cite Key="BaMa4prII"/>.

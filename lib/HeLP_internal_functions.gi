@@ -10,6 +10,19 @@ MakeReadWriteGlobal("HeLP_sol");
 
 BindGlobal("HeLP_settings", ["normaliz", false, "32", "default"]); # Normally redund does not speed up normaliz-computations
 
+########################################################################################################
+BindGlobal("HeLP_INTERNAL_DivNotOne", function(k)
+# Arguments: a positive integer k
+# Output: all divisors of k except 1
+return Filtered(DivisorsInt(k), n -> (n <> 1));
+end);
+
+########################################################################################################
+BindGlobal("HeLP_INTERNAL_ProperDiv", function(k)
+# Arguments: a positive integer k
+# Output: all divisors of k except 1 and k
+return Filtered(DivisorsInt(k), n -> (n <> 1) and (n <> k));
+end);
 
 ########################################################################################################
 # InstallGlobalFunction(HeLP_INTERNAL_IsIntVect, function(v)
@@ -284,8 +297,7 @@ elif HeLP_settings[1] = "4ti2" then
   fi;
 
 else
-  Print("No solver found or specified. Please install 4ti2 or normaliz such that GAP can use it.");
-
+  Info( HeLP_Info, 1, "No solver found or specified. Please install 4ti2 or normaliz so that GAP can use it.");
 fi;
 end);
 
@@ -718,7 +730,7 @@ for d in properdivisors do
     Info(HeLP_Info, 4, "    Solutions for order ", d, " not yet calculated.  Restart for this order.");
     presol := HeLP_INTERNAL_WithGivenOrder(C, d);
     if presol = "infinite" then
-      Print("There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.\n");
+      Info( HeLP_Info, 1, "There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.");
       return "infinite";
     else
       HeLP_sol[d] := presol;
@@ -783,6 +795,106 @@ for pa in list_paraugs do
   fi;
 od;
 return asol;
+end);
+
+
+
+########################################################################################################
+
+BindGlobal("HeLP_INTERNAL_WithGivenOrderAndPAAllTables", function(CAct, tables, ord, pas)
+# arguments: CAct character table
+# tables: list of other character tables (derived from CAct) that should be used
+# ord is the order of the unit in question
+# pas list of partial augmentations of the powers
+local W, intersol, tab;
+W := HeLP_INTERNAL_MakeSystem(Irr(CAct), ord, CAct, pas);
+if W = "infinite" then
+  # This case should never happen.
+  return "infinite";
+fi;
+intersol := HeLP_INTERNAL_TestSystem(W[1], W[2], ord, pas);
+if intersol = "infinite" then
+  # This case should never occur.
+  Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
+  return "infinite";
+else
+  for tab in tables do
+    if Gcd(UnderlyingCharacteristic(tab), ord) = 1 then
+      intersol := HeLP_INTERNAL_VerifySolution(tab, ord, intersol);
+    fi;
+  od;
+  return intersol;
+fi;
+end);
+
+
+########################################################################################################
+
+
+InstallGlobalFunction("HeLP_INTERNAL_WithGivenOrderAllTables", function(CAct, tables, ord)
+# arguments: CAct character table
+# tables: list of other character tables (derived from CAct) that should be used
+# ord is the order of the unit in question
+local properdivisors, d, presol, W, asol, primediv, p, npa, size_npa, j, pa, intersol, tab;
+
+
+properdivisors := Filtered(DivisorsInt(ord), d -> not (d = ord));
+for d in properdivisors do
+  if not IsBound(HeLP_sol[d]) then
+    Info(HeLP_Info, 4, "    Solutions for order ", d, " not yet calculated.  Restart for this order.");
+    presol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, d);
+    if presol = "infinite" then
+      # this should never happen
+      Info( HeLP_Info, 1, "There are infinitely many solutions for elements of order ", d, ", HeLP stopped.");
+      return "infinite";
+    else
+      HeLP_sol[d] := presol;
+    fi;
+  fi;
+  if HeLP_sol[d] = [ ] then # If there are no elements of order d, there are none of order k.    
+    Info(HeLP_Info, 4, "There are no elements of order ", d, ", so there are none of order ", ord, "."); 
+    return [ ];
+  fi;
+od;
+asol := [ ];  # stores all solution of elements of order k found so far
+primediv := PrimeDivisors(ord);	
+npa := [ ];
+for p in primediv do
+  Add(npa, HeLP_sol[ord/p]); 
+od;
+npa := Cartesian(npa);
+npa := List(npa, x -> HeLP_INTERNAL_CompatiblePartialAugmentations(x,ord));
+npa := Filtered(npa, x -> not x = fail); #The powers to be computed.
+size_npa := Size(npa);
+j := 1;
+# looping over all possible partial augmentations for the powers of u
+for pa in npa do
+  if InfoLevel(HeLP_Info) >= 4 then
+    Print("#I      Testing possibility ", j, "/", size_npa, " for elements of order ", ord, ".\r");
+  fi;
+  intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pa);
+  if intersol = "infinite" then
+      return "infinite";
+  fi;
+  Append(asol, intersol);
+  j := j + 1;
+od;
+if InfoLevel(HeLP_Info) >= 4 then
+  Print("                                                                              \r");
+fi;
+if asol = "infinite" then
+  # This case should never occur.
+  Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
+  return "infinite";
+else
+  asol := DuplicateFreeList(asol);
+  for tab in tables do
+    if Gcd(UnderlyingCharacteristic(tab), ord) = 1 then
+      asol := HeLP_INTERNAL_VerifySolution(tab, ord, asol);
+    fi;
+  od;
+  return asol;
+fi;
 end);
 
 #E
