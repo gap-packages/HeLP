@@ -12,9 +12,12 @@
  To interact with 4ti2 the package makes use of the
  4ti2-Interface written by S. Gutsche, which in turn uses the package IO.  Note that the latter
  package needs a C-part to be compiled; see the readme-file or the documentation of that package.
- If these preconditions are fulfilled, one just has to copy the HeLP-package in the GAP pkg-directory.
- Now the package can be loaded by typing <K>LoadPackage("HeLP");</K> during a GAP-session. 
- If the package doesn't work properly on your computer, you might want to check Section 
+ The package also provides the possibility to use redund form the lrslib software <Cite Key="lrslib"/>,
+ to remove redundant inequalities before solving the system, which might speed up the computations
+ significantly.  However, it is not a requirement to have lrslib installed.
+ If the above mentioned preconditions are fulfilled, one just has to copy the HeLP-package in the GAP pkg-directory.
+ Now the package can be loaded by typing <K>LoadPackage("HeLP");</K> during a GAP-session.
+ If the HeLP-package doesn't work properly on your computer, you might want to check Section 
  <Ref Sect='Chapter_Remarks_on_technical_problems_and_the_implementation_Section_Making_the_HeLP-package_run'/>
  for some trouble shooting.
 @EndChunk Intro

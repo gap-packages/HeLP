@@ -1,68 +1,51 @@
 @Chapter Remarks on technical problems and the implementation
 
 @Section Making the HeLP-package run
-#! Sometimes one encounters problems, when trying to make this package run.
-#! One known problem is that the 4ti2-interface needs the <URL Text="IO-package">http://gap-system.github.io/io/</URL>,
-#! which needs a C-part to be compiled. To see if this package is working on your system you can enter
-#! <K>LoadPackage("IO");</K> after starting GAP.
-#! If the result is <K>fail</K>, the package is not installed or the C-part is not yet compiled.
-#! For download and information on installation and in particular on how to compile the C-part, see the
-#! <URL Text="manual">http://gap-system.github.io/io/doc/chap0.html</URL> (in particular Chapter 2) or the README-file of that package.<P/>
-#! Another common problem is that the 4ti2-Interface package can not access 4ti2
-#! since it does not find the 4ti2-function <K>zsolve</K>.
-#! Most of the times this results in an error-message beginning with
-@BeginExample
-#! Error, operations: IN of character and boolean is not defined in
-#!   if '/' in path  then
-#!     if not IsExecutableFile( path )  then
-#!         return fail;
-#!     else
-#!         return path;
-#!     fi;
-#!  [...]
-@EndExample
-#!  The best solution is probably to 
-#! re-install 4ti2 in one of the directories contained in your <K>\$PATH</K>-variable
-#! (which can typically be displayed by typing <K>echo \$PATH</K> 
-#! (Linux, Mac) <K>echo %PATH%</K> (Windows) in a terminal or a command prompt).
-#! If you want to avoid a re-installation, in many cases the following helps:
-#! - Start a terminal and access a path written in your bash or system_bash. Typically <K>usr/local/bin</K> should work. <P/>
-#! - Run <K>ln -s /PathToZsolve zsolve</K>. This sets a symlink to the right place.
-#! E.g. <K>ln -s /opt/4ti2/bin/zsolve zsolve</K> was used on the (Linux) computers in Stuttgart.
+#! A checklist what to do, if the package does not work:
+#! * Make sure you have sufficiently new versions of the following software: 
+#!   - <URL Text="GAP">http://www.gap-system.org/</URL> (at least 4.7.4)
+#!   - the GAP-package <URL Text="CTblLib">http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/</URL> (at least 1.2.2)
+#!   - the GAP-package <URL Text="IO">http://gap-system.github.io/io/</URL> (at least 4.2; see also the next bullet point if this package can not be loaded)
+#!   - the GAP-package <URL Text="4ti2Interface">http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/</URL> (at least 2015.04.29; this package needs the IO-package)   <P/>
+#!   
+#!  Usually all these packages should come with a sufficently recent GAP-installation (4.7.8 or newer)
+#!  and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing
+#!  <K>LoadPackage("[name]");</K> after starting GAP, where <K>[name]</K> is the name of the package.
+#! * The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter
+#!   <K>LoadPackage("IO");</K> after starting GAP. If the result is <K>fail</K> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled.
+#!   For information on installation and in particular on how to compile the C-part, see the
+#!   <URL Text="manual">http://gap-system.github.io/io/doc/chap0.html</URL> (in particular Chapter 2) or the README-file of that package.<P/>
+#! * Please make sure that <URL Text="www.4ti2.de">http://www.4ti2.de</URL> (Version 1.6.5 or newer) is installed.
+#!   In case of an error-message "The executable 'zsolve' provided by the software 4ti2 was not found." after typing <K>LoadPackage("HeLP");</K> either the software is not properly installed or
+#!   installed in a directory where GAP can not find it, i.e. a directory not contained in the path-variable.  The content of this variable can typically be displayed by typing <K>echo \$PATH</K> 
+#!   (Linux, Mac) <K>echo %PATH%</K> (Windows) in a terminal or a command prompt.  The manual of 4ti2 contains several pages of information on how to install the program. 
+#!   Note that the installation of 4ti2 requires gcc (g++) and gmp installed
+#!   (which come with many Linux installations or can be installed using a package manager).  
+#!   Make sure to execute all four commands indicated in the 4ti2 manual (possibly without the <K>--prefix=</K>-command):<P/>
+#!     <K>./configure --prefix=INSTALLATION-DIRECTORY</K><P/>
+#!     <K>make</K><P/>
+#!     <K>make check</K><P/>
+#!     <K>make install-exec</K><P/>
+#!   Depending on the settings of your system you might need root privileges (type <K>sudo</K> in front of every command) to unpack the files and install them.
+#!   To check whether the installation worked, you can enter <K>zsolve</K> in a terminal.
+#!   In case one of the required programs (g++ or gmp) was not installed when running <K>make</K>
+#!   for the first time, you might need to run <K>make clean</K> and the above commands several times to complie 4ti2 succesfully.
+#!   If you already have 4ti2 installed in a directory not contained in the path-variable and want to avoid a re-installation, in many cases the following helps:
+#!   - Start a terminal and access a path written in your bash or system_bash. Typically <K>usr/local/bin</K> should work. <P/>
+#!   - Run <K>ln -s /[PathToZsolve] zsolve</K>, where <K>[PathToZsolve]</K> is the path to the executable zsolve. This sets a symlink to the right place.
+#!   E.g. <K>ln -s /opt/4ti2/bin/zsolve zsolve</K> was used on the (Linux) computers in Stuttgart.
+#! * We also recommend to install <URL Text="lrslib">http://cgm.cs.mcgill.ca/~avis/C/lrs.html</URL>, at least version 4.3 
+#!   (note that version 4.2 or older sometimes produces unwanted behavior).  This software provides the 'redund' command, 
+#!   which can be switched on and off within HeLP, but which often leads to better performances (cf. <Ref Func='HeLP_UseRedund'/>).
+#!   For installation see the User's Guide or the Readme-file on the above mentioned homepage.  Usually, after unpacking in a 
+#!   directory contained in the path-variable it should be enough to call<P/> <K>make all</K><P/> (possibly as root) inside the lrslib-directory.
+#! * In case this does not help to get HeLP running, please feel more than welcome to contact one of the maintainers of the package.
 
 @Section Computations with big coefficients - precision problems
-#! If one is solving systems of linear inequalities with **huge** coefficients with 4ti2 via the 4ti2-Interface, sometimes precision
-#! errors occur.  This is the case because the coefficients of the HeLP system are alredy close to 32bit or even bigger
-#! than 32bit.  In the first case, if the calculations result bigger than 32bit, an error is signaled, in the second case there
-#! is no check yet, so the calculations are performed with a wrong systen and produce also wrong results.
-@BeginExample
-C := CharacterTable("Symmetric", 22);;
-HeLP_WithGivenOrder(Irr(C){[2..400]}, 11);
-#! Error, 4ti2 Error:
-#! Results were near maximum precision (32bit).
-#! Please restart with higher precision!
-#! If you continue, your results might be wrong called from
-#! 4ti2Interface_zsolve_equalities_and_inequalities(
-#!  [ ListWithIdenticalEntries( Size( T[1] ), 1 ) ], [ 1 ], T, - a ) called from
-#! HeLP_TestSimplifiedSystemINTERNAL( W[1], W[2], k, arg[3] ) called from
-#! HeLP_WithGivenOrderAndPAINTERNAL( C, k, act_pa ) called from
-#! HeLP_WithGivenOrderINTERNAL( C, k ) called from
-#! <function "HeLP_WithGivenOrder">( <arguments> )
-#!  called from read-eval loop at line 21 of *stdin*
-#! you can 'quit;' to quit to outer loop, or
-#! you can 'return;' to continue
-#! brk> quit;
-HeLP_WithGivenOrder(Irr(C), 11);
-#! #I  Number of solutions for elements of order 11: 0; stored in HeLP_sol[11].
-#! [  ]
-#! # The last output is obviously wrong;
-@EndExample
-#! In the next version of the 4ti2-Interface this test will be implemented and there should always be an error message in case 
-#! the results might be wrong.
-#! In the few examples we know of
-#! the character values, in particular the degrees,
-#! appearing have to be really huge for this problem to occure. For groups with a "reasonable" order
-#! there should be no problems.
+#! When using 4ti2, HeLP calls it per default with a maximum precision of 32bit.  In case one gets error 
+#! messages stating that the results of the calculations were near the maximum precision, the used precision
+#! can be influenced by using <Ref Func='HeLP_Change4ti2Precision'/>.  For groups with a "reasonable" order
+#! there should be no problems with the precision. 
 
 @Section How much 4ti2 is really there?
 #! The reason, why the program 4ti2 is used in this package, is basically that it can solve systems 

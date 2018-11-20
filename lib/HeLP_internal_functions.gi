@@ -4,9 +4,24 @@ MakeReadWriteGlobal("HeLP_sol");
 # HeLP_sol will be set as global variable on loading of the package to have a warning in case it already has a value
 # afterwards it is made RaedWrite so that the user can also change its value.
 
+
+# BindGlobal("HeLP_presision4ti2", "32");
+
+# the global varaiable "HeLP_settings" contains as first entry a boolean determining if redund will be used and as second entry the precision with which 4ti2 is called
+
+if IO_FindExecutable( "zsolve" ) = fail then
+  Error("The executable 'zsolve' provided by the software 4ti2 (www.4ti2.de) was not found.\n  Please make sure that it is installed in a directory contained in the PATH variable.");
+fi;
+if IO_FindExecutable( "redund" ) = fail then
+  BindGlobal("HeLP_settings", [false, "32"] );
+  Print("The executable 'redund' (from the software lrslib, http://cgm.cs.mcgill.ca/~avis/C/lrs.html) was not found.\nThe calculations will be performed without using 'redund'.\nWe recommend to get the lrslib-package installed in a directory contained in the PATH variable, as the use of it can make the calculations significantly faster.\n");
+else
+  BindGlobal("HeLP_settings", [true, "32"] );
+fi;
+
 ########################################################################################################
-# InstallGlobalFunction(HeLP_IsIntVectINTERNAL, function(v)
-BindGlobal("HeLP_IsIntVectINTERNAL", function(v)
+# InstallGlobalFunction(HeLP_INTERNAL_IsIntVect, function(v)
+BindGlobal("HeLP_INTERNAL_IsIntVect", function(v)
 # Arguments: a vector
 # Output: true if the vector has only integral entries, false otherwise
 local w, j;
@@ -19,10 +34,10 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_MakeRightSideCharINTERNAL", function(chi, k, properdivisors, positions, pa)
+BindGlobal("HeLP_INTERNAL_MakeRightSideChar", function(chi, k, properdivisors, positions, pa)
 # Arguments: A character, order of the unit, proper divisors of k, a list of positions of the conjugacy
 # classes having potential non-trivial partial augmentation on every proper power of u in the list of conjugacy classes of chi, the partial augmentations of the proper powers of u
-# Output: The vector used in HeLP_MakeSystemINTERNAL
+# Output: The vector used in HeLP_INTERNAL_MakeSystem
 # This is an internal function.
 local Q, j, l, v, K, r, a;
 Q := Rationals;
@@ -44,9 +59,9 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_DuplicateFreeSystemINTERNAL", function(T, a)
+BindGlobal("HeLP_INTERNAL_DuplicateFreeSystem", function(T, a)
 #Arguments: A matrix and a vector building a system of inequalities
-#Output: Same system of inequalities, where lines appearing more then once are removed.-
+#Output: Same system of inequalities, where lines appearing more then once are removed.
 local Tsimple, asimple, W, x, i;
 W := [];
 for i in [1..Size(T)] do
@@ -63,13 +78,107 @@ end);
 
 
 ########################################################################################################
+BindGlobal("HeLP_INTERNAL_Redund", function(A, b)
+# Arguments: a matrix and a vector for a system of lienar inequalities from which redund  should remove redundant lines
+# Output: Same system of inequalities with redundnat lines removed or "nosystem" in case redund already finds that there are no solutions to the system
+# parts of the code originally taken from Sebastian Gutsche's 4ti2-Interface, adapted to use redund
+local filestream, i, j, dir, filename, filename2, exec, std_err_out, blubb, matrix, rhs, string, nr_rows, nr_columns, cd;
+dir := DirectoryTemporary();
+# dir := Directory(".");			# for tests write to files in the home-directory to see whether things work correctly
+#transform the data to a format that redund can read
+filename := IO_File(Filename( dir, "gap_redund.ine" ), "w");
+i := Length( A );
+if i = 0 then
+  return A;
+fi;
+j := Length( A[ 1 ] );
+if j = 0 then
+  return A;
+fi;
+if not ForAll( A, k -> Length( k ) = j ) then
+  Error( "Input is not a matrix" );
+  return fail;
+fi;
+if not Length(A) = Length(b) then
+  Error( "Input is not a matrix" );
+  return fail;
+fi;
+IO_Write(filename, "H-representation\nbegin\n");
+IO_Write(filename, Concatenation( String( i ), " ", String( j+1 ),  " integer\n"  ) );
+for i in [1..Length(A)] do
+  IO_Write( filename, Concatenation( String( b[i] ), " " ) );  
+  for j in [1..Length(A[1])] do
+    IO_Write( filename, Concatenation( String( A[i][j] ), " " ) );
+  od;
+  IO_Write( filename, "\n" );
+od;
+IO_Write(filename, "end");
+# IO_Flush(filename);  # done by the call of IO_Close afterwards
+IO_Close(filename);
+###
+exec := IO_FindExecutable( "redund" );
+if exec = fail then
+  Error("Executable redund (from package the lrslib-Package) not found.  Please check if it is installed in a directory contained in the PATH variable.");
+fi;
+filename2 := Filename( dir, "redund_out.ine" );   # write the output of redund to this file
+filename := Filename( dir, "gap_redund.ine" );
+filestream := IO_Popen3( exec, [ filename, filename2 ] );
+# while IO_ReadLine( filestream.stdout ) <> "" do od;             # still busy - is this needed?
+std_err_out := Concatenation( IO_ReadLines( filestream.stderr ) );
+IO_Close( filestream.stdin );
+IO_Close( filestream.stdout );
+IO_Close( filestream.stderr );
+if std_err_out <> "" then
+  Error( Concatenation( "redund Error:\n", std_err_out, "If you continue, your results might be wrong" ) );
+fi;
 
-BindGlobal("HeLP_TestSimplifiedSystemINTERNAL",  function(T,a,k,pa)
+# convert data back to GAP-matrix form 
+filestream := IO_File( filename2, "r" );
+string := IO_ReadLine( filestream );
+while string <> "begin\n" and string <> "" do
+  string := IO_ReadLine( filestream );
+od;
+if string = "" then
+  return "nosystem";
+fi;
+string := IO_ReadLine( filestream );
+NormalizeWhitespace( string );
+string := SplitString( string, " ", " \n" );
+nr_rows := Int(string[1]);
+nr_columns := Int(string[2]);
+matrix := [ ];
+rhs := [];
+string := IO_ReadLine( filestream );
+while string <> "end\n" and string <> "end" and string <> "" do
+  NormalizeWhitespace( string );
+  string := SplitString( string, " ", " \n" );
+  string := List(string, Rat);
+  cd := Lcm(List(string, DenominatorRat));
+  if cd <> 1 then         # if the inequality returned by redund contains rational coefficients multiply by the common denominator
+    string := cd*string;
+  fi;
+  Add( rhs, Int(string[1]) );
+  string := [List( string{[2..Length(string)]}, Int )];
+  matrix := Concatenation( matrix, string );
+  string := IO_ReadLine( filestream );
+od;
+if nr_rows <> 0 and (Length( matrix ) <>  nr_rows or Length( matrix[1] ) <>  nr_columns - 1 or Length( matrix ) <> Length( rhs )) then
+  Error( "Matrix returned by redund is corrupted." );
+   return [ fail, [ nr_rows, nr_columns ], matrix ];
+fi;
+IO_Close( filestream );
+return [matrix, rhs];
+end);
+
+
+########################################################################################################
+
+BindGlobal("HeLP_INTERNAL_TestSystem",  function(T,a,k,pa)
 # Arguments: A matrix, a vector, the order of the unit, the partial augmentations of the proper powers of the unit
 # Output: The possible partial augmentations given by the HeLP-method for this partial augmentations of the powers. 
 # This function is internal.
 # It relies on the 4ti2-interface and program. 
-local solutions, v, mue, intersol, Tscaled, ascaled, HeLP_TestConeForIntegralSolutionsINTERNAL;
+local solutions, v, mue, intersol, Tscaled, ascaled, HeLP_TestConeForIntegralSolutionsINTERNAL, temp;
 
 HeLP_TestConeForIntegralSolutionsINTERNAL := function(b, c, k, T, a)
 # Arguments: set of basepoints, set of translations in non-negative direction,  order of the unit, matrix, vector of HeLP-system
@@ -79,7 +188,7 @@ Tba := List(b, v -> T*v + Flat(a));
 int := false;  # no integral solution found so far
 if c = [] then 
   for v in Tba do
-    int := int or HeLP_IsIntVectINTERNAL(v);
+    int := int or HeLP_INTERNAL_IsIntVect(v);
     if int then break; fi;
   od;
 else
@@ -87,7 +196,7 @@ else
   L := List(c, v -> List([0..k-1], j -> j*T*v));
   for v in Tba do
     for w in IteratorOfCartesianProduct(L) do
-      int := int or HeLP_IsIntVectINTERNAL(v + Sum(w));
+      int := int or HeLP_INTERNAL_IsIntVect(v + Sum(w));
       if int then break; fi;
     od;
     if int then break; fi;
@@ -96,7 +205,16 @@ fi;
 return int;
 end;
 
-solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], T, -a);
+
+if HeLP_settings[1] then        # if possible, use redund first to minimize the system
+  temp := HeLP_INTERNAL_Redund(T,a);
+  if temp = "nosystem" then
+    return [];
+  fi;
+else                      # redund is not used
+  temp := HeLP_INTERNAL_DuplicateFreeSystem(T, a);      # remove multiple times occuring inequalities
+fi;
+solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[2]);
 # there are infinitely many solutions if there is a base-point, i.e. solutions[1] <> [], and there are translations,
 # i.e. solutions[2] <> [] or solutions[3] <> [] s.t. T*x + a is integral with x = b + \sum l_c v_c 
 # (b \in solutions[1], v_c \in \solutions[2] and l_c non-negative integers (w.l.o.g. l_c < k)).
@@ -108,7 +226,7 @@ elif solutions[2] = [] and solutions[3] = [] then # finitely many solutions
     Tscaled := 1/k*T;
     ascaled := 1/k*a;
     mue := Tscaled*v + ascaled;		# calculating the multiplicities of the eigenvalues
-    if HeLP_IsIntVectINTERNAL(mue) then	# checking if the other condition, i.e. the multiplicities are integers, of HeLP are satisfied
+    if HeLP_INTERNAL_IsIntVect(mue) then	# checking if the other condition, i.e. the multiplicities are integers, of HeLP are satisfied
       Append(intersol, [Concatenation(pa, [v])]);	# why do we need to put '[v]' here and not just 'v'? v should already be a vector?
     fi;
   od;
@@ -126,9 +244,9 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_MakeCoefficientMatrixCharINTERNAL", function(chi, k, poscon)
+BindGlobal("HeLP_INTERNAL_MakeCoefficientMatrixChar", function(chi, k, poscon)
 # Arguments: A character, order of the unit, positions of the conjugacy classes having potential non-trivial partial augmentation on u in the list of conjugacy classes of chi
-# Output: The matrix used in HeLP_MakeSystemINTERNAL
+# Output: The matrix used in HeLP_INTERNAL_MakeSystem
 # This is an internal function.
 local K, l, r, T;
 K := Field(Rationals, [E(k)]);
@@ -146,16 +264,16 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_MakeSystemINTERNAL", function(C, k, UCT, pa)
+BindGlobal("HeLP_INTERNAL_MakeSystem", function(C, k, UCT, pa)
 # Arguments: list of characters, order, underlying character table, partial augmentations of proper powers of u
 # Output: matrix and vector of the system obtain by the HeLP constraints
 # This is an internal function.
-local properdivisors, chi, d, e, i, W, T, a, r, l, t, CS, o, posconk, poscondiv, poscondivd, paraug, extended_pa;
+local properdivisors, chi, d, e, T, a, o, posconk, poscondiv, poscondivd, extended_pa, D, p1;
 properdivisors := Filtered(DivisorsInt(k), n -> not (n=k));
 o := OrdersClassRepresentatives(UCT);
 poscondiv := [];
 posconk := [];
-paraug := [];
+p1 := Positions(o,1);
 for d in properdivisors do
     # determine on which conjugacy classes the unit and its powers might have non-trivial partial augmentations
     if d = 1 then
@@ -173,34 +291,43 @@ Append(posconk, Positions(o, k));
 T := [];
 a := [];
 extended_pa := Concatenation([[1]], pa);	# add the partial augmentation of u^k = 1
-for chi in C do
-    Append(T, HeLP_MakeCoefficientMatrixCharINTERNAL(chi, k, posconk));
-    Append(a, HeLP_MakeRightSideCharINTERNAL(chi, k, properdivisors, poscondiv, extended_pa));
+D := Filtered(C, x -> Size(DuplicateFreeList(ValuesOfClassFunction(x){Concatenation(p1, posconk)})) <> 1);
+if D = [] then
+  return "infinite";
+fi;
+for chi in D do
+    Append(T, HeLP_INTERNAL_MakeCoefficientMatrixChar(chi, k, posconk));
+    Append(a, HeLP_INTERNAL_MakeRightSideChar(chi, k, properdivisors, poscondiv, extended_pa));
 od;
-return HeLP_DuplicateFreeSystemINTERNAL(T, a);
+return [T, a];
 end);
 
 
 ########################################################################################################
 
-BindGlobal("HeLP_MakeSystemSConstantINTERNAL", function(C, s, t, UCT, pa_t)
-local chi, T, a, o, poscon;
+BindGlobal("HeLP_INTERNAL_MakeSystemSConstant", function(C, s, t, UCT, pa_t)
+local chi, T, a, o, poscon, D, p1;
 o := OrdersClassRepresentatives(UCT);
 poscon := [Position(o, s)];
 Append(poscon, Positions(o, t));
+p1 := Positions(o,1);
 T := [];
 a := [];
-for chi in C do
-    Append(T, HeLP_MakeCoefficientMatrixCharINTERNAL(chi, s*t, poscon));
-    Append(a, HeLP_MakeRightSideCharINTERNAL(chi, s*t, [1, s, t], [[Position(o, 1)], [Position(o, s)], Positions(o, t)], [[1], [1], pa_t] ) );
+D := Filtered(C, x -> Size(DuplicateFreeList(ValuesOfClassFunction(x){Concatenation(p1, poscon)})) <> 1);
+if D = [] then
+  return "infinite";
+fi;
+for chi in D do
+    Append(T, HeLP_INTERNAL_MakeCoefficientMatrixChar(chi, s*t, poscon));
+    Append(a, HeLP_INTERNAL_MakeRightSideChar(chi, s*t, [1, s, t], [[Position(o, 1)], [Position(o, s)], Positions(o, t)], [[1], [1], pa_t] ) );
 od;
-return HeLP_DuplicateFreeSystemINTERNAL(T, a);
+return [T,a];
 end);
 
 
 ########################################################################################################
 
-BindGlobal("HeLP_SConstantCharactersINTERNAL", function(C, s, UCT)
+BindGlobal("HeLP_INTERNAL_SConstantCharacters", function(C, s, UCT)
 # C a list of characters
 # UCT the underlying character table
 # s the prime with respect to which the characters should be constant
@@ -224,7 +351,7 @@ end);
 #######################################################################################################
 
 
-BindGlobal("HeLP_CheckCharINTERNAL", function(t)
+BindGlobal("HeLP_INTERNAL_CheckChar", function(t)
 # Argument: list of characters
 # Output: nothing
 # Resets all global variables and sets HeLP_CT to the new character table, if the characters in the argument
@@ -296,7 +423,7 @@ end);
 ########################################################################################################
 ########################################################################################################
 
-BindGlobal("HeLP_IsTrivialSolutionINTERNAL", function(l, k, o)
+BindGlobal("HeLP_INTERNAL_IsTrivialSolution", function(l, k, o)
 # Arguments: a list of partial augmentations of u and all its powers (<> 1), the order of u, the list of the orders of the class representatives
 # Output: returns true if all partial augemntations in l are "trivial"
 local s, w, j, n, properdiv, i, num, ncc;
@@ -338,7 +465,7 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_SortCharacterTablesByDegreesINTERNAL", function(CharTabs)
+BindGlobal("HeLP_INTERNAL_SortCharacterTablesByDegrees", function(CharTabs)
 # Arguments: a list of character tables
 # Output: reorded list of character tables
 # tables having characters with smaller degree appear earlier in the list
@@ -350,7 +477,7 @@ end);
 ##############################################################################################################
 ##############################################################################################################
 
-BindGlobal("HeLP_WagnerTestINTERNAL", function(k, list_paraugs, o)
+BindGlobal("HeLP_INTERNAL_WagnerTest", function(k, list_paraugs, o)
 ## Arguments: order of unit and list of possible partial augmentations for units of this order after applying HeLP, list of orders of class representatives dividing k
 ## Output: list of possible partial augmentations for units of this order after applying the Wagner test
 local pd, fac, filtered_solutions, p, s, v, pexp, i, pos;
@@ -400,29 +527,25 @@ end);
 
 ########################################################################################################
 
-BindGlobal("HeLP_WithGivenOrderAndPAINTERNAL", function(arg)
-# Same function as HeLP_WithGivenOrderAndPA, but the Character table is not rechecked. Meant mostly for internal use via HeLP_WithGivenOrderINTERNAL
+BindGlobal("HeLP_INTERNAL_WithGivenOrderAndPA", function(arg)
+# Same function as HeLP_WithGivenOrderAndPA, but the Character table is not rechecked. Meant mostly for internal use via HeLP_INTERNAL_WithGivenOrder
 # arguments: a list of characters, order of the unit, acting partial augmentations
 local C, k, divisors, W, UCT, intersol;
 C := arg[1];
 k := arg[2];
 UCT := UnderlyingCharacterTable(C[1]);
 divisors := DivisorsInt(k);
-W := HeLP_MakeSystemINTERNAL(C, k, UCT, arg[3]);
-intersol := HeLP_TestSimplifiedSystemINTERNAL(W[1], W[2], k, arg[3]);
+W := HeLP_INTERNAL_MakeSystem(C, k, UCT, arg[3]);
+if W = "infinite" then
+  return "infinite";
+fi;
+intersol := HeLP_INTERNAL_TestSystem(W[1], W[2], k, arg[3]);
 return intersol;
 end);
 
 
-########################################################################################################
-InstallGlobalFunction(HeLP_WithGivenOrderINTERNAL, function(C, k)
-
-# arguments: C is a list of class functions
-# k is the order of the unit in question
-# output: Result obtainable using the HeLP method for the characters given in arg[1] for units of order arg[2] or "infinite". The result is stored also in HeLP_sol[k]
-local properdivisors, d, pa, npa, asol, intersol, presol, UCT, primediv, p, act_pa, size_npa, j, HeLP_CompatiblePartialAugmentationsINTERNAL;
-
-HeLP_CompatiblePartialAugmentationsINTERNAL := function(pa_powers, k)
+###########################################################################################################
+BindGlobal("HeLP_INTERNAL_CompatiblePartialAugmentations", function(pa_powers, k)
 # Arguments: list of partial augmentations for the smallest proper powers of u, i.e. for u^p for every prime p dividing the order of u
 # tests if the partial augmentations are compatible, e.g. if (u^p)^q has the same p.A. as (u^q)^p
 # Output: list of partial augmentations of u if compatible, fail otherwise
@@ -446,7 +569,16 @@ for l in [2..Size(pa_powers)] do
   od; 
 od; 
 return pa;
-end;
+end);
+
+
+########################################################################################################
+InstallGlobalFunction(HeLP_INTERNAL_WithGivenOrder, function(C, k)
+
+# arguments: C is a list of class functions
+# k is the order of the unit in question
+# output: Result obtainable using the HeLP method for the characters given in arg[1] for units of order arg[2] or "infinite". The result is stored also in HeLP_sol[k]
+local properdivisors, d, pa, npa, asol, intersol, presol, UCT, primediv, p, size_npa, j;
 
 UCT := UnderlyingCharacterTable(C[1]);
 if IsBrauerTable(UCT) and not Gcd(k, UnderlyingCharacteristic(UCT)) = 1 then
@@ -456,7 +588,7 @@ properdivisors := Filtered(DivisorsInt(k), d -> not (d = k));
 for d in properdivisors do
   if not IsBound(HeLP_sol[d]) then
     Info(HeLP_Info, 4, "    Solutions for order ", d, " not yet calculated.  Restart for this order.");
-    presol := HeLP_WithGivenOrderINTERNAL(C, d);
+    presol := HeLP_INTERNAL_WithGivenOrder(C, d);
     if presol = "infinite" then
       Print("There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.\n");
       return "infinite";
@@ -475,22 +607,21 @@ npa := [];
 for p in primediv do
   Add(npa, HeLP_sol[k/p]); 
 od;
-npa:=Cartesian(npa);
+npa := Cartesian(npa);
+npa := List(npa, x -> HeLP_INTERNAL_CompatiblePartialAugmentations(x,k));
+npa := Filtered(npa, x -> not x = fail); #The powers to be computed.
 size_npa := Size(npa);
 j := 1;
 # looping over all possible partial augmentations for the powers of u
 for pa in npa do
   if InfoLevel(HeLP_Info) >= 4 then
-    Print("#I      Testing possibility ", j, "/", Size(npa), " for elements of order ", k, ".\r");
+    Print("#I      Testing possibility ", j, "/", size_npa, " for elements of order ", k, ".\r");
   fi;
-  act_pa := HeLP_CompatiblePartialAugmentationsINTERNAL(pa, k);
-  if not act_pa = fail then
-    intersol := HeLP_WithGivenOrderAndPAINTERNAL(C, k, act_pa);
-    if intersol = "infinite" then
+  intersol := HeLP_INTERNAL_WithGivenOrderAndPA(C, k, pa);
+  if intersol = "infinite" then
       return "infinite";
-    fi;
-    Append(asol, intersol);
   fi;
+  Append(asol, intersol);
   j := j + 1;
 od;
 if InfoLevel(HeLP_Info) >= 4 then
@@ -501,7 +632,7 @@ end);
 
 ##############################################################################################################
 
-BindGlobal("HeLP_VerifySolutionINTERNAL", function(C, k, list_paraugs)
+BindGlobal("HeLP_INTERNAL_VerifySolution", function(C, k, list_paraugs)
 # Arguemnts: character table or list of class functions, an order k [list of partial augmentations]
 # returns a list of admissable pa's or nothing (if there can not be a unit of that order for theoretical reasons or the method can not be applied)
 # checks which of the pa's in HeLP_sol[k] (if there are 2 arguments given) or the pa's in the third  argument fulfill the HeLP-constraints
@@ -513,9 +644,13 @@ fi;
 chars := Irr(C);
 asol := [];    # stores the solutions which fulfill the conditions of the HeLP equations
 for pa in list_paraugs do
-  W := HeLP_MakeSystemINTERNAL(chars, k, C, pa{[1..Size(pa)-1]});
-  mu := W[1]*pa[Size(pa)] + W[2];
-  if HeLP_IsIntVectINTERNAL(mu) and not false in List(mu, x -> SignInt(x) > -1) then
+  W := HeLP_INTERNAL_MakeSystem(chars, k, C, pa{[1..Size(pa)-1]});
+  if W = "infinite" then
+    return "infinite";
+  fi;
+  W := HeLP_INTERNAL_DuplicateFreeSystem(W[1], W[2]);
+  mu := 1/k*(W[1]*pa[Size(pa)] + W[2]);
+  if HeLP_INTERNAL_IsIntVect(mu) and not false in List(mu, x -> SignInt(x) > -1) then
     Add(asol, pa);
   fi;
 od;

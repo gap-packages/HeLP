@@ -178,9 +178,14 @@ HeLP_WithGivenOrder(C, 13);;
 SetInfoLevel(HeLP_Info,4);
 TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
 #! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
+#! 1301
+HeLP_UseRedund(false);
+TimeFunction(HeLP_WithGivenOrder, [Irr(C){[5,11,16]}, 39]);
+#! #I  Number of solutions for elements of order 39: 0; stored in HeLP_sol[39].  
 #! 670
 @EndExample
-The command <K>HeLP_WithGivenOrder(C,39);</K> started at the same time on another kernel was at possibility 5 out of 12474 when the above example was already finished and is probably still computing while you read this. <P/> 
+The command <K>HeLP_WithGivenOrder(C,39);</K> started at the same time on another kernel was at possibility 
+1228 out of 12474 when the above example was already finished. Started without redund it was at possibility 5 out of 12474 and is probably still computing while you read this. <P/> 
 If you want to check, if the solutions you found using only a few characters satisfy the constraints of all characters, you can use <Ref Func='HeLP_VerifySolution'/>:
 @BeginExample
 C := CharacterTable("L3(7).2");
@@ -234,6 +239,22 @@ TimeFunction(HeLP_WithGivenOrderSConstant, [C, 13, 3]);
 #! 0
 @EndExample
 
+For some groups switching redund on and off gives major improvements.
+@BeginExample
+C := CharacterTable(SmallGroup(160,91));
+#! CharacterTable( <pc group of size 160 with 6 generators> )
+TimeFunction(HeLP_ZC, [C]);
+#! 41                                                                            
+@EndExample
+Without redund <K>HeLP_ZC(C)</K> ran for over 400 hours without a result.
+@BeginExample
+C := CharacterTable(SmallGroup(96,12));
+#! CharacterTable( <pc group of size 96 with 6 generators> )
+HeLP_UseRedund(false);
+TimeFunction(HeLP_ZC, [C]);
+#! 6                                                                            
+@EndExample
+Running this example using redund the computations does not proceed for elements of order 12.
 
 @Section Using InfoLevels
 HeLP provides different InfoLevels for different situations. The variable controlling the InfoLevel is <K>HeLP_Info</K> and it might be changed using <K>SetInfoLevel(HeLP_Info, n)</K> to set the InfoLevel to n. The maximal <K>HeLP_Info</K> entry is 5, the default InfoLevel is 1. The examples below give some idea, how one can use <K>HeLP_Info</K>, but do not give complete information on all possibilities.<P/>
@@ -402,7 +423,7 @@ HeLP_WithGivenOrderSConstant(Irr(C mod 3){[2,3,4,5]},11,5);
 #! #I    Number of non-trivial 11-constant characters in the list: 2.
 #! [  ] 
 @EndExample
-This calculations are enough to obtain the Prime Graph Question:
+These calculations are enough to obtain an affirmative answer to the Prime Graph Question:
 @BeginExample
 HeLP_AllOrdersPQ(C);
 #! #I  Checking order 2.
@@ -429,4 +450,4 @@ HeLP_AllOrdersPQ(C);
 #! #I    Using the known solutions for elements of order 77.
 #! true
 @EndExample
-Checking this computations takes a few minutes.  
+Checking these computations takes a few minutes.  

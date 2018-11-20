@@ -12,15 +12,15 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "1.0",
-Date           := "13/05/2015",
+Version        := "2.0",
+Date           := "29/07/2015",
 
-ArchiveURL :=  "http://homepages.vub.ac.be/~abachle/help/",
+ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
 
 ArchiveFormats := ".tar.gz",
 
 
-PackageWWWHome := "http://homepages.vub.ac.be/~abachle/help/",
+PackageWWWHome := "http://homepages.vub.ac.be/abachle/help/",
 
 PackageDoc := rec(
   BookName  := ~.PackageName,
@@ -102,6 +102,7 @@ AutoDoc := rec(
                     "The authors are grateful to Sebastian Gutsche for endowing GAP with the 4ti2-Interface.\n",
                     "We also would like to thank him for many very helpful discussions.\n",
                     "We also want to give credits to the developers of the software 4ti2.\n",
+                    "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",
                     "We moreover thank Wolfgang Kimmerle for introducing us to the beautiful world of group rings.\n",
                     "The development of this package was partially supported by the Research Foundation Flanders \n",
                     "(FWO - Vlaanderen) and the DFG priority program SPP 1489 Algorithmic and Experimental Methods in Algebra, Geometry, and Number Theory.\n"
