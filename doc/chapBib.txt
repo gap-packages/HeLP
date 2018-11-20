@@ -2,126 +2,144 @@
   
   [1XReferences[101X
   
-  [[20XAvi[120X]   [16XAvis,  D.[116X,  [17Xlrslib  --  reverse  search  vertex  enumeration  program[117X,  {A}vailable  at
-  \url{http://cgm.cs.mcgill.ca/~avis/C/lrs.html}.
+  [[20XAvi[120X]  [16XAvis,  D.[116X,  [17Xlrslib  --  reverse  search  vertex  enumeration program[117X,
+  {A}vailable at \url{http://cgm.cs.mcgill.ca/~avis/C/lrs.html}.
   
-  [[20XBC15[120X]  [16XB\"achle, A. and Caicedo, M.[116X, [17XOn the Prime Graph Question for Almost Simple Groups with
-  an                       Alternatin                      Socle[117X,                      [18XSubmitted,
-  \href{http://arxiv.org/abs/1510.04598}{\nolinkurl{arXiv:1510.04598   [math.RT]}}[118X  (2015),  ((11
-  pages)).
+  [[20XBC15[120X]  [16XB\"achle, A. and Caicedo, M.[116X, [17XOn the Prime Graph Question for Almost
+  Simple      Groups      with     an     Alternatin     Socle[117X,     [18XSubmitted,
+  \href{http://arxiv.org/abs/1510.04598}{\nolinkurl{arXiv:1510.04598
+  [math.RT]}}[118X (2015), ((11 pages)).
   
-  [[20XBH08[120X]  [16XBovdi,  V. A. and Hertweck, M.[116X, [17XZassenhaus conjecture for central extensions of S_5[117X, [18XJ.
-  Group Theory[118X, [19X11[119X, 1 (2008), 63--74.
+  [[20XBH08[120X]  [16XBovdi,  V.  A.  and  Hertweck, M.[116X, [17XZassenhaus conjecture for central
+  extensions of S_5[117X, [18XJ. Group Theory[118X, [19X11[119X, 1 (2008), 63--74.
   
-  [[20XBHK+16[120X] [16XB\"achle, A., Herman, A., Konovalov, A., Margolis, L. and Singh, G.[116X, [17XThe status of the
-  Zassenhaus     conjecture     for    small    groups[117X,    [18XSubmitted[118X    (2016),    ((10    pages,
-  \href{https://arxiv.org/abs/1609.00042}{\nolinkurl{arXiv:1609.00042 [math.RA]}})).
+  [[20XBHK+16[120X]  [16XB\"achle,  A.,  Herman, A., Konovalov, A., Margolis, L. and Singh,
+  G.[116X,  [17XThe  status  of  the  Zassenhaus conjecture for small groups[117X, [18XSubmitted[118X
+  (2016),                              ((10                             pages,
+  \href{https://arxiv.org/abs/1609.00042}{\nolinkurl{arXiv:1609.00042
+  [math.RA]}})).
   
-  [[20XBIR+[120X]  [16XBruns,  W.,  Ichim, B., R\"omer, T., Sieg, R. and S\"oger, C.[116X, [17XNormaliz. Algorithms for
-  rational cones and affine monoids[117X, Available at \url{http://normaliz.uos.de}.
+  [[20XBIR+[120X]  [16XBruns,  W.,  Ichim,  B.,  R\"omer,  T.,  Sieg,  R.  and S\"oger, C.[116X,
+  [17XNormaliz.  Algorithms  for  rational  cones and affine monoids[117X, Available at
+  \url{http://normaliz.uos.de}.
   
-  [[20XBK07[120X]  [16XBovdi,  V. A. and Konovalov, A. B.[116X, [17XIntegral group ring of the McLaughlin simple group[117X,
-  [18XAlgebra Discrete Math.[118X, 2 (2007), 43--53.
+  [[20XBK07[120X]  [16XBovdi,  V.  A.  and  Konovalov,  A.  B.[116X,  [17XIntegral group ring of the
+  McLaughlin simple group[117X, [18XAlgebra Discrete Math.[118X, 2 (2007), 43--53.
   
-  [[20XBK10[120X]  [16XBovdi,  V. A. and Konovalov, A. B.[116X, [17XTorsion units in integral group ring of Higman-Sims
-  simple group[117X, [18XStudia Sci. Math. Hungar.[118X, [19X47[119X, 1 (2010), 1--11.
+  [[20XBK10[120X]  [16XBovdi,  V.  A. and Konovalov, A. B.[116X, [17XTorsion units in integral group
+  ring  of  Higman-Sims simple group[117X, [18XStudia Sci. Math. Hungar.[118X, [19X47[119X, 1 (2010),
+  1--11.
   
-  [[20XBM14[120X]  [16XB\"achle,  A.  and  Margolis, L.[116X, [17XRational conjugacy of torsion units in integral group
-  rings     of     non-solvable    groups[117X,    [18XAccepted    in    Proc.    Edinb.    Math.    Soc.,
-  \href{http://arxiv.org/abs/1305.7419}{\nolinkurl{arXiv:1305.7419   [math.RT]}}[118X   (2014),   ((22
-  pages)).
+  [[20XBM14[120X] [16XB\"achle, A. and Margolis, L.[116X, [17XRational conjugacy of torsion units in
+  integral  group rings of non-solvable groups[117X, [18XAccepted in Proc. Edinb. Math.
+  Soc.,       \href{http://arxiv.org/abs/1305.7419}{\nolinkurl{arXiv:1305.7419
+  [math.RT]}}[118X (2014), ((22 pages)).
   
-  [[20XBM15[120X]  [16XB{\"a}chle,  A.  and  Margolis,  L.[116X,  [17XHeLP -- A \textsfGAP-package for torsion units in
-  integral         group         rings[117X,         [18XSubmitted[118X        (2015),        ((7        pages,
-  \href{http://arxiv.org/abs/1507.08174}{\nolinkurl{arXiv:1507.08174 [math.RT]}})).
+  [[20XBM15[120X]  [16XB{\"a}chle,  A.  and  Margolis, L.[116X, [17XHeLP -- A \textsfGAP-package for
+  torsion  units  in  integral  group  rings[117X,  [18XSubmitted[118X  (2015),  ((7  pages,
+  \href{http://arxiv.org/abs/1507.08174}{\nolinkurl{arXiv:1507.08174
+  [math.RT]}})).
   
-  [[20XBM16a[120X]  [16XB\"achle, A. and Margolis, L.[116X, [17XOn the Prime Graph Question for Integral Group Rings of
-  4-primary         groups         I[117X,         [18XSubmitted[118X         (2016),        ((33        pages,
-  \href{http://arxiv.org/abs/1601.05689}{\nolinkurl{arXiv:1601.05689 [math.RT]}})).
+  [[20XBM16a[120X]  [16XB\"achle,  A.  and  Margolis,  L.[116X,  [17XOn the Prime Graph Question for
+  Integral  Group  Rings  of 4-primary groups I[117X, [18XSubmitted[118X (2016), ((33 pages,
+  \href{http://arxiv.org/abs/1601.05689}{\nolinkurl{arXiv:1601.05689
+  [math.RT]}})).
   
-  [[20XBM16b[120X]  [16XB\"achle, A. and Margolis, L.[116X, [17XOn the Prime Graph Question for Integral Group Rings of
-  4-primary         groups         II[117X,         [18XSubmitted[118X        (2016),        ((17        pages,
-  \href{https://arxiv.org/abs/1606.01506}{\nolinkurl{arXiv:1606.01506 [math.RT]}})).
+  [[20XBM16b[120X]  [16XB\"achle,  A.  and  Margolis,  L.[116X,  [17XOn the Prime Graph Question for
+  Integral  Group  Rings of 4-primary groups II[117X, [18XSubmitted[118X (2016), ((17 pages,
+  \href{https://arxiv.org/abs/1606.01506}{\nolinkurl{arXiv:1606.01506
+  [math.RT]}})).
   
-  [[20XCL65[120X] [16XCohn, J. A. and Livingstone, D.[116X, [17XOn the structure of group algebras. I[117X, [18XCanad. J. Math.[118X,
-  [19X17[119X (1965), 583--593.
+  [[20XCL65[120X]  [16XCohn, J. A. and Livingstone, D.[116X, [17XOn the structure of group algebras.
+  I[117X, [18XCanad. J. Math.[118X, [19X17[119X (1965), 583--593.
   
-  [[20XCMdR13[120X]  [16XCaicedo,  M.,  Margolis,  L.  and  del  R{\'{\i}}o,  {.[116X,  [17XZassenhaus  conjecture  for
-  cyclic-by-abelian groups[117X, [18XJ. Lond. Math. Soc. (2)[118X, [19X88[119X, 1 (2013), 65--78.
+  [[20XCMdR13[120X]  [16XCaicedo,  M.,  Margolis,  L.  and  del  R{\'{\i}}o, {.[116X, [17XZassenhaus
+  conjecture  for  cyclic-by-abelian  groups[117X,  [18XJ.  Lond. Math. Soc. (2)[118X, [19X88[119X, 1
+  (2013), 65--78.
   
-  [[20XCR90[120X]  [16XCurtis,  C.  W. and Reiner, I.[116X, [17XMethods of representation theory. Vol. I[117X, John Wiley \&
-  Sons,  Inc.,  New  York,  Wiley Classics Library (1990), xxiv+819 pages, ((With applications to
-  finite groups and orders, Reprint of the 1981 original, A Wiley-Interscience Publication)).
+  [[20XCR90[120X]  [16XCurtis, C. W. and Reiner, I.[116X, [17XMethods of representation theory. Vol.
+  I[117X,  John  Wiley  \&  Sons,  Inc.,  New  York, Wiley Classics Library (1990),
+  xxiv+819  pages, ((With applications to finite groups and orders, Reprint of
+  the 1981 original, A Wiley-Interscience Publication)).
   
-  [[20XGil13[120X]  [16XGildea,  J.[116X, [17XZassenhaus conjecture for integral group ring of simple linear groups[117X, [18XJ.
-  Algebra Appl.[118X, [19X12[119X, 6 (2013), 1350016, 10.
+  [[20XGil13[120X]  [16XGildea, J.[116X, [17XZassenhaus conjecture for integral group ring of simple
+  linear groups[117X, [18XJ. Algebra Appl.[118X, [19X12[119X, 6 (2013), 1350016, 10.
   
-  [[20XHer06[120X] [16XHertweck, M.[116X, [17XOn the torsion units of some integral group rings[117X, [18XAlgebra Colloq.[118X, [19X13[119X, 2
-  (2006), 329--348.
+  [[20XHer06[120X]  [16XHertweck,  M.[116X,  [17XOn  the torsion units of some integral group rings[117X,
+  [18XAlgebra Colloq.[118X, [19X13[119X, 2 (2006), 329--348.
   
-  [[20XHer07[120X]  [16XHertweck,  M.[116X,  [17XPartial  Augmentations  and Brauer Character values of torion Units in
-  Group               Rings[117X,               [18XPreprint[118X               (2007),               ((e-print
-  \href{http://arxiv.org/abs/math/0612429v2}{\nolinkurl{arXiv:math.RA/0612429v2 [math.RA]}})).
+  [[20XHer07[120X]  [16XHertweck,  M.[116X, [17XPartial Augmentations and Brauer Character values of
+  torion    Units    in    Group    Rings[117X,    [18XPreprint[118X    (2007),    ((e-print
+  \href{http://arxiv.org/abs/math/0612429v2}{\nolinkurl{arXiv:math.RA/0612429v2
+  [math.RA]}})).
   
-  [[20XHer08a[120X]  [16XHertweck,  M.[116X, [17XThe orders of torsion units in integral group rings of finite solvable
-  groups[117X, [18XComm. Algebra[118X, [19X36[119X, 10 (2008), 3585--3588.
+  [[20XHer08a[120X]  [16XHertweck,  M.[116X, [17XThe orders of torsion units in integral group rings
+  of finite solvable groups[117X, [18XComm. Algebra[118X, [19X36[119X, 10 (2008), 3585--3588.
   
-  [[20XHer08b[120X]  [16XHertweck,  M.[116X,  [17XTorsion  units  in integral group rings of certain metabelian groups[117X,
-  [18XProc. Edinb. Math. Soc. (2)[118X, [19X51[119X, 2 (2008), 363--385.
+  [[20XHer08b[120X]  [16XHertweck,  M.[116X,  [17XTorsion  units  in integral group rings of certain
+  metabelian groups[117X, [18XProc. Edinb. Math. Soc. (2)[118X, [19X51[119X, 2 (2008), 363--385.
   
-  [[20XHer08c[120X]  [16XHertweck, M.[116X, [17XZassenhaus conjecture for A_6[117X, [18XProc. Indian Acad. Sci. Math. Sci.[118X, [19X118[119X,
-  2 (2008), 189--195.
+  [[20XHer08c[120X]  [16XHertweck,  M.[116X,  [17XZassenhaus  conjecture for A_6[117X, [18XProc. Indian Acad.
+  Sci. Math. Sci.[118X, [19X118[119X, 2 (2008), 189--195.
   
-  [[20XHK06[120X]  [16XH{\"o}fert,  C. and Kimmerle, W.[116X, [17XOn torsion units of integral group rings of groups of
-  small order[117X, in Groups, rings and group rings, Chapman \& Hall/CRC, Boca Raton, FL, Lect. Notes
-  Pure Appl. Math., [19X248[119X (2006), 243--252.
+  [[20XHK06[120X]  [16XH{\"o}fert,  C. and Kimmerle, W.[116X, [17XOn torsion units of integral group
+  rings of groups of small order[117X, in Groups, rings and group rings, Chapman \&
+  Hall/CRC,  Boca  Raton,  FL,  Lect.  Notes  Pure  Appl.  Math.,  [19X248[119X (2006),
+  243--252.
   
-  [[20XJPM00[120X]  [16XJuriaans,  S.  O.  and  Polcino Milies, C.[116X, [17XUnits of integral group rings of Frobenius
-  groups[117X, [18XJ. Group Theory[118X, [19X3[119X, 3 (2000), 277--284.
+  [[20XJPM00[120X]  [16XJuriaans,  S.  O.  and  Polcino Milies, C.[116X, [17XUnits of integral group
+  rings of Frobenius groups[117X, [18XJ. Group Theory[118X, [19X3[119X, 3 (2000), 277--284.
   
-  [[20XKim06[120X]  [16XKimmerle,  W.[116X,  [17XOn the prime graph of the unit group of integral group rings of finite
-  groups[117X,  in  Groups,  rings and algebras, Amer. Math. Soc., Providence, RI, Contemp. Math., [19X420[119X
-  (2006), 215--228.
+  [[20XKim06[120X] [16XKimmerle, W.[116X, [17XOn the prime graph of the unit group of integral group
+  rings  of  finite  groups[117X,  in Groups, rings and algebras, Amer. Math. Soc.,
+  Providence, RI, Contemp. Math., [19X420[119X (2006), 215--228.
   
-  [[20XKim07[120X]  [16XKimmerle,  W.[116X,  [17XMini-Workshop:  Arithmetik  von  Gruppenringen[117X,  [18XOberwolfach  Reports[118X,
-  European Mathematical Society, [19X4[119X, 4 (2007), 3209-3239.
+  [[20XKim07[120X]   [16XKimmerle,   W.[116X,   [17XMini-Workshop:   Arithmetik  von  Gruppenringen[117X,
+  [18XOberwolfach Reports[118X, European Mathematical Society, [19X4[119X, 4 (2007), 3209-3239.
   
-  [[20XKK15[120X]  [16XKimmerle,  W.  and  Konovalov,  A. B.[116X, [17XRecent advances on torsion subgroups of Integral
-  Group Rings[117X, [18XProc. of Groups St Andrews 2013[118X (2015), 331--347.
+  [[20XKK15[120X]  [16XKimmerle,  W.  and  Konovalov,  A.  B.[116X,  [17XRecent  advances on torsion
+  subgroups  of  Integral Group Rings[117X, [18XProc. of Groups St Andrews 2013[118X (2015),
+  331--347.
   
-  [[20XLP89[120X]  [16XLuthar,  I.  S.  and Passi, I. B. S.[116X, [17XZassenhaus conjecture for A_5[117X, [18XProc. Indian Acad.
-  Sci. Math. Sci.[118X, [19X99[119X, 1 (1989), 1--5.
+  [[20XLP89[120X]  [16XLuthar,  I.  S.  and Passi, I. B. S.[116X, [17XZassenhaus conjecture for A_5[117X,
+  [18XProc. Indian Acad. Sci. Math. Sci.[118X, [19X99[119X, 1 (1989), 1--5.
   
-  [[20XMdRS16[120X]  [16XMargolis,  L.,  del  R{\'{\i}}o, {. and Serrano, M.[116X, [17XZassenhaus Conjecture on torsion
-  units  holds  for  PSL(2,p)  with  p  a  Fermat  or Mersenne prime[117X, [18XSubmitted[118X (2016), 32 pages,
-  \href{https://arxiv.org/abs/1608.05797}{\nolinkurl{arXiv:1608.05797 [math.RA]}}.
+  [[20XMdRS16[120X]  [16XMargolis,  L.,  del  R{\'{\i}}o,  {.  and  Serrano, M.[116X, [17XZassenhaus
+  Conjecture  on  torsion units holds for PSL(2,p) with p a Fermat or Mersenne
+  prime[117X,            [18XSubmitted[118X            (2016),           32           pages,
+  \href{https://arxiv.org/abs/1608.05797}{\nolinkurl{arXiv:1608.05797
+  [math.RA]}}.
   
-  [[20XMRSW87[120X]  [16XMarciniak,  Z., Ritter, J., Sehgal, S. and Weiss, A.[116X, [17XTorsion units in integral group
-  rings of some metabelian groups. II[117X, [18XJournal of Number Theory[118X, [19X25[119X, 3 (1987), 340--352.
+  [[20XMRSW87[120X]  [16XMarciniak, Z., Ritter, J., Sehgal, S. and Weiss, A.[116X, [17XTorsion units
+  in  integral  group  rings  of some metabelian groups. II[117X, [18XJournal of Number
+  Theory[118X, [19X25[119X, 3 (1987), 340--352.
   
-  [[20XSal11[120X]  [16XSalim,  M.[116X, [17XKimmerle's conjecture for integral group rings of some alternating groups[117X,
-  [18XActa Math. Acad. Paedagog. Nyh\'azi. (N.S.)[118X, [19X27[119X, 1 (2011), 9--22.
+  [[20XSal11[120X]  [16XSalim,  M.[116X,  [17XKimmerle's conjecture for integral group rings of some
+  alternating  groups[117X,  [18XActa  Math.  Acad.  Paedagog.  Nyh\'azi. (N.S.)[118X, [19X27[119X, 1
+  (2011), 9--22.
   
-  [[20XSal13[120X]  [16XSalim,  M.[116X,  [17XThe  prime  graph conjecture for integral group rings of some alternating
-  groups[117X, [18XInt. J. Group Theory[118X, [19X2[119X, 1 (2013), 175--185.
+  [[20XSal13[120X]  [16XSalim,  M.[116X,  [17XThe prime graph conjecture for integral group rings of
+  some alternating groups[117X, [18XInt. J. Group Theory[118X, [19X2[119X, 1 (2013), 175--185.
   
-  [[20XSeh93[120X]  [16XSehgal,  S. K.[116X, [17XUnits in integral group rings[117X, Longman Scientific \& Technical, Pitman
-  Monographs and Surveys in Pure and Applied Mathematics, [19X69[119X, Harlow (1993), xii+357 pages.
+  [[20XSeh93[120X]  [16XSehgal, S. K.[116X, [17XUnits in integral group rings[117X, Longman Scientific \&
+  Technical,  Pitman  Monographs  and Surveys in Pure and Applied Mathematics,
+  [19X69[119X, Harlow (1993), xii+357 pages.
   
-  [[20XSri64[120X]  [16XSrinivasan, B.[116X, [17XOn the modular characters of the special linear group SL(2,p^n)[117X, [18XProc.
-  London Math. Soc. (3)[118X, [19X14[119X (1964), 101--114.
+  [[20XSri64[120X]  [16XSrinivasan,  B.[116X,  [17XOn  the  modular characters of the special linear
+  group SL(2,p^n)[117X, [18XProc. London Math. Soc. (3)[118X, [19X14[119X (1964), 101--114.
   
-  [[20Xtea[120X]  [16Xteam,  4.  t.  2.[116X,  [17X4ti2---A software package for algebraic, geometric and combinatorial
-  problems on linear spaces[117X, {A}vailable at \url{www.4ti2.de}.
+  [[20Xtea[120X] [16Xteam, 4. t. 2.[116X, [17X4ti2---A software package for algebraic, geometric and
+  combinatorial problems on linear spaces[117X, {A}vailable at \url{www.4ti2.de}.
   
-  [[20XWag95[120X]  [16XWagner,  R.[116X, [17XZassenhausvermutung über die Gruppen textupPSL(2, p)[117X (1995), Diplomarbeit
-  Universität Stuttgart.
+  [[20XWag95[120X]  [16XWagner,  R.[116X,  [17XZassenhausvermutung  über die Gruppen textupPSL(2, p)[117X
+  (1995), Diplomarbeit Universität Stuttgart.
   
-  [[20XWei91[120X]  [16XWeiss,  A.[116X,  [17XTorsion units in integral group rings[117X, [18XJ. Reine Angew. Math.[118X, [19X415[119X (1991),
-  175--187.
+  [[20XWei91[120X]  [16XWeiss,  A.[116X,  [17XTorsion units in integral group rings[117X, [18XJ. Reine Angew.
+  Math.[118X, [19X415[119X (1991), 175--187.
   
-  [[20XZas74[120X]  [16XZassenhaus,  H.[116X,  [17XOn  the  torsion  units  of  group  rings[117X, [18XEstudos de Mathemátics em
-  homenagem ao Prof. A. Almeida Costa, Instituto de Alta Cultura (Portugese)[118X (1974), 119-126.
+  [[20XZas74[120X]  [16XZassenhaus,  H.[116X,  [17XOn  the  torsion units of group rings[117X, [18XEstudos de
+  Mathemátics  em  homenagem  ao  Prof.  A.  Almeida  Costa, Instituto de Alta
+  Cultura (Portugese)[118X (1974), 119-126.
   
   
   

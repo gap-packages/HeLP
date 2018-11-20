@@ -6,10 +6,10 @@
                         [1X Hertweck-Luthar-Passi method. [101X
   
   
-                                      3.3
+                                      3.4
   
   
-                                11 December 2017
+                                20 November 2018
   
   
                                  Andreas Bächle
@@ -29,13 +29,13 @@
   
   
   Leo Margolis
-      Email:    [7Xmailto:Leo.Margolis@mathematik.uni-stuttgart.de[107X
-      Homepage: [7Xhttp://www.igt.uni-stuttgart.de/LstDiffgeo/Margolis/[107X
-      Address:  [33X[0;14YDepartamento de Matemáticas[133X
-                [33X[0;14YFacultad de Matemáticas[133X
-                [33X[0;14YUniversidad de Murcia[133X
-                [33X[0;14YMurcia 30100[133X
-                [33X[0;14YSpain[133X
+      Email:    [7Xmailto:Leo.Margolis@vub.be[107X
+      Homepage: [7Xhttp://homepages.vub.ac.be/~lmargoli/[107X
+      Address:  [33X[0;14YVrije Universiteit Brussel[133X
+                [33X[0;14YVakgroep Wiskunde[133X
+                [33X[0;14YPleinlaan 2[133X
+                [33X[0;14Y1050 Brussels[133X
+                [33X[0;14YBelgium[133X
   
   
   

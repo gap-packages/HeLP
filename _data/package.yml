@@ -66,11 +66,11 @@ bibtex: |
       month =            {Nov},
       year =             {2018},
       note =             {GAP package},
-      howpublished =     {\href                               {https://gap-packages.github.io/HeLP}
+      howpublished =     {\href            {https://gap-packages.github.io/HeLP}
                           {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{HeLP}}},
-      keywords =         {HeLP  method;  torsion  units; rational conjugacy; Zassenhaus Conjecture;
-                          Prime Graph Question},
+      keywords =         {HeLP   method;   torsion  units;  rational  conjugacy;
+                          Zassenhaus Conjecture; Prime Graph Question},
       printedkey =       {BM18}
     }
 
