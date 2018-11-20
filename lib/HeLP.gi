@@ -647,6 +647,9 @@ if InfoLevel(HeLP_Info) >= 4 then
 fi;
 if spq = [] then
   HeLP_sol[s*t] := [];			# if by using s-constant characters the existence of elements of order s*t can be excluded, this is stored in the global variable HeLP_sol
+  Info( HeLP_Info, 1, "Number of solutions for elements of order ", s*t, ": ", Size(spq), "; stored in HeLP_sol[", s*t, "].");
+else
+  Info( HeLP_Info, 1, "Number of solutions for elements of order ", s*t, ": ", Size(spq), ".");
 fi;
 return List(spq, x -> x{[2,3]});	# {[2,3]} -> don't return the "fake" p.a. for elements of order s
 end);
@@ -854,6 +857,9 @@ for pa in list_paraugs do
 od;
 if NumArg = 2 then
   HeLP_sol[k] := asol;
+  Info( HeLP_Info, 1, "Number of solutions for elements of order ", k, ": ", Size(asol), "; stored in HeLP_sol[", k, "].");
+else
+  Info( HeLP_Info, 1, "Number of solutions for elements of order ", k, ": ", Size(asol), ".");
 fi;
 return asol;
 end);
