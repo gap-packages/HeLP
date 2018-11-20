@@ -152,6 +152,49 @@ DeclareGlobalFunction( "HeLP_WithGivenOrderAndPA" );
 
 #! @Description
 #!  Calculates the admissible partial augmentations for elements of 
+#!  order <A>ord</A> using the given character table <A>CharacterTable</A>
+#!  and all Brauer tables that can be obtained from it. <A>CharacterTable</A> can be
+#!  an ordinary or a Brauer table.  In any case, then given table will be used first to
+#!  obtain a finite number of solutions (if the characteristic does not divide <A>ord</A>, 
+#!  otherwise the ordinary table will be used), with the other tables only checks will be performed to
+#!  restrict the number of possible partial augmentations as much as possible.  If certain Brauer
+#!   tables are not avaialble, this will be printed if HeLP_Info is at least 1.
+#!  This function only uses the constraints of the HeLP method, but does not apply
+#!  the Wagner test <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+#!  If the constraints allow only a finite number of solutions, these lists will
+#!  be written in <K>HeLP_sol[ord]</K>.
+#!  If for divisors <M>d</M> of <A>ord</A> solutions are already calculated and 
+#!  stored in <K>HeLP_sol[d]</K>, these will be used, otherwise the function <K>HeLP_WithGivenOrder</K>
+#!  will first be applied to this order and the data given in the first argument.
+#! @Arguments CharacterTable ord
+#! @Returns List of admissible partial augmentations
+DeclareGlobalFunction( "HeLP_WithGivenOrderAllTables" );
+
+
+#! @Description
+#!  Calculates the admissible partial augmentations for elements of 
+#!  order <A>ord</A> using the given character table <A>CharacterTable</A>
+#!  and all other tables that can be obtained from it.  <A>CharacterTable</A> can be
+#!  an ordinary or a Brauer table.  In any case, then given table will be used first to
+#!  obtain a finite number of solutions (if the characteristic does not divide <A>ord</A>, 
+#!  otherwise the ordinary table will be used), with the other tables only checks will be performed to
+#!  restrict the number of possible partial augmentations as much as possible.  If certain Brauer
+#!   tables are not avaialble, this will be printed if HeLP_Info is at least 1.
+#!  The function uses the partial augmentations for the powers <M>u^d</M> with <M>d</M>
+#!  divisors of <M>k</M> different from <M>1</M> and <M>k</M> given in <A>partaugs</A>.
+#!  Here, the <M>d</M>'s have to be in a descending order (i.e. the orders of the $u^d$'s
+#!  are ascending).
+#!  This function only uses the constraints of the HeLP method, but does not apply
+#!  the Wagner test <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+#!  Note that this function will not affect <K>HeLP_sol</K>.
+#! @Arguments CharacterTable ord partaugs
+#! @Returns List of admissible partial augmentations
+DeclareGlobalFunction( "HeLP_WithGivenOrderAndPAAllTables" );
+
+
+
+#! @Description
+#!  Calculates the admissible partial augmentations for elements of 
 #!  order <A>ord</A> using only the data given in the first argument.
 #!  The first argument is a list, which can contains as entries characters or pairs with first entry a character
 #!  and second entrie an integer or a mixture of these.
@@ -178,7 +221,7 @@ DeclareGlobalFunction( "HeLP_WithGivenOrderAndPAAndSpecificSystem" );
 #! When considering elements of order $st$ (in absence of elements of this order in the group
 #! ; in particular when trying to prove (PQ)) and there are several conjugacy classes of 
 #! elements of order $s$, it might be useful to consider $s$-constant characters 
-#! (cf. Section <Ref Sect='Chapter_Background_Section_s-constant_(and_(s,t)-constant)_characters'/>)
+#! (cf. Section <Ref Sect='Chapter_Background_Section_s-constant_characters'/>)
 #! to reduce the computational complexity.
 
 
@@ -383,6 +426,18 @@ DeclareGlobalFunction( "HeLP_PossiblePartialAugmentationsOfPowers" );
 
 #! @InsertChunk PPExample
 
+#! @Description
+#! Given a character table <A>C</A> and an order <A>k</A>, the function calculates the partial augmentations 
+#! of units of order $k$ that are rationally conjugate to group elements (note that they just coincide with the
+#! partial augmentations of group elements) and stores them in <K>HeLP_sol[k]</K>. If solutions of order $k$ were
+#! already calculated, they are overwritten by this function, so this function can be used in particular if elements
+#! of order $k$ are known to be rationally conjugate to group elements by theoretical results.
+#! @Arguments C k
+#! @Returns Trivial solutions.
+DeclareGlobalFunction( "HeLP_WriteTrivialSolution" ); 
+
+# #! @InsertChunk TSExample
+
 #! @Section The Wagner test
 
 #! @Description
@@ -397,6 +452,20 @@ DeclareGlobalFunction( "HeLP_PossiblePartialAugmentationsOfPowers" );
 DeclareGlobalFunction( "HeLP_WagnerTest" );
 
 #! @InsertChunk WTExample
+
+
+#! @Section Action of the automorphism group
+
+#! @Description
+#!  For a list of possible partial augmentations, this function calculates representatives of each orbit of the action of the automorphism group of $G$
+#!  on them.  The first two mandatory arguments are an ordinary character table <A>C</A> (with an underlying group or ) and the order <A>k</A> for which the partial augmentations
+#!  should be filtered with respect to the action of the automorphism group of $G$.  If as third argument a lisrt of partial augmentations is given,
+#!  then these will be used, otherwise the partial augmentations that are stored in <K>HeLP_sol[k]</K> are used.
+#! @Arguments C, k [, list_paraug]
+#! @Returns List of admissible partial augmentations
+DeclareGlobalFunction( "HeLP_AutomorphismOrbits" );
+
+#! @InsertChunk AOExample
 
 
 #! @Section Output 
@@ -430,9 +499,29 @@ DeclareGlobalFunction( "HeLP_CharacterValue" );
 
 #! @InsertChunk EMCVExample
 
-# The following function is the only internal one, which is
+
+#! @Section Check whether Zassenhaus Conjecture is known from theoretical results
+
+#! @Description
+#!  For the given group <A>G</A> this function applies five checks, namely it checks
+#!   * if $G$ is nilpotent
+#!   * if $G$ has a normal Sylow subgroup with abelian complement,
+#!   * if $G$ is cyclic-by-abelian
+#!   * if it is of the form $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$
+#!   * or if the order of $G$ is smaller than $144$.
+#!  <P/>
+#!  
+#!  In all these cases the Zassenhaus Conjecture is known.  See <Ref Sect='Chapter_Background_Section_Known_results_about_the_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/> for references.
+#!   This function is designed for solvable groups.
+#! @Arguments G
+#! @Returns <K>true</K> if (ZC) can be derived from theoretical results, <K>false</K> otherwise
+DeclareGlobalFunction( "HeLP_IsZCKnown" );
+
+
+# The following functions are the only internal one, which are
 # defined via DeclareGlobalFunction / InstallGlobalFunction 
-# as it seems otherwise not possible use define it recursively
+# as it seems otherwise not possible define it recursively
 DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrder" );
+DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrderAllTables" );
 
 #E

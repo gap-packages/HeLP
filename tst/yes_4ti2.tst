@@ -1,13 +1,13 @@
 gap> HeLP_Solver("4ti2");;
-'4ti2' will be used from now on.
+#I  '4ti2' will be used from now on.
 
 gap> OldHeLPInfoLevel := InfoLevel(HeLP_Info);;
 gap> SetInfoLevel(HeLP_Info, 1);
 gap> G := AlternatingGroup(5);;
 
 gap> HeLP_ZC(CyclicGroup(6));
- Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.
- true
+#I  Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.
+true
 
 gap> HeLP_ZC(G);
  true

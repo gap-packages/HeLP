@@ -1,3 +1,14 @@
+Changes v3.0 -> v3.1
+
+* New function HeLP_AutomorphismOrbits
+
+* New function HeLP_IsZCKnown
+
+* New functions HeLP_WithGivenOrderAllTables and HeLP_WithGivenOrderAndPAAllTables
+
+* New functions HeLP_WriteTrivialSolution
+
+
 Changes v2.2 -> v3.0
 
 * Normaliz is included as a possible solver. 
