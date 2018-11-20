@@ -1,1 +1,132 @@
-Placeholder
+  
+  
+                                     [1X HeLP [101X
+  
+  
+                        [1X Hertweck-Luthar-Passi method. [101X
+  
+  
+                                      3.3
+  
+  
+                                11 December 2017
+  
+  
+                                 Andreas Bächle
+  
+                                  Leo Margolis
+  
+  
+  
+  Andreas Bächle
+      Email:    [7Xmailto:ABachle@vub.ac.be[107X
+      Homepage: [7Xhttp://homepages.vub.ac.be/~abachle/[107X
+      Address:  [33X[0;14YVrije Universiteit Brussel[133X
+                [33X[0;14YVakgroep Wiskunde[133X
+                [33X[0;14YPleinlaan 2[133X
+                [33X[0;14Y1050 Brussels[133X
+                [33X[0;14YBelgium[133X
+  
+  
+  Leo Margolis
+      Email:    [7Xmailto:Leo.Margolis@mathematik.uni-stuttgart.de[107X
+      Homepage: [7Xhttp://www.igt.uni-stuttgart.de/LstDiffgeo/Margolis/[107X
+      Address:  [33X[0;14YDepartamento de Matemáticas[133X
+                [33X[0;14YFacultad de Matemáticas[133X
+                [33X[0;14YUniversidad de Murcia[133X
+                [33X[0;14YMurcia 30100[133X
+                [33X[0;14YSpain[133X
+  
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2017 by Andreas Bächle and Leo Margolis[133X
+  
+  [33X[0;0YThis  package  is  free  software and may be distributed under the terms and
+  conditions of the GNU Public License Version 2.[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThe  authors  are grateful to Sebastian Gutsche, Christof Söger and Max Horn
+  for  endowing  GAP  with  a 4ti2-Interface and a normlaiz-Interface. We also
+  would  like to thank Gutsche and Söger for many very helpful discussions. We
+  also  want  to  give  credits  to  the  developers of the softwares 4ti2 and
+  normaliz.  Thanks  go  to  David  Avis  for writing lrslib and answering our
+  questions  about  it. We moreover thank Wolfgang Kimmerle for introducing us
+  to  the  beautiful world of group rings. The development of this package was
+  partially  supported  by the Research Foundation Flanders (FWO - Vlaanderen)
+  and  the  DFG priority program SPP 1489 Algorithmic and Experimental Methods
+  in Algebra, Geometry, and Number Theory.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (HeLP)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+  2 [33X[0;0YThe main functions[133X
+    2.1 [33X[0;0YZassenhaus Conjecture[133X
+      2.1-1 HeLP_ZC
+    2.2 [33X[0;0YPrime Graph Question[133X
+      2.2-1 HeLP_PQ
+  3 [33X[0;0YFurther functions[133X
+    3.1 [33X[0;0YChecks for specific orders[133X
+      3.1-1 HeLP_WithGivenOrder
+      3.1-2 HeLP_WithGivenOrderAndPA
+      3.1-3 HeLP_WithGivenOrderAllTables
+      3.1-4 HeLP_WithGivenOrderAndPAAllTables
+      3.1-5 HeLP_WithGivenOrderAndPAAndSpecificSystem
+    3.2 [33X[0;0YChecks for specific orders with s-constant characters[133X
+      3.2-1 HeLP_WithGivenOrderSConstant
+      3.2-2 HeLP_AddGaloisCharacterSums
+    3.3 [33X[0;0YChecks for all orders[133X
+      3.3-1 HeLP_AllOrders
+      3.3-2 HeLP_AllOrdersPQ
+    3.4 [33X[0;0YChanging the used Character Table[133X
+      3.4-1 HeLP_ChangeCharKeepSols
+      3.4-2 HeLP_Reset
+    3.5 [33X[0;0YInfluencing how the Systems of Inequalities are solved[133X
+      3.5-1 HeLP_Solver
+      3.5-2 HeLP_UseRedund
+      3.5-3 HeLP_Change4ti2Precision
+      3.5-4 HeLP_Vertices
+    3.6 [33X[0;0YChecking solutions, calculating and checking solutions[133X
+      3.6-1 HeLP_VerifySolution
+      3.6-2 HeLP_FindAndVerifySolution
+      3.6-3 HeLP_PossiblePartialAugmentationsOfPowers
+      3.6-4 HeLP_WriteTrivialSolution
+    3.7 [33X[0;0YThe Wagner test[133X
+      3.7-1 HeLP_WagnerTest
+    3.8 [33X[0;0YAction of the automorphism group[133X
+      3.8-1 HeLP_AutomorphismOrbits
+    3.9 [33X[0;0YOutput[133X
+      3.9-1 HeLP_PrintSolution
+    3.10 [33X[0;0YEigenvalue multiplicities and character values[133X
+      3.10-1 HeLP_MultiplicitiesOfEigenvalues
+      3.10-2 HeLP_CharacterValue
+    3.11 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X
+      3.11-1 HeLP_IsZCKnown
+  4 [33X[0;0YExtended examples[133X
+    4.1 [33X[0;0YThe Character Table Library[133X
+    4.2 [33X[0;0YThe behavior of the variable HeLP sol[133X
+    4.3 [33X[0;0YSaving time[133X
+    4.4 [33X[0;0YUsing InfoLevels[133X
+    4.5 [33X[0;0YNon-standard characters[133X
+    4.6 [33X[0;0YA complete example: (PQ) for the MacLaughlin simple group[133X
+  5 [33X[0;0YBackground[133X
+    5.1 [33X[0;0YThe Zassenhaus Conjecture and the Prime Graph Question[133X
+    5.2 [33X[0;0YPartial augmentations and the structure of HeLP sol[133X
+    5.3 [33X[0;0YThe HeLP equations[133X
+    5.4 [33X[0;0YThe Wagner test[133X
+    5.5 [33X[0;0Ys-constant characters[133X
+    5.6 [33X[0;0YKnown results about the Zassenhaus Conjecture and the Prime Graph
+    Question[133X
+  6 [33X[0;0YRemarks on technical problems and the implementation[133X
+    6.1 [33X[0;0YMaking the HeLP-package run[133X
+    6.2 [33X[0;0YHow much 4ti2 and normaliz is really there?[133X
+  
+  
+  [32X

@@ -1,0 +1,74 @@
+  
+  [1X2 [33X[0;0YThe main functions[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YZassenhaus Conjecture[133X[101X
+  
+  [33X[0;0YThis  function checks whether the Zassenhaus Conjecture ((ZC) for short, cf.
+  Section  [14X5.1[114X) can be proved using the HeLP method with the data available in
+  GAP.[133X
+  
+  [1X2.1-1 HeLP_ZC[101X
+  
+  [33X[1;0Y[29X[2XHeLP_ZC[102X( [3XOrdinaryCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (ZC) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0Y[9XHeLP_ZC[109X checks whether the Zassenhaus Conjecture can be solved for the given
+  group  using  the  HeLP  method,  the  Wagner  test  and  all character data
+  available.  The argument of the function can be either an ordinary character
+  table  or  a  group.  In  the  second  case  it  will  first  calculate  the
+  corresponding  ordinary  character  table.  If  the  group  in  question  is
+  nilpotent,  the  Zassenhaus Conjecture holds by a result of A. Weiss and the
+  function will return [9Xtrue[109X without performing any calculations.[133X
+  
+  [33X[0;0YIf  the  group is not solvable, the function will check all orders which are
+  divisors  of  the  exponent  of the group. If the group is solvable, it will
+  only check the orders of group elements, as there can't be any torsion units
+  of  another  order.  The  function  will use the ordinary table and, for the
+  primes  [23Xp[123X  for  which the group is not [23Xp[123X-solvable, all [23Xp[123X-Brauer tables which
+  are  available in GAP to produce as many constraints on the torsion units as
+  possible.  Additionally,  the  Wagner  test  is  applied to the results, cf.
+  Section  [14X5.4[114X.  In  case  the  information suffices to obtain a proof for the
+  Zassenhaus Conjecture for this group the function will return [9Xtrue[109X and [9Xfalse[109X
+  otherwise.  The  possible  partial augmentations for elements of order [22Xk[122X and
+  all its powers will also be stored in the list entry [9XHeLP_sol[k][109X.[133X
+  
+  [33X[0;0YThe  prior  computed  partial augmentations in [9XHeLP_sol[109X will not be used and
+  will  be  overwritten.  If  you  do  not  like  the  last  fact,  please use
+  [2XHeLP_AllOrders[102X ([14X3.3-1[114X).[133X
+  
+  
+  [1X2.2 [33X[0;0YPrime Graph Question[133X[101X
+  
+  [33X[0;0YThis  function  checks whether the Prime Graph Question ((PQ) for short, cf.
+  Section  [14X5.1[114X)  can be verified using the HeLP method with the data available
+  in GAP.[133X
+  
+  [1X2.2-1 HeLP_PQ[101X
+  
+  [33X[1;0Y[29X[2XHeLP_PQ[102X( [3XOrdinaryCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (PQ) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0Y[9XHeLP_PQ[109X  checks  whether  an affirmative answer for the Prime Graph Question
+  for  the  given  group  can  be  obtained  using the HeLP method, the Wagner
+  restrictions  and  the  data  available. The argument of the function can be
+  either  an  ordinary  character table or a group. In the second case it will
+  first  calculate the corresponding ordinary character table. If the group in
+  question  is solvable, the Prime Graph Question has an affirmative answer by
+  a result of W. Kimmerle and the function will return [9Xtrue[109X without performing
+  any calculations.[133X
+  
+  [33X[0;0YIf  the group is non-solvable, the ordinary character table and all [23Xp[123X-Brauer
+  tables  for  primes  [23Xp[123X  for  which the group is not [23Xp[123X-solvable and which are
+  available  in GAP will be used to produce as many constraints on the torsion
+  units  as possible. Additionally, the Wagner test is applied to the results,
+  cf.  Section  [14X5.4[114X. In case the information suffices to obtain an affirmative
+  answer  for  the  Prime Graph Question, the function will return [9Xtrue[109X and it
+  will  return [9Xfalse[109X otherwise. Let [23Xp[123X and [23Xq[123X be distinct primes such that there
+  are  elements  of order [23Xp[123X and [23Xq[123X in [23XG[123X but no elements of order [23Xpq[123X. Then for [23Xk[123X
+  being  [23Xp[123X,  [23Xq[123X or [23Xpq[123X the function will save the possible partial augmentations
+  for  elements  of  order  [23Xk[123X and its (non-trivial) powers in [9XHeLP_sol[k][109X. The
+  function also does not use the previously computed partial augmentations for
+  elements  of these orders but will overwrite the content of [9XHeLP_sol[109X. If you
+  do not like the last fact, please use [2XHeLP_AllOrdersPQ[102X ([14X3.3-2[114X).[133X
+  

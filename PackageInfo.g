@@ -1,102 +1,119 @@
 #############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
 ##
+##                                                               HeLP package
+##
+##                                 Andreas Bächle, Vrije Universiteit Brussel
+##                                        Leo Margolis, Universidad de Murcia
+##
+#############################################################################
 
 SetPackageInfo( rec(
 
-PackageName := "GitHubPagesForGAP",
+PackageName    := "HeLP",
+Subtitle       := Concatenation( [
+                  "Hertweck-Luthar-Passi method." ] ),
+Version        := "3.4",
+Date           := "20/11/2018",
 
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.2",
-Date := "04/02/2017", # dd/mm/yyyy format
-
-Persons := [
-  rec(
-    LastName      := "Horn",
-    FirstNames    := "Max",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
-    PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
-                       "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
-  ),
-
-  rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    #Email         := "janitor@example.com",
-  ),
-],
-
-Status := "other",
-
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "gap-system",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
-
-PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
-
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", ~.PackageName ),
+README_URL      := Concatenation( ~.PackageWWWHome, "/README" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
+                                 
+ArchiveFormats := ".tar.gz",
 
 PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
+  BookName  := ~.PackageName,
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
+  LongTitle := ~.Subtitle,
+  Autoload  := false
 ),
 
-# The following dependencies are fake and for testing / demo purposes
+Persons :=
+ [
+     rec(
+       LastName      := "Bächle",
+       FirstNames    := "Andreas",
+       IsAuthor      := true,
+       IsMaintainer  := true,
+       Email         := "ABachle@vub.ac.be",
+       WWWHome       := "http://homepages.vub.ac.be/~abachle/",
+       PostalAddress := Concatenation( [
+                        "Vrije Universiteit Brussel\n",
+                        "Vakgroep Wiskunde\n",
+                        "Pleinlaan 2\n", 
+                        "1050 Brussels\n",
+                        "Belgium" ] ),
+       Place         := "Brussels",
+       Institution   := "Vrije Universiteit Brussel"
+     ),
+rec(
+       LastName      := "Margolis",
+       FirstNames    := "Leo",
+       IsAuthor      := true,
+       IsMaintainer  := true,
+       Email         := "Leo.Margolis@vub.be",
+       WWWHome       := "http://homepages.vub.ac.be/~lmargoli/",
+       PostalAddress := Concatenation( [
+                        "Vrije Universiteit Brussel\n",
+                        "Vakgroep Wiskunde\n",
+                        "Pleinlaan 2\n", 
+                        "1050 Brussels\n",
+                        "Belgium" ] ),
+       Place         := "Brussels",
+       Institution   := "Vrije Universiteit Brussel"
+     )
+],
+
+Status := "deposited",
+
+AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.",
+                  
 Dependencies := rec(
-  GAP := ">=4.8.1",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
-  ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+  GAP                    := ">=4.8.2",
+  NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
+  SuggestedOtherPackages := [ ],
+  ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),
 
-AvailabilityTest := ReturnTrue,
+TestFile := "tst/testall.g",
 
-Keywords := ["GitHub Pages", "GAP"]
+AvailabilityTest := function()
+    return true;
+  end,
+
+Keywords := ["HeLP method", "torsion units", 
+             "rational conjugacy", "Zassenhaus Conjecture", "Prime Graph Question"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Copyright := Concatenation(
+                    "&copyright; 2017 by Andreas Bächle and Leo Margolis<P/>\n\n",
+                    "This package is free software and may be distributed under the terms and conditions of the\n",
+                    "GNU Public License Version 2.\n"
+                ),
+        Acknowledgements := Concatenation(
+                    "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
+                    "with a 4ti2-Interface and a normlaiz-Interface.\n",
+                    "We also would like to thank Gutsche and Söger for many very helpful discussions.\n",
+                    "We also want to give credits to the developers of the softwares 4ti2 and normaliz.\n",
+                    "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",
+                    "We moreover thank Wolfgang Kimmerle for introducing us to the beautiful world of group rings.\n",
+                    "The development of this package was partially supported by the Research Foundation Flanders \n",
+                    "(FWO - Vlaanderen) and the DFG priority program SPP 1489 Algorithmic and Experimental Methods in Algebra, Geometry, and Number Theory.\n"
+                ),
+    )
+),
 
 ));
-
 

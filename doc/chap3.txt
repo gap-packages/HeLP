@@ -1,0 +1,490 @@
+  
+  [1X3 [33X[0;0YFurther functions[133X[101X
+  
+  [33X[0;0YA  short  remark  is  probably  in  order  on the three global variables the
+  package  is using: [9XHeLP_CT[109X, [9XHeLP_sol[109X and [9XHeLP_settings[109X. The first one stores
+  the  character  table  for  which  the last calculations were performed, the
+  second  one  containing  at  the  [9Xk[109X's spot the already calculated admissible
+  partial augmentations of elements of order [23Xk[123X (and its powers [23Xu^d[123X for [23Xd \not=
+  k[123X  a  divisor  of  [23Xk[123X).  If  a  function of the HeLP-package is called with a
+  character  table  different  from  the one saved in [9XHeLP_CT[109X then the package
+  tries to check if the character tables belong to the same group. This can be
+  done  in  particular  for tables from the ATLAS. If this check is successful
+  the  solutions already written in [9XHeLP_sol[109X are kept, otherwise this variable
+  is   reset.   For  a  more  detailed  account  see  Sections  [14X4.2[114X,  [14X5.2[114X  and
+  [2XHeLP_ChangeCharKeepSols[102X  ([14X3.4-1[114X). In most situations, the user does not have
+  to  worry  about  this, the program will take care of it as far as possible.
+  [9XHeLP_settings[109X  is  a  varaible  which  is used to store some settings of the
+  program.[133X
+  
+  
+  [1X3.1 [33X[0;0YChecks for specific orders[133X[101X
+  
+  [1X3.1-1 HeLP_WithGivenOrder[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrder[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xord[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YCalculates  the  admissible  partial augmentations for elements of order [3Xord[103X
+  using  only  the data given in the first argument. The first argument can be
+  an  ordinary  character table, a Brauer table, or a list of class functions,
+  all  having the same underlying character table. This function only uses the
+  constraints  of  the  HeLP method (from the class functions given), but does
+  not apply the Wagner test [14X5.4[114X. If the constraints allow only a finite number
+  of  solutions, these lists will be written in [9XHeLP_sol[ord][109X. If for divisors
+  [22Xd[122X  of  [3Xord[103X solutions are already calculated and stored in [9XHeLP_sol[d][109X, these
+  will  be  used,  otherwise  the  function  [9XHeLP_WithGivenOrder[109X will first be
+  applied to this order and the data given in the first argument.[133X
+  
+  [1X3.1-2 HeLP_WithGivenOrderAndPA[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrderAndPA[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xord[103X, [3Xpartaugs[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YCalculates  the  admissible  partial augmentations for elements of order [3Xord[103X
+  using  only  the data given in the first argument. The first argument can be
+  an  ordinary  character table, a Brauer table, or a list of class functions,
+  all  having  the  same  underlying  character  table.  The function uses the
+  partial augmentations for the powers [22Xu^d[122X with [22Xd[122X divisors of [22Xk[122X different from
+  [22X1[122X  and  [22Xk[122X  given in [3Xpartaugs[103X. Here, the [22Xd[122X's have to be in a descending order
+  (i.e.  the  orders  of the [23Xu^d[123X's are ascending). This function only uses the
+  constraints of the HeLP method, but does not apply the Wagner test [14X5.4[114X. Note
+  that this function will not affect [9XHeLP_sol[109X.[133X
+  
+  [1X3.1-3 HeLP_WithGivenOrderAllTables[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrderAllTables[102X( [3XCharacterTable[103X, [3Xord[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YCalculates  the  admissible  partial augmentations for elements of order [3Xord[103X
+  using  the  given  character table [3XCharacterTable[103X and all Brauer tables that
+  can  be  obtained  from  it.  [3XCharacterTable[103X  can be an ordinary or a Brauer
+  table.  In  any case, then given table will be used first to obtain a finite
+  number  of  solutions  (if the characteristic does not divide [3Xord[103X, otherwise
+  the  ordinary table will be used), with the other tables only checks will be
+  performed  to  restrict the number of possible partial augmentations as much
+  as  possible.  If  certain  Brauer  tables  are  not avaialble, this will be
+  printed  if HeLP_Info is at least 1. This function only uses the constraints
+  of  the  HeLP  method,  but  does  not  apply  the  Wagner  test [14X5.4[114X. If the
+  constraints  allow  only  a  finite number of solutions, these lists will be
+  written  in  [9XHeLP_sol[ord][109X.  If  for divisors [22Xd[122X of [3Xord[103X solutions are already
+  calculated  and  stored  in  [9XHeLP_sol[d][109X,  these will be used, otherwise the
+  function  [9XHeLP_WithGivenOrder[109X  will  first  be applied to this order and the
+  data given in the first argument.[133X
+  
+  [1X3.1-4 HeLP_WithGivenOrderAndPAAllTables[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrderAndPAAllTables[102X( [3XCharacterTable[103X, [3Xord[103X, [3Xpartaugs[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YCalculates  the  admissible  partial augmentations for elements of order [3Xord[103X
+  using the given character table [3XCharacterTable[103X and all other tables that can
+  be obtained from it. [3XCharacterTable[103X can be an ordinary or a Brauer table. In
+  any  case,  then given table will be used first to obtain a finite number of
+  solutions (if the characteristic does not divide [3Xord[103X, otherwise the ordinary
+  table  will be used), with the other tables only checks will be performed to
+  restrict  the  number of possible partial augmentations as much as possible.
+  If  certain  Brauer  tables  are  not  avaialble,  this  will  be printed if
+  HeLP_Info is at least 1. The function uses the partial augmentations for the
+  powers  [22Xu^d[122X  with  [22Xd[122X divisors of [22Xk[122X different from [22X1[122X and [22Xk[122X given in [3Xpartaugs[103X.
+  Here, the [22Xd[122X's have to be in a descending order (i.e. the orders of the [23Xu^d[123X's
+  are  ascending). This function only uses the constraints of the HeLP method,
+  but  does  not  apply  the Wagner test [14X5.4[114X. Note that this function will not
+  affect [9XHeLP_sol[109X.[133X
+  
+  [1X3.1-5 HeLP_WithGivenOrderAndPAAndSpecificSystem[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrderAndPAAndSpecificSystem[102X( [3Xlist[103X, [3Xord[103X, [3Xpartaugs[103X[, [3Xb[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YCalculates  the  admissible  partial augmentations for elements of order [3Xord[103X
+  using  only  the  data  given in the first argument. The first argument is a
+  list,  which  can contains as entries characters or pairs with first entry a
+  character  and  second  entrie  an  integer or a mixture of these. The first
+  argument  is  understood as follows: If a character [22Xχ[122X is not given in a pair
+  all  inequalities obtainable by this character are used. If it is given in a
+  pair with the integer [22Xm[122X the inequalities obtainable from the multiplicity of
+  [9XE(ord)[109X taken to the power [22Xm[122X as an eigenvalue of a representation affording [22Xχ[122X
+  are  used.  The  function  uses the partial augmentations for the powers [22Xu^d[122X
+  with [22Xd[122X divisors of [22Xk[122X different from [22X1[122X and [22Xk[122X given in [3Xpartaugs[103X. Here, the [22Xd[122X's
+  have  to  be  in  a  descending  order  (i.e.  the  orders  of the [23Xu^d[123X's are
+  ascending).  This function only uses the constraints of the HeLP method, but
+  does  not apply the Wagner test [14X5.4[114X. Note that this function will not affect
+  [9XHeLP_sol[109X.[133X
+  
+  
+  [1X3.2 [33X[0;0YChecks for specific orders with s-constant characters[133X[101X
+  
+  [33X[0;0YWhen  considering elements of order [23Xst[123X (in absence of elements of this order
+  in  the  group  ;  in  particular  when  trying to prove (PQ)) and there are
+  several  conjugacy  classes  of  elements  of order [23Xs[123X, it might be useful to
+  consider [23Xs[123X-constant characters (cf. Section [14X5.5[114X) to reduce the computational
+  complexity.[133X
+  
+  [1X3.2-1 HeLP_WithGivenOrderSConstant[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WithGivenOrderSConstant[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xs[103X, [3Xt[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible "partial augmentations" or [9X"infinite"[109X[133X
+  
+  [33X[0;0YCalculates  the admissible partial augmentations for elements [22Xu[122X of order [22Xs*t[122X
+  using  only  the  [23Xs[123X-constant class functions that are contained in the first
+  argument.  The  first  argument can be an ordinary character table, a Brauer
+  table,  or  a  list  of  class  functions,  all  having  the same underlying
+  character table. [3Xs[103X and [3Xt[103X have to be different prime numbers, such that there
+  are elements of order [3Xs[103X and [3Xt[103X in the group, but no elements of order [22Xs*t[122X.[133X
+  
+  [33X[0;0YThe  function  filters which class functions given in the first argument are
+  constant  on  all  conjugacy classes of elements of order [3Xs[103X. For the element
+  [22Xu^s[122X  of  order [3Xt[103X the partial augmentations given in [9XHeLP_sol[t][109X are used. If
+  they  are  not yet calculated, the function calculates them first, using the
+  data  given  in  the  first  argument  and  stores them in [9XHeLP_sol[t][109X. This
+  function  only  uses  the constraints of the HeLP method, but does not apply
+  the  Wagner  test  [14X5.4[114X.  If  these  calculations allow an infinite number of
+  solutions   of  elements  of  order  [23Xst[123X  the  function  returns  [9X"infinite"[109X,
+  otherwiese  it  returns  the  finite list of solutions for elements of order
+  [22Xs*t[122X.   The  first  entry  of  every  solution  is  a  list  of  the  partial
+  augmentations  of  [22Xu^s[122X  and  the  second  entry  is  a  list of the "partial
+  augmentations" for [22Xu[122X: the first entry of this list is the sum of the partial
+  augmentations  on  all  classes of elements of order [3Xs[103X and the other entries
+  are  the  partial  augmentations on the classes of order [3Xt[103X. Only in the case
+  that  the  existence  of units of order [23Xs*t[123X can be excluded by this function
+  the variable [9XHeLP_sol[s*t][109X will be affected and [9XHeLP_sol[s*t][109X will be set to
+  [9X[ ][109X.[133X
+  
+  [1X3.2-2 HeLP_AddGaloisCharacterSums[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AddGaloisCharacterSums[102X( [3XCT[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of characters[133X
+  
+  [33X[0;0YGiven  an  ordinary  character  table  [3XCT[103X the function calculates the orbits
+  under  the  action  of  the  Galois  group  and returns a list of characters
+  containing  the ones contained in [3XCT[103X and the ones obtained by summing up the
+  Galois-orbits.[133X
+  
+  
+  [1X3.3 [33X[0;0YChecks for all orders[133X[101X
+  
+  [1X3.3-1 HeLP_AllOrders[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AllOrders[102X( [3XCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (ZC) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0YThis function does almost the same as [2XHeLP_ZC[102X ([14X2.1-1[114X). It checks whether the
+  Zassenhaus  Conjecture can be verified for a group, but does not compute the
+  partial augmentations of elements of order [23Xk[123X, if [9XHeLP_sol[k][109X already exists.
+  It  does  however verify the solutions given in [9XHeLP_sol[109X using all available
+  tables   for   the   group,   see  [2XHeLP_VerifySolution[102X  ([14X3.6-1[114X).  Thus  some
+  precalculations  using  e.g.  [2XHeLP_WithGivenOrder[102X  ([14X3.1-1[114X) are respected. In
+  contrast  to  [2XHeLP_ZC[102X  ([14X2.1-1[114X) this function also does not check whether the
+  group  is  nilpotent  to  use the Weiss-result to have an immediate positive
+  solution for (ZC).[133X
+  
+  [33X[0;0YThis  function  is  interesting  if one wants to save time or possesses some
+  information,  which  was  not  obtained  using  this package and was entered
+  manually into [9XHeLP_sol[109X.[133X
+  
+  [1X3.3-2 HeLP_AllOrdersPQ[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AllOrdersPQ[102X( [3XCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (PQ) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0YThis function does almost the same as [2XHeLP_PQ[102X ([14X2.2-1[114X). It checks whether the
+  Prime  Graph  Question can be verified for a group, but does not compute the
+  partial augmentations of elements of order [23Xk[123X, if [9XHeLP_sol[k][109X already exists.
+  Thus   some  precalculations  using  e.g.  [2XHeLP_WithGivenOrder[102X  ([14X3.1-1[114X)  are
+  respected.  In contrast to [2XHeLP_PQ[102X ([14X2.2-1[114X) this function also does not check
+  whether  the  group  is  solvable  to  use  the  Kimmerle-result  to have an
+  immediate positive solution for (ZC).[133X
+  
+  [33X[0;0YThis  function  is  interesting  if one wants to save time or possesses some
+  information,  which  was  not  obtained  using  this package and was entered
+  manually into [9XHeLP_sol[109X.[133X
+  
+  
+  [1X3.4 [33X[0;0YChanging the used Character Table[133X[101X
+  
+  [1X3.4-1 HeLP_ChangeCharKeepSols[101X
+  
+  [33X[1;0Y[29X[2XHeLP_ChangeCharKeepSols[102X( [3XCT[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis function changes the used character table to the character table [3XCT[103X and
+  keeps  all  the  solutions  calculated  so  far.  It  is  in  this  case the
+  responsibility  of the user that the tables belong to the same group and the
+  ordering  of  the  conjugacy classes in [3XCT[103X is consistent with the one in the
+  previously used table. This function can be used to change from one table of
+  the  group to another, e.g. from a Brauer table to the ordinary table if the
+  calculations  will  involve  [23Xp[123X-singular  elements.  (In  case  the  involved
+  character tables come from the ATLAS and their InfoText begins with "origin:
+  ATLAS  of finite groups", this is done automatically by the program.) A user
+  may also use characters, which are normally not accessible in GAP.[133X
+  
+  [1X3.4-2 HeLP_Reset[101X
+  
+  [33X[1;0Y[29X[2XHeLP_Reset[102X(  ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  function delets all the values calculated so far and resets the global
+  variables  [9XHeLP_CT[109X  and  [9XHeLP_CT[109X  to  their  initial  value  [9X[ [ [1] ] ][109X and
+  [9XCharacterTable(SmallGroup(1,1))[109X respectively.[133X
+  
+  
+  [1X3.5 [33X[0;0YInfluencing how the Systems of Inequalities are solved[133X[101X
+  
+  [33X[0;0YHeLP uses currently three external programs (i.e. programs that are not part
+  of the GAP-system): zsolve from 4ti2 and/or normaliz to solve the systems of
+  linear  inequalities  and  redund  from  lrslib  to simplify the inequlities
+  before handing them over to the solver (HeLP can also be used without lrslib
+  installed. In general it is recommanded to have lrslib installed, if 4ti2 is
+  used  as  the  solver). The following functions can be used to influence the
+  behaviour of these external programms.[133X
+  
+  [1X3.5-1 HeLP_Solver[101X
+  
+  [33X[1;0Y[29X[2XHeLP_Solver[102X( [[3Xstring[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  function  can  be  used  to change the solver used for the HeLP-system
+  between  4ti2 and normaliz. If the function is called without an argument it
+  prints  which solver is currently used. If the argument it is called with is
+  one  of  the  stings  "4ti2"  or "normaliz", then the solver used for future
+  calculations  is changed to the one given as argument in case this solver is
+  found  by  the  HeLP-package.  If both solvers are found when the package is
+  loaded normaliz is taken as default.[133X
+  
+  [1X3.5-2 HeLP_UseRedund[101X
+  
+  [33X[1;0Y[29X[2XHeLP_UseRedund[102X( [3Xbool[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  function determines whether HeLP uses 'redund' from the lrslib-package
+  to remove redundant equations from the HeLP system. If [3Xbool[103X is [9Xtrue[109X 'redund'
+  will  be  used in all calculation that follow, if it is [9Xfalse[109X, 'redund' will
+  not  be  used  (which  might take significantly longer). If 'redund' was not
+  found  by  GAP  a  warning  will  be  printed  and  the calculations will be
+  performed  without  'redund'.  As  default  'redund'  will  be  used  in all
+  calculations,  if  4ti2 is the chosen solver, and 'redund' will not be used,
+  if normaliz is used.[133X
+  
+  [1X3.5-3 HeLP_Change4ti2Precision[101X
+  
+  [33X[1;0Y[29X[2XHeLP_Change4ti2Precision[102X( [3Xstring[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  function  changes the maximum precision of the calculations of 4ti2 to
+  solve  the  occurring systems of linear inequalities. The possible arguments
+  are  [9X"32"[109X, [9X"64"[109X and [9X"gmp"[109X. After calling the function the new precision will
+  be  used  until  this  function  is used again. The default value is [9X"32"[109X. A
+  higher precision causes slower calculations. But this function might be used
+  to  increase  the  precision  of  4ti2,  when one gets an error message like
+  "Error,  4ti2  Error:  Results  were  near maximum precision (32bit). Please
+  restart  with  higher precision!" stating that the results were close to the
+  maximum  4ti2-precision.  normaliz  does automatically change its precision,
+  when it reaches an overflow.[133X
+  
+  [33X[0;0YSometimes it is desirable to perform calculations without redund (even if it
+  is  installed  and in many cases improves the performance of the package) or
+  with  a higher precision. For example, determining the partial augmentations
+  for   units   of  order  [23X14[123X  for  [9XSmallGroup(392,  30)[109X  involves  very  long
+  calculations  (when  called  with  redund  and precision 32) or cause errors
+  (when  called without redund and precision 32). However, the following works
+  in a reasonable time.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(SmallGroup(392,30));[127X[104X
+    [4X[28XCharacterTable( <pc group of size 392 with 5 generators> )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_Solver("4ti2");[127X[104X
+    [4X[28X'4ti2' will be used from now on.[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_UseRedund(false);[127X[104X
+    [4X[28XThe calculations will be performed without using 'redund' from now on.[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28XError, 4ti2 Error:[128X[104X
+    [4X[28XResults were near maximum precision (32bit).[128X[104X
+    [4X[28XPlease restart with higher precision![128X[104X
+    [4X[28XIf you continue, your results might be wrong called from[128X[104X
+    [4X[28X4ti2Interface_zsolve_equalities_and_inequalities( [128X[104X
+    [4X[28X [ ListWithIdenticalEntries( Size( T[1] ), 1 ) ], [ 1 ], temp[1], - temp[2] [128X[104X
+    [4X[28X ) called from[128X[104X
+    [4X[28XHeLP_TestSystemINTERNAL( W[1], W[2], k, arg[3] ) called from[128X[104X
+    [4X[28XHeLP_WithGivenOrderAndPAINTERNAL( C, k, pa ) called from[128X[104X
+    [4X[28XHeLP_WithGivenOrderINTERNAL( Irr( T ), k ) called from[128X[104X
+    [4X[28X<function "HeLP_ZC">( <arguments> )[128X[104X
+    [4X[28X called from read-eval loop at line 19 of *stdin*[128X[104X
+    [4X[28Xyou can 'quit;' to quit to outer loop, or[128X[104X
+    [4X[28Xyou can 'return;' to continue[128X[104X
+    [4X[25Xgap>[125X [27Xbrk> quit;[127X[104X
+    [4X[28X#I  Options stack has been reset[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_Change4ti2Precision("64");[127X[104X
+    [4X[28XThe calculations of 4ti2 will be performed with precision 64 from now on.[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [1X3.5-4 HeLP_Vertices[101X
+  
+  [33X[1;0Y[29X[2XHeLP_Vertices[102X( [3Xstring[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YIf  normlaiz  is  used  as  the  solver  of  the  HeLP-system  this function
+  influences,  whether the "VerticesOfPolyhedron" are computed by normaliz. By
+  default  these  are only computed, if the system has a trivial solution. The
+  function  takes  "vertices", "novertices" and "default" as arguments. If you
+  do not understand what this means, don't worry.[133X
+  
+  
+  [1X3.6 [33X[0;0YChecking solutions, calculating and checking solutions[133X[101X
+  
+  [1X3.6-1 HeLP_VerifySolution[101X
+  
+  [33X[1;0Y[29X[2XHeLP_VerifySolution[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xk[103X[, [3Xlist_paraugs[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YThis  function  checks  which  of  the partial augmentations for elements of
+  order  [9Xk[109X  given  in  [9XHeLP_sol[k][109X or the optional third argument [9Xlist_paraugs[109X
+  fulfill  the  HeLP  equations  obtained  from  the  characters  in the first
+  argument. This function does not solve any inequalities, but only checks, if
+  the  given  partial  augmentations fulfill them. It is for this reason often
+  faster then e.g. [2XHeLP_WithGivenOrder[102X ([14X3.1-1[114X).[133X
+  
+  [33X[0;0YIf there is no third argument given, i.e. the augmentations from [9XHeLP_sol[k][109X
+  are used, the result overwrites [9XHeLP_sol[k][109X.[133X
+  
+  [1X3.6-2 HeLP_FindAndVerifySolution[101X
+  
+  [33X[1;0Y[29X[2XHeLP_FindAndVerifySolution[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xk[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations or "infinite"[133X
+  
+  [33X[0;0YThis function provides the same functionality as [2XHeLP_WithGivenOrder[102X ([14X3.1-1[114X)
+  but  instead  of  constructiong the corresponding system with all characters
+  from  the  first  argument  [3XCharacterTable|ListOfClassFunctions[103X  it  does it
+  consecutively  with  larger  sets  of  characters  from the argument until a
+  finite  list  of  solutions  is  found  and then applies [2XHeLP_VerifySolution[102X
+  ([14X3.6-1[114X)  to  these solutions with the entirety of the class functions in the
+  first argument.[133X
+  
+  [33X[0;0YThis  function is sometimes faster than [2XHeLP_WithGivenOrder[102X ([14X3.1-1[114X), but the
+  output  is the same, thus the examples from [2XHeLP_WithGivenOrder[102X ([14X3.1-1[114X) also
+  apply here.[133X
+  
+  [1X3.6-3 HeLP_PossiblePartialAugmentationsOfPowers[101X
+  
+  [33X[1;0Y[29X[2XHeLP_PossiblePartialAugmentationsOfPowers[102X( [3Xn[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of partial augmentations of powers.[133X
+  
+  [33X[0;0YThis  function  provides the possible partial augmentations of the powers of
+  units of a given order [23Xn,[123X if the partial augmentations if units of order [23Xn/p[123X
+  have  been  already  computed for all primes [23Xp[123X dividing [23Xn.[123X The possibilities
+  are  sorted  in  the  same  way as, if the order [23Xn[123X is checked with any other
+  function  like e.g. [2XHeLP_WithGivenOrder[102X ([14X3.1-1[114X) or [2XHeLP_ZC[102X ([14X2.1-1[114X). Thus, if
+  the  InfoLevel  is  high enough and one obtains that the computation of some
+  possibility    is    taking    too    long,   one   can   check   it   using
+  [2XHeLP_WithGivenOrderAndPA[102X ([14X3.1-2[114X).[133X
+  
+  [1X3.6-4 HeLP_WriteTrivialSolution[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WriteTrivialSolution[102X( [3XC[103X, [3Xk[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YTrivial solutions.[133X
+  
+  [33X[0;0YGiven  a  character  table  [3XC[103X  and  an  order [3Xk[103X, the function calculates the
+  partial  augmentations  of units of order [23Xk[123X that are rationally conjugate to
+  group  elements (note that they just coincide with the partial augmentations
+  of  group  elements) and stores them in [9XHeLP_sol[k][109X. If solutions of order [23Xk[123X
+  were  already  calculated,  they  are  overwritten by this function, so this
+  function  can  be  used in particular if elements of order [23Xk[123X are known to be
+  rationally conjugate to group elements by theoretical results.[133X
+  
+  
+  [1X3.7 [33X[0;0YThe Wagner test[133X[101X
+  
+  [1X3.7-1 HeLP_WagnerTest[101X
+  
+  [33X[1;0Y[29X[2XHeLP_WagnerTest[102X( [3Xk[103X[, [3Xlist_paraugs[103X, [3XOrdinaryCharacterTable[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YThis  function  applies the Wagner test (cf. Section [14X5.4[114X) to the given data.
+  If only the order [3Xk[103X is given as argument, the Wagner test will be applied to
+  the  solutions  stored  in  [9XHeLP_sol[k][109X. If the arguments are the order [3Xk[103X, a
+  list  of  possible  solutions  [3Xlist_paraugs[103X  and an ordinary character table
+  [3XOrdinaryCharacterTable[103X  it  applies  the  test  to  the  solutions  given in
+  [3Xlist_paraugs[103X  and  using  the  number  of  conjugacy  classes for elements a
+  divisor    of    [3Xk[103X,   which   will   be   extracted   from   the   head   of
+  [3XOrdinaryCharacterTable[103X.[133X
+  
+  
+  [1X3.8 [33X[0;0YAction of the automorphism group[133X[101X
+  
+  [1X3.8-1 HeLP_AutomorphismOrbits[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AutomorphismOrbits[102X( [3XC[103X, [3Xk[103X[, [3Xlist_paraug[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YList of admissible partial augmentations[133X
+  
+  [33X[0;0YFor  a  list  of  possible  partial  augmentations, this function calculates
+  representatives  of  each orbit of the action of the automorphism group of [23XG[123X
+  on them. The first two mandatory arguments are an ordinary character table [3XC[103X
+  (with  an  underlying  group  or  )  and  the  order [3Xk[103X for which the partial
+  augmentations  should  be  filtered  with  respect  to  the  action  of  the
+  automorphism   group  of  [23XG[123X.  If  as  third  argument  a  lisrt  of  partial
+  augmentations  is  given,  then  these  will  be used, otherwise the partial
+  augmentations that are stored in [9XHeLP_sol[k][109X are used.[133X
+  
+  
+  [1X3.9 [33X[0;0YOutput[133X[101X
+  
+  [1X3.9-1 HeLP_PrintSolution[101X
+  
+  [33X[1;0Y[29X[2XHeLP_PrintSolution[102X( [[3Xk[103X] ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ynothing[133X
+  
+  [33X[0;0YThis  function  prints the possible solutions in a pretty way. If a positive
+  integer  [3Xk[103X  as  argument  is  given,  then  it prints the admissible partial
+  augmentations  of  units  of  order [3Xk[103X, if they are already calculated. If no
+  argument  is  given, the function prints information on all orders for which
+  there are already informations.[133X
+  
+  
+  [1X3.10 [33X[0;0YEigenvalue multiplicities and character values[133X[101X
+  
+  [1X3.10-1 HeLP_MultiplicitiesOfEigenvalues[101X
+  
+  [33X[1;0Y[29X[2XHeLP_MultiplicitiesOfEigenvalues[102X( [3Xchi[103X, [3Xk[103X, [3Xparaugs[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ya list of multiplicities of eigenvalues[133X
+  
+  [33X[0;0YThe  returned  list contains at the [22Xl[122X-th spot the multiplicity of [9XE(k)^(l-1)[109X
+  as  eigenvalue of a unit [22Xu[122X of order [3Xk[103X under the representation corresponding
+  to  [3Xchi[103X  having  the  partial augmentations [3Xparaugs[103X for the elements [22Xu^d[122X for
+  divisors [22Xd[122X different from [3Xk[103X.[133X
+  
+  [1X3.10-2 HeLP_CharacterValue[101X
+  
+  [33X[1;0Y[29X[2XHeLP_CharacterValue[102X( [3Xchi[103X, [3Xk[103X, [3Xparaug[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Ythe character value [22Xchi(u)[122X[133X
+  
+  [33X[0;0YThe  function  returns the character value [22Xchi(u)[122X of an element [22Xu[122X of order [23Xk[123X
+  having the partial augmentations [3Xparaug[103X.[133X
+  
+  
+  [1X3.11 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X[101X
+  
+  [1X3.11-1 HeLP_IsZCKnown[101X
+  
+  [33X[1;0Y[29X[2XHeLP_IsZCKnown[102X( [3XG[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  (ZC)  can  be  derived  from  theoretical results, [9Xfalse[109X
+            otherwise[133X
+  
+  [33X[0;0YFor the given group [3XG[103X this function applies five checks, namely it checks[133X
+  
+  [30X    [33X[0;6Yif [23XG[123X is nilpotent[133X
+  
+  [30X    [33X[0;6Yif [23XG[123X has a normal Sylow subgroup with abelian complement,[133X
+  
+  [30X    [33X[0;6Yif [23XG[123X is cyclic-by-abelian[133X
+  
+  [30X    [33X[0;6Yif  it  is of the form [23XX \rtimes A[123X, where [23XX[123X and [23XA[123X are abelian and [23XA[123X is
+        of  prime order [23Xp[123X such that [23Xp[123X is smaller then any prime divisor of the
+        order of [23XX[123X[133X
+  
+  [30X    [33X[0;6Yor if the order of [23XG[123X is smaller than [23X144[123X.[133X
+  
+  [33X[0;0YIn  all  these  cases  the  Zassenhaus  Conjecture  is  known.  See  [14X5.6[114X for
+  references. This function is designed for solvable groups.[133X
+  

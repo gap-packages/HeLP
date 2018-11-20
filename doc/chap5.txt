@@ -1,0 +1,279 @@
+  
+  [1X5 [33X[0;0YBackground[133X[101X
+  
+  [33X[0;0YIn  this  chapter  we give a brief overview of the Zassenhaus Conjecture and
+  the  Prime  Graph  Questions  and the techniques used in this package. For a
+  more detailed exposition see [BM15].[133X
+  
+  
+  [1X5.1 [33X[0;0YThe Zassenhaus Conjecture and the Prime Graph Question[133X[101X
+  
+  [33X[0;0YLet  [23XG[123X  be  a  finite  group  and let [22XZG[122X denote its integral group ring. Let
+  [22XmathrmV(ZG)[122X  be  the  group  of  units  of augmentation one, aka. normalized
+  units. An element of the unit group of [22XZG[122X is called a torsion element, if it
+  has finite order.[133X
+  
+  [33X[0;0YA  long standing conjecture of H.J. Zassenhaus asserts that every normalized
+  torsion  unit  of  [22XZG[122X  is conjugate within [22XQG[122X ("rationally conjugate") to an
+  element  of  [22XG[122X, see [Zas74] or [Seh93], Section 37. This is the first of his
+  three  famous  conjectures about integral group rings and the only one which
+  is nowadays still open, hence it is referred to as the Zassenhaus Conjecture
+  (ZC). This conjecture asserts that the torsion part of the units of [22XZG[122X is as
+  far determined by [22XG[122X as possible.[133X
+  
+  [33X[0;0YConsidering  the  difficulty of the problem W. Kimmerle raised the question,
+  whether  the  Prime  Graph of the normalized units of [22XZG[122X coincides with that
+  one  of  [22XG[122X  (cf.  [Kim07]  Problem  21).  This  is the so called Prime Graph
+  Question (PQ). The prime graph of a group is the loop-free, undirected graph
+  having  as vertices those primes [22Xp[122X, for which there is an element of order [22Xp[122X
+  in  the group. Two vertices [22Xp[122X and [22Xq[122X are joined by an edge, provided there is
+  an  element  of order [22Xpq[122X in the group. In the light of this description, the
+  Prime  Graph Question asks, whether there exists an element of order [23Xpq[123X in [22XG[122X
+  provided  there  exists an element of order [23Xpq[123X in [22XmathrmV(ZG)[122X for every pair
+  of primes [23X(p, q)[123X.[133X
+  
+  [33X[0;0YIn  general,  by a result of J. A. Cohn and D. Livingstone [CL65], Corollary
+  4.1,  and a result of M. Hertweck [Her08a], the following is known about the
+  possible orders of torsion units in integral group rings:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X  The exponents of [23X\mathrm{V}(\mathbb{Z}G)[123X and [23XG[123X coincide. Moreover,
+  if  [23XG[123X  is solvable, any torsion unit in [23X\mathrm{V}(\mathbb{Z}G)[123X has the same
+  order as some element in [23XG.[123X[133X
+  
+  
+  [1X5.2 [33X[0;0YPartial augmentations and the structure of HeLP sol[133X[101X
+  
+  [33X[0;0YFor a finite group [22XG[122X and an element [22Xx ∈ G[122X let [22Xx^G[122X denote the conjugacy class
+  of  [22Xx[122X  in  [22XG[122X.  The  partial  augmentation  with  respect  to [22Xx[122X or rather the
+  conjugacy  class  of [22Xx[122X is the map [22Xε_x[122X sending an element [22Xu[122X to the sum of the
+  coefficients at elements of the conjugacy class of [22Xx[122X, i.e.[133X
+  
+  
+  [24X[33X[0;6Y\varepsilon_x  \colon  \mathbb{Z}G \to \mathbb{Z}, \ \ \sum\limits_{g \in G}
+  z_g g \mapsto \sum\limits_{g \in x^G} z_g.[133X
+  
+  [124X
+  
+  [33X[0;0YLet  [22Xu[122X  be  a  torsion element in [22XmathrmV(ZG)[122X. By results of G. Higman, S.D.
+  Berman  and M. Hertweck the following is known for the partial augmentations
+  of [23Xu[123X:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X ([Seh93], Proposition (1.4); [Her07], Theorem 2.3) [23X\varepsilon_1(u)
+  = 0[123X if [23Xu \not= 1[123X and [23X\varepsilon_x(u) = 0[123X if the order of [23Xx[123X does not divides
+  the order of [23Xu[123X.[133X
+  
+  [33X[0;0YPartial  augmentations  are  connected  to  (ZC)  and (PQ) via the following
+  result,  which  is  due  to  Z. Marciniak, J. Ritter, S. Sehgal and A. Weiss
+  [MRSW87], Theorem 2.5:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X  A  torsion unit [22Xu ∈ mathrmV(ZG)[122X of order [23Xk[123X is rationally conjugate
+  to  an  element of [23XG[123X if and only if all partial augmentations of [22Xu^d[122X vanish,
+  except one (which then is necessarily 1) for all divisors [22Xd[122X of [22Xk[122X.[133X
+  
+  [33X[0;0YThe  last statement also explains the structure of the variable [9XHeLP_sol[109X. In
+  [9XHeLP_sol[k][109X the possible partial augmentations for an element of order [23Xk[123X and
+  all  powers  [22Xu^d[122X  for  [22Xd[122X  dividing  [22Xk[122X  (except  for  [22Xd=k[122X) are stored, sorted
+  ascending w.r.t. order of the element [22Xu^d[122X. For instance, for [22Xk = 12[122X an entry
+  of [9XHeLP_sol[12][109X might be of the following form:[133X
+  
+  [33X[0;0Y[9X[ [ 1 ],[ 0, 1 ],[ -2, 2, 1 ],[ 1, -1, 1 ],[ 0, 0, 0, 1, -1, 0, 1, 0, 0 ] ][109X.[133X
+  
+  [33X[0;0YThe  first  sublist  [9X[ 1 ][109X indicates that the element [22Xu^6[122X of order 2 has the
+  partial  augmentation 1 at the only class of elements of order 2, the second
+  sublist [9X[ 0, 1 ][109X indicates that [22Xu^4[122X of order 3 has partial augmentation 0 at
+  the  first class of elements of order 3 and 1 at the second class. The third
+  sublist  [9X[  -2,  2,  1  ][109X states that the element [22Xu^3[122X of order 4 has partial
+  augmentation  -2  at  the class of elements of order 2 while 2 and 1 are the
+  partial   augmentations   at   the  two  classes  of  elements  of  order  4
+  respectively,  and  so  on.  Note  that  this  format provides all necessary
+  information  on  the  partial augmentations of [22Xu[122X and its powers by the above
+  restrictions on the partial augmentations.[133X
+  
+  [33X[0;0YFor  more details on when the variable [9XHeLP_sol[109X is modified or reset and how
+  to  influence  this  behavior  see  Section  [14X4.2[114X and [2XHeLP_ChangeCharKeepSols[102X
+  ([14X3.4-1[114X).[133X
+  
+  
+  [1X5.3 [33X[0;0YThe HeLP equations[133X[101X
+  
+  [33X[0;0YDenote  by  [23Xx^G[123X the conjugacy class of an element [23Xx[123X in [23XG[123X. Let [23Xu[123X be a torsion
+  unit  in [23X\mathrm{V}(\mathbb{Z}G)[123X of order [23Xk[123X and [23XD[123X an ordinary representation
+  of  [23XG[123X over a field contained in [23X\mathbb{C}[123X with character [23X\chi[123X. Then [23XD(u)[123X is
+  a  matrix of finite order and thus diagonalizable over [23X\mathbb{C}[123X. Let [23X\zeta[123X
+  be  a  primitive  [23Xk[123X-th root of unity, then the multiplicity [23X\mu_l(u,\chi)[123X of
+  [23X\zeta^l[123X  as  an eigenvalue of [23XD(u)[123X can be computed via Fourier inversion and
+  equals[133X
+  
+  
+  [24X[33X[0;6Y\mu_l(u,\chi)     =     \frac{1}{k}     \sum_{1     \not=    d    \mid    k}
+  {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\chi(u^d)\zeta^{-dl})           +
+  \frac{1}{k}                    \sum_{x^G}                   \varepsilon_x(u)
+  {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\chi(x)\zeta^{-l}).[133X
+  
+  [124X
+  
+  [33X[0;0YAs this multiplicity is a non-negative integer, we have the constraints[133X
+  
+  
+  [24X[33X[0;6Y\mu_l(u,\chi) \in \mathbb{Z}_{\geq 0}[133X
+  
+  [124X
+  
+  [33X[0;0Yfor  all  ordinary characters [23X\chi[123X and all [23Xl[123X. This formula was given by I.S.
+  Luthar and I.B.S. Passi [LP89].[133X
+  
+  [33X[0;0YLater  M. Hertweck showed that it may also be used for a representation over
+  a  field  of  characteristic  [23Xp  >  0[123X with Brauer character [23X\varphi[123X, if [23Xp[123X is
+  coprime  to  [23Xk[123X  [Her07],  § 4. In that case one has to ignore the [23Xp[123X-singular
+  conjugacy  classes  (i.e. the classes of elements with an order divisible by
+  [23Xp[123X) and the above formula becomes[133X
+  
+  
+  [24X[33X[0;6Y\mu_l(u,\varphi)     =    \frac{1}{k}    \sum_{1    \not=    d    \mid    k}
+  {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\varphi(u^d)\zeta^{-dl})        +
+  \frac{1}{k}      \sum_{x^G,\      p     \nmid     o(x)}     \varepsilon_x(u)
+  {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\varphi(x)\zeta^{-l}).[133X
+  
+  [124X
+  
+  [33X[0;0YAgain,  as  this  multiplicity  is  a  non-negative  integer,  we  have  the
+  constraints[133X
+  
+  
+  [24X[33X[0;6Y\mu_l(u,\varphi) \in \mathbb{Z}_{\geq 0}[133X
+  
+  [124X
+  
+  [33X[0;0Yfor all Brauer characters [23X\varphi[123X and all [23Xl[123X.[133X
+  
+  [33X[0;0YThese  equations  allow  to  build a system of integral inequalities for the
+  partial  augmentations  of [23Xu[123X. Solving these inequalities is exactly what the
+  HeLP  method  does  to  obtain  restrictions  on  the possible values of the
+  partial  augmentations  of  [23Xu[123X.  Note that some of the [23X\varepsilon_x(u)[123X are a
+  priori zero by the results in the above sections.[133X
+  
+  [33X[0;0YFor  [23Xp[123X-solvable  groups  representations over fields of characteristic [23Xp[123X can
+  not  give  any  new  information compared to ordinary representations by the
+  Fong-Swan-Rukolaine Theorem [CR90], Theorem 22.1.[133X
+  
+  
+  [1X5.4 [33X[0;0YThe Wagner test[133X[101X
+  
+  [33X[0;0YWe  also  included  a result motivated by a theorem R. Wagner proved 1995 in
+  his  Diplomarbeit  [Wag95].  This  result gives a further restriction on the
+  partial  augmentations  of  torsion  units.  Though the results was actually
+  available before Wagner's work, cf. [BH08] Remark 6, we named the test after
+  him,  since  he  was  the  first  to  use  the HeLP-method on a computer. We
+  included   it   into   the   functions  [2XHeLP_ZC[102X  ([14X2.1-1[114X),  [2XHeLP_PQ[102X  ([14X2.2-1[114X),
+  [2XHeLP_AllOrders[102X ([14X3.3-1[114X), [2XHeLP_AllOrdersPQ[102X ([14X3.3-2[114X) and [2XHeLP_WagnerTest[102X ([14X3.7-1[114X)
+  and call it "Wagner test".[133X
+  
+  [33X[0;0Y[13XTheorem:[113X  For  a  torsion unit [22Xu ∈ mathrmV(ZG)[122X, a group element [23Xs[123X, a prime [23Xp[123X
+  and a natural number [23Xj[123X we have[133X
+  
+  
+  [24X[33X[0;6Y\sum\limits_{x^{p^j}  \sim s} \varepsilon_x(u) \equiv \varepsilon_s(u^{p^j})
+  \ \ \ {\rm{mod}} \ \ p.[133X
+  
+  [124X
+  
+  [33X[0;0YCombining the Theorem with the HeLP-method may only give new insight, if [23Xp^j[123X
+  is a proper divisor of the order of [23Xu[123X. Wagner did obtain this result for [23Xs =
+  1[123X,  when [23X\varepsilon_s(u) = 0[123X by the Berman-Higman Theorem. In the case that
+  [23Xu[123X  is  of prime power order this is a result of J.A. Cohn and D. Livingstone
+  [CL65].[133X
+  
+  
+  [1X5.5 [33X[0;0Ys-constant characters[133X[101X
+  
+  [33X[0;0YIf  one  is  interested  in  units of mixed order [23Xs*t[123X for two primes [23Xs[123X and [23Xt[123X
+  (e.g.  if  one  studies  the  Prime Graph Question) an idea to make the HeLP
+  method more efficient was introduced by V. Bovdi and A. Konovalov in [BK10],
+  page 4. Assume one has several conjugacy classes of elements of order [23Xs[123X, and
+  a  character  taking  the  same  value  on  all  of  these classes. Then the
+  coefficient   of   every  of  these  conjugacy  classes  in  the  system  of
+  inequalities  of  this  character, which is obtained via the HeLP method, is
+  the  same.  Also the constant terms of the inequalities do not depend on the
+  partial  augmentations  of elements of order [23Xs[123X. Thus for such characters one
+  can  reduce the number of variables in the inequalities by replacing all the
+  partial  augmentations  on  classes  of elements of order [23Xs[123X by their sum. To
+  obtain  the  formulas for the multiplicities of the HeLP method one does not
+  need the partial augmentations of elements of order [23Xs[123X. Characters having the
+  above  property are called [23Xs[123X-constant. In this way the existence of elements
+  of  order  [23Xs*t[123X  can  be  excluded  in  a  quite  efficient way without doing
+  calculations for elements of order [23Xs[123X.[133X
+  
+  [33X[0;0YThere  is  also  the concept of [23X(s,t)[123X-constant characters, being constant on
+  both,  the  conjugacy  classes  of  elements of order [23Xs[123X and on the conjugacy
+  classes  of  elements  of order [23Xt[123X. The implementation of this is however not
+  yet part of this package.[133X
+  
+  
+  [1X5.6  [33X[0;0YKnown  results  about  the  Zassenhaus  Conjecture  and the Prime Graph[101X
+  [1XQuestion[133X[101X
+  
+  [33X[0;0YAt  the  moment  as  this  documentation  was  written,  to  the best of our
+  knowledge,   the   following  results  were  available  for  the  Zassenhaus
+  Conjecture and the Prime Graph Question:[133X
+  
+  [33X[0;0YFor the Zassenhaus Conjecture only the following reduction is available:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X  Assume  the  Zassenhaus  Conjecture holds for a group [23XG[123X. Then (ZC)
+  holds  for  [23XG  \times C_2[123X [HK06], Corollary 3.3, and [23XG \times \Pi[123X, where [23X\Pi[123X
+  denotes  a  nilpotent  group  of  order  prime  to  the order of [23XG[123X [Her08b],
+  Proposition 8.1.[133X
+  
+  [33X[0;0YWith this reductions in mind the Zassenhaus Conjecture is known for:[133X
+  
+  [30X    [33X[0;6YNilpotent groups [Wei91],[133X
+  
+  [30X    [33X[0;6YCyclic-By-Abelian groups [CMdR13],[133X
+  
+  [30X    [33X[0;6YGroups  containing  a  normal  Sylow  subgroup with abelian complement
+        [Her06],[133X
+  
+  [30X    [33X[0;6YFrobenius  groups  whose  order  is divisible by at most two different
+        primes [JPM00],[133X
+  
+  [30X    [33X[0;6YGroups  [23XX \rtimes A[123X, where [23XX[123X and [23XA[123X are abelian and [23XA[123X is of prime order
+        [23Xp[123X  such  that  [23Xp[123X  is  smaller then any prime divisor of the order of [23XX[123X
+        [MRSW87],[133X
+  
+  [30X    [33X[0;6YAll groups of order up to 143 [BHK+16],[133X
+  
+  [30X    [33X[0;6YThe   non-abelian  simple  groups  [23XA_5[123X  [LP89],  [23XA_6  \simeq  PSL(2,9)[123X
+        [Her08c],  [23XPSL(2,7)[123X, [23XPSL(2,11)[123X, [23XPSL(2,13)[123X [Her07], [23XPSL(2,8)[123X, [23XPSL(2,17)[123X
+        [KK15]  [Gil13],  [23XPSL(2,19)[123X,  [23XPSL(2,23)[123X  [BM14], [23XPSL(2,25)[123X, [23XPSL(2,31)[123X,
+        [23XPSL(2,32)[123X  [BM16b]  and  some extensions of these groups. Also for all
+        [23XPSL(2,p)[123X where [23Xp[123X is a fermat or a Mersenne prime [MdRS16].[133X
+  
+  [33X[0;0YFor  the Prime Graph Question the following strong reduction was obtained in
+  [KK15]:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X  Assume the Prime Graph Question holds for all almost simple images
+  of a group [23XG[123X. Then (PQ) also holds for [23XG.[123X[133X
+  
+  [33X[0;0YHere  a  group  [23XG[123X  is  called almost simple, if it is sandwiched between the
+  inner  automorphism  group and the whole automorphism group of a non-abelian
+  simple  group  [23XS[123X.  I.e. [23XInn(S) \leq G \leq Aut(S).[123X Keeping this reduction in
+  mind (PQ) is known for:[133X
+  
+  [30X    [33X[0;6YSolvable groups [Kim06],[133X
+  
+  [30X    [33X[0;6YGroups  whose  socle  is isomorphic to a group [23XPSL(2,p)[123X or [23XPSL(2,p^2)[123X,
+        where [23Xp[123X denotes a prime, [Her07], [BM16a].[133X
+  
+  [30X    [33X[0;6YHalf  of the sporadic simple groups and their automorphism groups; for
+        an overview see [KK15],[133X
+  
+  [30X    [33X[0;6YGroups  whose socle is isomorphic to an alternating group of degree at
+        most 17, [Sal11] [Sal13][BC15],[133X
+  
+  [30X    [33X[0;6YAlmost  simple  groups  whose  order  is  divisible  by  at most three
+        different  primes  [KK15]  and [BM14]. (This implies that it holds for
+        all  groups with an order divisible by at most three primes, using the
+        reduction result above.)[133X
+  
+  [30X    [33X[0;6YMany  almost  simple groups whose order is divisible by four different
+        primes [BM16a][BM16b].[133X
+  

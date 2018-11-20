@@ -1,0 +1,30 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YThe  purpose  of  this  package  is  to provide functionalities to work with
+  torsion  units  in  (integral)  group rings. It implements a method that was
+  developed  by  I.S. Luthar and I.B.S. Passi in [LP89] and which was extended
+  by  M.  Hertweck  in  [Her07].  These  names also constitute the name of the
+  method,  suggested by A. Konovalov: [13XHe[113Xrtweck-[13XL[113Xuthar-[13XP[113Xassi. The theory behind
+  the  method is briefly described in Chapter [14X5[114X and also in the survey article
+  [BM15].[133X
+  
+  [33X[0;0YThe package uses the software 4ti2 [tea] and/or normaliz [BIR+] and hence is
+  only  properly  working  on  systems  which  have  at  least  one of the two
+  installed.  normaliz is usually automatically installed with the GAP-package
+  NormalizInterface,  see  the  documentation of that package for details. For
+  more  information  on  4ti2  and  to  download  it, please visit www.4ti2.de
+  ([7Xhttp://www.4ti2.de[107X).  To  interact with these external software the package
+  makes  use  of  the  4ti2-Interface  and  normaliz-Interface  written  by S.
+  Gutsche,  C.  Söger and M. Horn. The 4ti2-Interface in turn uses the package
+  IO,  that  needs  a  C-part  to  be  compiled;  see  the  readme-file or the
+  documentation  of  the IO-package for details. The package also provides the
+  possibility  to  use  redund  form  the  lrslib  software  [Avi],  to remove
+  redundant  inequalities  before solving the system, which might speed up the
+  computations  significantly  when  4ti2  is  used.  However,  it  is  not  a
+  requirement  to  have lrslib installed. If the above mentioned preconditions
+  are   fulfilled,   one  just  has  to  copy  the  HeLP-package  in  the  GAP
+  pkg-directory.  Now the package can be loaded by typing [9XLoadPackage("HeLP");[109X
+  during  a  GAP-session.  If  the  HeLP-package doesn't work properly on your
+  computer, you might want to check Section [14X6.1[114X for some trouble shooting.[133X
+  
