@@ -1,0 +1,144 @@
+@Chapter Background
+
+@Section The Zassenhaus Conjecture and the Prime Graph Question
+
+ Let $G$ be a finite group and let <M>\mathbb{Z}G</M> denote its
+ integral group ring.  Let <M>\mathrm{V}(\mathbb{Z}G)</M> be the
+ group of units of augmentation one, aka. normalized units. An
+ element of the unit group of <M>\mathbb{Z}G</M> is called a torsion 
+ element, if it has finite order. <P/>
+
+ A long standing conjecture of H.J. Zassenhaus asserts that every
+ normalized torsion unit of <M>\mathbb{Z}G</M> is conjugate within 
+ <M>\mathbb{Q}G</M> ("rationally conjugate") to an element of <M>G</M>, see
+ <Cite Key="Zas"/> or <Cite Key="SehgalBook2"/>, Section 37.  This is the first 
+ of his three famous conjectures about integral group rings and the
+ only one which is nowadays still open, hence it is referred to as
+ the Zassenhaus Conjecture (ZC).  This conjecture asserts that the
+ torsion part of the units of <M>\mathbb{Z}G</M> is as far
+ determined by <M>G</M> as possible. <P/>
+
+ Considering the difficulty of the problem W. Kimmerle raised the
+ question, whether the Prime Graph of the normalized units of 
+ <M>\mathbb{Z}G</M> coincides with that one of <M>G</M> 
+ (cf. <Cite Key="Ari"/> Problem 21).  This is the
+ so called Prime Graph Question (PQ).  The prime graph of a group is the
+ loop-free, undirected graph having as vertices those primes <M>p</M>, for which there
+ is an element of order <M>p</M> in the group.  Two vertices <M>p</M> and
+ <M>q</M> are joined by an edge, provided there is an element of order <M>pq</M>
+ in the group.  In the light of this description, the Prime Graph Question asks,
+ whether there exists an element of order $pq$ in <M>G</M> provided there exists an element of order
+ $pq$ in <M>\mathrm{V}(\mathbb{Z}G)</M> for every pair of primes $(p, q)$. <P/>
+ In general, by a result of J. A. Cohn and D. Livingstone <Cite Key="CohnLivingstone"/>,
+ Corollary 4.1, and a result of M. Hertweck  <Cite Key="HertweckSolvable"/>, the
+ following is known about the possible orders of torsion units in integral group rings: <P/>
+ **Theorem:** The exponents of $\mathrm{V}(\mathbb{Z}G)$ and $G$ coincide. Moreover, if
+ $G$ is solvable, any torsion unit in $\mathrm{V}(\mathbb{Z}G)$ has the same order as 
+ some element in $G.$
+
+@Section Partial augmentations and the structure of HeLP_sol
+
+ For a finite group <M>G</M> and an element <M>x \in G</M> let <M>x^G</M> denote
+ the conjugacy class of <M>x</M> in <M>G</M>.  The partial augmentation with
+ respect to <M>x</M> or rather the conjugacy class of <M>x</M> is the map
+ <M>\varepsilon_x </M> sending an element
+ <M>u </M> to the sum of the coefficients at elements of
+ the conjugacy class of <M>x</M>, i.e. 
+ $$ \varepsilon_x \colon \mathbb{Z}G \to \mathbb{Z}, \ \ \sum\limits_{g \in G} z_g g \mapsto \sum\limits_{g \in x^G} z_g. $$ 
+ 
+ Let <M>u</M> be a torsion element in <M>\mathrm{V}(\mathbb{Z}G)</M>. By results of G. Higman, S.D. Berman and M. Hertweck the following is known for the partial augmentations of $u$: <P/>
+ **Theorem:** (<Cite Key="SehgalBook2"/>, Proposition (1.4); <Cite Key="HertweckBrauer"/>, Proposition 2.2) 
+ $\varepsilon_1(u) = 0$ if $u \not= 1$ and $\varepsilon_x(u) = 0$ if the order of $x$ does not divides the order of $u$.
+ <P/>
+ Partial  augmentations are connected to (ZC) and (PQ) via the following result, which 
+ is due to Z. Marciniak, J. Ritter, S. Sehgal and A. Weiss
+ <Cite Key="MRSW"/>, Theorem 2.5: <P/>
+ **Theorem:** A torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M> of order $k$
+ is rationally conjugate to an element of $G$ if and only if all partial augmentations
+ of <M>u^d</M> vanish, except one (which then is necessarily 1) for all divisors 
+ <M>d</M> of <M>k</M>.<P/>
+
+ The last statement also explains the structure of the variable <K>HeLP_sol</K>.  In <K>HeLP_sol[k]</K>
+ the possible partial augmentations for an element of order $k$ and all powers <M>u^d</M> 
+ for <M>d</M> dividing <M>k</M> (except for <M>d=k</M>) are stored, sorted ascending w.r.t. order of the 
+ element <M>u^d</M>.  For instance, for <M>k = 12</M>  an entry of <K>HeLP_sol[12]</K> might be 
+ of the following form:<P/>
+ <K>[  [ 1 ],[ 0, 1 ],[ -2, 2, 1 ],[ 1, -1, 1 ],[ 0, 0, 0, 1, -1, 0, 1, 0, 0 ] ]</K>.<P/>
+ The first sublist <K>[ 1 ]</K> indicates that the element <M>u^6</M> of order 2 has the 
+ partial augmentation 1 at the only class of elements of order 2, the second sublist 
+ <K>[ 0, 1 ]</K> indicates that <M>u^4</M> of order 3 has partial augmentation 0 at the first 
+ class of elements of order 3 and 1 at the second class.  The third sublist <K>[ -2, 2, 1 ]</K>
+ states that the element <M>u^3</M> of order 4 has partial augmentation -2 at the class 
+ of elements of order 2 while 2 and 1 are the partial augmentations at the two classes of elements of order 4 respectively,
+ and so on.  Note that this format provides all necessary information on the partial augmentations
+ of <M>u</M> and its powers by the above restrictions on the partial augmentations.<P/>
+ For more details on when the variable <K>HeLP_sol</K> is modified or reset and how to influence this behavior see Section <Ref Sect='Chapter_Extended_examples_Section_The_behavior_of_the_variable_HeLP_sol'/> and <Ref Func='HeLP_ChangeCharKeepSols'/>.
+
+
+@Section The HeLP equations
+
+ Denote by $x^G$ the conjugacy class of an element $x$ in $G$.
+ Let $u$ be a torsion unit in $\mathrm{V}(\mathbb{Z}G)$ of order $k$ and $D$ an ordinary
+ representation of $G$ over a field contained in $\mathbb{C}$ with character $\chi$. 
+ Then $D(u)$ is a matrix of finite order and thus diagonalizable over $\mathbb{C}$.
+ Let $\zeta$ be a primitive $k$-th root of unity, then the multiplicity $\mu_l(u,\chi)$
+ of $\zeta^l$ as an eigenvalue of $D(u)$ can be computed via Fourier inversion and equals
+ $$ \mu_l(u,\chi) = \frac{1}{k} \sum_{1 \not= d \mid k} {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\chi(u^d)\zeta^{-dl}) + \frac{1}{k} \sum_{x^G} \varepsilon_x(u) {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\chi(x)\zeta^{-l}).$$
+ As this multiplicity is a non-negative integer, we have the constraints $$\mu_l(u,\chi) \in \mathbb{Z}_{\geq 0}$$
+ for all ordinary characters $\chi$ and all $l$. 
+ This formula was given by I.S. Luthar and I.B.S. Passi <Cite Key="LP"/>. <P/>
+ Later M. Hertweck showed that it may also be used for a representation over a field of characteristic $p > 0$ with character $\varphi$,
+ if $p$ is coprime to $k$ <Cite Key="HertweckBrauer"/>, § 4. In that case one has to ignore the $p$-singular conjugacy classes (i.e. the classes of elements with an order divisible by $p$) and the above formula becomes
+  $$ \mu_l(u,\varphi) = \frac{1}{k} \sum_{1 \not= d \mid k} {\rm{Tr}}_{\mathbb{Q}(\zeta^d)/\mathbb{Q}}(\varphi(u^d)\zeta^{-dl}) + \frac{1}{k} \sum_{x^G,\ p \nmid o(x)} \varepsilon_x(u) {\rm{Tr}}_{\mathbb{Q}(\zeta)/\mathbb{Q}}(\varphi(x)\zeta^{-l}).$$  
+ Again, as this multiplicity is a non-negative integer, we have the constraints $$\mu_l(u,\varphi) \in \mathbb{Z}_{\geq 0}$$
+ for all Brauer characters $\varphi$ and all $l$. 
+<P/>
+ These equations allow to build a system of integral inequalities for the partial augmentations of $u$.
+ Solving these inequalities is exactly what the HeLP method does to obtain restrictions on the possible
+ values of the partial augmentations of $u$. Note that some of the $\varepsilon_x(u)$ are a priori zero by the results in the above sections. <P/>
+ For $p$-solvable groups representations over fields of characteristic $p$ can not give any
+ new information compared to ordinary representations by the Fong-Swan-Rukolaine Theorem <Cite Key="CR1"/>, Theorem 22.1.
+
+
+@Section The Wagner test
+
+ In 1995 R. Wagner proved in his Diplomarbeit <Cite Key="Wa"/> a further restriction on the partial augmentations
+ of torsion units. His result was however never properly published and is not very well-known. 
+ The result is however often helpful,
+ so we included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/> and <Ref Func='HeLP_WagnerTest'/> and call it "Wagner test". <P/>
+ **Theorem:** (R. Wagner) For a torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M> of order
+ <M>p^k*m</M>, where <M>p</M> is a prime number and <M>m \not= 1</M>, the sum of all partial augmentations 
+ at conjugacy classes of elements of order <M>p^s</M> is congruent <M>0</M> modulo <M>p</M> for all 
+ <M>0\leq s\leq k</M>.<P/>
+ In the case that $u$ is of prime power order this is a result of J.A. Cohn and D. Livingstone <Cite Key="CohnLivingstone"/>.
+
+ 
+@Section s-constant (and (s,t)-constant) characters
+
+If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one is studying the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
+There is also the concept of $(s,t)$-constant characters, being constant on both, the conjugacy classes of elements of order $s$ and on the conjugacy classes of elements of order $t$. The implementation of this is however not yet part of this package.
+
+
+@Section Known results about (ZC) and (PQ)
+ 
+At the moment as this documentation was written, to the best of our knowledge, the following results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
+For the Zassenhaus Conjecture only the following reduction is available: <P/><P/>
+**Theorem:** Assume the Zassenhaus Conjecture holds for a group $G$. Then (ZC) holds for $G \times C_2$ <Cite Key="HoefertKimmerle"/>, Corollary 3.3, and $G \times \Pi$, where $\Pi$ denotes a nilpotent group of order prime to the order of $G$ <Cite Key="HertweckEdinb"/>, Proposition 8.1.<P/>
+With this reductions in mind the Zassenhaus Conjecture is known for:
+* Nilpotent groups <Cite Key="Weiss91"/>,
+* Cyclic-By-Abelian groups <Cite Key="CyclicByAbelian"/>,
+* Groups containing a normal Sylow subgroup with abelian complement <Cite Key="HertweckColloq"/>,
+* Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
+* Groups $X \rtimes A$, where $X$ is abelian, $A$ elementary abelian and $A$ acts faithfully and irreducibly on $X$ <Cite Key="SehgalWeiss"/>,
+* Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
+* All groups of order up to 159 and some other groups of order up to 200 listed in <Cite Key="HermanSingh"/>,
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> / <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/> and some extensions of these groups.
+
+For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
+**Theorem:** Assume the Prime Graph Question holds for all almost simple images of a group $G$. Then (PQ) also holds for $G.$<P/>
+Here a group $G$ is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group $S$. I.e. $Inn(S) \leq G \leq Aut(S).$ Keeping this reduction in mind (PQ) is known for:
+* Solvable groups <Cite Key="KimmiPQ"/>,
+* The groups $PSL(2,p)$ where $p$ denotes a prime <Cite Key="HertweckBrauer"/>,
+* Half of the sporadic simple groups and their automorphism groups, for an overview see <Cite Key="KonovalovKimmiStAndrews"/>,
+* The groups $A_7, A_8$ <Cite Key="SalimA7A8"/>, $A_9, A_{10}$ <Cite Key="SalimA9A10"/>,
+* Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)

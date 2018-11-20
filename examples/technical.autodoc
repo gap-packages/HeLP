@@ -1,0 +1,74 @@
+@Chapter Remarks on technical problems and the implementation
+
+@Section Making the HeLP-package run
+#! Sometimes one encounters problems, when trying to make this package run.
+#! One known problem is that the 4ti2-interface needs the <URL Text="IO-package">http://gap-system.github.io/io/</URL>,
+#! which needs a C-part to be compiled. To see if this package is working on your system you can enter
+#! <K>LoadPackage("IO");</K> after starting GAP.
+#! If the result is <K>fail</K>, the package is not installed or the C-part is not yet compiled.
+#! For download and information on installation and in particular on how to compile the C-part, see the
+#! <URL Text="manual">http://gap-system.github.io/io/doc/chap0.html</URL> (in particular Chapter 2) or the README-file of that package.<P/>
+#! Another common problem is that the 4ti2-Interface package can not access 4ti2
+#! since it does not find the 4ti2-function <K>zsolve</K>.
+#! Most of the times this results in an error-message beginning with
+@BeginExample
+#! Error, operations: IN of character and boolean is not defined in
+#!   if '/' in path  then
+#!     if not IsExecutableFile( path )  then
+#!         return fail;
+#!     else
+#!         return path;
+#!     fi;
+#!  [...]
+@EndExample
+#!  The best solution is probably to 
+#! re-install 4ti2 in one of the directories contained in your <K>\$PATH</K>-variable
+#! (which can typically be displayed by typing <K>echo \$PATH</K> 
+#! (Linux, Mac) <K>echo %PATH%</K> (Windows) in a terminal or a command prompt).
+#! If you want to avoid a re-installation, in many cases the following helps:
+#! - Start a terminal and access a path written in your bash or system_bash. Typically <K>usr/local/bin</K> should work. <P/>
+#! - Run <K>ln -s /PathToZsolve zsolve</K>. This sets a symlink to the right place.
+#! E.g. <K>ln -s /opt/4ti2/bin/zsolve zsolve</K> was used on the (Linux) computers in Stuttgart.
+
+@Section Computations with big coefficients - precision problems
+#! If one is solving systems of linear inequalities with **huge** coefficients with 4ti2 via the 4ti2-Interface, sometimes precision
+#! errors occur.  This is the case because the coefficients of the HeLP system are alredy close to 32bit or even bigger
+#! than 32bit.  In the first case, if the calculations result bigger than 32bit, an error is signaled, in the second case there
+#! is no check yet, so the calculations are performed with a wrong systen and produce also wrong results.
+@BeginExample
+C := CharacterTable("Symmetric", 22);;
+HeLP_WithGivenOrder(Irr(C){[2..400]}, 11);
+#! Error, 4ti2 Error:
+#! Results were near maximum precision (32bit).
+#! Please restart with higher precision!
+#! If you continue, your results might be wrong called from
+#! 4ti2Interface_zsolve_equalities_and_inequalities(
+#!  [ ListWithIdenticalEntries( Size( T[1] ), 1 ) ], [ 1 ], T, - a ) called from
+#! HeLP_TestSimplifiedSystemINTERNAL( W[1], W[2], k, arg[3] ) called from
+#! HeLP_WithGivenOrderAndPAINTERNAL( C, k, act_pa ) called from
+#! HeLP_WithGivenOrderINTERNAL( C, k ) called from
+#! <function "HeLP_WithGivenOrder">( <arguments> )
+#!  called from read-eval loop at line 21 of *stdin*
+#! you can 'quit;' to quit to outer loop, or
+#! you can 'return;' to continue
+#! brk> quit;
+HeLP_WithGivenOrder(Irr(C), 11);
+#! #I  Number of solutions for elements of order 11: 0; stored in HeLP_sol[11].
+#! [  ]
+#! # The last output is obviously wrong;
+@EndExample
+#! In the next version of the 4ti2-Interface this test will be implemented and there should always be an error message in case 
+#! the results might be wrong.
+#! In the few examples we know of
+#! the character values, in particular the degrees,
+#! appearing have to be really huge for this problem to occure. For groups with a "reasonable" order
+#! there should be no problems.
+
+@Section How much 4ti2 is really there?
+#! The reason, why the program 4ti2 is used in this package, is basically that it can solve systems 
+#! of linear inequalities efficently and there
+#! exists a good GAP-Interface to it. However there is only one line of code
+#! where a function is called which accesses 4ti2. Thus the effort of using another solver of
+#! inequalities would be not so big, if there is a GAP-Interface for it.
+#! If you are aware of such a solver and would like to use it in this package,
+#! please contact the authors of this package. We will be happy to help.

@@ -1,0 +1,20 @@
+@BeginChunk Intro
+ The purpose of this package is to provide functionalities to
+ work with torsion units in (integral) group rings.  It implements a 
+ method which was developed by I.S. Luthar and I.B.S. Passi in <Cite Key="LP"/> and which was
+ extended by M. Hertweck in <Cite Key="HertweckBrauer"/>. These names also constitute the name
+ of the method, suggested by A. Konovalov: **He**rtweck-**L**uthar-**P**assi.
+ The theory behind the method is briefly described in Chapter <Ref Chap='Chapter_Background'/>.  <P/>
+
+ The package uses the software 4ti2 <Cite Key="4ti2"/> and is hence only working
+ on systems which have 4ti2 installed. For more information on 4ti2 and to download it, please visit
+ <URL Text="www.4ti2.de">http://www.4ti2.de</URL>. 
+ To interact with 4ti2 the package makes use of the
+ 4ti2-Interface written by S. Gutsche, which in turn uses the package IO.  Note that the latter
+ package needs a C-part to be compiled; see the readme-file or the documentation of that package.
+ If these preconditions are fulfilled, one just has to copy the HeLP-package in the GAP pkg-directory.
+ Now the package can be loaded by typing <K>LoadPackage("HeLP");</K> during a GAP-session. 
+ If the package doesn't work properly on your computer, you might want to check Section 
+ <Ref Sect='Chapter_Remarks_on_technical_problems_and_the_implementation_Section_Making_the_HeLP-package_run'/>
+ for some trouble shooting.
+@EndChunk Intro
