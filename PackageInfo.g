@@ -12,15 +12,22 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.3",
-Date           := "11/12/2017",
+Version        := "3.4",
+Date           := "20/11/2018",
 
-ArchiveURL :=  "http://homepages.vub.ac.be/abachle/help/help",
-
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", ~.PackageName ),
+README_URL      := Concatenation( ~.PackageWWWHome, "/README" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName, "-", ~.Version ),
+                                 
 ArchiveFormats := ".tar.gz",
-
-
-PackageWWWHome := "http://homepages.vub.ac.be/abachle/help/",
 
 PackageDoc := rec(
   BookName  := ~.PackageName,
@@ -55,26 +62,21 @@ rec(
        FirstNames    := "Leo",
        IsAuthor      := true,
        IsMaintainer  := true,
-       Email         := "Leo.Margolis@mathematik.uni-stuttgart.de",
-       WWWHome       := "http://www.igt.uni-stuttgart.de/LstDiffgeo/Margolis/",
+       Email         := "Leo.Margolis@vub.be",
+       WWWHome       := "http://homepages.vub.ac.be/~lmargoli/",
        PostalAddress := Concatenation( [
-                        "Departamento de Matemáticas\n",
-                        "Facultad de Matemáticas\n",
-                        "Universidad de Murcia\n",
-                        "Murcia 30100\n",
-                        "Spain" ] ),
-       Place         := "Murcia",
-       Institution   := "Universidad de Murcia"
+                        "Vrije Universiteit Brussel\n",
+                        "Vakgroep Wiskunde\n",
+                        "Pleinlaan 2\n", 
+                        "1050 Brussels\n",
+                        "Belgium" ] ),
+       Place         := "Brussels",
+       Institution   := "Vrije Universiteit Brussel"
      )
 ],
 
 Status := "deposited",
 
-README_URL := 
-  Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := 
-  Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-  
 AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.",
                   
 Dependencies := rec(

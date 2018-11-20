@@ -1,3 +1,8 @@
+Changes v3.3 -> v3.4
+
+* Package migrated to GitHub
+
+
 Changes v3.2 -> v3.3
 
 * testfile in PackageInfo.g changed to "tst/testall.g"
