@@ -539,7 +539,7 @@ HeLP_ZC(C);
 #! @BeginChunk AOExample
 #! @BeginExample
 C := CharacterTable("A6");;
-gap> HeLP_WithGivenOrder(C, 6);
+HeLP_WithGivenOrder(C, 6);
 #! #I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].
 #! [ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ]
 #! gap> HeLP_AutomorphismOrbits(C, 6);
