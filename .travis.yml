@@ -3,7 +3,7 @@ env:
   global:
     - GAPROOT=gaproot
     - COVDIR=coverage
-    - GAP_PKGS_TO_BUILD="io 4ti2Interface NormalizInterface"
+    - GAP_PKGS_TO_BUILD="io profiling NormalizInterface"
 
 addons:
   apt_packages:
