@@ -13,7 +13,8 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "3.4",
-Date           := "20/11/2018",
+Date           := "20/11/2018", # dd/mm/yyyy format
+License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
     Type := "git",
@@ -100,7 +101,7 @@ AutoDoc := rec(
         Copyright := Concatenation(
                     "&copyright; 2017 by Andreas Bächle and Leo Margolis<P/>\n\n",
                     "This package is free software and may be distributed under the terms and conditions of the\n",
-                    "GNU Public License Version 2.\n"
+                    "GNU Public License Version 2, or (at your option) any later version.\n"
                 ),
         Acknowledgements := Concatenation(
                     "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
