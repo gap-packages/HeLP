@@ -147,7 +147,7 @@ With this reductions in mind the Zassenhaus Conjecture is known for:
 * Direct products of an abelian group and a Frobenius group with complement of odd order <Cite Key="BaechleKimmerleSerrano18"/>,
 * All groups of order up to 143 <Cite Key="BaHeKoMaSi"/>, 
 * The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>,
-* For the following non-solvable and non-simple groups: $S_5$ <Cite Key="HertweckBrauer"/>, $\operatorname{GL}(2,5)$ and the covering group of $S_5$ <Cite Key="BovdiHertweck"/> and the groups $\operatorname{SL}(2,p)$ and $\operatorname{SL}(2,p^2)$ for any prime $p$ <Cite Key="delRioSerrano19"/>.
+* For the following non-solvable and non-simple groups: $S_5$ <Cite Key="HertweckBrauer"/>, $GL(2,5)$ and the covering group of $S_5$ <Cite Key="BovdiHertweck"/> and the groups $SL(2,p)$ and $SL(2,p^2)$ for any prime $p$ <Cite Key="delRioSerrano19"/>.
 
 
 For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
