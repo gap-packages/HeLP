@@ -456,9 +456,9 @@ DeclareGlobalFunction( "HeLP_WagnerTest" );
 
 #! @Description
 #!  For a list of possible partial augmentations, this function calculates representatives of each orbit of the action of the automorphism group of $G$
-#!  on them.  The first two mandatory arguments are an ordinary character table <A>C</A> (with an underlying group or ) and the order <A>k</A> for which the partial augmentations
-#!  should be filtered with respect to the action of the automorphism group of $G$.  If as third argument a lisrt of partial augmentations is given,
-#!  then these will be used, otherwise the partial augmentations that are stored in <K>HeLP_sol[k]</K> are used.
+#!  on them.  The first two mandatory arguments are an ordinary character table <A>C</A> (with an underlying group or Identifier) and the order <A>k</A> for which the partial augmentations
+#!  should be filtered with respect to the action of the automorphism group of $G$.  If as third argument a list of partial augmentations is given,
+#!  then this will be used, otherwise the partial augmentations that are stored in <K>HeLP_sol[k]</K> are used.
 #! @Arguments C, k [, list_paraug]
 #! @Returns List of admissible partial augmentations
 DeclareGlobalFunction( "HeLP_AutomorphismOrbits" );
@@ -471,7 +471,7 @@ DeclareGlobalFunction( "HeLP_AutomorphismOrbits" );
 #! @Description
 #!  This function prints the possible solutions in a pretty way.  If a positive integer <A>k</A> as argument is given, then it prints the
 #!  admissible partial augmentations of units of order <A>k</A>, if they are already calculated.  If no argument is given, the 
-#!  function prints information on all orders for which there are already informations.
+#!  function prints information on all orders for which there is already information.
 #! @Arguments [k]
 #! @Returns nothing
 DeclareGlobalFunction( "HeLP_PrintSolution" );

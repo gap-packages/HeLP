@@ -12,15 +12,17 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  element of the unit group of <M>\mathbb{Z}G</M> is called a torsion 
  element, if it has finite order. <P/>
 
- A long standing conjecture of H.J. Zassenhaus asserts that every
+ When the first versions of this package were published in 2015-2017 
+ a long standing conjecture of H.J. Zassenhaus asserted that every
  normalized torsion unit of <M>\mathbb{Z}G</M> is conjugate within 
  <M>\mathbb{Q}G</M> ("rationally conjugate") to an element of <M>G</M>, see
- <Cite Key="Zas"/> or <Cite Key="SehgalBook2"/>, Section 37.  This is the first 
+ <Cite Key="Zas"/> or <Cite Key="SehgalBook2"/>, Section 37.  This was the first 
  of his three famous conjectures about integral group rings and the
- only one which is nowadays still open, hence it is referred to as
- the Zassenhaus Conjecture (ZC).  This conjecture asserts that the
- torsion part of the units of <M>\mathbb{Z}G</M> is as far
- determined by <M>G</M> as possible. <P/>
+ only one which remained open at the time, hence it is referred to as
+ the Zassenhaus Conjecture (ZC).  
+
+ In October 2017 counterexamples to the Zassenhaus Conjecture were found by
+ F. Eisele and L. Margolis <Cite Key="EiMa18"/>.
 
  Considering the difficulty of the problem W. Kimmerle raised the
  question, whether the Prime Graph of the normalized units of 
@@ -128,8 +130,10 @@ There is also the concept of $(s,t)$-constant characters, being constant on both
 
 
 @Section Known results about the Zassenhaus Conjecture and the Prime Graph Question
+
+A survey on topics touched on by this package has been written in 2018 <Cite Key="MadRSurvey"/>. The counterexamples to the Zassenhaus Conjecture are of the form $(C_{pq} \times C_{pq}) \rtimes A$ where $p$ and $q$ are certain primes and $A$ is an abelian group with a specified action <Cite Key="EiMa18"/>. 
  
-At the moment as this documentation was written, to the best of our knowledge, the following results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
+In December 2019, to the best of our knowledge, the following positive results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
 For the Zassenhaus Conjecture only the following reduction is available: <P/><P/>
 **Theorem:** Assume the Zassenhaus Conjecture holds for a group $G$. Then (ZC) holds for $G \times C_2$ <Cite Key="HoefertKimmerle"/>, Corollary 3.3, and $G \times \Pi$, where $\Pi$ denotes a nilpotent group of order prime to the order of $G$ <Cite Key="HertweckEdinb"/>, Proposition 8.1.<P/>
 With this reductions in mind the Zassenhaus Conjecture is known for:
@@ -138,15 +142,21 @@ With this reductions in mind the Zassenhaus Conjecture is known for:
 * Groups containing a normal Sylow subgroup with abelian complement <Cite Key="HertweckColloq"/>,
 * Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
 * Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
+* Groups with an abelian normal subgroup of index 2 <Cite Key="LutharPassi1992"/>,
+* Some more special classes of metabelian groups <Cite Key="MargolisdelRioCW1"/> and <Cite Key="MargolisdelRioCW3"/>,
+* Direct products of an abelian group and a Frobenius group with complement of odd order <Cite Key="BaechleKimmerleSerrano18"/>,
 * All groups of order up to 143 <Cite Key="BaHeKoMaSi"/>, 
-* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>.
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>,
+* For the following non-solvable and non-simple groups: $S_5$ <Cite Key="HertweckBrauer"/>, $\operatorname{GL}(2,5)$ and the covering group of $S_5$ <Cite Key="BovdiHertweck"/> and the groups $\operatorname{SL}(2,p)$ and $\operatorname{SL}(2,p^2)$ for any prime $p$ <Cite Key="delRioSerrano19"/>.
+
 
 For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
 **Theorem:** Assume the Prime Graph Question holds for all almost simple images of a group $G$. Then (PQ) also holds for $G.$<P/>
 Here a group $G$ is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group $S$. I.e. $Inn(S) \leq G \leq Aut(S).$ Keeping this reduction in mind (PQ) is known for:
 * Solvable groups <Cite Key="KimmiPQ"/>,
+* Groups whose socle is isomorphic to an alternating group, <Cite Key="LP"/><Cite Key="HerA6"/><Cite Key="SalimA7A8"/><Cite Key="SalimA9A10"/><Cite Key="BaMaM10"/><Cite Key="BaCa"/><Cite Key="BaMaAn"/>,
 * Groups whose socle is isomorphic to a group $PSL(2,p)$ or $PSL(2,p^2)$, where $p$ denotes a prime, <Cite Key="HertweckBrauer"/>, <Cite Key="BaMa4prI"/>.
-* Half of the sporadic simple groups and their automorphism groups; for an overview see <Cite Key="KonovalovKimmiStAndrews"/>,
-* Groups whose socle is isomorphic to an alternating group of degree at most 17, <Cite Key="SalimA7A8"/> <Cite Key="SalimA9A10"/><Cite Key="BaCa"/>, 
-* Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)
-* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/><Cite Key="BaMa4prII"/>.
+* A group with sporadic simple socle which is not the O'Nan group or the Monster <Cite Key="KonovalovM11"/><Cite Key="KonovalovMcL"/><Cite Key="BovdiKonovalovM12"/><Cite Key="BovdiKonovalovConway"/><Cite Key="BovdiKonovalovSuz"/><Cite Key="BovdiKonovalovM23"/><Cite Key="BovdiKonovalovHe"/><Cite Key="BJK"/><Cite Key="BovdiKonovalovM24"/><Cite Key="BovdiKonovalovRu"/><Cite Key="KonovalovM22"/> <Cite Key="BKHS"/><Cite Key="KonovalovKimmiStAndrews"/><Cite Key="MargolisConway"/><Cite Key="BaMaAn"/><Cite Key="CaMaBrauerTree"/>,
+* Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.
+* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/><Cite Key="BaMa4prII"/>,
+* Many groups from the GAP character table library <Cite Key="CaMaBrauerTree"/>.

@@ -82,7 +82,7 @@ HeLP can detect that the character tables belong to the same group, if they are 
 are tables of the same group from the ATLAS and their InfoText begins with "origin: ATLAS of finite groups" (which is usually the case for ATLAS tables).
 If the program can verify that the character table which is used at the current call of a function belongs to the 
 same group as in the previous call of a function, the solutions stored in <K>HeLP_sol</K> are kept. 
-If the character table belongs to another group or it can not be made sure that the character tabel belongs to the same group,
+If the character table belongs to another group or it can not be made sure that the character table belongs to the same group,
 <K>HeLP_sol</K> is reset to the initial value <K>[ [ [1] ] ]</K> representing the trivial solution for units of order $1$.<P/>
 Not reseting <K>HeLP_sol</K> can also be achieved using <Ref Func='HeLP_ChangeCharKeepSols'/>. 
 However, caution should be exercised when using this command since it may manipulate <K>HeLP_sol</K> into something meaningless.
