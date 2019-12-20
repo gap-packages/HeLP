@@ -5,53 +5,92 @@
   [[20XAvi[120X]  [16XAvis,  D.[116X,  [17Xlrslib  --  reverse  search  vertex  enumeration program[117X,
   {A}vailable at \url{http://cgm.cs.mcgill.ca/~avis/C/lrs.html}.
   
-  [[20XBC15[120X]  [16XB\"achle, A. and Caicedo, M.[116X, [17XOn the Prime Graph Question for Almost
-  Simple      Groups      with     an     Alternatin     Socle[117X,     [18XSubmitted,
-  \href{http://arxiv.org/abs/1510.04598}{\nolinkurl{arXiv:1510.04598
-  [math.RT]}}[118X (2015), ((11 pages)).
+  [[20XBC17[120X]  [16XB\"achle, A. and Caicedo, M.[116X, [17XOn the prime graph question for almost
+  simple groups with an alternating socle[117X, [18XInternat. J. Algebra Comput.[118X, [19X27[119X, 3
+  (2017), 333--347.
+  
+  [[20XBGK09[120X]  [16XBovdi,  V.  A.,  Grishkov,  A.  N.  and  Konovalov, A. B.[116X, [17XKimmerle
+  conjecture  for  the Held and O'Nan sporadic simple groups[117X, [18XSci. Math. Jpn.[118X,
+  [19X69[119X, 3 (2009), 353--361.
   
   [[20XBH08[120X]  [16XBovdi,  V.  A.  and  Hertweck, M.[116X, [17XZassenhaus conjecture for central
   extensions of S_5[117X, [18XJ. Group Theory[118X, [19X11[119X, 1 (2008), 63--74.
   
-  [[20XBHK+16[120X]  [16XB\"achle,  A.,  Herman, A., Konovalov, A., Margolis, L. and Singh,
-  G.[116X,  [17XThe  status  of  the  Zassenhaus conjecture for small groups[117X, [18XSubmitted[118X
-  (2016),                              ((10                             pages,
-  \href{https://arxiv.org/abs/1609.00042}{\nolinkurl{arXiv:1609.00042
-  [math.RA]}})).
+  [[20XBHK+18[120X]  [16XB\"{a}chle, A., Herman, A., Konovalov, A., Margolis, L. and Singh,
+  G.[116X,  [17XThe  status  of the Zassenhaus conjecture for small groups[117X, [18XExp. Math.[118X,
+  [19X27[119X, 4 (2018), 431--436.
   
   [[20XBIR+[120X]  [16XBruns,  W.,  Ichim,  B.,  R\"omer,  T.,  Sieg,  R.  and S\"oger, C.[116X,
   [17XNormaliz.  Algorithms  for  rational  cones and affine monoids[117X, Available at
   \url{http://normaliz.uos.de}.
   
-  [[20XBK07[120X]  [16XBovdi,  V.  A.  and  Konovalov,  A.  B.[116X,  [17XIntegral group ring of the
+  [[20XBJK11[120X]  [16XBovdi,  V.  A.,  Jespers, E. and Konovalov, A. B.[116X, [17XTorsion units in
+  integral  group  rings  of Janko simple groups[117X, [18XMath. Comp.[118X, [19X80[119X, 273 (2011),
+  593--615.
+  
+  [[20XBK07a[120X]  [16XBovdi, V. A. and Konovalov, A. B.[116X, [17XIntegral group ring of the first
+  Mathieu  simple  group[117X,  in Groups St. Andrews 2005. Vol. 1, Cambridge Univ.
+  Press, Cambridge, London Math. Soc. Lecture Note Ser., [19X339[119X (2007), 237--245.
+  
+  [[20XBK07b[120X]  [16XBovdi,  V.  A.  and  Konovalov,  A.  B.[116X, [17XIntegral group ring of the
   McLaughlin simple group[117X, [18XAlgebra Discrete Math.[118X, 2 (2007), 43--53.
+  
+  [[20XBK08[120X] [16XBovdi, V. A. and Konovalov, A. B.[116X, [17XIntegral group ring of the Mathieu
+  simple group M_23[117X, [18XComm. Algebra[118X, [19X36[119X, 7 (2008), 2670--2680.
+  
+  [[20XBK09[120X]  [16XBovdi,  V.  A. and Konovalov, A. B.[116X, [17XIntegral group ring of Rudvalis
+  simple group[117X, [18XUkra\"\i n. Mat. Zh.[118X, [19X61[119X, 1 (2009), 3--13.
   
   [[20XBK10[120X]  [16XBovdi,  V.  A. and Konovalov, A. B.[116X, [17XTorsion units in integral group
   ring  of  Higman-Sims simple group[117X, [18XStudia Sci. Math. Hungar.[118X, [19X47[119X, 1 (2010),
   1--11.
   
-  [[20XBM14[120X] [16XB\"achle, A. and Margolis, L.[116X, [17XRational conjugacy of torsion units in
-  integral  group rings of non-solvable groups[117X, [18XAccepted in Proc. Edinb. Math.
-  Soc.,       \href{http://arxiv.org/abs/1305.7419}{\nolinkurl{arXiv:1305.7419
-  [math.RT]}}[118X (2014), ((22 pages)).
+  [[20XBK12[120X] [16XBovdi, V. A. and Konovalov, A. B.[116X, [17XIntegral group ring of the Mathieu
+  simple group M_24[117X, [18XJ. Algebra Appl.[118X, [19X11[119X, 1 (2012), 1250016, 10.
   
-  [[20XBM15[120X]  [16XB{\"a}chle,  A.  and  Margolis, L.[116X, [17XHeLP -- A \textsfGAP-package for
-  torsion  units  in  integral  group  rings[117X,  [18XSubmitted[118X  (2015),  ((7  pages,
-  \href{http://arxiv.org/abs/1507.08174}{\nolinkurl{arXiv:1507.08174
-  [math.RT]}})).
+  [[20XBKL08[120X]  [16XBovdi,  V.  A.,  Konovalov,  A. B. and Linton, S.[116X, [17XTorsion units in
+  integral  group ring of the Mathieu simple group M_22[117X, [18XLMS J. Comput. Math.[118X,
+  [19X11[119X (2008), 28--39.
   
-  [[20XBM16a[120X]  [16XB\"achle,  A.  and  Margolis,  L.[116X,  [17XOn the Prime Graph Question for
-  Integral  Group  Rings  of 4-primary groups I[117X, [18XSubmitted[118X (2016), ((33 pages,
-  \href{http://arxiv.org/abs/1601.05689}{\nolinkurl{arXiv:1601.05689
-  [math.RT]}})).
+  [[20XBKL11[120X]  [16XBovdi,  V.  A.,  Konovalov,  A. B. and Linton, S.[116X, [17XTorsion units in
+  integral  group rings of Conway simple groups[117X, [18XInternat. J. Algebra Comput.[118X,
+  [19X21[119X, 4 (2011), 615--634.
   
-  [[20XBM16b[120X]  [16XB\"achle,  A.  and  Margolis,  L.[116X,  [17XOn the Prime Graph Question for
-  Integral  Group  Rings of 4-primary groups II[117X, [18XSubmitted[118X (2016), ((17 pages,
-  \href{https://arxiv.org/abs/1606.01506}{\nolinkurl{arXiv:1606.01506
-  [math.RT]}})).
+  [[20XBKM08[120X]  [16XBovdi, V. A., Konovalov, A. B. and Marcos, E. d. N.[116X, [17XIntegral group
+  ring  of  the  Suzuki  sporadic  simple group[117X, [18XPubl. Math. Debrecen[118X, [19X72[119X, 3-4
+  (2008), 487--503.
+  
+  [[20XBKS07[120X]  [16XBovdi,  V.  A.,  Konovalov, A. B. and Siciliano, S.[116X, [17XIntegral group
+  ring  of  the Mathieu simple group M_12[117X, [18XRend. Circ. Mat. Palermo (2)[118X, [19X56[119X, 1
+  (2007), 125--136.
+  
+  [[20XBKS18[120X]  [16XB\"achle, A., Kimmerle, W. and Serrano, M.[116X, [17XOn the first Zassenhaus
+  conjecture and direct products[117X, [18XCan. J. Math. (to appear)[118X (2018), 1--17.
+  
+  [[20XBM17a[120X]  [16XB\"achle,  A.  and  Margolis,  L.[116X,  [17XOn the prime graph question for
+  integral  group  rings  of 4-primary groups I[117X, [18XInternat. J. Algebra Comput.[118X,
+  [19X27[119X, 6 (2017), 731--767.
+  
+  [[20XBM17b[120X]  [16XB\"achle,  A. and Margolis, L.[116X, [17XRational conjugacy of torsion units
+  in integral group rings of non-solvable groups[117X, [18XProc. Edinb. Math. Soc. (2)[118X,
+  [19X60[119X, 4 (2017), 813--830.
+  
+  [[20XBM18[120X]  [16XB\"achle, A. and Margolis, L.[116X, [17XHeLP: a GAP package for torsion units
+  in integral group rings[117X, [18XJ. Softw. Algebra Geom.[118X, [19X8[119X (2018), 1--9.
+  
+  [[20XBM19a[120X] [16XB\"{a}chle, A. and Margolis, L.[116X, [17XAn application of blocks to torsion
+  units in group rings[117X, [18XProc. Amer. Math. Soc.[118X, [19X147[119X, 10 (2019), 4221--4231.
+  
+  [[20XBM19b[120X]  [16XB\"{a}chle,  A.  and  Margolis, L.[116X, [17XOn the prime graph question for
+  integral  group rings of 4-primary groups II[117X, [18XAlgebr. Represent. Theory[118X, [19X22[119X,
+  2 (2019), 437--457.
   
   [[20XCL65[120X]  [16XCohn, J. A. and Livingstone, D.[116X, [17XOn the structure of group algebras.
   I[117X, [18XCanad. J. Math.[118X, [19X17[119X (1965), 583--593.
+  
+  [[20XCM19[120X] [16XCaicedo, M. and Margolis, L.[116X, [17XOrders of units in integral group rings
+  and  blocks of defect 1[117X, [18Xpreprint, arxiv.org/abs/arXiv:1906.03570[118X (2019), 26
+  pages.
   
   [[20XCMdR13[120X]  [16XCaicedo,  M.,  Margolis,  L.  and  del  R{\'{\i}}o, {.[116X, [17XZassenhaus
   conjecture  for  cyclic-by-abelian  groups[117X,  [18XJ.  Lond. Math. Soc. (2)[118X, [19X88[119X, 1
@@ -61,6 +100,13 @@
   I[117X,  John  Wiley  \&  Sons,  Inc.,  New  York, Wiley Classics Library (1990),
   xxiv+819  pages, ((With applications to finite groups and orders, Reprint of
   the 1981 original, A Wiley-Interscience Publication)).
+  
+  [[20XdRS19[120X]  [16Xdel  R\'{\i}o, \. and Serrano, M.[116X, [17XZassenhaus conjecture on torsion
+  units  holds  for  SL(2,p)  and  SL(2,p^2)[117X,  [18XJ.  Group Theory[118X, [19X22[119X, 5 (2019),
+  953--974.
+  
+  [[20XEM18[120X] [16XEisele, F. and Margolis, L.[116X, [17XA counterexample to the first Zassenhaus
+  conjecture[117X, [18XAdv. Math.[118X, [19X339[119X (2018), 599--641.
   
   [[20XGil13[120X]  [16XGildea, J.[116X, [17XZassenhaus conjecture for integral group ring of simple
   linear groups[117X, [18XJ. Algebra Appl.[118X, [19X12[119X, 6 (2013), 1350016, 10.
@@ -104,11 +150,25 @@
   [[20XLP89[120X]  [16XLuthar,  I.  S.  and Passi, I. B. S.[116X, [17XZassenhaus conjecture for A_5[117X,
   [18XProc. Indian Acad. Sci. Math. Sci.[118X, [19X99[119X, 1 (1989), 1--5.
   
-  [[20XMdRS16[120X]  [16XMargolis,  L.,  del  R{\'{\i}}o,  {.  and  Serrano, M.[116X, [17XZassenhaus
-  Conjecture  on  torsion units holds for PSL(2,p) with p a Fermat or Mersenne
-  prime[117X,            [18XSubmitted[118X            (2016),           32           pages,
-  \href{https://arxiv.org/abs/1608.05797}{\nolinkurl{arXiv:1608.05797
-  [math.RA]}}.
+  [[20XLP92[120X]  [16XLuthar,  I.  S.  and  Passi, I. B. S.[116X, [17XTorsion units in matrix group
+  rings[117X, [18XComm. Algebra[118X, [19X20[119X, 4 (1992), 1223--1228.
+  
+  [[20XMar19[120X]  [16XMargolis,  L.[116X, [17XOn the prime graph question for integral group rings
+  of Conway simple groups[117X, [18XJ. Symbolic Comput.[118X, [19X95[119X (2019), 162--176.
+  
+  [[20XMdR18[120X]  [16XMargolis, L. and del R\'{\i}o, \.[116X, [17XFinite Subgroups of Group Rings:
+  A survey[117X, [18Xpreprint, arxiv.org/abs/arXiv:1809.00718[118X (2018), 23 pages.
+  
+  [[20XMdR19[120X]  [16XMargolis,  L.  and  del  R\'{\i}o,  \.[116X, [17XPartial augmentations power
+  property:  a  Zassenhaus  conjecture related problem[117X, [18XJ. Pure Appl. Algebra[118X,
+  [19X223[119X, 9 (2019), 4089--4101.
+  
+  [[20XMdRS19[120X]  [16XMargolis,  L.,  del  R\'{\i}o,  \.  and  Serrano,  M.[116X,  [17XZassenhaus
+  conjecture  on  torsion units holds for PSL(2,p) with p a Fermat or Mersenne
+  prime[117X, [18XJ. Algebra[118X, [19X531[119X (2019), 320--335.
+  
+  [[20XMR18[120X]  [16XMargolis,  L.  and R{\'i}o, {. d.[116X, [17XCliff--Weiss inequalities and the
+  Zassenhaus Conjecture[117X, [18XJ. Algebra[118X, [19X507[119X (2018), 292--319.
   
   [[20XMRSW87[120X]  [16XMarciniak, Z., Ritter, J., Sehgal, S. and Weiss, A.[116X, [17XTorsion units
   in  integral  group  rings  of some metabelian groups. II[117X, [18XJournal of Number

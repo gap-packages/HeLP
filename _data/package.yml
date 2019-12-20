@@ -1,6 +1,6 @@
 name: HeLP
-version: 3.4
-date: 2018-11-20
+version: 3.5
+date: 2019-12-20
 description: |
     Hertweck-Luthar-Passi method.
 
@@ -28,6 +28,9 @@ needed-pkgs:
     - name: "CTblLib"
       version: ">= 1.2.2"
       url: "http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib"
+    - name: "atlasrep"
+      version: ">= 1.5"
+      url: "http://www.math.rwth-aachen.de/~Thomas.Breuer/atlasrep"
     - name: "NormalizInterface"
       version: ">= 0.9.6"
       url: "https://gap-packages.github.io/NormalizInterface"
@@ -38,7 +41,7 @@ packageinfo: https://gap-packages.github.io/HeLP/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/HeLP/releases/download/v3.4/HeLP-3.4.tar.gz
+      url: https://github.com/gap-packages/HeLP/releases/download/v3.5/HeLP-3.5.tar.gz
 
 abstract: |
     <span class="pkgname">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.
@@ -50,27 +53,27 @@ keywords: |
     HeLP method, torsion units, rational conjugacy, Zassenhaus Conjecture, Prime Graph Question.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BM18</span>]   <b class='BibAuthor'>Bächle, A. and Margolis, L.</b>,
+    [<span class='BibKey'>BM19</span>]   <b class='BibAuthor'>Bächle, A. and Margolis, L.</b>,
      <i class='BibTitle'>HeLP, Hertweck-Luthar-Passi method.,
-             Version 3.4</i>
-     (<span class='BibYear'>2018</span>)<br />
+             Version 3.5</i>
+     (<span class='BibYear'>2019</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/HeLP">https://gap-packages.github.io/HeLP</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ HeLP3.4,
+    @misc{ HeLP3.5,
       author =           {B{\"a}chle, A. and Margolis, L.},
-      title =            {{HeLP}, Hertweck-Luthar-Passi method., {V}ersion 3.4},
-      month =            {Nov},
-      year =             {2018},
+      title =            {{HeLP}, Hertweck-Luthar-Passi method., {V}ersion 3.5},
+      month =            {Dec},
+      year =             {2019},
       note =             {GAP package},
       howpublished =     {\href            {https://gap-packages.github.io/HeLP}
                           {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{HeLP}}},
       keywords =         {HeLP   method;   torsion  units;  rational  conjugacy;
                           Zassenhaus Conjecture; Prime Graph Question},
-      printedkey =       {BM18}
+      printedkey =       {BM19}
     }
 

@@ -6,10 +6,10 @@
                         [1X Hertweck-Luthar-Passi method. [101X
   
   
-                                      3.4
+                                      3.5
   
   
-                                20 November 2018
+                                20 December 2019
   
   
                                  Andreas Bächle
@@ -44,13 +44,14 @@
   [33X[0;0Y© 2017 by Andreas Bächle and Leo Margolis[133X
   
   [33X[0;0YThis  package  is  free  software and may be distributed under the terms and
-  conditions of the GNU Public License Version 2.[133X
+  conditions  of  the  GNU  Public  License Version 2, or (at your option) any
+  later version.[133X
   
   
   -------------------------------------------------------
   [1XAcknowledgements[101X
   [33X[0;0YThe  authors  are grateful to Sebastian Gutsche, Christof Söger and Max Horn
-  for  endowing  GAP  with  a 4ti2-Interface and a normlaiz-Interface. We also
+  for  endowing  GAP  with  a 4ti2-Interface and a normaliz-Interface. We also
   would  like to thank Gutsche and Söger for many very helpful discussions. We
   also  want  to  give  credits  to  the  developers of the softwares 4ti2 and
   normaliz.  Thanks  go  to  David  Avis  for writing lrslib and answering our

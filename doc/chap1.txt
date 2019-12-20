@@ -7,7 +7,7 @@
   by  M.  Hertweck  in  [Her07].  These  names also constitute the name of the
   method,  suggested by A. Konovalov: [13XHe[113Xrtweck-[13XL[113Xuthar-[13XP[113Xassi. The theory behind
   the  method is briefly described in Chapter [14X5[114X and also in the survey article
-  [BM15].[133X
+  [BM18].[133X
   
   [33X[0;0YThe package uses the software 4ti2 [tea] and/or normaliz [BIR+] and hence is
   only  properly  working  on  systems  which  have  at  least  one of the two
@@ -19,7 +19,7 @@
   Gutsche,  C.  Söger and M. Horn. The 4ti2-Interface in turn uses the package
   IO,  that  needs  a  C-part  to  be  compiled;  see  the  readme-file or the
   documentation  of  the IO-package for details. The package also provides the
-  possibility  to  use  redund  form  the  lrslib  software  [Avi],  to remove
+  possibility  to  use  redund  from  the  lrslib  software  [Avi],  to remove
   redundant  inequalities  before solving the system, which might speed up the
   computations  significantly  when  4ti2  is  used.  However,  it  is  not  a
   requirement  to  have lrslib installed. If the above mentioned preconditions

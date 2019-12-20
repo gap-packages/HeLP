@@ -3,7 +3,7 @@
   
   [33X[0;0YIn  this  chapter  we give a brief overview of the Zassenhaus Conjecture and
   the  Prime  Graph  Questions  and the techniques used in this package. For a
-  more detailed exposition see [BM15].[133X
+  more detailed exposition see [BM18].[133X
   
   
   [1X5.1 [33X[0;0YThe Zassenhaus Conjecture and the Prime Graph Question[133X[101X
@@ -13,13 +13,16 @@
   units. An element of the unit group of [22XZG[122X is called a torsion element, if it
   has finite order.[133X
   
-  [33X[0;0YA  long standing conjecture of H.J. Zassenhaus asserts that every normalized
+  [33X[0;0YWhen  the  first versions of this package were published in 2015-2017 a long
+  standing  conjecture  of  H.J.  Zassenhaus  asserted  that  every normalized
   torsion  unit  of  [22XZG[122X  is conjugate within [22XQG[122X ("rationally conjugate") to an
-  element  of  [22XG[122X, see [Zas74] or [Seh93], Section 37. This is the first of his
+  element  of [22XG[122X, see [Zas74] or [Seh93], Section 37. This was the first of his
   three  famous  conjectures about integral group rings and the only one which
-  is nowadays still open, hence it is referred to as the Zassenhaus Conjecture
-  (ZC). This conjecture asserts that the torsion part of the units of [22XZG[122X is as
-  far determined by [22XG[122X as possible.[133X
+  remained  open  at  the  time,  hence  it  is  referred to as the Zassenhaus
+  Conjecture (ZC).[133X
+  
+  [33X[0;0YIn  October  2017 counterexamples to the Zassenhaus Conjecture were found by
+  F. Eisele and L. Margolis [EM18].[133X
   
   [33X[0;0YConsidering  the  difficulty of the problem W. Kimmerle raised the question,
   whether  the  Prime  Graph of the normalized units of [22XZG[122X coincides with that
@@ -212,9 +215,14 @@
   [1X5.6  [33X[0;0YKnown  results  about  the  Zassenhaus  Conjecture  and the Prime Graph[101X
   [1XQuestion[133X[101X
   
-  [33X[0;0YAt  the  moment  as  this  documentation  was  written,  to  the best of our
-  knowledge,   the   following  results  were  available  for  the  Zassenhaus
-  Conjecture and the Prime Graph Question:[133X
+  [33X[0;0YA  survey  on  topics  touched  on  by this package has been written in 2018
+  [MdR18].  The  counterexamples  to the Zassenhaus Conjecture are of the form
+  [23X(C_{pq}  \times  C_{pq}) \rtimes A[123X where [23Xp[123X and [23Xq[123X are certain primes and [23XA[123X is
+  an abelian group with a specified action [EM18].[133X
+  
+  [33X[0;0YIn  December  2019,  to  the  best  of our knowledge, the following positive
+  results  were  available  for  the Zassenhaus Conjecture and the Prime Graph
+  Question:[133X
   
   [33X[0;0YFor the Zassenhaus Conjecture only the following reduction is available:[133X
   
@@ -239,13 +247,24 @@
         [23Xp[123X  such  that  [23Xp[123X  is  smaller then any prime divisor of the order of [23XX[123X
         [MRSW87],[133X
   
-  [30X    [33X[0;6YAll groups of order up to 143 [BHK+16],[133X
+  [30X    [33X[0;6YGroups with an abelian normal subgroup of index 2 [LP92],[133X
+  
+  [30X    [33X[0;6YSome more special classes of metabelian groups [MR18] and [MdR19],[133X
+  
+  [30X    [33X[0;6YDirect  products  of  an  abelian  group  and  a  Frobenius group with
+        complement of odd order [BKS18],[133X
+  
+  [30X    [33X[0;6YAll groups of order up to 143 [BHK+18],[133X
   
   [30X    [33X[0;6YThe   non-abelian  simple  groups  [23XA_5[123X  [LP89],  [23XA_6  \simeq  PSL(2,9)[123X
         [Her08c],  [23XPSL(2,7)[123X, [23XPSL(2,11)[123X, [23XPSL(2,13)[123X [Her07], [23XPSL(2,8)[123X, [23XPSL(2,17)[123X
-        [KK15]  [Gil13],  [23XPSL(2,19)[123X,  [23XPSL(2,23)[123X  [BM14], [23XPSL(2,25)[123X, [23XPSL(2,31)[123X,
-        [23XPSL(2,32)[123X  [BM16b]  and  some extensions of these groups. Also for all
-        [23XPSL(2,p)[123X where [23Xp[123X is a fermat or a Mersenne prime [MdRS16].[133X
+        [KK15]  [Gil13],  [23XPSL(2,19)[123X,  [23XPSL(2,23)[123X [BM17b], [23XPSL(2,25)[123X, [23XPSL(2,31)[123X,
+        [23XPSL(2,32)[123X  [BM19b]  and  some extensions of these groups. Also for all
+        [23XPSL(2,p)[123X where [23Xp[123X is a fermat or a Mersenne prime [MdRS19],[133X
+  
+  [30X    [33X[0;6YFor  the  following  non-solvable  and non-simple groups: [23XS_5[123X [Her07],
+        [23XGL(2,5)[123X  and  the  covering group of [23XS_5[123X [BH08] and the groups [23XSL(2,p)[123X
+        and [23XSL(2,p^2)[123X for any prime [23Xp[123X [dRS19].[133X
   
   [33X[0;0YFor  the Prime Graph Question the following strong reduction was obtained in
   [KK15]:[133X
@@ -260,20 +279,24 @@
   
   [30X    [33X[0;6YSolvable groups [Kim06],[133X
   
+  [30X    [33X[0;6YGroups   whose   socle   is   isomorphic   to  an  alternating  group,
+        [LP89][Her08c][Sal11][Sal13][BM17b][BC17][BM19a],[133X
+  
   [30X    [33X[0;6YGroups  whose  socle  is isomorphic to a group [23XPSL(2,p)[123X or [23XPSL(2,p^2)[123X,
-        where [23Xp[123X denotes a prime, [Her07], [BM16a].[133X
+        where [23Xp[123X denotes a prime, [Her07], [BM17a].[133X
   
-  [30X    [33X[0;6YHalf  of the sporadic simple groups and their automorphism groups; for
-        an overview see [KK15],[133X
-  
-  [30X    [33X[0;6YGroups  whose socle is isomorphic to an alternating group of degree at
-        most 17, [Sal11] [Sal13][BC15],[133X
+  [30X    [33X[0;6YA group with sporadic simple socle which is not the O'Nan group or the
+        Monster
+        [BK07a][BK07b][BKS07][BKL11][BKM08][BK08][BGK09][BJK11][BK12][BK09][BKL08]
+        [BK10][KK15][Mar19][BM19a][CM19],[133X
   
   [30X    [33X[0;6YAlmost  simple  groups  whose  order  is  divisible  by  at most three
-        different  primes  [KK15]  and [BM14]. (This implies that it holds for
+        different  primes  [KK15]  and [BM17b]. This implies that it holds for
         all  groups with an order divisible by at most three primes, using the
-        reduction result above.)[133X
+        reduction result above.[133X
   
   [30X    [33X[0;6YMany  almost  simple groups whose order is divisible by four different
-        primes [BM16a][BM16b].[133X
+        primes [BM17a][BM19b],[133X
+  
+  [30X    [33X[0;6YMany groups from the GAP character table library [CM19].[133X
   

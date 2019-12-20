@@ -12,8 +12,9 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.4",
-Date           := "20/11/2018",
+Version        := "3.5",
+Date           := "20/12/2019", # dd/mm/yyyy format
+License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
     Type := "git",
@@ -81,7 +82,13 @@ AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute con
                   
 Dependencies := rec(
   GAP                    := ">=4.8.2",
-  NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
+  NeededOtherPackages    := [
+    ["io", ">=4.2" ],
+    ["4ti2Interface", ">= 2015.04.29"],
+    ["CTblLib", ">= 1.2.2"],
+    ["atlasrep", ">= 1.5"],
+    ["NormalizInterface", ">= 0.9.6"],
+  ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),
@@ -100,11 +107,11 @@ AutoDoc := rec(
         Copyright := Concatenation(
                     "&copyright; 2017 by Andreas Bächle and Leo Margolis<P/>\n\n",
                     "This package is free software and may be distributed under the terms and conditions of the\n",
-                    "GNU Public License Version 2.\n"
+                    "GNU Public License Version 2, or (at your option) any later version.\n"
                 ),
         Acknowledgements := Concatenation(
                     "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
-                    "with a 4ti2-Interface and a normlaiz-Interface.\n",
+                    "with a 4ti2-Interface and a normaliz-Interface.\n",
                     "We also would like to thank Gutsche and Söger for many very helpful discussions.\n",
                     "We also want to give credits to the developers of the softwares 4ti2 and normaliz.\n",
                     "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",

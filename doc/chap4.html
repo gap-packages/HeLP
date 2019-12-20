@@ -44,8 +44,6 @@
 
 <h3>4 <span class="Heading">Extended examples</span></h3>
 
-<p>We will give some more extended examples which are intended to give the user an idea of the behaviour on different inputs, how to use the package more efficently, to use characters not available in libraries and how InfoLevels can be helpful.</p>
-
 <p>We will give some more examples which are intended to give the user an idea of the behavior on different inputs and the variable HeLP_sol. We also give hints how to use the package more efficiently, to use characters not available in libraries and how InfoLevels can be helpful.</p>
 
 <p><a id="X7DEAD03D7811F9FA" name="X7DEAD03D7811F9FA"></a></p>
@@ -124,7 +122,7 @@ s for the powers: 1.
 # the previously calaculated result for order 3 is still there.
 </pre></div>
 
-<p>HeLP can detect that the character tables belong to the same group, if they are identical objects in GAP or if both are tables of the same group from the ATLAS and their InfoText begins with "origin: ATLAS of finite groups" (which is usually the case for ATLAS tables). If the program can verify that the character table which is used at the current call of a function belongs to the same group as in the previous call of a function, the solutions stored in <code class="keyw">HeLP_sol</code> are kept. If the character table belongs to another group or it can not be made sure that the character tabel belongs to the same group, <code class="keyw">HeLP_sol</code> is reset to the initial value <code class="keyw">[ [ [1] ] ]</code> representing the trivial solution for units of order <span class="Math">1</span>.</p>
+<p>HeLP can detect that the character tables belong to the same group, if they are identical objects in GAP or if both are tables of the same group from the ATLAS and their InfoText begins with "origin: ATLAS of finite groups" (which is usually the case for ATLAS tables). If the program can verify that the character table which is used at the current call of a function belongs to the same group as in the previous call of a function, the solutions stored in <code class="keyw">HeLP_sol</code> are kept. If the character table belongs to another group or it can not be made sure that the character table belongs to the same group, <code class="keyw">HeLP_sol</code> is reset to the initial value <code class="keyw">[ [ [1] ] ]</code> representing the trivial solution for units of order <span class="Math">1</span>.</p>
 
 <p>Not reseting <code class="keyw">HeLP_sol</code> can also be achieved using <code class="func">HeLP_ChangeCharKeepSols</code> (<a href="chap3.html#X7BB9009482784E90"><span class="RefLink">3.4-1</span></a>). However, caution should be exercised when using this command since it may manipulate <code class="keyw">HeLP_sol</code> into something meaningless.</p>
 
@@ -469,7 +467,7 @@ ClassFunction( CharacterTable( "L2(49)" ),
 
 <h4>4.6 <span class="Heading">A complete example: (PQ) for the MacLaughlin simple group</span></h4>
 
-<p>This section gives a demonstration of many functions of the package. The goal is to verify the Prime Graph Question for the McLaughlin simple group, which was proved in <a href="chapBib.html#biBKonovalovMcL">[BK07]</a></p>
+<p>This section gives a demonstration of many functions of the package. The goal is to verify the Prime Graph Question for the McLaughlin simple group, which was proved in <a href="chapBib.html#biBKonovalovMcL">[BK07b]</a></p>
 
 
 <div class="example"><pre>

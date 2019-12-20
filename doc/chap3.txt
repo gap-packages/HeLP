@@ -421,10 +421,10 @@
   [33X[0;0YFor  a  list  of  possible  partial  augmentations, this function calculates
   representatives  of  each orbit of the action of the automorphism group of [23XG[123X
   on them. The first two mandatory arguments are an ordinary character table [3XC[103X
-  (with  an  underlying  group  or  )  and  the  order [3Xk[103X for which the partial
-  augmentations  should  be  filtered  with  respect  to  the  action  of  the
-  automorphism   group  of  [23XG[123X.  If  as  third  argument  a  lisrt  of  partial
-  augmentations  is  given,  then  these  will  be used, otherwise the partial
+  (with  an  underlying  group  or  Identifier)  and the order [3Xk[103X for which the
+  partial  augmentations  should be filtered with respect to the action of the
+  automorphism   group   of  [23XG[123X.  If  as  third  argument  a  list  of  partial
+  augmentations  is  given,  then  this  will  be  used, otherwise the partial
   augmentations that are stored in [9XHeLP_sol[k][109X are used.[133X
   
   
@@ -439,7 +439,7 @@
   integer  [3Xk[103X  as  argument  is  given,  then  it prints the admissible partial
   augmentations  of  units  of  order [3Xk[103X, if they are already calculated. If no
   argument  is  given, the function prints information on all orders for which
-  there are already informations.[133X
+  there is already information.[133X
   
   
   [1X3.10 [33X[0;0YEigenvalue multiplicities and character values[133X[101X

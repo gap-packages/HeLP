@@ -47,7 +47,7 @@
 
 <h3>5 <span class="Heading">Background</span></h3>
 
-<p>In this chapter we give a brief overview of the Zassenhaus Conjecture and the Prime Graph Questions and the techniques used in this package. For a more detailed exposition see <a href="chapBib_mj.html#biBBaMaHeLPArticle">[BM15]</a>.</p>
+<p>In this chapter we give a brief overview of the Zassenhaus Conjecture and the Prime Graph Questions and the techniques used in this package. For a more detailed exposition see <a href="chapBib_mj.html#biBBaMaHeLPArticle">[BM18]</a>.</p>
 
 <p><a id="X7CAEB4DF8506EBF9" name="X7CAEB4DF8506EBF9"></a></p>
 
@@ -55,7 +55,9 @@
 
 <p>Let <span class="SimpleMath">\(G\)</span> be a finite group and let <span class="SimpleMath">\(\mathbb{Z}G\)</span> denote its integral group ring. Let <span class="SimpleMath">\(\mathrm{V}(\mathbb{Z}G)\)</span> be the group of units of augmentation one, aka. normalized units. An element of the unit group of <span class="SimpleMath">\(\mathbb{Z}G\)</span> is called a torsion element, if it has finite order.</p>
 
-<p>A long standing conjecture of H.J. Zassenhaus asserts that every normalized torsion unit of <span class="SimpleMath">\(\mathbb{Z}G\)</span> is conjugate within <span class="SimpleMath">\(\mathbb{Q}G\)</span> ("rationally conjugate") to an element of <span class="SimpleMath">\(G\)</span>, see <a href="chapBib_mj.html#biBZas">[Zas74]</a> or <a href="chapBib_mj.html#biBSehgalBook2">[Seh93]</a>, Section 37. This is the first of his three famous conjectures about integral group rings and the only one which is nowadays still open, hence it is referred to as the Zassenhaus Conjecture (ZC). This conjecture asserts that the torsion part of the units of <span class="SimpleMath">\(\mathbb{Z}G\)</span> is as far determined by <span class="SimpleMath">\(G\)</span> as possible.</p>
+<p>When the first versions of this package were published in 2015-2017 a long standing conjecture of H.J. Zassenhaus asserted that every normalized torsion unit of <span class="SimpleMath">\(\mathbb{Z}G\)</span> is conjugate within <span class="SimpleMath">\(\mathbb{Q}G\)</span> ("rationally conjugate") to an element of <span class="SimpleMath">\(G\)</span>, see <a href="chapBib_mj.html#biBZas">[Zas74]</a> or <a href="chapBib_mj.html#biBSehgalBook2">[Seh93]</a>, Section 37. This was the first of his three famous conjectures about integral group rings and the only one which remained open at the time, hence it is referred to as the Zassenhaus Conjecture (ZC).</p>
+
+<p>In October 2017 counterexamples to the Zassenhaus Conjecture were found by F. Eisele and L. Margolis <a href="chapBib_mj.html#biBEiMa18">[EM18]</a>.</p>
 
 <p>Considering the difficulty of the problem W. Kimmerle raised the question, whether the Prime Graph of the normalized units of <span class="SimpleMath">\(\mathbb{Z}G\)</span> coincides with that one of <span class="SimpleMath">\(G\)</span> (cf. <a href="chapBib_mj.html#biBAri">[Kim07]</a> Problem 21). This is the so called Prime Graph Question (PQ). The prime graph of a group is the loop-free, undirected graph having as vertices those primes <span class="SimpleMath">\(p\)</span>, for which there is an element of order <span class="SimpleMath">\(p\)</span> in the group. Two vertices <span class="SimpleMath">\(p\)</span> and <span class="SimpleMath">\(q\)</span> are joined by an edge, provided there is an element of order <span class="SimpleMath">\(pq\)</span> in the group. In the light of this description, the Prime Graph Question asks, whether there exists an element of order <span class="SimpleMath">\(pq\)</span> in <span class="SimpleMath">\(G\)</span> provided there exists an element of order <span class="SimpleMath">\(pq\)</span> in <span class="SimpleMath">\(\mathrm{V}(\mathbb{Z}G)\)</span> for every pair of primes <span class="SimpleMath">\((p, q)\)</span>.</p>
 
@@ -139,7 +141,9 @@
 
 <h4>5.6 <span class="Heading">Known results about the Zassenhaus Conjecture and the Prime Graph Question</span></h4>
 
-<p>At the moment as this documentation was written, to the best of our knowledge, the following results were available for the Zassenhaus Conjecture and the Prime Graph Question:</p>
+<p>A survey on topics touched on by this package has been written in 2018 <a href="chapBib_mj.html#biBMadRSurvey">[MdR18]</a>. The counterexamples to the Zassenhaus Conjecture are of the form <span class="SimpleMath">\((C_{pq} \times C_{pq}) \rtimes A\)</span> where <span class="SimpleMath">\(p\)</span> and <span class="SimpleMath">\(q\)</span> are certain primes and <span class="SimpleMath">\(A\)</span> is an abelian group with a specified action <a href="chapBib_mj.html#biBEiMa18">[EM18]</a>.</p>
+
+<p>In December 2019, to the best of our knowledge, the following positive results were available for the Zassenhaus Conjecture and the Prime Graph Question:</p>
 
 <p>For the Zassenhaus Conjecture only the following reduction is available:</p>
 
@@ -164,10 +168,22 @@
 <li><p>Groups <span class="SimpleMath">\(X \rtimes A\)</span>, where <span class="SimpleMath">\(X\)</span> and <span class="SimpleMath">\(A\)</span> are abelian and <span class="SimpleMath">\(A\)</span> is of prime order <span class="SimpleMath">\(p\)</span> such that <span class="SimpleMath">\(p\)</span> is smaller then any prime divisor of the order of <span class="SimpleMath">\(X\)</span> <a href="chapBib_mj.html#biBMRSW">[MRSW87]</a>,</p>
 
 </li>
-<li><p>All groups of order up to 143 <a href="chapBib_mj.html#biBBaHeKoMaSi">[BHK+16]</a>,</p>
+<li><p>Groups with an abelian normal subgroup of index 2 <a href="chapBib_mj.html#biBLutharPassi1992">[LP92]</a>,</p>
 
 </li>
-<li><p>The non-abelian simple groups <span class="SimpleMath">\(A_5\)</span> <a href="chapBib_mj.html#biBLP">[LP89]</a>, <span class="SimpleMath">\(A_6 \simeq PSL(2,9)\)</span> <a href="chapBib_mj.html#biBHerA6">[Her08c]</a>, <span class="SimpleMath">\(PSL(2,7)\)</span>, <span class="SimpleMath">\(PSL(2,11)\)</span>, <span class="SimpleMath">\(PSL(2,13)\)</span> <a href="chapBib_mj.html#biBHertweckBrauer">[Her07]</a>, <span class="SimpleMath">\(PSL(2,8)\)</span>, <span class="SimpleMath">\(PSL(2,17)\)</span> <a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a> <a href="chapBib_mj.html#biBGildea">[Gil13]</a>, <span class="SimpleMath">\(PSL(2,19)\)</span>, <span class="SimpleMath">\(PSL(2,23)\)</span> <a href="chapBib_mj.html#biBBaMaM10">[BM14]</a>, <span class="SimpleMath">\(PSL(2,25)\)</span>, <span class="SimpleMath">\(PSL(2,31)\)</span>, <span class="SimpleMath">\(PSL(2,32)\)</span> <a href="chapBib_mj.html#biBBaMa4prII">[BM16b]</a> and some extensions of these groups. Also for all <span class="SimpleMath">\(PSL(2,p)\)</span> where <span class="SimpleMath">\(p\)</span> is a fermat or a Mersenne prime <a href="chapBib_mj.html#biBFermatMersenne">[MdRS16]</a>.</p>
+<li><p>Some more special classes of metabelian groups <a href="chapBib_mj.html#biBMargolisdelRioCW1">[MR18]</a> and <a href="chapBib_mj.html#biBMargolisdelRioCW3">[MdR19]</a>,</p>
+
+</li>
+<li><p>Direct products of an abelian group and a Frobenius group with complement of odd order <a href="chapBib_mj.html#biBBaechleKimmerleSerrano18">[BKS18]</a>,</p>
+
+</li>
+<li><p>All groups of order up to 143 <a href="chapBib_mj.html#biBBaHeKoMaSi">[BHK+18]</a>,</p>
+
+</li>
+<li><p>The non-abelian simple groups <span class="SimpleMath">\(A_5\)</span> <a href="chapBib_mj.html#biBLP">[LP89]</a>, <span class="SimpleMath">\(A_6 \simeq PSL(2,9)\)</span> <a href="chapBib_mj.html#biBHerA6">[Her08c]</a>, <span class="SimpleMath">\(PSL(2,7)\)</span>, <span class="SimpleMath">\(PSL(2,11)\)</span>, <span class="SimpleMath">\(PSL(2,13)\)</span> <a href="chapBib_mj.html#biBHertweckBrauer">[Her07]</a>, <span class="SimpleMath">\(PSL(2,8)\)</span>, <span class="SimpleMath">\(PSL(2,17)\)</span> <a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a> <a href="chapBib_mj.html#biBGildea">[Gil13]</a>, <span class="SimpleMath">\(PSL(2,19)\)</span>, <span class="SimpleMath">\(PSL(2,23)\)</span> <a href="chapBib_mj.html#biBBaMaM10">[BM17b]</a>, <span class="SimpleMath">\(PSL(2,25)\)</span>, <span class="SimpleMath">\(PSL(2,31)\)</span>, <span class="SimpleMath">\(PSL(2,32)\)</span> <a href="chapBib_mj.html#biBBaMa4prII">[BM19b]</a> and some extensions of these groups. Also for all <span class="SimpleMath">\(PSL(2,p)\)</span> where <span class="SimpleMath">\(p\)</span> is a fermat or a Mersenne prime <a href="chapBib_mj.html#biBFermatMersenne">[MdRS19]</a>,</p>
+
+</li>
+<li><p>For the following non-solvable and non-simple groups: <span class="SimpleMath">\(S_5\)</span> <a href="chapBib_mj.html#biBHertweckBrauer">[Her07]</a>, <span class="SimpleMath">\(GL(2,5)\)</span> and the covering group of <span class="SimpleMath">\(S_5\)</span> <a href="chapBib_mj.html#biBBovdiHertweck">[BH08]</a> and the groups <span class="SimpleMath">\(SL(2,p)\)</span> and <span class="SimpleMath">\(SL(2,p^2)\)</span> for any prime <span class="SimpleMath">\(p\)</span> <a href="chapBib_mj.html#biBdelRioSerrano19">[dRS19]</a>.</p>
 
 </li>
 </ul>
@@ -182,19 +198,22 @@
 <li><p>Solvable groups <a href="chapBib_mj.html#biBKimmiPQ">[Kim06]</a>,</p>
 
 </li>
-<li><p>Groups whose socle is isomorphic to a group <span class="SimpleMath">\(PSL(2,p)\)</span> or <span class="SimpleMath">\(PSL(2,p^2)\)</span>, where <span class="SimpleMath">\(p\)</span> denotes a prime, <a href="chapBib_mj.html#biBHertweckBrauer">[Her07]</a>, <a href="chapBib_mj.html#biBBaMa4prI">[BM16a]</a>.</p>
+<li><p>Groups whose socle is isomorphic to an alternating group, <a href="chapBib_mj.html#biBLP">[LP89]</a><a href="chapBib_mj.html#biBHerA6">[Her08c]</a><a href="chapBib_mj.html#biBSalimA7A8">[Sal11]</a><a href="chapBib_mj.html#biBSalimA9A10">[Sal13]</a><a href="chapBib_mj.html#biBBaMaM10">[BM17b]</a><a href="chapBib_mj.html#biBBaCa">[BC17]</a><a href="chapBib_mj.html#biBBaMaAn">[BM19a]</a>,</p>
 
 </li>
-<li><p>Half of the sporadic simple groups and their automorphism groups; for an overview see <a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a>,</p>
+<li><p>Groups whose socle is isomorphic to a group <span class="SimpleMath">\(PSL(2,p)\)</span> or <span class="SimpleMath">\(PSL(2,p^2)\)</span>, where <span class="SimpleMath">\(p\)</span> denotes a prime, <a href="chapBib_mj.html#biBHertweckBrauer">[Her07]</a>, <a href="chapBib_mj.html#biBBaMa4prI">[BM17a]</a>.</p>
 
 </li>
-<li><p>Groups whose socle is isomorphic to an alternating group of degree at most 17, <a href="chapBib_mj.html#biBSalimA7A8">[Sal11]</a> <a href="chapBib_mj.html#biBSalimA9A10">[Sal13]</a><a href="chapBib_mj.html#biBBaCa">[BC15]</a>,</p>
+<li><p>A group with sporadic simple socle which is not the O'Nan group or the Monster <a href="chapBib_mj.html#biBKonovalovM11">[BK07a]</a><a href="chapBib_mj.html#biBKonovalovMcL">[BK07b]</a><a href="chapBib_mj.html#biBBovdiKonovalovM12">[BKS07]</a><a href="chapBib_mj.html#biBBovdiKonovalovConway">[BKL11]</a><a href="chapBib_mj.html#biBBovdiKonovalovSuz">[BKM08]</a><a href="chapBib_mj.html#biBBovdiKonovalovM23">[BK08]</a><a href="chapBib_mj.html#biBBovdiKonovalovHe">[BGK09]</a><a href="chapBib_mj.html#biBBJK">[BJK11]</a><a href="chapBib_mj.html#biBBovdiKonovalovM24">[BK12]</a><a href="chapBib_mj.html#biBBovdiKonovalovRu">[BK09]</a><a href="chapBib_mj.html#biBKonovalovM22">[BKL08]</a> <a href="chapBib_mj.html#biBBKHS">[BK10]</a><a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a><a href="chapBib_mj.html#biBMargolisConway">[Mar19]</a><a href="chapBib_mj.html#biBBaMaAn">[BM19a]</a><a href="chapBib_mj.html#biBCaMaBrauerTree">[CM19]</a>,</p>
 
 </li>
-<li><p>Almost simple groups whose order is divisible by at most three different primes <a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a> and <a href="chapBib_mj.html#biBBaMaM10">[BM14]</a>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)</p>
+<li><p>Almost simple groups whose order is divisible by at most three different primes <a href="chapBib_mj.html#biBKonovalovKimmiStAndrews">[KK15]</a> and <a href="chapBib_mj.html#biBBaMaM10">[BM17b]</a>. This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.</p>
 
 </li>
-<li><p>Many almost simple groups whose order is divisible by four different primes <a href="chapBib_mj.html#biBBaMa4prI">[BM16a]</a><a href="chapBib_mj.html#biBBaMa4prII">[BM16b]</a>.</p>
+<li><p>Many almost simple groups whose order is divisible by four different primes <a href="chapBib_mj.html#biBBaMa4prI">[BM17a]</a><a href="chapBib_mj.html#biBBaMa4prII">[BM19b]</a>,</p>
+
+</li>
+<li><p>Many groups from the GAP character table library <a href="chapBib_mj.html#biBCaMaBrauerTree">[CM19]</a>.</p>
 
 </li>
 </ul>

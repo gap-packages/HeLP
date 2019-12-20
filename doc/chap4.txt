@@ -1,11 +1,6 @@
   
   [1X4 [33X[0;0YExtended examples[133X[101X
   
-  [33X[0;0YWe will give some more extended examples which are intended to give the user
-  an  idea  of  the behaviour on different inputs, how to use the package more
-  efficently,  to use characters not available in libraries and how InfoLevels
-  can be helpful.[133X
-  
   [33X[0;0YWe  will give some more examples which are intended to give the user an idea
   of  the behavior on different inputs and the variable HeLP_sol. We also give
   hints  how  to  use  the  package  more  efficiently,  to use characters not
@@ -103,7 +98,7 @@
   the  character table which is used at the current call of a function belongs
   to  the  same  group  as  in  the previous call of a function, the solutions
   stored in [9XHeLP_sol[109X are kept. If the character table belongs to another group
-  or  it  can  not  be  made sure that the character tabel belongs to the same
+  or  it  can  not  be  made sure that the character table belongs to the same
   group,  [9XHeLP_sol[109X  is reset to the initial value [9X[ [ [1] ] ][109X representing the
   trivial solution for units of order [23X1[123X.[133X
   
@@ -488,7 +483,7 @@
   
   [33X[0;0YThis  section  gives  a  demonstration of many functions of the package. The
   goal  is to verify the Prime Graph Question for the McLaughlin simple group,
-  which was proved in [BK07][133X
+  which was proved in [BK07b][133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XC := CharacterTable("McL");[127X[104X
