@@ -54,7 +54,6 @@
 #! @Returns <K>true</K> if (ZC) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_ZC" );
 #! @InsertChunk ZCExample
-#! @EndSection
 
 
 #! @Section Prime Graph Question
@@ -86,7 +85,6 @@ DeclareGlobalFunction( "HeLP_ZC" );
 #! @Returns <K>true</K> if (PQ) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_PQ" );
 #! @InsertChunk PQExample
-#! @EndSection
 
 
 ####################################
