@@ -13,7 +13,7 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "3.5",
-Date           := "17/12/2019", # dd/mm/yyyy format
+Date           := "20/12/2019", # dd/mm/yyyy format
 License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
