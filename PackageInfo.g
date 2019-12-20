@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.4",
-Date           := "20/11/2018", # dd/mm/yyyy format
+Version        := "3.5",
+Date           := "17/12/2019", # dd/mm/yyyy format
 License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
@@ -82,7 +82,13 @@ AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute con
                   
 Dependencies := rec(
   GAP                    := ">=4.8.2",
-  NeededOtherPackages    := [ ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
+  NeededOtherPackages    := [
+    ["io", ">=4.2" ],
+    ["4ti2Interface", ">= 2015.04.29"],
+    ["CTblLib", ">= 1.2.2"],
+    ["atlasrep", ">= 1.5"],
+    ["NormalizInterface", ">= 0.9.6"],
+  ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),

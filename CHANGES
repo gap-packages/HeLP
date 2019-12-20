@@ -1,3 +1,7 @@
+Changes v3.4 -> v3.5
+
+* Package now dependend on AtlasRep to avoid undeclared variable
+
 Changes v3.3 -> v3.4
 
 * Package migrated to GitHub

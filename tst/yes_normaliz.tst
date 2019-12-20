@@ -35,14 +35,14 @@ gap> HeLP_ZC(G);
 gap> Size(HeLP_sol[4]);
  10
 
+gap> SetInfoLevel(HeLP_Info, 0);
 gap> C1 := CharacterTable(PSL(2,7));;
 gap> HeLP_PQ(C1);
- #I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ]. 
- #I  (PQ) can't be solved, using the given data, for the orders: [ 6 ].
  false
 gap> C2 := CharacterTable("L2(7)");;  
 gap> HeLP_PQ(C2);                  
  true
+gap> SetInfoLevel(HeLP_Info, 1);
 
 gap> C := CharacterTable("L2(49).2_1");;
 gap> HeLP_WithGivenOrder(Irr(C), 7);;

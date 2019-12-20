@@ -18,7 +18,7 @@
  4ti2-Interface and normaliz-Interface written by S. Gutsche, C. Söger and M. Horn. 
  The 4ti2-Interface in turn uses the package IO, that needs a C-part to be compiled;
  see the readme-file or the documentation of the IO-package for details.
- The package also provides the possibility to use redund form the lrslib software <Cite Key="lrslib"/>,
+ The package also provides the possibility to use redund from the lrslib software <Cite Key="lrslib"/>,
  to remove redundant inequalities before solving the system, which might speed up the computations
  significantly when 4ti2 is used.  However, it is not a requirement to have lrslib installed.
  If the above mentioned preconditions are fulfilled, one just has to copy the HeLP-package in the GAP pkg-directory.
