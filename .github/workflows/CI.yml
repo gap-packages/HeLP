@@ -25,11 +25,14 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Install additional dependencies'
         run: sudo apt-get install 4ti2 libboost-all-dev # for NormalizInterface
-      - uses: gap-actions/setup-gap-for-packages@v1
+      - uses: gap-actions/setup-gap@v2
         with:
           GAP_PKGS_TO_BUILD: "io profiling NormalizInterface"
           GAPBRANCH: ${{ matrix.gap-branch }}
-      - uses: gap-actions/run-test-for-packages@v1
+      - uses: gap-actions/build-pkg@v1
+      - uses: gap-actions/run-pkg-tests@v2
+      - uses: gap-actions/process-coverage@v2
+      - uses: codecov/codecov-action@v2
 
   # The documentation job
   manual:
@@ -42,10 +45,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: 'Install additional dependencies'
         run: sudo apt-get install 4ti2 libboost-all-dev # for NormalizInterface
-      - uses: gap-actions/setup-gap-for-packages@v1
+      - uses: gap-actions/setup-gap@v2
         with:
           GAP_PKGS_TO_BUILD: "io profiling NormalizInterface"
-      - uses: gap-actions/compile-documentation-for-packages@v1
+      - uses: gap-actions/build-pkg-docs@v1
         with:
           use-latex: 'true'
       - name: 'Upload documentation'
