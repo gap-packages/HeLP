@@ -2,21 +2,21 @@
 
 @Section Making the HeLP-package run
 #! For all basic functionalities of the HeLP-package (using only the solver normaliz) the standard GAP-installation
-#! should suffice to make everything work: Get the most recent GAP from the <URL Text="GAP-webpage">http://www.gap-system.org/</URL> 
+#! should suffice to make everything work: Get the most recent GAP from the <URL Text="GAP-webpage">https://www.gap-system.org/</URL> 
 #! by following the instructions on the Download-page. Make sure to also run <K>InstPackages.sh</K> 
 #! as explained there. This should install all packages needed to run HeLP. Just start GAP and type
 #! <K>LoadPackage("HeLP");</K>. In GAP 4.8.2 the NormalizInterface has to be updated to version 0.9.6 
 #! or newer which can be obtained from the 
-#! <URL Text="website">http://gap-packages.github.io/NormalizInterface//</URL> of the package.
+#! <URL Text="website">https://gap-packages.github.io/NormalizInterface//</URL> of the package.
 #! For GAP 4.8.3 or newer this should not be necessary anymore.<P/>
 
 #! Here is a checklist what to do, if the package does not work or you also want to use the solver 4ti2:
 #! * Make sure you have sufficiently new versions of the following software: 
-#!   - <URL Text="GAP">http://www.gap-system.org/</URL> (at least 4.8.2)
-#!   - the GAP-package <URL Text="CTblLib">http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/</URL> (at least 1.2.2)
-#!   - the GAP-package <URL Text="IO">http://gap-packages.github.io/io/</URL> (at least 4.2; see also the next bullet point if this package can not be loaded)
+#!   - <URL Text="GAP">https://www.gap-system.org/</URL> (at least 4.8.2)
+#!   - the GAP-package <URL Text="CTblLib">https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/</URL> (at least 1.2.2)
+#!   - the GAP-package <URL Text="IO">https://gap-packages.github.io/io/</URL> (at least 4.2; see also the next bullet point if this package can not be loaded)
 #!   - the GAP-package <URL Text="4ti2Interface">http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/</URL> (at least 2015.04.29; this package needs the IO-package)   <P/>
-#!   - the GAP-package <URL Text="NormalizInterface">http://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6)   <P/>
+#!   - the GAP-package <URL Text="NormalizInterface">https://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6)   <P/>
 #!   
 #!  Usually all these packages should come with a sufficiently recent GAP-installation (4.8.2 or newer)
 #!  and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing
@@ -24,8 +24,8 @@
 #! * The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter
 #!   <K>LoadPackage("IO");</K> after starting GAP. If the result is <K>fail</K> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled.
 #!   For information on installation and in particular on how to compile the C-part, see the
-#!   <URL Text="manual">http://gap-packages.github.io/io/doc/chap0.html</URL> (in particular Chapter 2) or the README-file of that package.<P/>
-#! * The installation of normaliz is possible via the GAP-package <URL Text="NormalizInterface">http://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6).
+#!   <URL Text="manual">https://gap-packages.github.io/io/doc/chap0.html</URL> (in particular Chapter 2) or the README-file of that package.<P/>
+#! * The installation of normaliz is possible via the GAP-package <URL Text="NormalizInterface">https://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6).
 #!   Just access the folder in a terminal and do <K>./build-normaliz.sh; ./configure; make</K>.
 #! * If you want to use 4ti2, please make sure that <URL Text="www.4ti2.de">http://www.4ti2.de</URL> (Version 1.6.5 or newer) is properly installed.
 #!   In case of an error-message "The executable 'zsolve' provided by the software 4ti2 was not found." after typing <K>LoadPackage("HeLP");</K> either the software is not properly installed or
