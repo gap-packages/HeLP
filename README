@@ -26,7 +26,7 @@ of your GAP 4 installation. It creates a subdirectory called `help'.
  The package uses the software 4ti2 <Cite Key="4ti2"/> and/or normaliz and hence is only properly working
  on systems which have at least one of the two installed. normaliz
  may be installed via the GAP-package NormalizInterface,
- see the documentaion of this package for details.
+ see the documentation of this package for details.
  For more information on 4ti2 and to download it, please visit
  <URL Text="www.4ti2.de">http://www.4ti2.de</URL>. 
  To interact with these external softwares the package makes use of the
