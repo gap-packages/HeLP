@@ -4,7 +4,7 @@ In this chapter we give a brief overview of the Zassenhaus Conjecture and
 the Prime Graph Questions and the techniques used in this package. 
 For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
 
-@Section The Zassenhaus Conjecture and the Prime Graph Question
+@Section The Zassenhaus Conjecture and related questions
 
  Let $G$ be a finite group and let <M>\mathbb{Z}G</M> denote its
  integral group ring.  Let <M>\mathrm{V}(\mathbb{Z}G)</M> be the
@@ -12,19 +12,19 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  element of the unit group of <M>\mathbb{Z}G</M> is called a torsion 
  element, if it has finite order. <P/>
 
- When the first versions of this package were published in 2015-2017 
- a long standing conjecture of H.J. Zassenhaus asserted that every
+ A conjecture of H.J. Zassenhaus asserted that every
  normalized torsion unit of <M>\mathbb{Z}G</M> is conjugate within 
  <M>\mathbb{Q}G</M> ("rationally conjugate") to an element of <M>G</M>, see
- <Cite Key="Zas"/> or <Cite Key="SehgalBook2"/>, Section 37.  This was the first 
+ <Cite Key="Zas"/> or <Cite Key="SehgalBook2"/>, Section 37.  This is the first 
  of his three famous conjectures about integral group rings and the
- only one which remained open at the time, hence it is referred to as
- the Zassenhaus Conjecture (ZC).  
+ only one which is was open when the first versions of this package appeared, hence it is referred to as
+ the Zassenhaus Conjecture (ZC).  This conjecture asserts that the
+ torsion part of the units of <M>\mathbb{Z}G</M> is as far
+ determined by <M>G</M> as possible. <P/>
 
- In October 2017 counterexamples to the Zassenhaus Conjecture were found by
- F. Eisele and L. Margolis <Cite Key="EiMa18"/>.
+ Negative solutions to the conjecture were finally found in <Cite Key="EiMa18"/>. <P/>
 
- Considering the difficulty of the problem W. Kimmerle raised the
+ Considering the difficulty of the Zassenhaus Conjecture W. Kimmerle raised the
  question, whether the Prime Graph of the normalized units of 
  <M>\mathbb{Z}G</M> coincides with that one of <M>G</M> 
  (cf. <Cite Key="Ari"/> Problem 21).  This is the
@@ -35,12 +35,25 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  in the group.  In the light of this description, the Prime Graph Question asks,
  whether there exists an element of order $pq$ in <M>G</M> provided there exists an element of order
  $pq$ in <M>\mathrm{V}(\mathbb{Z}G)</M> for every pair of primes $(p, q)$. <P/>
+
+ A question which lies between the Zassenhaus Conjecture and the Prime Graph Question is
+ the Spectrum Problem. It asks, if the orders of elements in <M>G</M> and <M>\mathrm{V}(\mathbb{Z}G)</M>
+ coincide.
  In general, by a result of J. A. Cohn and D. Livingstone <Cite Key="CohnLivingstone"/>,
  Corollary 4.1, and a result of M. Hertweck  <Cite Key="HertweckSolvable"/>, the
  following is known about the possible orders of torsion units in integral group rings: <P/>
  **Theorem:** The exponents of $\mathrm{V}(\mathbb{Z}G)$ and $G$ coincide. Moreover, if
  $G$ is solvable, any torsion unit in $\mathrm{V}(\mathbb{Z}G)$ has the same order as 
- some element in $G.$
+ some element in $G.$ <P/>
+
+ Finally, a question raised by W. Kimmerle in <Cite Key="Ari"/> asks if any unit of finite order
+ in <M>\mathrm{V}(\mathbb{Z}G)</M> is conjugate in the rational group algebra <M>\mathbb{Q}H</M>
+ to a trivial unit, where <M>H</M> is a finite group containing <M>G</M>. We call this the
+ Kimmerle Problem. This question did not receive much attention while the Zassenhaus Conjecture 
+ was still open. It can be shown however that the methods used in <Cite Key="EiMa18"/> to construct
+ counterexamples to the Zassenhaus Conjecture can not yield negative solutions to the Kimmerle Problem.
+ In this sense it remains the strongest statement about torsion units in integral group rings of finite
+ group which could still be true.
 
 @Section Partial augmentations and the structure of HeLP_sol
 
@@ -48,7 +61,7 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  the conjugacy class of <M>x</M> in <M>G</M>.  The partial augmentation with
  respect to <M>x</M> or rather the conjugacy class of <M>x</M> is the map
  <M>\varepsilon_x </M> sending an element
- <M>u </M> to the sum of the coefficients at elements of
+ <M>u</M> to the sum of the coefficients at elements of
  the conjugacy class of <M>x</M>, i.e. 
  $$ \varepsilon_x \colon \mathbb{Z}G \to \mathbb{Z}, \ \ \sum\limits_{g \in G} z_g g \mapsto \sum\limits_{g \in x^G} z_g. $$ 
  
@@ -78,6 +91,31 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  of elements of order 2 while 2 and 1 are the partial augmentations at the two classes of elements of order 4 respectively,
  and so on.  Note that this format provides all necessary information on the partial augmentations
  of <M>u</M> and its powers by the above restrictions on the partial augmentations.<P/>
+
+ From version 4 onwards this package incorporates more theoretical restrictions on partial augmentations. More precisely,
+ it uses more results about vanishing partial augmentations of normalized torsion units.
+ One is the more general form of the Berman-Higman theorem, namely that if <M>z</M> is a central element in <M>G</M> and
+ <M>u \in \mathrm{V}(\mathbb{Z}G)</M> is a torsion unit different from <M>z</M>, then <M>\varepsilon_z(u)= 0</M>.
+ Moreover, two more elaborate criteria derived from the work of Hertweck are used:<P/>
+ **Theorem:**(<Cite Key="HertweckSolvable"/>, Proposition 2; <Cite Key="HertweckEdinb"/>, Lemma 2.2;
+ <Cite Key="MargolisHertweck"/>) Let <M>u \in \mathrm{V}(\mathbb{Z}G)</M> be of finite order and <M>\varepsilon_g(u) \neq 0</M>
+ for some <M>g \in G</M>. 
+ Suppose that <M>u</M> has smaller order  modulo some normal <M>p</M>-subgroup <M>N</M> of <M>G</M>. 
+ Then the <M>p</M>-part of <M>g</M> has the same order as the <M>p</M>-part of <M>u</M>. Furthermore, if the <M>p</M>-part
+ of <M>u</M> is <M>p</M>-adically conjugate to an element in <M>G</M>, then the <M>p</M>-part of <M>g</M> is even
+ conjugate in <M>G</M> to the <M>p</M>-part of <M>u</M>. Such a <M>p</M>-adic conjugation holds, if the order of <M>u</M>
+ modulo a normal <M>p</M>-subgroup of <M>G</M> is not divisible by <M>p</M>, i.e. the $p$-part of $u$ is trivial modulo a normal $p$-subgroup. <P/>
+ To apply this theorem, some knowledge on the normal subgroups of <M>G</M> is necessary. Hence it is only applied in the
+ package when the character table one works with possesses an underlying group.<P/> 
+
+ It is clear the Prime Graph Question or Spectrum Problem can be studied using the HeLP-method (if no possible partial augmentations exist
+ for a given order neither does a unit of that order) and the possibility to do this for the Zassenhaus Conjecture is 
+ given via the above theorem of Marciniak-Ritter-Sehgal-Weiss. For the Kimmerle Problem a somehow similar result states
+ that a unit $u \in \mathrm{V}(\mathbb{Z}G)$ of order $k$ is conjugate in $\mathbb{Q}H$, for $H$ some group containing $G$, to a trivial
+ unit if and only if the sum of the coefficients of $u$ at elements of order $k$ equals $1$ and the sum of coefficients of elements
+ of order $m$ equals $0$ for any $m \neq k$ <Cite Key="MargolisDelRioPAP"/>, Proposition 2.1. This shows that the Kimmerle Problem is in fact equvivalent to an earlier
+ question of A. Bovdi and hence results on Bovdi's Problem can also be applied.<P/>
+
  For more details on when the variable <K>HeLP_sol</K> is modified or reset and how to influence this behavior see Section <Ref Sect='Chapter_Extended_examples_Section_The_behavior_of_the_variable_HeLP_sol'/> and <Ref Func='HeLP_ChangeCharKeepSols'/>.
 
 
@@ -113,7 +151,7 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  This result gives a further restriction on the partial augmentations
  of torsion units. Though the results was actually available before Wagner's work, cf. <Cite Key="BovdiHertweck"/> Remark 6, we named the test
  after him, since he was the first to use the HeLP-method on a computer.
- We included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, 
+ We included it into the functions <Ref Func='HeLP_ZC'/>, <Ref Func='HeLP_PQ'/>, <Ref Func='HeLP_SP'/>, <Ref Func='HeLP_KP'/> 
  <Ref Func='HeLP_AllOrders'/>, <Ref Func='HeLP_AllOrdersPQ'/> and <Ref Func='HeLP_WagnerTest'/> and call it "Wagner test". <P/>
  **Theorem:** For a torsion unit <M>u \in \mathrm{V}(\mathbb{Z}G)</M>, a group element $s$,
  a prime $p$  and a natural number $j$  we have
@@ -125,38 +163,34 @@ For a more detailed exposition see <Cite Key="BaMaHeLPArticle"/>.
  
 @Section s-constant characters
 
-If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one studies the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and A. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
+If one is interested in units of mixed order $s*t$ for two primes $s$ and $t$ (e.g. if one studies the Prime Graph Question) an idea to make the HeLP method more efficient was introduced by V. Bovdi and O. Konovalov in <Cite Key="BKHS"/>, page 4. Assume one has several conjugacy classes of elements of order $s$, and a character taking the same value on all of these classes. Then the coefficient of every of these conjugacy classes in the system of inequalities of this character, which is obtained via the HeLP method, is the same. Also the constant terms of the inequalities do not depend on the partial augmentations of elements of order $s$. Thus for such characters one can reduce the number of variables in the inequalities by replacing all the partial augmentations on classes of elements of order $s$ by their sum. To obtain the formulas for the multiplicities of the HeLP method one does not need the partial augmentations of elements of order $s$. Characters having the above property are called $s$-constant. In this way the existence of elements of order $s*t$ can be excluded in a quite efficient way without doing calculations for elements of order $s$. <P/>
 There is also the concept of $(s,t)$-constant characters, being constant on both, the conjugacy classes of elements of order $s$ and on the conjugacy classes of elements of order $t$. The implementation of this is however not yet part of this package.
 
 
 @Section Known results about the Zassenhaus Conjecture and the Prime Graph Question
-
-A survey on topics touched on by this package has been written in 2018 <Cite Key="MadRSurvey"/>. The counterexamples to the Zassenhaus Conjecture are of the form $(C_{pq} \times C_{pq}) \rtimes A$ where $p$ and $q$ are certain primes and $A$ is an abelian group with a specified action <Cite Key="EiMa18"/>. 
  
-In December 2019, to the best of our knowledge, the following positive results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
+At the moment as this documentation was written, to the best of our knowledge, the following results were available for the Zassenhaus Conjecture and the Prime Graph Question: <P/>
 For the Zassenhaus Conjecture only the following reduction is available: <P/><P/>
-**Theorem:** Assume the Zassenhaus Conjecture holds for a group $G$. Then (ZC) holds for $G \times C_2$ <Cite Key="HoefertKimmerle"/>, Corollary 3.3, and $G \times \Pi$, where $\Pi$ denotes a nilpotent group of order prime to the order of $G$ <Cite Key="HertweckEdinb"/>, Proposition 8.1.<P/>
+**Theorem:** Assume the Zassenhaus Conjecture holds for a group $G$. Then (ZC) holds for $G \times C_2$ <Cite Key="HoefertKimmerle"/>, Corollary 3.3, and $G \times \Pi$, where $\Pi$ denotes a nilpotent group of order prime to the order of $G$ <Cite Key="HertweckEdinb"/>, Proposition 8.1.<P/> It is also known to go over to other types of direct products under certain conditions <Cite Key="BachleKimmerleSerrano"/>.
 With this reductions in mind the Zassenhaus Conjecture is known for:
 * Nilpotent groups <Cite Key="Weiss91"/>,
-* Cyclic-By-Abelian groups <Cite Key="CyclicByAbelian"/>,
+* Cyclic-By-Abelian groups <Cite Key="CyclicByAbelian"/> and some other special cyclic-by-nilpotent groups <Cite Key="CaicedoDelRio20"/>,
 * Groups containing a normal Sylow subgroup with abelian complement <Cite Key="HertweckColloq"/>,
 * Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
 * Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
-* Groups with an abelian normal subgroup of index 2 <Cite Key="LutharPassi1992"/>,
-* Some more special classes of metabelian groups <Cite Key="MargolisdelRioCW1"/> and <Cite Key="MargolisdelRioCW3"/>,
-* Direct products of an abelian group and a Frobenius group with complement of odd order <Cite Key="BaechleKimmerleSerrano18"/>,
 * All groups of order up to 143 <Cite Key="BaHeKoMaSi"/>, 
-* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>,
-* For the following non-solvable and non-simple groups: $S_5$ <Cite Key="HertweckBrauer"/>, $GL(2,5)$ and the covering group of $S_5$ <Cite Key="BovdiHertweck"/> and the groups $SL(2,p)$ and $SL(2,p^2)$ for any prime $p$ <Cite Key="delRioSerrano19"/>.
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>, and $PSL(2,p)$ and $PSL(2,p^2)$ if $p \pm 1$ or $p^2 \pm 1$ is 4 multiplied by a prime <Cite Key="EiseleMargolisDefect1"/>,
+* For special linear groups $SL(2,p)$ and $SL(2,p^2)$ for $p$ a prime <Cite Key="delRioSerrano19"/>.
 
+The only known counterexamples to the conjecture are exhibited in <Cite Key="EiMa18"/>.<P/>
 
 For the Prime Graph Question the following strong reduction was obtained in <Cite Key="KonovalovKimmiStAndrews"/>: <P/>
 **Theorem:** Assume the Prime Graph Question holds for all almost simple images of a group $G$. Then (PQ) also holds for $G.$<P/>
 Here a group $G$ is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group $S$. I.e. $Inn(S) \leq G \leq Aut(S).$ Keeping this reduction in mind (PQ) is known for:
 * Solvable groups <Cite Key="KimmiPQ"/>,
-* Groups whose socle is isomorphic to an alternating group, <Cite Key="LP"/><Cite Key="HerA6"/><Cite Key="SalimA7A8"/><Cite Key="SalimA9A10"/><Cite Key="BaMaM10"/><Cite Key="BaCa"/><Cite Key="BaMaAn"/>,
+* All but two of the sporadic simple groups and their automorphism groups <Cite Key="CaMaBrauerTree"/>, the exceptions being the Monster and the O'Nan group; for an overview of early HeLP-results see <Cite Key="KonovalovKimmiStAndrews"/>,
 * Groups whose socle is isomorphic to a group $PSL(2,p)$ or $PSL(2,p^2)$, where $p$ denotes a prime, <Cite Key="HertweckBrauer"/>, <Cite Key="BaMa4prI"/>.
-* A group with sporadic simple socle which is not the O'Nan group or the Monster <Cite Key="KonovalovM11"/><Cite Key="KonovalovMcL"/><Cite Key="BovdiKonovalovM12"/><Cite Key="BovdiKonovalovConway"/><Cite Key="BovdiKonovalovSuz"/><Cite Key="BovdiKonovalovM23"/><Cite Key="BovdiKonovalovHe"/><Cite Key="BJK"/><Cite Key="BovdiKonovalovM24"/><Cite Key="BovdiKonovalovRu"/><Cite Key="KonovalovM22"/> <Cite Key="BKHS"/><Cite Key="KonovalovKimmiStAndrews"/><Cite Key="MargolisConway"/><Cite Key="BaMaAn"/><Cite Key="CaMaBrauerTree"/>,
-* Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.
+* Groups whose socle is isomorphic to an alternating group, <Cite Key="SalimA7A8"/> <Cite Key="SalimA9A10"/><Cite Key="BaCa"/><Cite Key="BaMaAn"/>, 
+* Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)
 * Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/><Cite Key="BaMa4prII"/>,
-* Many groups from the GAP character table library <Cite Key="CaMaBrauerTree"/>.
+* Certain infinite series of simple groups of Lie type of small rank and other groups from the character table library <Cite Key="CaMaBrauerTree"/>

@@ -3,7 +3,7 @@
  work with torsion units in (integral) group rings.  It implements a 
  method that was developed by I.S. Luthar and I.B.S. Passi in <Cite Key="LP"/> and which was
  extended by M. Hertweck in <Cite Key="HertweckBrauer"/>. These names also constitute the name
- of the method, suggested by A. Konovalov: **He**rtweck-**L**uthar-**P**assi.
+ of the method, suggested by O. Konovalov: **He**rtweck-**L**uthar-**P**assi.
  The theory behind the method is briefly described in Chapter <Ref Chap='Chapter_Background'/>
  and also in the survey article <Cite Key="BaMaHeLPArticle"/>.  <P/>
 

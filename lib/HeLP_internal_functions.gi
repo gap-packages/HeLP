@@ -897,4 +897,455 @@ else
 fi;
 end);
 
+########################################################################################################3
+########################################################################################################
+## New functions in version 4
+
+###################################################################
+# Argument: List L of integers
+# Output: Whether L contains 1 exactly once and rest 0's
+BindGlobal("HeLP_INTERNAL_One1Rest0", function(L)
+local ones, i;
+ones := 0;
+for i in [1..Size(L)] do
+  if not L[i] in [0,1] then
+    return false;
+  elif L[i] = 1 then
+    ones := ones + 1;
+    if ones >= 2 then 
+      return false;
+    fi;
+  fi;
+od;
+if ones = 1 then
+  return true;
+else
+  return false;
+fi;
+end);
+
+####################### New function
+BindGlobal("HeLP_INTERNAL_IsCentralUnit_NoPowers", function(UCT, k, pa)
+# Arguments: Underlying character table, order of unit, partial augmentations of a unit (no powers)
+# Output: True/false, whether the partial augmentations describe a unit central in ZG
+# Relying on Berman-Higman, i.e. central units have exactly one non-trivial partial augmentation
+local o, posk, pau, pak, l;
+
+o := OrdersClassRepresentatives(UCT);
+if not HeLP_INTERNAL_One1Rest0(pa) then
+  return false;
+else
+  posk := Positions(o, k); # as unit is trivial we know the non-trivial partial augmentation is at element of order k
+  pak := pa{[Size(pa)-Size(posk)+1..Size(pa)]}; # only look on p.a.'s at elements of order k
+  l := Position(pak, 1);
+  l := posk[l]; # position of the non-trivial p.a. of u in the list of all conjugacy classes
+  if SizesCentralizers(UCT)[l] = Size(UCT) then
+    return true;
+  else
+    return false;
+  fi; 
+fi;
+end);
+
+####################### New function
+BindGlobal("HeLP_INTERNAL_IsCentralUnit", function(UCT, k, pa)
+# Arguments: Underlying character table, order of unit, partial augmentations of a unit and its powers
+# Output: True/false, whether the partial augmentations describe a unit central in ZG
+# Relying on Berman-Higman, i.e. central units have exactly one non-trivial partial augmentation and it lies at a central class
+local o, posk, pau, pak, l;
+
+o := OrdersClassRepresentatives(UCT);
+if not HeLP_INTERNAL_IsTrivialSolution([pa], k, o) then
+  return false;
+else
+  posk := Positions(o, k); # as unit is trivial we know the non-tirival partial augmentation is at element of order k
+  pau := pa[Size(pa)];
+  pak := pau{[Size(pau)-Size(posk)+1..Size(pau)]}; # only look on p.a.'s at elements of order k
+  l := Position(pak, 1);
+  l := posk[l]; # position of the non-trivial p.a. of u in the list of all conjugacy classes
+  if SizesCentralizers(UCT)[l] = Size(UCT) then
+    return true;
+  else
+    return false;
+  fi; 
+fi;
+end);
+
+
+
+#####################################################################
+###New function
+# Arguments: Underlying character table, order of unit, p.a.'s of unit (not of powers), underlying group, normal subgroup N of underlying group, positions of conj classes of order dividing k in UCT
+# Output: Whether the unit is 1 modulo the normal subgroup N
+BindGlobal("HeLP_INTERNAL_IsOneModuloN", function(UCT, k, pa, G, N, posconk)
+local o, d, phi, Q, CCQ, pos1Q, paim, pau, i, rep, posQ;
+
+phi := NaturalHomomorphismByNormalSubgroup(G, N); 
+Q := Image(phi);
+CCQ := ConjugacyClasses(Q);
+pos1Q := Position(CCQ, One(Q)^Q);
+paim := ListWithIdenticalEntries(Size(CCQ), 0);
+for i in [1..Size(pa)] do
+  if pa[i] <> 0 then
+    rep := Representative(ConjugacyClasses(UCT)[posconk[i]]); # image of element with non-trivial p.a.
+    posQ := Position(CCQ, (rep^phi)^Q);
+    paim[posQ] := paim[posQ] + pa[i]; # add p.a. at right spot in image
+  fi;
+od;
+for i in [1..Size(CCQ)] do
+  if i <> pos1Q then
+    if paim[i] <> 0 then # only at identity can we have non-zero p.a. to get 1 as image
+      return false;
+    fi;
+  fi;
+od;
+return true;
+end);
+
+##############################################################3
+# Arguments: A group element, a prime
+# Output: p-part of the group element
+BindGlobal("HeLP_INTERNAL_PPartGrouElement", function(g, p)
+local ord, divp, q, i;
+ord := Order(g);
+divp := p^PValuation(ord,p);
+q := ord/divp;
+for i in [1..divp] do
+  if i*q mod divp = 1 then
+    return g^(i*q);
+  fi;
+od;
+end);
+
+#############################################################################
+#### New function
+# Arguments: Underlying character table, order of unit, its partial augmentations of proper powers
+# Output: Positions of classes in table which should be involved in solving the system
+# Goal is two apply two results: General Berman-Higman and Hertweck's p-adic criterion
+# Needs underlying group of UCT to exist
+BindGlobal("HeLP_INTERNAL_DetermineInterestingClasses", function(UCT, k, pa)
+local properdivisorsnotone, o, posconk, d, posanyway0, j, papow, i, primedivs, G, p, N, kp, pakp, posconkp, pos1, ccp, pos, g, gp, pap, posconp;
+
+properdivisorsnotone := Filtered(DivisorsInt(k), n -> not (n=k) and not (n=1));
+o := OrdersClassRepresentatives(UCT);
+posconk := [];
+for d in DivisorsInt(k) do
+  if d <> 1 then
+    Append(posconk, Positions(o, d));
+  fi;
+od;
+
+posanyway0 := [ ];
+# general Berman-Higman
+for j in [1..Size(pa)] do
+  papow := pa[j];
+  if not HeLP_INTERNAL_IsCentralUnit_NoPowers(UCT, properdivisorsnotone[j], papow) then # check if pa[j] is central. This is to include calculation of central units
+    for i in [1..Size(posconk)] do 
+      if SizesCentralizers(UCT)[posconk[i]] = Size(UCT) then
+        Add(posanyway0, i);
+      fi;
+    od;
+    break; # if one power non-central, this is enough
+  fi;
+od;
+
+# Herwecks smaller order criterion ["The orders of torsion units ...", Proposition 2]
+if not IsPrimeInt(k) then # if not prime, check if the part of u of order p is 1 mod O_p(G)
+  primedivs := PrimeDivisors(k);
+  G := UnderlyingGroup(UCT);
+  for p in primedivs do
+    N := PCore(G, p); # maximal normal p-subgroup of G
+    if N <> Group(One(G)) then
+      pap := pa[ Position(properdivisorsnotone, p) ];
+      if HeLP_INTERNAL_One1Rest0(pap) then # if unit is not trivial, it will also not be p-adically conjugate
+        posconp := Positions(o, p);
+        if HeLP_INTERNAL_IsOneModuloN(UCT, p, pap, G, N, posconp) then  # so we can apply Hertweck
+          for i in [1..Size(posconk)] do  
+            pos := posconk[i];
+            g := Representative(ConjugacyClasses(UCT)[pos]);
+            if not p^PValuation(Order(g),p) = p^PValuation(k,p) then # elements with smaller p-parts will have p.a. 0
+              Add(posanyway0, i);
+            fi;
+          od; 
+        fi;
+      fi;
+    fi;
+  od;
+fi;	
+
+# Hertweck's p-adic conjugacy criterion [Hertweck's unpiblished preprint, reproduced in arXiv:1706.02117 ]
+if not IsPrimePowerInt(k) then # only for mixed order we check the p-parts mod O_p(G)
+  primedivs := PrimeDivisors(k);
+  G := UnderlyingGroup(UCT);
+  for p in primedivs do
+    kp := p^PValuation(k,p); # maximal p-power dividing k
+    N := PCore(G, p); # maximal normal p-subgroup of G
+    if N <> Group(One(G)) then
+      pakp := pa[ Position(properdivisorsnotone, kp) ];
+      if HeLP_INTERNAL_One1Rest0(pakp) then # if unit is not trivial, it will also not be p-adically conjugate
+        posconkp := [ ]; # get positions of classes of order dividing kp in UCT
+        for d in DivisorsInt(kp) do
+          if d <> 1 then
+            Append(posconkp, Positions(o, d));
+          fi;
+        od;
+        if HeLP_INTERNAL_IsOneModuloN(UCT, kp, pakp, G, N, posconkp) then  # so p-part of u is 1 modulo a normal p-subgroup and we can apply Hertweck
+          pos1 := Position(pakp, 1);
+          ccp := ConjugacyClasses(UCT)[posconkp[pos1]]; # the class to which p-part of u is p-adically conjugate
+          for i in [1..Size(posconk)] do  # check every class for p-part being in cc
+            pos := posconk[i];
+            g := Representative(ConjugacyClasses(UCT)[pos]);
+            if not p^PValuation(Order(g),p) = kp then
+              Add(posanyway0, i);
+            else
+#              gp := HeLP_INTERNAL_PPartGrouElement(g, p);
+              gp := g^(k/kp); # As we use u^(k/kp) we have to compare with this element
+              if not gp in ccp then
+                Add(posanyway0, i);
+              fi; 
+            fi;
+          od; 
+        fi;
+      fi;
+    fi;
+  od;
+fi;
+
+posanyway0 := DuplicateFreeList(posanyway0);
+return posanyway0;
+end);
+
+###########################
+BindGlobal("HeLP_v4_INTERNAL_MakeSystem", function(C, k, UCT, pa, posconk)
+# Arguments: list of characters, order, underlying character table, partial augmentations of proper powers of u, positions of conj. classes which go into inequalities
+# Output: matrix and vector of the system obtain by the HeLP constraints
+# This is an internal function.
+# Change compared to earlier version is that now posconk is part of the input, while it was computed inside the function itself before
+local properdivisors, chi, d, e, T, a, o, poscondiv, poscondivd, extended_pa, D, p1;
+properdivisors := Filtered(DivisorsInt(k), n -> not (n=k));
+o := OrdersClassRepresentatives(UCT);
+poscondiv := [];
+p1 := Positions(o,1);
+for d in properdivisors do
+    # determine on which conjugacy classes the unit and its powers might have non-trivial partial augmentations
+    if d = 1 then
+       Add(poscondiv, Positions(o, 1));
+    else
+      poscondivd := [];
+      for e in Filtered(DivisorsInt(d), f -> not (f = 1)) do
+         Append(poscondivd, Positions(o, e));
+      od;
+      Add(poscondiv, poscondivd);
+    fi;
+od;
+T := [ ];
+a := [ ];
+extended_pa := Concatenation([[1]], pa);	# add the partial augmentation of u^k = 1
+D := Filtered(C, x -> Size(DuplicateFreeList(ValuesOfClassFunction(x){Concatenation(p1, posconk)})) <> 1);
+if D = [ ] then
+  return "infinite";
+fi;
+
+for chi in D do
+    Append(T, HeLP_INTERNAL_MakeCoefficientMatrixChar(chi, k, posconk));
+    Append(a, HeLP_INTERNAL_MakeRightSideChar(chi, k, properdivisors, poscondiv, extended_pa));
+od;
+return [T, a];
+end);
+
+###########################3
+BindGlobal("HeLP_v4_INTERNAL_WithGivenOrderAndPA", function(arg)
+# Same function as HeLP_WithGivenOrderAndPA, but the Character table is not rechecked. Meant mostly for internal use via HeLP_INTERNAL_WithGivenOrder
+# arguments: a list of characters, order of the unit, acting partial augmentations
+local C, k, pa, UCT, nonintclas, o, posconk, d, posconkint, W, intersol, sol, pasol, v, i, j, done, solsol, interintersol, p, G, N;
+C := arg[1];
+k := arg[2];
+pa := arg[3];
+UCT := UnderlyingCharacterTable(C[1]);
+
+nonintclas := HeLP_INTERNAL_DetermineInterestingClasses(UCT, k, pa); # this is new and so posconk which goes to MakeSystem changes
+o := OrdersClassRepresentatives(UCT);
+posconk := [];
+for d in DivisorsInt(k) do
+  if d <> 1 then
+    Append(posconk, Positions(o, d));
+  fi;
+od;
+posconkint := posconk{Difference([1..Size(posconk)], nonintclas) }; # determine classes which go into the inequalities
+if posconkint = [ ] then # this can happen, e.g. in SG(144, 33) order 18
+  return [ ];
+fi;
+
+W := HeLP_v4_INTERNAL_MakeSystem(C, k, UCT, pa, posconkint);
+if W = "infinite" then
+  return "infinite";
+fi;
+intersol := HeLP_INTERNAL_TestSystem(W[1], W[2], k, pa);
+
+if intersol = [ ] or intersol = "infinite" then
+  return intersol;
+else ### Put inside the solutions the 0's at right spot
+  interintersol := [ ];
+  for i in [1..Size(intersol)] do
+    sol := intersol[i];
+    pasol := sol[Size(sol)]; # partial augmentations of unit which will be changed
+    v := [ ];
+    done := 0;
+    for j in [1..Size(posconk)] do  # run over all classes which will have an entry
+      if j in nonintclas then       # non-interesting classes just filled by 0's
+        v[j] := 0;
+      else                          # interesting classes filled by solution of system 
+        done := done + 1;
+        v[j] := pasol[done];
+      fi; 
+    od;
+    solsol := ShallowCopy(sol);
+    solsol[Size(solsol)] := v;
+    Add(interintersol, solsol);
+  od;
+  intersol := [ ];
+  if IsPrimePowerInt(k) then  # if u is of prime power order and it is 1 modulo O_p(G) we only take trivial solutions
+    p := PrimeDivisors(k)[1];
+    G := UnderlyingGroup(UCT);
+    N := PCore(G, p);
+    for sol in interintersol do
+      if HeLP_INTERNAL_IsOneModuloN(UCT, p, sol[Size(sol)], G, N, posconk) then
+        if HeLP_INTERNAL_IsTrivialSolution([sol], k, o) then
+          Add(intersol, sol);
+        fi;
+      else
+        Add(intersol, sol); 
+      fi;
+    od;
+    return intersol;
+  fi;
+  return interintersol;  
+fi;
+end);
+
+##############################################################################################
+InstallGlobalFunction("HeLP_v4_INTERNAL_WithGivenOrder", function(C, k)
+# arguments: C is a list of class functions
+# k is the order of the unit in question
+# output: Result obtainable using the HeLP method for the characters given in arg[1] for units of order arg[2] or "infinite". The result is stored also in HeLP_sol[k]
+local properdivisors, d, pa, npa, asol, intersol, presol, UCT, primediv, p, size_npa, j;
+
+UCT := UnderlyingCharacterTable(C[1]);
+if IsBrauerTable(UCT) and not Gcd(k, UnderlyingCharacteristic(UCT)) = 1 then
+  return "non-admissible";
+fi;
+properdivisors := Filtered(DivisorsInt(k), d -> not (d = k));
+for d in properdivisors do
+  if not IsBound(HeLP_sol[d]) then
+    Info(HeLP_Info, 4, "    Solutions for order ", d, " not yet calculated.  Restart for this order.");
+    presol := HeLP_v4_INTERNAL_WithGivenOrder(C, d);
+    if presol = "infinite" then
+      Info( HeLP_Info, 1, "There are infinitely many solutions for elements of order ", d, ", HeLP stopped.  Try with more characters.");
+      return "infinite";
+    else
+      HeLP_sol[d] := presol;
+    fi;
+  fi;
+  if HeLP_sol[d] = [ ] then # If there are no elements of order d, there are none of order k.    
+    Info(HeLP_Info, 4, "There are no elements of order ", d, ", so there are none of order ", k, "."); 
+    return [ ];
+  fi;
+od; 
+asol := [ ];  # stores all solution of elements of order k found so far
+primediv := PrimeDivisors(k);	
+npa := [ ];
+for p in primediv do
+  Add(npa, HeLP_sol[k/p]); 
+od;
+npa := Cartesian(npa);
+npa := List(npa, x -> HeLP_INTERNAL_CompatiblePartialAugmentations(x,k));
+npa := Filtered(npa, x -> not x = fail); #The powers to be computed.
+size_npa := Size(npa);
+j := 1;
+# looping over all possible partial augmentations for the powers of u
+for pa in npa do
+  if InfoLevel(HeLP_Info) >= 4 then
+    Print("#I      Testing possibility ", j, "/", size_npa, " for elements of order ", k, ".\r");
+  fi;
+  intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPA(C, k, pa);
+  if intersol = "infinite" then
+      return "infinite";
+  fi;
+  Append(asol, intersol);
+  j := j + 1;
+od;
+if InfoLevel(HeLP_Info) >= 4 then
+  Print("                                                                              \r");
+fi;
+return DuplicateFreeList(asol);
+end);
+
+#########################################################################################
+# Arguments: Character table, order of unit, partial augmentations of unit and powers
+# Output: Whether the unit satisfies KP
+BindGlobal("HeLP_INTERNAL_UnitSatisfiesKP", function(UCT, k, pa)
+local o, divsnot1, i, d, papow, divsdnot1, count, dd, odd;
+o := OrdersClassRepresentatives(UCT);
+divsnot1 := Filtered(DivisorsInt(k), x -> x <> 1);
+for i in [1..Size(divsnot1)] do
+  d := divsnot1[i];
+  papow := pa[i];
+  divsdnot1 := Filtered(DivisorsInt(d), x -> x <> 1);
+  count := 0;
+  for dd in divsdnot1 do
+    odd := Positions(o, dd);
+    if dd < d then
+      if Sum(papow{[count+1..count+Size(odd)]}) <> 0 then
+        return false;
+      fi;
+    else 
+      if Sum(papow{[count+1..count+Size(odd)]}) <> 1 then
+        return false;
+      fi;
+    fi;
+    count := count + Size(odd);
+  od;
+od;
+return true;
+end);
+
+#######################################################################################################################
+# Arguments: CharacterTable, order, list of partial augmentations and powers
+BindGlobal("HeLP_INTERNAL_UnitsSatisfyKP", function(UCT, k, L)
+local pa;
+for pa in L do
+  if not HeLP_INTERNAL_UnitSatisfiesKP(UCT, k, pa) then
+    return false;
+  fi;
+od;
+return true;
+end);
+
+################################################################################################################3
+BindGlobal("HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables", function(CAct, tables, ord, pas)
+# arguments: CAct character table
+# tables: list of other character tables (derived from CAct) that should be used
+# ord is the order of the unit in question
+# pas list of partial augmentations of the powers
+local W, intersol, tab;
+W := HeLP_v4_INTERNAL_MakeSystem(Irr(CAct), ord, CAct, pas);
+if W = "infinite" then
+  # This case should never happen.
+  return "infinite";
+fi;
+intersol := HeLP_INTERNAL_TestSystem(W[1], W[2], ord, pas);
+if intersol = "infinite" then
+  # This case should never occur.
+  Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
+  return "infinite";
+else
+  for tab in tables do
+    if Gcd(UnderlyingCharacteristic(tab), ord) = 1 then
+      intersol := HeLP_INTERNAL_VerifySolution(tab, ord, intersol);
+    fi;
+  od;
+  return intersol;
+fi;
+end);
+
 #E

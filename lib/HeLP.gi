@@ -69,7 +69,11 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
       if interintersol = "infinite" then
         Error("Unexpected theoretical error.  Please report this to the authors.");
       fi;
@@ -176,7 +180,11 @@ for k in Union(crit_p, crit) do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
       if interintersol = "infinite" then
         Error("Unexpected theoretical error.  Please report this to the authors.");
       fi;
@@ -270,7 +278,11 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
       if interintersol = "infinite" then
         Error("Unexpected theoretical error.  Please report this to the authors.");
       fi;
@@ -370,7 +382,11 @@ for k in Union(crit_p, crit) do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
       if interintersol = "infinite" then
         Error("Unexpected theoretical error.  Please report this to the authors.");
       fi;
@@ -413,7 +429,7 @@ end);
 ########################################################################################################
 ########################################################################################################
 
-InstallGlobalFunction(HeLP_WithGivenOrder , function(arg)
+InstallGlobalFunction(HeLP_WithGivenOrder, function(arg)
 # arguments: arg[1] is a character table or a list of class functions
 # arg[2] is the order of the unit in question
 # output: Result obtainable using the HeLP method for the characters given in arg[1] for units of order arg[2]. The result is stored also in HeLP_sol[k]
@@ -437,7 +453,11 @@ if not Lcm(OrdersClassRepresentatives(UCT)) mod k = 0 then
   return [ ];
 fi;
 HeLP_INTERNAL_CheckChar(C);
-intersol := HeLP_INTERNAL_WithGivenOrder(C, k);
+if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+  intersol := HeLP_v4_INTERNAL_WithGivenOrder(C, k);
+else
+  intersol := HeLP_INTERNAL_WithGivenOrder(C, k);
+fi;
 if intersol = "infinite" then
   Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", k, ".");
   return "infinite";
@@ -528,7 +548,12 @@ if not IsSolvable(C) then
     fi;
   od;
 fi;
-intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
+if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+  intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
+else
+  intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
+fi;
+#intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
 if intersol = "infinite" then
   # This case should never occur.
   Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
@@ -584,7 +609,12 @@ if not IsSolvable(C) then
   od;
 fi;
 HeLP_INTERNAL_CheckChar(Irr(C));
-intersol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
+if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+  intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
+else
+  intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
+fi;
+#intersol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
 if intersol = "infinite" then
   # This case should never occur.
   Info( HeLP_Info, 1, "The given data admit infinitely many solutions for elements of order ", ord, "."); 
@@ -720,7 +750,12 @@ if Size(Positions(o, s*t)) <> 0 then
 fi;
 if not IsBound(HeLP_sol[t]) then 
   Info( HeLP_Info, 2, "  Partial augmentations for elements of order ", t, " not yet calculated.  Restart for this order.");
-  tintersol := HeLP_INTERNAL_WithGivenOrder(C, t);
+  if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+    tintersol := HeLP_v4_INTERNAL_WithGivenOrder(C, t);
+  else
+    tintersol := HeLP_INTERNAL_WithGivenOrder(C, t);
+  fi;
+#  tintersol := HeLP_INTERNAL_WithGivenOrder(C, t);
   if tintersol = "infinite" then
     Info( HeLP_Info, 1, "Solutions for elements of order ", t, " were not calculated.  When using the characters given in the first argument, there are infinitely many solutions for elements of order ", t, ".\n");
     Info( HeLP_Info, 1, "Calculate first a finite list for elements of order ", t, ".");
@@ -1061,7 +1096,12 @@ for j in [1..Size(D)] do
     if InfoLevel(HeLP_Info) >= 4 then
       Print("#I  Checking order ", k, " with possibility [", j, ":", Position(S,t), "]             \n");
     fi;
-    intersol := HeLP_INTERNAL_WithGivenOrder(D{t}, k);
+    if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      intersol := HeLP_v4_INTERNAL_WithGivenOrder(D{t}, k);
+    else
+      intersol := HeLP_INTERNAL_WithGivenOrder(D{t}, k);
+    fi;
+    #intersol := HeLP_INTERNAL_WithGivenOrder(D{t}, k);
     if not intersol = "infinite" then 
       break;
     fi;
@@ -1149,18 +1189,24 @@ elif Size(arg) = 1 and arg[1] in ["4ti2", "normaliz"] then
   h4 := HeLP_settings[4];
   MakeReadWriteGlobal("HeLP_settings");  
   UnbindGlobal("HeLP_settings");
-  if arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) <> fail then
+  if arg[1] = "4ti2" then
     BindGlobal("HeLP_settings", ["4ti2", h2, h3, h4]);
-    Info( HeLP_Info, 1, "'4ti2' will be used from now on.");
-  elif arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) = fail then
-    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
-    Info( HeLP_Info, 1, "The executable 'zsolve' (from 4ti2) was not found.\nPlease install 4ti2 in a directory contained in the PATH variable.\nThe calculations will be performed as before.");
-  elif arg[1] = "normaliz" and LoadPackage("normaliz") then
+    Info( HeLP_Info, 1, "'4ti2' will be used from now on.\n");
+    if IO_FindExecutable( "zsolve" ) = fail then
+      Info( HeLP_Info, 1, "Though note I could not find the function zsolve.\n");
+    fi;
+#  elif arg[1] = "4ti2" and IO_FindExecutable( "zsolve" ) = fail then
+#    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
+#    Info( HeLP_Info, 1, "The executable 'zsolve' (from 4ti2) was not found.\nPlease install 4ti2 in a directory contained in the PATH variable.\nThe calculations will be performed as before.");
+  elif arg[1] = "normaliz" then
     BindGlobal("HeLP_settings", ["normaliz", h2, h3, h4]);
     Info( HeLP_Info, 1, "'normaliz' will be used from now on.");
-  elif arg[1] = "normaliz" and LoadPackage("normaliz") = fail then
-    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
-    Info( HeLP_Info, 1, "The executable 'BNmzCone' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.");
+    if LoadPackage("normaliz") = fail then
+      Info( HeLP_Info, 1, "Though note I could not load the NormalizInterface package .\n");
+    fi;
+#  elif arg[1] = "normaliz" and LoadPackage("normaliz") = fail then
+#    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
+#    Info( HeLP_Info, 1, "The executable 'BNmzCone' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.");
   fi;
 else
   Info( HeLP_Info, 1, "Argument of 'HeLP_Solver' must be empty or \"4ti2\" or \"normaliz\"."); 
@@ -1168,7 +1214,7 @@ fi;
 end);
 
 
-##############################################################################################################
+#s#############################################################################################################
 InstallGlobalFunction(HeLP_UseRedund, function(b)
 # Arguments: boolean
 # return: nothing
@@ -1352,5 +1398,491 @@ if Order(G) < 144 then
 fi;
 return false;
 end);
+
+#########################################################3
+#################################################################################################################
+# New functions in version 4
+# Function was written together with Andreas in Brussels at some point
+InstallGlobalFunction(HeLP_SP, function(GC)
+# Argument: an ordinary character table or a group
+# Output: true if Spectrum Problem can be proved using the HeLP method and the data available in GAP or false otherwise. On higher info-levels it prints more information.
+local C, o, op, posords, k, j, isnotpsolvable, intersol, interintersol, CharTabs, p, BT_not_available, T, ord, result_orders, critical_orders;
+if not IsOrdinaryTable(GC) then
+  if not IsGroup(GC) then
+    Error( "Function HeLP_SP has to be called with an ordinary character table or a group.");
+  else
+    if IsSolvable(GC) then # if the group is solvable then SP has an affirmative answer by [Hertweck08]
+      Info( HeLP_Info, 1, "Since the group is solvable, the Spectrum Problem has an affirmative answer for this group by a result of M. Hertweck.");  
+      return true;
+    else
+      C := CharacterTable(GC);
+      if C = fail then
+        Error( "Calculation of the character table of the given group failed.");
+      fi;
+    fi;
+  fi;
+else
+  if IsSolvable(GC) then # if the group belonging to the character table given is solvable then SP has an affirmative answer by [Hertweck08]
+    Info( HeLP_Info, 1, "Since the group is solvable, the Spectrum Problem has an affirmative answer for this group by a result of M. Hertweck.");  
+    return true;
+  else
+    C := GC;
+  fi;
+fi;
+if IsSolvable(C) then # if the group is solvable then SP has an affirmative answer by [Hertweck08]
+  Info( HeLP_Info, 1, "Since the group is solvable, the Spectrum Problem has an affirmative answer for this group by a result of M. Hertweck.");  
+  return true;
+fi;
+ord := OrdersClassRepresentatives(C);
+o := DuplicateFreeList(ord);
+op := Filtered(o, m -> IsPrime(m));
+# check which divisors of exp(G) don't have corresponding group elements
+posords := Filtered(DivisorsInt(Lcm(o)), k -> not k = 1);
+posords := Difference(posords, o);
+
+BT_not_available := [];
+# calculate all character tables that are available and of interest and sort them wrt the smallest character degree
+CharTabs := [C];
+isnotpsolvable := Filtered(op, p -> not IsPSolvableCharacterTable(C, p));
+for p in isnotpsolvable do
+  T := C mod p;
+  if not T = fail then
+    Add(CharTabs, T);
+  else
+    Add(BT_not_available, p);
+  fi;
+od;
+CharTabs := HeLP_INTERNAL_SortCharacterTablesByDegrees(CharTabs);
+HeLP_INTERNAL_CheckChar(Irr(C));
+# calcuate the minimal possible solutions for elements of orders critical for SP
+for k in posords do
+  Info( HeLP_Info, 2, "Checking order ", k, ".");
+  j := 1;
+    Info( HeLP_Info, 3, "  Calculating the solutions for elements of order ", k, ".");
+    while not IsBound(intersol) and j <= Size(CharTabs) do
+      T := CharTabs[j];
+      HeLP_ChangeCharKeepSols(T);
+      Info(HeLP_Info, 3, "  Using table ", T, "."); 
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
+      if interintersol = "infinite" then
+        Error("Unexpected theoretical error.  Please report this to the authors.");
+      fi;
+      if not interintersol = "non-admissible" then
+        intersol := interintersol;
+      fi;
+      j := j + 1;
+    od;
+  while not HeLP_INTERNAL_IsTrivialSolution(intersol, k, ord) and j <= Size(CharTabs) do
+    T := CharTabs[j]; # test with so far not used character tables
+    HeLP_ChangeCharKeepSols(T);
+    Info(HeLP_Info, 3, "  Using table ", T, "."); 
+    interintersol := HeLP_INTERNAL_VerifySolution(T, k, intersol);
+    if not interintersol = "non-admissible" then
+      intersol := interintersol;
+    fi;
+    j := j + 1;
+  od;
+  HeLP_sol[k] := Filtered(intersol, x -> HeLP_INTERNAL_WagnerTest(C, k, x));  
+  if not Size(HeLP_sol[k]) = Size(intersol) then
+    Info(HeLP_Info, 4, "  Wagner test for order ", k, " eliminated ", Size(intersol) - Size(HeLP_sol[k]), " possible partial augmentations.");
+  fi;
+  Unbind(intersol);
+od;
+result_orders := List(posords, k -> [k, HeLP_INTERNAL_IsTrivialSolution(HeLP_sol[k], k, ord)]);
+critical_orders := List(Filtered(result_orders, w -> w[2] = false), v -> v[1]);
+if critical_orders <> [] and BT_not_available <> [] then  # not issolvable and 
+  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+fi;
+if critical_orders <> [] then
+  Info( HeLP_Info, 1, "(SP) can't be solved, using the given data, for the orders: ", critical_orders, ".");
+fi;
+return critical_orders = [];
+end);
+
+#########################################################################################################
+# Version of HeLP_SP which does not overwrite known HeLP_sol. Like HeLP_AllOrdersPQ for HeLP_PQ
+InstallGlobalFunction(HeLP_AllOrdersSP, function(GC)
+# Argument: an ordinary character table or a group
+# Output: true if Spectrum Problem can be proved using the HeLP method and the data available in GAP or false otherwise. On higher info-levels it prints more information.
+local C, o, op, posords, k, j, isnotpsolvable, intersol, interintersol, CharTabs, p, BT_not_available, T, ord, result_orders, critical_orders;
+if not IsOrdinaryTable(GC) then
+  if not IsGroup(GC) then
+    Error( "Function HeLP_SP has to be called with an ordinary character table or a group.");
+  else
+    C := CharacterTable(GC);
+    if C = fail then
+      Error( "Calculation of the character table of the given group failed.");
+    fi;
+  fi;
+else
+  if IsSolvable(GC) then # if the group belonging to the character table given is solvable then SP has an affirmative answer by [Hertweck08]
+    Info( HeLP_Info, 1, "Since the group is solvable, the Spectrum Problem has an affirmative answer for this group by a result of M. Hertweck.");  
+    return true;
+  else
+    C := GC;
+  fi;
+fi;
+if IsSolvable(C) then # if the group is solvable then SP has an affirmative answer by [Hertweck08]
+  Info( HeLP_Info, 1, "Since the group is solvable, the Spectrum Problem has an affirmative answer for this group by a result of M. Hertweck.");  
+  return true;
+fi;
+ord := OrdersClassRepresentatives(C);
+o := DuplicateFreeList(ord);
+op := Filtered(o, m -> IsPrime(m));
+# check which divisors of exp(G) don't have corresponding group elements
+posords := Filtered(DivisorsInt(Lcm(o)), k -> not k = 1);
+posords := Difference(posords, o);
+
+BT_not_available := [];
+# calculate all character tables that are available and of interest and sort them wrt the smallest character degree
+CharTabs := [C];
+isnotpsolvable := Filtered(op, p -> not IsPSolvableCharacterTable(C, p));
+for p in isnotpsolvable do
+  T := C mod p;
+  if not T = fail then
+    Add(CharTabs, T);
+  else
+    Add(BT_not_available, p);
+  fi;
+od;
+CharTabs := HeLP_INTERNAL_SortCharacterTablesByDegrees(CharTabs);
+HeLP_INTERNAL_CheckChar(Irr(C));
+# calcuate the minimal possible solutions for elements of orders critical for SP
+for k in posords do
+  Info( HeLP_Info, 2, "Checking order ", k, ".");
+  j := 1;
+  if IsBound(HeLP_sol[k]) then  # use the given pa's
+    Info( HeLP_Info, 3, "  Using the known solutions for elements of order ", k, ".");
+    intersol := HeLP_sol[k];
+  else
+    Info( HeLP_Info, 3, "  Calculating the solutions for elements of order ", k, ".");
+    while not IsBound(intersol) and j <= Size(CharTabs) do
+      T := CharTabs[j];
+      HeLP_ChangeCharKeepSols(T);
+      Info(HeLP_Info, 3, "  Using table ", T, "."); 
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
+      if interintersol = "infinite" then
+        Error("Unexpected theoretical error.  Please report this to the authors.");
+      fi;
+      if not interintersol = "non-admissible" then
+        intersol := interintersol;
+      fi;
+      j := j + 1;
+    od;
+  fi;
+  while not HeLP_INTERNAL_IsTrivialSolution(intersol, k, ord) and j <= Size(CharTabs) do
+    T := CharTabs[j]; # test with so far not used character tables
+    HeLP_ChangeCharKeepSols(T);
+    Info(HeLP_Info, 3, "  Using table ", T, "."); 
+    interintersol := HeLP_INTERNAL_VerifySolution(T, k, intersol);
+    if not interintersol = "non-admissible" then
+      intersol := interintersol;
+    fi;
+    j := j + 1;
+  od;
+  HeLP_sol[k] := Filtered(intersol, x -> HeLP_INTERNAL_WagnerTest(C, k, x));  
+  if not Size(HeLP_sol[k]) = Size(intersol) then
+    Info(HeLP_Info, 4, "  Wagner test for order ", k, " eliminated ", Size(intersol) - Size(HeLP_sol[k]), " possible partial augmentations.");
+  fi;
+  Unbind(intersol);
+od;
+result_orders := List(posords, k -> [k, HeLP_INTERNAL_IsTrivialSolution(HeLP_sol[k], k, ord)]);
+critical_orders := List(Filtered(result_orders, w -> w[2] = false), v -> v[1]);
+if critical_orders <> [] and BT_not_available <> [] then  # not issolvable and 
+  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+fi;
+if critical_orders <> [] then
+  Info( HeLP_Info, 1, "(SP) can't be solved, using the given data, for the orders: ", critical_orders, ".");
+fi;
+return critical_orders = [];
+end);
+
+#########################################################################################################
+InstallGlobalFunction(HeLP_KP, function(GC)
+# Argument: an ordinary character table or a group
+# Output: true if KP can be proved using the HeLP method and the data available in GAP or false otherwise. On higher info-levels it prints more information.
+local C, o, op, posords, p, BT_not_available, j, k, T, intersol, interintersol, CharTabs, ord, issolvable, isnotpsolvable, result_orders, critical_orders;
+if not IsOrdinaryTable(GC) then
+  if not IsGroup(GC) then
+    Error( "Function HeLP_KP has to be called with an ordinary character table or a group.");
+  else
+    if IsNilpotent(GC) then # if the group is nilpotent then ZC is true by [Weiss91]
+      Info( HeLP_Info, 1, "Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.");
+      return true;
+    else
+      C := CharacterTable(GC);
+      if C = fail then
+        Error( "Calculation of the character table of the given group failed.");
+      fi;
+    fi;
+  fi;
+else
+  if IsNilpotent(GC) then  # if the group belonging to the character table given is nilpotent then ZC is true by [Weiss91]
+    Info( HeLP_Info, 1, "Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.");
+    return true;
+  else
+     C := GC;
+  fi;
+fi;
+ord := OrdersClassRepresentatives(C);
+o := DuplicateFreeList(ord);
+op := Filtered(o, m -> IsPrime(m));
+issolvable := IsSolvable(C);
+isnotpsolvable := Filtered(op, p -> not IsPSolvableCharacterTable(C, p));
+# if the group is p-solvable the p-Brauer table will not provide any additional information (by Fong-Swan-Rukolaine [CR81, 22.1]), so it will not be used
+if issolvable then
+  posords := Filtered(o, d -> not d = 1);# for solvable groups its known that the orders of torsion units coincide with orders of group elements 
+				#[Her08a, The orders of torsion units in integral group rings of finite solvable groups]
+else
+  posords := Filtered(DivisorsInt(Lcm(o)), k -> not k = 1); #All divisors of the exponent of the group, i.e. the orders to be checked in the case of non-solvable groups
+fi;
+posords := SortedList(posords);
+posords := Filtered(posords, x -> not IsPrime(x)); # for units of prime order KP always holds
+BT_not_available := [];
+CharTabs := [C];    # calculate all character tables of interest, which are availbale in GAP and sort them wrt the smallest character degree
+for p in isnotpsolvable do
+  T := C mod p;
+  if not T = fail then
+    Add(CharTabs, T);
+  else
+    Add(BT_not_available, p);
+  fi;
+od;
+CharTabs := HeLP_INTERNAL_SortCharacterTablesByDegrees(CharTabs);
+HeLP_INTERNAL_CheckChar(Irr(C));
+posords := Filtered(posords, x -> not IsPrimeInt(x));
+for k in posords do
+  Info( HeLP_Info, 2, "Checking order ", k, ".");
+  j := 1;
+    Info( HeLP_Info, 3, "  Calculating the solutions for elements of order ", k, ".");
+    while not IsBound(intersol) and j <= Size(CharTabs) do
+      T := CharTabs[j];
+      HeLP_ChangeCharKeepSols(T);
+      Info(HeLP_Info, 3, "  Using table ", T, "."); 
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
+      if interintersol = "infinite" then
+        Error("Unexpected theoretical error.  Please report this to the authors.");
+      fi;
+      if not interintersol = "non-admissible" then
+        intersol := interintersol;
+      fi;
+      j := j + 1;
+    od;
+  while not HeLP_INTERNAL_IsTrivialSolution(intersol, k, ord) and j <= Size(CharTabs) do
+    T := CharTabs[j];     # test with so far not used character tables
+    HeLP_ChangeCharKeepSols(T);
+    Info(HeLP_Info, 3, "  Using table ", T, "."); 
+    interintersol := HeLP_INTERNAL_VerifySolution(T, k, intersol);
+    if not interintersol = "non-admissible" then
+      intersol := interintersol;
+    fi;
+    j := j + 1;
+  od;
+  HeLP_sol[k] := Filtered(intersol, x -> HeLP_INTERNAL_WagnerTest(C, k, x));  
+  if not Size(HeLP_sol[k]) = Size(intersol) then
+    Info(HeLP_Info, 4, "  Wagner test for order ", k, " eliminated ", Size(intersol) - Size(HeLP_sol[k]), " possible partial augmentations.");
+  fi;
+  Unbind(intersol);
+od;
+result_orders := List(posords, k -> [ k, HeLP_INTERNAL_UnitsSatisfyKP(C, k, HeLP_sol[k]) ]);
+critical_orders := List(Filtered(result_orders, w -> w[2] = false), v -> v[1]);
+if critical_orders <> [] and BT_not_available <> [] then  # not issolvable and 
+  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+fi;
+if critical_orders <> [] then
+  Info( HeLP_Info, 1, "(KP) can't be solved, using the given data, for the orders: ", critical_orders, ".");
+fi;
+return critical_orders = [];
+end);
+
+##############################################################################################
+InstallGlobalFunction(HeLP_AllOrdersKP, function(GC)
+# Argument: an ordinary character table or a group
+# Output: true if KP can be proved using the HeLP method and the data available in GAP or false otherwise. On higher info-levels it prints more information.
+local C, o, op, posords, p, BT_not_available, j, k, T, intersol, interintersol, CharTabs, ord, issolvable, isnotpsolvable, result_orders, critical_orders;
+if not IsOrdinaryTable(GC) then
+  if not IsGroup(GC) then
+    Error( "Function HeLP_KP has to be called with an ordinary character table or a group.");
+  else
+    C := CharacterTable(GC);
+    if C = fail then
+      Error( "Calculation of the character table of the given group failed.");
+    fi;
+  fi;
+else
+  if IsNilpotent(GC) then  # if the group belonging to the character table given is nilpotent then ZC is true by [Weiss91]
+    Info( HeLP_Info, 1, "Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.");
+    return true;
+  else
+     C := GC;
+  fi;
+fi;
+ord := OrdersClassRepresentatives(C);
+o := DuplicateFreeList(ord);
+op := Filtered(o, m -> IsPrime(m));
+issolvable := IsSolvable(C);
+isnotpsolvable := Filtered(op, p -> not IsPSolvableCharacterTable(C, p));
+# if the group is p-solvable the p-Brauer table will not provide any additional information (by Fong-Swan-Rukolaine [CR81, 22.1]), so it will not be used
+if issolvable then
+  posords := Filtered(o, d -> not d = 1);# for solvable groups its known that the orders of torsion units coincide with orders of group elements 
+				#[Her08a, The orders of torsion units in integral group rings of finite solvable groups]
+else
+  posords := Filtered(DivisorsInt(Lcm(o)), k -> not k = 1); #All divisors of the exponent of the group, i.e. the orders to be checked in the case of non-solvable groups
+fi;
+posords := SortedList(posords);
+posords := Filtered(posords, x -> not IsPrime(x)); # for units of prime order KP always holds
+BT_not_available := [];
+CharTabs := [C];    # calculate all character tables of interest, which are availbale in GAP and sort them wrt the smallest character degree
+for p in isnotpsolvable do
+  T := C mod p;
+  if not T = fail then
+    Add(CharTabs, T);
+  else
+    Add(BT_not_available, p);
+  fi;
+od;
+CharTabs := HeLP_INTERNAL_SortCharacterTablesByDegrees(CharTabs);
+HeLP_INTERNAL_CheckChar(Irr(C));
+posords := Filtered(posords, x -> not IsPrimeInt(x));
+for k in posords do
+  Info( HeLP_Info, 2, "Checking order ", k, ".");
+  j := 1;
+  if IsBound(HeLP_sol[k]) then  # use the given pa's
+    Info( HeLP_Info, 3, "  Using the known solutions for elements of order ", k, ".");
+    intersol := HeLP_sol[k];
+  else
+    Info( HeLP_Info, 3, "  Calculating the solutions for elements of order ", k, ".");
+    while not IsBound(intersol) and j <= Size(CharTabs) do
+      T := CharTabs[j];
+      HeLP_ChangeCharKeepSols(T);
+      Info(HeLP_Info, 3, "  Using table ", T, "."); 
+      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+        interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
+      else
+        interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
+      fi;
+      if interintersol = "infinite" then
+        Error("Unexpected theoretical error.  Please report this to the authors.");
+      fi;
+      if not interintersol = "non-admissible" then
+        intersol := interintersol;
+      fi;
+      j := j + 1;
+    od;
+  fi;
+  while not HeLP_INTERNAL_IsTrivialSolution(intersol, k, ord) and j <= Size(CharTabs) do
+    T := CharTabs[j];     # test with so far not used character tables
+    HeLP_ChangeCharKeepSols(T);
+    Info(HeLP_Info, 3, "  Using table ", T, "."); 
+    interintersol := HeLP_INTERNAL_VerifySolution(T, k, intersol);
+    if not interintersol = "non-admissible" then
+      intersol := interintersol;
+    fi;
+    j := j + 1;
+  od;
+  HeLP_sol[k] := Filtered(intersol, x -> HeLP_INTERNAL_WagnerTest(C, k, x));  
+  if not Size(HeLP_sol[k]) = Size(intersol) then
+    Info(HeLP_Info, 4, "  Wagner test for order ", k, " eliminated ", Size(intersol) - Size(HeLP_sol[k]), " possible partial augmentations.");
+  fi;
+  Unbind(intersol);
+od;
+result_orders := List(posords, k -> [ k, HeLP_INTERNAL_UnitsSatisfyKP(C, k, HeLP_sol[k]) ]);
+critical_orders := List(Filtered(result_orders, w -> w[2] = false), v -> v[1]);
+if critical_orders <> [] and BT_not_available <> [] then  # not issolvable and 
+  Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
+fi;
+if critical_orders <> [] then
+  Info( HeLP_Info, 1, "(KP) can't be solved, using the given data, for the orders: ", critical_orders, ".");
+fi;
+return critical_orders = [];
+end);
+
+###############################################################################################
+# Arguments: Underlying character table, order of unit, p.a.'s of unit (not of powers), underlying group, normal subgroup N of underlying group, positions of conj classes of order dividing k in UCT
+# Output: Whether the unit is 1 modulo the normal subgroup N
+InstallGlobalFunction(HeLP_IsOneModuloN, function(UCT, k, pa, G, N)
+local o, d, phi, Q, CCQ, pos1Q, paim, pau, i, rep, posQ, posconk;
+
+o := OrdersClassRepresentatives(UCT);
+posconk := [];
+for d in DivisorsInt(k) do
+  if d <> 1 then
+    Append(posconk, Positions(o, d));
+  fi;
+od;
+
+phi := NaturalHomomorphismByNormalSubgroup(G, N); 
+Q := Image(phi);
+CCQ := ConjugacyClasses(Q);
+pos1Q := Position(CCQ, One(Q)^Q);
+paim := ListWithIdenticalEntries(Size(CCQ), 0);
+for i in [1..Size(pa)] do
+  if pa[i] <> 0 then
+    rep := Representative(ConjugacyClasses(UCT)[posconk[i]]); # image of element with non-trivial p.a.
+    posQ := Position(CCQ, (rep^phi)^Q);
+    paim[posQ] := paim[posQ] + pa[i]; # add p.a. at right spot in image
+  fi;
+od;
+for i in [1..Size(CCQ)] do
+  if i <> pos1Q then
+    if paim[i] <> 0 then # only at identity can we have non-zero p.a. to get 1 as image
+      return false;
+    fi;
+  fi;
+od;
+return true;
+end);
+
+##############################################################################################
+# Arguments: Character table, order of unit, partial augmentations of unit and powers
+# Output: Whether the unit satisfies KP
+InstallGlobalFunction(HeLP_UnitSatisfiesKP, function(UCT, k, pa)
+local o, divsnot1, i, d, papow, divsdnot1, count, dd, odd;
+o := OrdersClassRepresentatives(UCT);
+divsnot1 := Filtered(DivisorsInt(k), x -> x <> 1);
+for i in [1..Size(divsnot1)] do
+  d := divsnot1[i];
+  papow := pa[i];
+  divsdnot1 := Filtered(DivisorsInt(d), x -> x <> 1);
+  count := 0;
+  for dd in divsdnot1 do
+    odd := Positions(o, dd);
+    if dd < d then
+      if Sum(papow{[count+1..count+Size(odd)]}) <> 0 then
+        return false;
+      fi;
+    else 
+      if Sum(papow{[count+1..count+Size(odd)]}) <> 1 then
+        return false;
+      fi;
+    fi;
+    count := count + Size(odd);
+  od;
+od;
+return true;
+end);
+###########################################################################################
+# Function to ignore additional info on vanishing partial augmentations included in version 4 and reproduce earlier results
+# Arguments: Ordinary character table
+# Output: Same table, but without underlying group
+InstallGlobalFunction(HeLP_ForgetUnderlyingGroup, function(C)
+local CCop;
+CCop := rec(UnderlyingCharacteristic := 0, Size := Size(C), NrConjugacyClasses := NrConjugacyClasses(C), OrdersClassRepresentatives := OrdersClassRepresentatives(C), SizesCentralizers := SizesCentralizers(C), Irr := Irr(C) );
+CCop := ConvertToCharacterTable(CCop);
+return CCop;
+end);
+
 
 #E

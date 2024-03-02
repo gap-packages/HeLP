@@ -3,7 +3,7 @@
 ##                                                               HeLP package
 ##
 ##                                 Andreas Bächle, Vrije Universiteit Brussel
-##                                        Leo Margolis, Universidad de Murcia
+##                               Leo Margolis, Universidad Autonoma de Madrid
 ##
 #############################################################################
 
@@ -12,9 +12,8 @@ SetPackageInfo( rec(
 PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
-Version        := "3.5",
-Date           := "20/12/2019", # dd/mm/yyyy format
-License        := "GPL-2.0-or-later",
+Version        := "4.0",
+Date           := "29/02/2024",
 
 SourceRepository := rec(
     Type := "git",
@@ -33,7 +32,7 @@ ArchiveFormats := ".tar.gz",
 PackageDoc := rec(
   BookName  := ~.PackageName,
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0_mj.html",
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := ~.Subtitle,
@@ -47,8 +46,7 @@ Persons :=
        FirstNames    := "Andreas",
        IsAuthor      := true,
        IsMaintainer  := true,
-       Email         := "ABachle@vub.ac.be",
-       WWWHome       := "http://homepages.vub.ac.be/~abachle/",
+       Email         := "ABachle@gmx.net",
        PostalAddress := Concatenation( [
                         "Vrije Universiteit Brussel\n",
                         "Vakgroep Wiskunde\n",
@@ -63,33 +61,28 @@ rec(
        FirstNames    := "Leo",
        IsAuthor      := true,
        IsMaintainer  := true,
-       Email         := "Leo.Margolis@vub.be",
-       WWWHome       := "http://homepages.vub.ac.be/~lmargoli/",
+       Email         := "Leo.Margolis@uam.es",
+       WWWHome       := "http://margollo.github.io",
        PostalAddress := Concatenation( [
-                        "Vrije Universiteit Brussel\n",
-                        "Vakgroep Wiskunde\n",
-                        "Pleinlaan 2\n", 
-                        "1050 Brussels\n",
-                        "Belgium" ] ),
-       Place         := "Brussels",
-       Institution   := "Vrije Universiteit Brussel"
+                        "Universidad Autonoma de Madrid\n",
+                        "Campus Cantoblanco\n",
+                        "Facultad de Ciencias\n", 
+                        "Departamento de Matematicas\n", 
+                        "28049 Madrid\n",
+                        "Spain" ] ),
+       Place         := "Madrid",
+       Institution   := "Universidad Autonoma de Madrid"
      )
 ],
 
 Status := "deposited",
 
-AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.",
+AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture, the Prime Graph Question, the Spectrum Problem and the Kimmerle Problem for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities or alternatively Normaliz.",
                   
 Dependencies := rec(
   GAP                    := ">=4.8.2",
-  NeededOtherPackages    := [
-    ["io", ">=4.2" ],
-    ["4ti2Interface", ">= 2015.04.29"],
-    ["CTblLib", ">= 1.2.2"],
-    ["atlasrep", ">= 1.5"],
-    ["NormalizInterface", ">= 0.9.6"],
-  ],
-  SuggestedOtherPackages := [ ],
+  NeededOtherPackages    := [ ],
+  SuggestedOtherPackages := [  ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
   ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
 ),
 
@@ -100,18 +93,18 @@ AvailabilityTest := function()
   end,
 
 Keywords := ["HeLP method", "torsion units", 
-             "rational conjugacy", "Zassenhaus Conjecture", "Prime Graph Question"],
+             "rational conjugacy", "Zassenhaus Conjecture", "Prime Graph Question", "Spectrum Problem", "Kimmerle Problem"],
 
 AutoDoc := rec(
     TitlePage := rec(
         Copyright := Concatenation(
                     "&copyright; 2017 by Andreas Bächle and Leo Margolis<P/>\n\n",
                     "This package is free software and may be distributed under the terms and conditions of the\n",
-                    "GNU Public License Version 2, or (at your option) any later version.\n"
+                    "GNU Public License Version 2.\n"
                 ),
         Acknowledgements := Concatenation(
                     "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
-                    "with a 4ti2-Interface and a normaliz-Interface.\n",
+                    "with a 4ti2-Interface and a normlaiz-Interface.\n",
                     "We also would like to thank Gutsche and Söger for many very helpful discussions.\n",
                     "We also want to give credits to the developers of the softwares 4ti2 and normaliz.\n",
                     "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",

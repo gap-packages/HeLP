@@ -25,7 +25,7 @@
 #! @Section Zassenhaus Conjecture
 
 #!  This function checks whether the Zassenhaus Conjecture ((ZC) for short, cf. Section
-#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/>) can be proved
+#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_related_questions'/>) can be proved
 #!  using the HeLP method with the data available in GAP.
 
 #! @Description
@@ -54,11 +54,12 @@
 #! @Returns <K>true</K> if (ZC) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_ZC" );
 #! @InsertChunk ZCExample
+#! @EndSection
 
 
 #! @Section Prime Graph Question
 #!  This function checks whether the Prime Graph Question ((PQ) for short, cf. Section 
-#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_the_Prime_Graph_Question'/>) can be verified
+#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_related_questions'/>) can be verified
 #!  using the HeLP method with the data available in GAP.
 
 #! @Description
@@ -85,6 +86,71 @@ DeclareGlobalFunction( "HeLP_ZC" );
 #! @Returns <K>true</K> if (PQ) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_PQ" );
 #! @InsertChunk PQExample
+#! @EndSection
+
+#! @Section Spectrum Problem
+#!  This function checks whether the Spectrum Problem ((SP) for short, cf. Section 
+#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_related_questions'/>) can be verified
+#!  using the HeLP method with the data available in GAP.
+
+#! @Description
+#!  <K>HeLP_SP</K> checks whether an affirmative answer for the Spectrum Problem for
+#!  the given group can be obtained using the HeLP method, the Wagner restrictions and the data available.
+#!  The argument of the function can be either an ordinary character table
+#!  or a group.  In the second case it will first calculate the corresponding 
+#!  ordinary character table.
+#!  If the group in question is solvable, the Spectrum Problem has an affirmative answer by a result of M. Hertweck and the 
+#!  function will return <K>true</K> without performing any calculations.<P/>
+#!  If the group is non-solvable, the ordinary character table and all $p$-Brauer
+#!  tables for primes $p$ for which the group is not $p$-solvable and which are available in GAP will be used to produce as many
+#!  constraints on the torsion units as possible. Additionally, the Wagner test  
+#!  is applied to the results, cf. Section <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+#!  In case the information
+#!  suffices to obtain an affirmative answer for the Spectrum Problem,
+#!  the function will return <K>true</K> and it will return <K>false</K> otherwise.
+#!  The possible partial augmentations for elements of order <M>k</M> 
+#!  and all its powers will also be stored in the list entry <K>HeLP_sol[k]</K>.<P/>
+#!  The function also does not use the previously computed partial augmentations
+#!  for elements of these orders but will overwrite the content of <K>HeLP_sol</K>.
+#!  If you do not like the last fact, please use <Ref Func='HeLP_AllOrdersSP'/>. 
+#! @Arguments OrdinaryCharacterTable|Group
+#! @Returns <K>true</K> if (SP) can be solved using the given data, <K>false</K> otherwise
+DeclareGlobalFunction( "HeLP_SP" );
+#! @InsertChunk SPExample
+#! @EndSection
+
+
+#! @Section Kimmerle Problem
+#!  This function checks whether the Kimmerle Problem ((KP) for short, cf. Section 
+#!  <Ref Sect='Chapter_Background_Section_The_Zassenhaus_Conjecture_and_related_questions'/>) can be verified
+#!  using the HeLP method with the data available in GAP.
+
+#! @Description
+#!  <K>HeLP_KP</K> checks whether an affirmative answer for the Kimmerle Problem for
+#!  the given group can be obtained using the HeLP method, the Wagner restrictions and the data available.
+#!  The argument of the function can be either an ordinary character table
+#!  or a group.  In the second case it will first calculate the corresponding 
+#!  ordinary character table.
+#!  If the group in question is nilpotent, then even the Zassenahus Conjecture and so also the Kimmerle Problem has an affirmative answer by a result of Al Weiss and the 
+#!  function will return <K>true</K> without performing any calculations.<P/>
+#!  If the group is non-nilpotent, the ordinary character table and all $p$-Brauer
+#!  tables for primes $p$ for which the group is not $p$-solvable and which are available in GAP will be used to produce as many
+#!  constraints on the torsion units as possible. Additionally, the Wagner test  
+#!  is applied to the results, cf. Section <Ref Sect='Chapter_Background_Section_The_Wagner_test'/>.
+#!  In case the information
+#!  suffices to obtain an affirmative answer for the Kimmerle Problem,
+#!  the function will return <K>true</K> and it will return <K>false</K> otherwise.
+#!  The possible partial augmentations for elements of order <M>k</M> 
+#!  and all its powers will also be stored in the list entry <K>HeLP_sol[k]</K>.<P/>
+#!  The function also does not use the previously computed partial augmentations
+#!  for elements of these orders but will overwrite the content of <K>HeLP_sol</K>.
+#!  If you do not like the last fact, please use <Ref Func='HeLP_AllOrdersKP'/>. 
+#! @Arguments OrdinaryCharacterTable|Group
+#! @Returns <K>true</K> if (KP) can be solved using the given data, <K>false</K> otherwise
+DeclareGlobalFunction( "HeLP_KP" );
+#! @InsertChunk KPExample
+#! @EndSection
+
 
 
 ####################################
@@ -103,7 +169,7 @@ DeclareGlobalFunction( "HeLP_PQ" );
 #! For a more detailed account see Sections <Ref Sect='Chapter_Extended_examples_Section_The_behavior_of_the_variable_HeLP_sol'/>,
 #! <Ref Sect='Chapter_Background_Section_Partial_augmentations_and_the_structure_of_HeLP_sol'/> and <Ref Func='HeLP_ChangeCharKeepSols'/>.
 #! In most situations, the user does not have to worry about this, the program will 
-#! take care of it as far as possible. <K>HeLP_settings</K> is a varaible which is used to store some settings of the program.
+#! take care of it as far as possible. <K>HeLP_settings</K> is a varaible which is used to store some settings on how linear inequalities are solved by the package.
 
 
 #! @Section Checks for specific orders 
@@ -286,7 +352,7 @@ DeclareGlobalFunction( "HeLP_AllOrders" );
 #!  of elements of order $k$, if <K>HeLP_sol[k]</K> already exists. Thus some precalculations using 
 #!  e.g. <Ref Func='HeLP_WithGivenOrder'/> are respected. In contrast to <Ref Func='HeLP_PQ'/> 
 #!  this function also does not check whether the group is solvable to use the Kimmerle-result to have an 
-#!  immediate positive solution for (ZC). <P/>
+#!  immediate positive solution for (PQ). <P/>
 #!  This function is interesting if one wants to save time or possesses some information, which was 
 #!  not obtained using this package and was entered manually into <K>HeLP_sol</K>.  
 #! @Arguments CharacterTable|Group
@@ -294,6 +360,35 @@ DeclareGlobalFunction( "HeLP_AllOrders" );
 DeclareGlobalFunction( "HeLP_AllOrdersPQ" );
 
 #! @InsertChunk AllOrdersExamplePQ 
+
+#! @Description
+#!  This function does almost the same as <Ref Func='HeLP_SP'/>. It checks whether the Spectrum
+#!  Problem can be verified for a group, but does not compute the partial augmentations
+#!  of elements of order $k$, if <K>HeLP_sol[k]</K> already exists. Thus some precalculations using 
+#!  e.g. <Ref Func='HeLP_WithGivenOrder'/> are respected. In contrast to <Ref Func='HeLP_SP'/> 
+#!  this function also does not check whether the group is solvable to use the Hertweck-result to have an 
+#!  immediate positive solution for (SP). <P/>
+#!  This function is interesting if one wants to save time or possesses some information, which was 
+#!  not obtained using this package and was entered manually into <K>HeLP_sol</K>.  
+#! @Arguments CharacterTable|Group
+#! @Returns <K>true</K> if (SP) can be solved using the given data, <K>false</K> otherwise
+DeclareGlobalFunction( "HeLP_AllOrdersSP" );
+
+#! @Description
+#!  This function does almost the same as <Ref Func='HeLP_KP'/>. It checks whether the Kimmerle
+#!  Problem can be verified for a group, but does not compute the partial augmentations
+#!  of elements of order $k$, if <K>HeLP_sol[k]</K> already exists. Thus some precalculations using 
+#!  e.g. <Ref Func='HeLP_WithGivenOrder'/> are respected. In contrast to <Ref Func='HeLP_KP'/> 
+#!  this function also does not check whether the group is nilpotent to use the Weiss-result to have an 
+#!  immediate positive solution for (KP). <P/>
+#!  This function is interesting if one wants to save time or possesses some information, which was 
+#!  not obtained using this package and was entered manually into <K>HeLP_sol</K>.  
+#! @Arguments CharacterTable|Group
+#! @Returns <K>true</K> if (KP) can be solved using the given data, <K>false</K> otherwise
+DeclareGlobalFunction( "HeLP_AllOrdersKP" );
+
+
+
 
 
 #! @Section Changing the used Character Table
@@ -456,9 +551,9 @@ DeclareGlobalFunction( "HeLP_WagnerTest" );
 
 #! @Description
 #!  For a list of possible partial augmentations, this function calculates representatives of each orbit of the action of the automorphism group of $G$
-#!  on them.  The first two mandatory arguments are an ordinary character table <A>C</A> (with an underlying group or Identifier) and the order <A>k</A> for which the partial augmentations
+#!  on them.  The first two mandatory arguments are an ordinary character table <A>C</A> (with an underlying group) and the order <A>k</A> for which the partial augmentations
 #!  should be filtered with respect to the action of the automorphism group of $G$.  If as third argument a list of partial augmentations is given,
-#!  then this will be used, otherwise the partial augmentations that are stored in <K>HeLP_sol[k]</K> are used.
+#!  then these will be used, otherwise the partial augmentations that are stored in <K>HeLP_sol[k]</K> are used.
 #! @Arguments C, k [, list_paraug]
 #! @Returns List of admissible partial augmentations
 DeclareGlobalFunction( "HeLP_AutomorphismOrbits" );
@@ -471,7 +566,7 @@ DeclareGlobalFunction( "HeLP_AutomorphismOrbits" );
 #! @Description
 #!  This function prints the possible solutions in a pretty way.  If a positive integer <A>k</A> as argument is given, then it prints the
 #!  admissible partial augmentations of units of order <A>k</A>, if they are already calculated.  If no argument is given, the 
-#!  function prints information on all orders for which there is already information.
+#!  function prints information on all orders for which there is already some information available.
 #! @Arguments [k]
 #! @Returns nothing
 DeclareGlobalFunction( "HeLP_PrintSolution" );
@@ -497,6 +592,34 @@ DeclareGlobalFunction( "HeLP_CharacterValue" );
 
 #! @InsertChunk EMCVExample
 
+#! @Section Check for triviality modulo normal subgroup
+
+#! @Description 
+#!  This function checks, if the image of a unit in $\mathrm{V}(\mathbb{Z}G)$ given by the partial augmentations of itself (not its powers)
+#!  is trivial modulo a normal subgroup $N$, i.e.
+#!  if it maps to the identity under the natural homomorphism $\mathbb{Z}G \rightarrow \mathbb{Z}(G/N)$.
+#!  The input is a character table, the order of the unit, its partial augmentations, the group and the normal subgroup.
+#! @Arguments UCT, k, pa, G, N  
+#! @Returns <K>true</K> or <K>false</K>
+DeclareGlobalFunction( "HeLP_IsOneModuloN" );
+#! @InsertChunk IOMNExample
+
+#! @Description
+
+#! @Arguments C
+#! @Returns Same character table as <K>C</K> but without underlying group
+DeclareGlobalFunction( "HeLP_ForgetUnderlyingGroup" );
+#! @InsertChunk FUGExample
+
+#! @Section Check Kimmerle Problem for single units
+
+#! @Description
+#!  Decides if a unit described by the partial augmentations of its powers satisfies the Kimmerle Problem. Input is Ordinary character table, order of the unit
+#!  and the partial augmentations.
+#! @Arguments UCT, k, pa
+#! @Returns <K>true</K> or <K>false</K>
+DeclareGlobalFunction( "HeLP_UnitSatisfiesKP" );
+#! @InsertChunk USKPExample
 
 #! @Section Check whether Zassenhaus Conjecture is known from theoretical results
 
@@ -516,10 +639,13 @@ DeclareGlobalFunction( "HeLP_CharacterValue" );
 DeclareGlobalFunction( "HeLP_IsZCKnown" );
 
 
+
 # The following functions are the only internal one, which are
 # defined via DeclareGlobalFunction / InstallGlobalFunction 
 # as it seems otherwise not possible define it recursively
 DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrder" );
 DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrderAllTables" );
+DeclareGlobalFunction( "HeLP_v4_INTERNAL_WithGivenOrder");
+
 
 #E

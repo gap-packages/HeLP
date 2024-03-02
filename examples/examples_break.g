@@ -35,6 +35,7 @@ HeLP_Change4ti2Precision("64");
 HeLP_ZC(C);
 #! true
 #! @EndExample
+#! The reproducibility of the above example depends on the versions of the progrmas involved and probably also your machine.
 #! @EndChunk
 
 HeLP_UseRedund(true);
