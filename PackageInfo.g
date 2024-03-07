@@ -13,7 +13,8 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "4.0",
-Date           := "29/02/2024",
+Date           := "29/02/2024", # dd/mm/yyyy format
+License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
     Type := "git",
@@ -32,7 +33,7 @@ ArchiveFormats := ".tar.gz",
 PackageDoc := rec(
   BookName  := ~.PackageName,
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := ~.Subtitle,
@@ -62,7 +63,7 @@ rec(
        IsAuthor      := true,
        IsMaintainer  := true,
        Email         := "Leo.Margolis@uam.es",
-       WWWHome       := "http://margollo.github.io",
+       WWWHome       := "https://margollo.github.io",
        PostalAddress := Concatenation( [
                         "Universidad Autonoma de Madrid\n",
                         "Campus Cantoblanco\n",
@@ -82,8 +83,13 @@ AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute con
 Dependencies := rec(
   GAP                    := ">=4.8.2",
   NeededOtherPackages    := [ ],
-  SuggestedOtherPackages := [  ["io", ">=4.2" ], ["4ti2Interface", ">= 2015.04.29"], ["CTblLib", ">= 1.2.2"], ["NormalizInterface", ">= 0.9.6"] ],
-  ExternalConditions     := [[ "zsolve", "http://www.4ti2.de" ] ]
+  SuggestedOtherPackages := [
+    ["io", ">=4.2" ],
+    ["4ti2Interface", ">= 2015.04.29"],
+    ["CTblLib", ">= 1.2.2"],
+    ["NormalizInterface", ">= 0.9.6"],
+  ],
+  ExternalConditions     := [[ "zsolve", "https://4ti2.github.io" ] ]
 ),
 
 TestFile := "tst/testall.g",
@@ -104,7 +110,7 @@ AutoDoc := rec(
                 ),
         Acknowledgements := Concatenation(
                     "The authors are grateful to Sebastian Gutsche, Christof Söger and Max Horn for endowing GAP\n",
-                    "with a 4ti2-Interface and a normlaiz-Interface.\n",
+                    "with a 4ti2-Interface and a normaliz-Interface.\n",
                     "We also would like to thank Gutsche and Söger for many very helpful discussions.\n",
                     "We also want to give credits to the developers of the softwares 4ti2 and normaliz.\n",
                     "Thanks go to David Avis for writing lrslib and answering our questions about it.\n",

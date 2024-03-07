@@ -466,7 +466,7 @@ DeclareGlobalFunction("HeLP_Change4ti2Precision");
 #! @InsertChunk PRExample
 
 #! @Description
-#! If normlaiz is used as the solver of the HeLP-system this function influences, whether the "VerticesOfPolyhedron"
+#! If normaliz is used as the solver of the HeLP-system this function influences, whether the "VerticesOfPolyhedron"
 #! are computed by normaliz. By default these are only computed, if the system has a trivial solution.
 #! The function takes "vertices", "novertices" and "default" as arguments. If you do not understand what this means, don't worry.
 #! @Arguments string
