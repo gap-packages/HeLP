@@ -4,7 +4,7 @@ LoadPackage( pkgname );
 pkgdir := DirectoriesPackageLibrary( pkgname, "tst" );
 
 testresult := true;
-if LoadPackage("normaliz") <> fail then
+if LoadPackage("NormalizInterface") <> fail then
   Print("normaliz found\n");
   fn := Filename( pkgdir, "yes_normaliz.tst" );
   Print("#I  Testing ", fn, "\n");
@@ -22,7 +22,7 @@ if IO_FindExecutable( "zsolve" ) <> fail then
   fi;
 fi;
 
-if IO_FindExecutable( "zsolve" ) = fail and LoadPackage("normaliz") = fail then
+if IO_FindExecutable( "zsolve" ) = fail and LoadPackage("NormalizInterface") = fail then
   fn := Filename( pkgdir, "no_solver.tst" );
   Print("No solver found\n");
   if not Test( fn, rec(compareFunction := "uptowhitespace") ) then
