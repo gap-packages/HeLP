@@ -1201,10 +1201,10 @@ elif Size(arg) = 1 and arg[1] in ["4ti2", "normaliz"] then
   elif arg[1] = "normaliz" then
     BindGlobal("HeLP_settings", ["normaliz", h2, h3, h4]);
     Info( HeLP_Info, 1, "'normaliz' will be used from now on.");
-    if LoadPackage("normaliz") = fail then
+    if LoadPackage("NormalizInterface") = fail then
       Info( HeLP_Info, 1, "Though note I could not load the NormalizInterface package .\n");
     fi;
-#  elif arg[1] = "normaliz" and LoadPackage("normaliz") = fail then
+#  elif arg[1] = "normaliz" and LoadPackage("NormalizInterface") = fail then
 #    BindGlobal("HeLP_settings", [h1, h2, h3, h4]);
 #    Info( HeLP_Info, 1, "The executable 'BNmzCone' (from normaliz) was not found.\nPlease install normaliz. See the manual of the package NormalizInterface.\nThe calculations will be performed as before.");
   fi;
