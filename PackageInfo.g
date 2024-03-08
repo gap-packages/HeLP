@@ -84,10 +84,10 @@ Dependencies := rec(
   GAP                    := ">=4.8.2",
   NeededOtherPackages    := [
     ["io", ">=4.2" ],
+    ["CTblLib", ">= 1.2.2"],
   ],
   SuggestedOtherPackages := [
     ["4ti2Interface", ">= 2015.04.29"],
-    ["CTblLib", ">= 1.2.2"],
     ["NormalizInterface", ">= 0.9.6"],
   ],
   ExternalConditions     := [[ "zsolve", "https://4ti2.github.io" ] ]
