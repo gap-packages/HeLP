@@ -82,9 +82,10 @@ AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute con
                   
 Dependencies := rec(
   GAP                    := ">=4.8.2",
-  NeededOtherPackages    := [ ],
-  SuggestedOtherPackages := [
+  NeededOtherPackages    := [
     ["io", ">=4.2" ],
+  ],
+  SuggestedOtherPackages := [
     ["4ti2Interface", ">= 2015.04.29"],
     ["CTblLib", ">= 1.2.2"],
     ["NormalizInterface", ">= 0.9.6"],
