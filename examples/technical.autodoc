@@ -3,12 +3,8 @@
 @Section Making the HeLP-package run
 #! For all basic functionalities of the HeLP-package (using only the solver normaliz) the standard GAP-installation
 #! should suffice to make everything work: Get the most recent GAP from the <URL Text="GAP-webpage">https://www.gap-system.org/</URL> 
-#! by following the instructions on the Download-page. Make sure to also run <K>InstPackages.sh</K> 
-#! as explained there. This should install all packages needed to run HeLP. Just start GAP and type
-#! <K>LoadPackage("HeLP");</K>. In GAP 4.8.2 the NormalizInterface has to be updated to version 0.9.6 
-#! or newer which can be obtained from the 
-#! <URL Text="website">https://gap-packages.github.io/NormalizInterface/</URL> of the package.
-#! For GAP 4.8.3 or newer this should not be necessary anymore.<P/>
+#! by following the instructions on the Download-page. Make sure to also install all packages needed to run HeLP. Then just start GAP and type
+#! <K>LoadPackage("HeLP");</K>. <P/>
 
 #! Here is a checklist what to do, if the package does not work or you also want to use the solver 4ti2:
 #! * Make sure you have sufficiently new versions of the following software: 
@@ -18,7 +14,7 @@
 #!   - the GAP-package <URL Text="4ti2Interface">https://homalg-project.github.io/pkg/4ti2Interface/</URL> (at least 2015.04.29; this package needs the IO-package)   <P/>
 #!   - the GAP-package <URL Text="NormalizInterface">https://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6)   <P/>
 #!   
-#!  Usually all these packages should come with a sufficiently recent GAP-installation (4.8.2 or newer)
+#!  Usually all these packages should come with a sufficiently recent GAP-installation (4.8.3 or newer)
 #!  and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing
 #!  <K>LoadPackage("[name]");</K> after starting GAP, where <K>[name]</K> is the name of the package.
 #! * The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter
@@ -46,8 +42,8 @@
 #!   - Start a terminal and access a path written in your bash or system_bash. Typically <K>usr/local/bin</K> should work. <P/>
 #!   - Run <K>ln -s /[PathToZsolve] zsolve</K>, where <K>[PathToZsolve]</K> is the path to the executable zsolve. This sets a symlink to the right place.
 #!   E.g. <K>ln -s /opt/4ti2/bin/zsolve zsolve</K> was used on the (Linux) computers in Stuttgart.
-#! * In case you use 4ti2, we also recommend to install <URL Text="lrslib">https://cgm.cs.mcgill.ca/~avis/C/lrs.html</URL>, at least version 4.3 
-#!   (note that version 4.2 or older sometimes produces unwanted behavior).  This software provides the 'redund' command, 
+#! * In case you use 4ti2, we also recommend to install <URL Text="lrslib">https://cgm.cs.mcgill.ca/~avis/C/lrs.html</URL>, at least version 4.3.
+#!   This software provides the 'redund' command, 
 #!   which can be switched on and off within HeLP, but which often leads to better performances (cf. <Ref Func='HeLP_UseRedund'/>).
 #!   For installation see the User's Guide or the Readme-file on the above mentioned homepage.  Usually, after unpacking in a 
 #!   directory contained in the path-variable it should be enough to call<P/> <K>make all</K><P/> (possibly as root) inside the lrslib-directory.

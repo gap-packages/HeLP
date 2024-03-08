@@ -69,7 +69,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -180,7 +180,7 @@ for k in Union(crit_p, crit) do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -278,7 +278,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -382,7 +382,7 @@ for k in Union(crit_p, crit) do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -548,7 +548,7 @@ if not IsSolvable(C) then
     fi;
   od;
 fi;
-if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+if "UnderlyingGroup" in KnownAttributesOfObject(CAct) then  # only when we know the group we can use its quotients
   intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
 else
   intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord, pas);
@@ -609,7 +609,7 @@ if not IsSolvable(C) then
   od;
 fi;
 HeLP_INTERNAL_CheckChar(Irr(C));
-if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+if "UnderlyingGroup" in KnownAttributesOfObject(CAct) then  # only when we know the group we can use its quotients
   intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
 else
   intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
@@ -1463,7 +1463,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -1564,7 +1564,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -1667,7 +1667,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
@@ -1768,7 +1768,7 @@ for k in posords do
       T := CharTabs[j];
       HeLP_ChangeCharKeepSols(T);
       Info(HeLP_Info, 3, "  Using table ", T, "."); 
-      if "UnderlyingGroup" in KnownAttributesOfObject(C) then  # only when we know the group we can use its quotients
+      if "UnderlyingGroup" in KnownAttributesOfObject(T) then  # only when we know the group we can use its quotients
         interintersol := HeLP_v4_INTERNAL_WithGivenOrder(Irr(T), k);
       else
         interintersol := HeLP_INTERNAL_WithGivenOrder(Irr(T), k);
