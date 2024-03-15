@@ -14,8 +14,8 @@
   is   reset.   For  a  more  detailed  account  see  Sections  [14X4.2[114X,  [14X5.2[114X  and
   [2XHeLP_ChangeCharKeepSols[102X  ([14X3.4-1[114X). In most situations, the user does not have
   to  worry  about  this, the program will take care of it as far as possible.
-  [9XHeLP_settings[109X  is  a  varaible  which  is used to store some settings of the
-  program.[133X
+  [9XHeLP_settings[109X  is  a  varaible  which  is used to store some settings on how
+  linear inequalities are solved by the package.[133X
   
   
   [1X3.1 [33X[0;0YChecks for specific orders[133X[101X
@@ -36,6 +36,125 @@
   will  be  used,  otherwise  the  function  [9XHeLP_WithGivenOrder[109X will first be
   applied to this order and the data given in the first argument.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A5");[127X[104X
+    [4X[28XCharacterTable( "A5" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 5);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 5: 2; stored in HeLP_sol[5].[128X[104X
+    [4X[28X[ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(5);[127X[104X
+    [4X[28XSolutions for elements of order 5:[128X[104X
+    [4X[28X[ [               u ],.[128X[104X
+    [4X[28X  [  [ "5a", "5b" ] ],[128X[104X
+    [4X[28X  [             --- ],[128X[104X
+    [4X[28X  [        [ 0, 1 ] ],[128X[104X
+    [4X[28X  [        [ 1, 0 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTests which partial augmentations for elements of order 5 are admissible.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");[127X[104X
+    [4X[28XCharacterTable( "A6" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 4);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 4; stored in HeLP_sol[4].[128X[104X
+    [4X[28X[ [ [ 1 ], [ -1, 2 ] ], [ [ 1 ], [ 2, -1 ] ], [ [ 1 ], [ 1, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4];              [127X[104X
+    [4X[28X[ [ [ 1 ], [ -1, 2 ] ], [ [ 1 ], [ 2, -1 ] ], [ [ 1 ], [ 1, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YTwo  of the non-trivial partial augmentations can be eliminated by using the
+  Brauer table modulo the prime [23X3[123X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C mod 3, 4);                                                                    [127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 2; stored in HeLP_sol[4].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 1, 0 ] ], [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWhen  using [9XHeLP_ZC[109X also the last remaining non-trivial partial augmentation
+  disappears,   as  this  function  applies  the  Wagner  test,  cf.  [14X5.4[114X  and
+  [2XHeLP_WagnerTest[102X ([14X3.7-1[114X):[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);               [127X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4]; HeLP_sol[6];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  following  example  demonstrates how one can use lists of characters to
+  obtain constraints for partial augmentations:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(49).2_1");   [127X[104X
+    [4X[28XCharacterTable( "L2(49).2_1" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C), 7);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 7: 1; stored in HeLP_sol[7].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C){[2]}, 14);[127X[104X
+    [4X[28X#I  The given data admit infinitely many solutions for elements of order 14.[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C){[44]}, 14);[127X[104X
+    [4X[28X#I  The given data admit infinitely many solutions for elements of order 14.[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C){[2,44]}, 14);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 14: 0; stored in HeLP_sol[14].[128X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YBrauer  tables  can  provide  more  restrictions on partial augmentations of
+  certain torsion units:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("J1");       [127X[104X
+    [4X[28XCharacterTable( "J1" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 6);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 73; stored in HeLP_sol[6].[128X[104X
+    [4X[25Xgap>[125X [27XB := C mod 11;[127X[104X
+    [4X[28XBrauerTable( "J1", 11 )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(B, 6);;       [127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 6; stored in HeLP_sol[6].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(B){[2,3]}, 6);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 6; stored in HeLP_sol[6].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(6);[127X[104X
+    [4X[28XSolutions for elements of order 6:[128X[104X
+    [4X[28X[ [                   u^3,                   u^2,                     u ],[128X[104X
+    [4X[28X  [              [ "2a" ],              [ "3a" ],  [ "2a", "3a", "6a" ] ],[128X[104X
+    [4X[28X  [                   ---,                   ---,                   --- ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],          [ -2, 0, 3 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],          [ 2, 0, -1 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],           [ 0, 0, 1 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],          [ -4, 3, 2 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],          [ 0, 3, -2 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],                 [ 1 ],          [ -2, 3, 0 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe result of the previous example can be found in [BJK11]. The existence of
+  such units was later excluded in [BM21].[133X
+  
+  [33X[0;0YWhen  dealing  with  many  variables  using lists of characters instead of a
+  complete  character  table  might  also speed up the calculations a lot, see
+  Section [14X4.3[114X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(27)");[127X[104X
+    [4X[28XCharacterTable( "L2(27)" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,7);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 7: 78; stored in HeLP_sol[7].[128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info,4);[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,3*7); [127X[104X
+    [4X[28X#I      Solutions for order 3 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 21: 0; stored in HeLP_sol[21].  [128X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info,1);[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y[9XHeLP_WithGivenOrder[109X  often  needs to consider many cases. Set the info class
+  HeLP_Info  to a level 4 or higher to keep track of the progress, see Section
+  [14X4.4[114X on info levels.[133X
+  
   [1X3.1-2 HeLP_WithGivenOrderAndPA[101X
   
   [33X[1;0Y[29X[2XHeLP_WithGivenOrderAndPA[102X( [3XCharacterTable|ListOfClassFunctions[103X, [3Xord[103X, [3Xpartaugs[103X ) [32X function[133X
@@ -50,6 +169,44 @@
   (i.e.  the  orders  of the [23Xu^d[123X's are ascending). This function only uses the
   constraints of the HeLP method, but does not apply the Wagner test [14X5.4[114X. Note
   that this function will not affect [9XHeLP_sol[109X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(48,33);; StructureDescription(G);[127X[104X
+    [4X[28X"SL(2,3) : C2"[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(G);;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 4);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 4; stored in HeLP_sol[4].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 6);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4]; HeLP_sol[6];[127X[104X
+    [4X[28X[ [ [ 1, 0 ], [ 0, 1, 0, 0, 0 ] ], [ [ 1, 0 ], [ 0, 0, 0, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1, 0 ], [ 0, 0, 0, 1, 0 ] ], [ [ 1, 0 ], [ 0, 0, 1, 0, 0 ] ] ][128X[104X
+    [4X[28X[ [ [ 1, 0 ], [ 0, 1 ], [ 0, 0, 0, 0, 1, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1, 0 ], [ 1, 0 ], [ 0, 0, 0, 0, 0, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPA(C, 12, [ [ 1, 0 ],  [ 0, 1 ], [ 0, 0, 0, 0, 1 ],[127X[104X
+    [4X[25X>[125X [27X    [ 0, 0, 0, 0, 1, 0 ] ]); [127X[104X
+    [4X[28X#I  Number of solutions for elements of order 12 with these partial augmentation[128X[104X
+    [4X[28Xs for the powers: 1.[128X[104X
+    [4X[28X[ [ [ 1, 0 ], [ 0, 1 ], [ 0, 0, 0, 0, 1 ], [ 0, 0, 0, 0, 1, 0 ], [128X[104X
+    [4X[28X      [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPA(C, 12, [ [ 1, 0 ],  [ 0, 1 ], [ 0, 0, 0, 1, 0 ],[127X[104X
+    [4X[25X>[125X [27X    [ 0, 0, 0, 0, 1, 0 ] ]);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 12 with these partial augmentation[128X[104X
+    [4X[28Xs for the powers: 0.[128X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIn  the  calls  of  [9XHeLP_WithGivenOrderAndPA[109X the function uses the following
+  partial augmentations:[133X
+  
+  [30X    [33X[0;6Y[9X[ 1, 0 ][109X for the element [22Xu^6[122X of order 2,[133X
+  
+  [30X    [33X[0;6Y[9X[ 0, 1 ][109X for the element [22Xu^4[122X of order 3,[133X
+  
+  [30X    [33X[0;6Y[9X[ 0, 0, 0, 0, 1 ][109X and [9X[ 0, 0, 0, 1, 0 ][109X for the element [22Xu^3[122X of order 4
+        respectively,[133X
+  
+  [30X    [33X[0;6Y[9X[ 0, 0, 0, 0, 1, 0 ][109X for the element [22Xu^2[122X of order 6.[133X
   
   [1X3.1-3 HeLP_WithGivenOrderAllTables[101X
   
@@ -112,6 +269,43 @@
   does  not apply the Wagner test [14X5.4[114X. Note that this function will not affect
   [9XHeLP_sol[109X.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A5");[127X[104X
+    [4X[28XCharacterTable( "A5" )[128X[104X
+    [4X[25Xgap>[125X [27Xchi := Irr(C)[2];; psi := Irr(C)[4];[127X[104X
+    [4X[28XCharacter( CharacterTable( "A5" ), [ 4, 0, 1, -1, -1 ] )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPAAndSpecificSystem([[chi, 1], [chi, 2]],[127X[104X
+    [4X[25X>[125X [27X 5, [ ], true);[127X[104X
+    [4X[28X[ [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [ [ -3/5, 2/5 ], [ 2/5, -3/5 ] ], [ 3/5, 3/5 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xsol5 := HeLP_WithGivenOrderAndPAAndSpecificSystem([[chi, 1], [chi, 2]], [127X[104X
+    [4X[25X>[125X [27X 5, [ ]);      [127X[104X
+    [4X[28X[ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe inequalities in the above examples are:[133X
+  
+  
+  [24X[33X[0;6Y\frac{-3}{5}\varepsilon_{5a}(u)     +    \frac{2}{5}\varepsilon_{5b}(u)    +
+  \frac{3}{5}    \in    \mathbb{Z}_{\geq    0}    \    \    {\rm{and}}   \   \
+  \frac{2}{5}\varepsilon_{5a}(u)     +    \frac{-3}{5}\varepsilon_{5b}(u)    +
+  \frac{3}{5} \in \mathbb{Z}_{\geq 0}.[133X
+  
+  [124X
+  
+  [33X[0;0YContinuing the above example:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPAAndSpecificSystem([psi], [127X[104X
+    [4X[25X>[125X [27X 2*5, [[1], sol5[1][1]], true);     [127X[104X
+    [4X[28X[ [  ], [ [ 0, -2/5, -2/5 ], [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ],[128X[104X
+    [4X[28X [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ], [ 0, 2/5, 2/5 ], [128X[104X
+    [4X[28X [ 0, 1/10, 1/10 ], [ 0, -1/10, -1/10 ], [ 0, 1/10, 1/10 ], [128X[104X
+    [4X[28X[ 0, -1/10, -1/10 ] ], [ 0, 1/2, 1/2, 1/2, 1/2, 0, 1/2, 1/2, 1/2, 1/2 ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPAAndSpecificSystem([[psi, 0], [psi, 2], [psi, 5]], [127X[104X
+    [4X[25X>[125X [27X 2*5, [[1], sol5[2][1]], true); [127X[104X
+    [4X[28X[ [  ], [ [ 0, -2/5, -2/5 ], [ 0, 1/10, 1/10 ], [ 0, 2/5, 2/5 ] ], [ 0, 1/2, 0 ] ][128X[104X
+  [4X[32X[104X
+  
   
   [1X3.2 [33X[0;0YChecks for specific orders with s-constant characters[133X[101X
   
@@ -151,6 +345,45 @@
   the variable [9XHeLP_sol[s*t][109X will be affected and [9XHeLP_sol[s*t][109X will be set to
   [9X[ ][109X.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 6);            [127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C, 2, 3);[127X[104X
+    [4X[28X[ [ [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C, 3, 2);     [127X[104X
+    [4X[28X[ [ [ 1 ], [ 3, -2 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("Sz(8)");;[127X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 4);[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C, 7, 13);[127X[104X
+    [4X[28X#I    Partial augmentations for elements of order 13 not yet calculated.  Restar[128X[104X
+    [4X[28Xt for this order.[128X[104X
+    [4X[28X#I    Number of non-trivial 7-constant characters in the list: 7.[128X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 1);[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  last example can also be checked by using all characters in [9XC[109X, but this
+  takes notably longer.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("Sz(32)");[127X[104X
+    [4X[28XCharacterTable( "Sz(32)" )[128X[104X
+    [4X[25Xgap>[125X [27XL := Filtered(OrdersClassRepresentatives(C), x-> x = 31);; Size(L);[127X[104X
+    [4X[28X15           # I.e. HeLP_WithGivenOrder(C,31) would take hopelessly long[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C mod 2, 31, 5);[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XIsBound(HeLP_sol[31]);[127X[104X
+    [4X[28Xfalse [128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe  still  have  no  clue  about elements of order 31, but there are none of
+  order 5*31.[133X
+  
   [1X3.2-2 HeLP_AddGaloisCharacterSums[101X
   
   [33X[1;0Y[29X[2XHeLP_AddGaloisCharacterSums[102X( [3XCT[103X ) [32X function[133X
@@ -183,6 +416,19 @@
   information,  which  was  not  obtained  using  this package and was entered
   manually into [9XHeLP_sol[109X.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(PSL(2,7));         [127X[104X
+    [4X[28XCharacterTable( Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8) ]) )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);        [127X[104X
+    [4X[28X#I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].[128X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[6] := [ ];[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_AllOrders(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
   [1X3.3-2 HeLP_AllOrdersPQ[101X
   
   [33X[1;0Y[29X[2XHeLP_AllOrdersPQ[102X( [3XCharacterTable|Group[103X ) [32X function[133X
@@ -194,7 +440,59 @@
   Thus   some  precalculations  using  e.g.  [2XHeLP_WithGivenOrder[102X  ([14X3.1-1[114X)  are
   respected.  In contrast to [2XHeLP_PQ[102X ([14X2.2-1[114X) this function also does not check
   whether  the  group  is  solvable  to  use  the  Kimmerle-result  to have an
-  immediate positive solution for (ZC).[133X
+  immediate positive solution for (PQ).[133X
+  
+  [33X[0;0YThis  function  is  interesting  if one wants to save time or possesses some
+  information,  which  was  not  obtained  using  this package and was entered
+  manually into [9XHeLP_sol[109X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A12");[127X[104X
+    [4X[28XCharacterTable( "A12" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C){[2, 4, 7]}, 2);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 2: 37; stored in HeLP_sol[2].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C mod 3,11,2);[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C mod 2){[2, 3, 4, 6]}, 3);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 3: 99; stored in HeLP_sol[3].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderSConstant(C mod 2, 11, 3);[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_AllOrdersPQ(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThus  the Prime Graph Question holds for the alternating group of degree 12.
+  Just using [9XHeLP_PQ(C)[109X would take hopelessly long.[133X
+  
+  [1X3.3-3 HeLP_AllOrdersSP[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AllOrdersSP[102X( [3XCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (SP) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0YThis function does almost the same as [2XHeLP_SP[102X ([14X2.3-1[114X). It checks whether the
+  Spectrum  Problem  can  be  verified  for  a group, but does not compute the
+  partial augmentations of elements of order [23Xk[123X, if [9XHeLP_sol[k][109X already exists.
+  Thus   some  precalculations  using  e.g.  [2XHeLP_WithGivenOrder[102X  ([14X3.1-1[114X)  are
+  respected.  In contrast to [2XHeLP_SP[102X ([14X2.3-1[114X) this function also does not check
+  whether  the  group  is  solvable  to  use  the  Hertweck-result  to have an
+  immediate positive solution for (SP).[133X
+  
+  [33X[0;0YThis  function  is  interesting  if one wants to save time or possesses some
+  information,  which  was  not  obtained  using  this package and was entered
+  manually into [9XHeLP_sol[109X.[133X
+  
+  [1X3.3-4 HeLP_AllOrdersKP[101X
+  
+  [33X[1;0Y[29X[2XHeLP_AllOrdersKP[102X( [3XCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (KP) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0YThis function does almost the same as [2XHeLP_KP[102X ([14X2.4-1[114X). It checks whether the
+  Kimmerle  Problem  can  be  verified  for  a group, but does not compute the
+  partial augmentations of elements of order [23Xk[123X, if [9XHeLP_sol[k][109X already exists.
+  Thus   some  precalculations  using  e.g.  [2XHeLP_WithGivenOrder[102X  ([14X3.1-1[114X)  are
+  respected.  In contrast to [2XHeLP_KP[102X ([14X2.4-1[114X) this function also does not check
+  whether  the group is nilpotent to use the Weiss-result to have an immediate
+  positive solution for (KP).[133X
   
   [33X[0;0YThis  function  is  interesting  if one wants to save time or possesses some
   information,  which  was  not  obtained  using  this package and was entered
@@ -218,6 +516,70 @@
   character tables come from the ATLAS and their InfoText begins with "origin:
   ATLAS  of finite groups", this is done automatically by the program.) A user
   may also use characters, which are normally not accessible in GAP.[133X
+  
+  [33X[0;0YTo keep track of the change of the character tables one can set HeLP_Info to
+  level  5. In this first example it is not realized that the character tables
+  belong  to  the  same  group,  so  the solutions for elements of order 2 are
+  recalculated (they have been reset, as another character table is used).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 5);[127X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(SymmetricGroup(4)); [127X[104X
+    [4X[28XCharacterTable( Sym( [ 1 .. 4 ] ) )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C mod 2, 3); [127X[104X
+    [4X[28X#I  USED CHARACTER TABLE CHANGED TO BrauerTable( SymmetricGroup( [ 1 .. 4 ] ), 2[128X[104X
+    [4X[28X ), ALL GLOBAL VARIABLES RESET.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].[128X[104X
+    [4X[28X[ [ [ 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 2*3);    [127X[104X
+    [4X[28X#I  USED CHARACTER TABLE CHANGED TO CharacterTable( SymmetricGroup( [ 1 .. 4 ] )[128X[104X
+    [4X[28X ), ALL GLOBAL VARIABLES RESET.[128X[104X
+    [4X[28X#I      Solutions for order 2 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I      Solutions for order 3 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 0; stored in HeLP_sol[6].[128X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe   recalculations   of   the   solutions   can   be  avoided  by  calling
+  [9XHeLP_ChangeCharKeepSols[109X before using another character table.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XD := CharacterTable(SymmetricGroup(4));[127X[104X
+    [4X[28XCharacterTable( Sym( [ 1 .. 4 ] ) )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(D mod 2, 3);       [127X[104X
+    [4X[28X#I  USED CHARACTER TABLE CHANGED TO BrauerTable( SymmetricGroup( [ 1 .. 4 ] ), 2[128X[104X
+    [4X[28X ), ALL GLOBAL VARIABLES RESET.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 3: 1; stored in HeLP_sol[3].[128X[104X
+    [4X[28X[ [ [ 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ChangeCharKeepSols(D);[127X[104X
+    [4X[28X#I  WARNING: Change used character table without checking if the character table[128X[104X
+    [4X[28Xs have the same underlying groups and the ordering of the conjugacy classes are [128X[104X
+    [4X[28Xthe same![128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(D, 2*3);    [127X[104X
+    [4X[28X#I  Using same character table as until now; all known solutions kept.[128X[104X
+    [4X[28X#I      Solutions for order 2 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 0; stored in HeLP_sol[6].[128X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWhen using tables from the ATLAS this is done automatically:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCA := CharacterTable("A5");[127X[104X
+    [4X[28XCharacterTable( "A5" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(CA mod 2, 5);[127X[104X
+    [4X[28X#I  USED CHARACTER TABLE CHANGED TO BrauerTable( "A5", 2 ), ALL GLOBAL VARIABLES[128X[104X
+    [4X[28X RESET.[128X[104X
+    [4X[28X#I  Testing possibility 1 out of 1.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 5: 2; stored in HeLP_sol[5].[128X[104X
+    [4X[28X[ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(CA, 2*5);    [127X[104X
+    [4X[28X#I  Using character table of the same group; all known solutions kept.[128X[104X
+    [4X[28X#I      Solutions for order 2 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 10: 0; stored in HeLP_sol[10].[128X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 1);[127X[104X
+  [4X[32X[104X
   
   [1X3.4-2 HeLP_Reset[101X
   
@@ -320,12 +682,15 @@
     [4X[28Xtrue[128X[104X
   [4X[32X[104X
   
+  [33X[0;0YThe  reproducibility  of  the  above  example depends on the versions of the
+  progrmas involved and probably also your machine.[133X
+  
   [1X3.5-4 HeLP_Vertices[101X
   
   [33X[1;0Y[29X[2XHeLP_Vertices[102X( [3Xstring[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ynothing[133X
   
-  [33X[0;0YIf  normlaiz  is  used  as  the  solver  of  the  HeLP-system  this function
+  [33X[0;0YIf  normaliz  is  used  as  the  solver  of  the  HeLP-system  this function
   influences,  whether the "VerticesOfPolyhedron" are computed by normaliz. By
   default  these  are only computed, if the system has a trivial solution. The
   function  takes  "vertices", "novertices" and "default" as arguments. If you
@@ -348,6 +713,34 @@
   
   [33X[0;0YIf there is no third argument given, i.e. the augmentations from [9XHeLP_sol[k][109X
   are used, the result overwrites [9XHeLP_sol[k][109X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 4);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 4; stored in HeLP_sol[4].[128X[104X
+    [4X[28X[ [ [ 1 ], [ -1, 2 ] ], [ [ 1 ], [ 2, -1 ] ], [ [ 1 ], [ 1, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_VerifySolution(C mod 3, 4);[127X[104X
+    [4X[28X[ [ [ 1 ], [ 1, 0 ] ], [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 1, 0 ] ], [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("S12");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(Irr(C mod 5){[2..6]}, 2);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 2: 563; stored in HeLP_sol[2].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_VerifySolution(C mod 5, 2);;[127X[104X
+    [4X[25Xgap>[125X [27XSize(HeLP_sol[2]);[127X[104X
+    [4X[28X387[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_VerifySolution(C mod 3, 2);;[127X[104X
+    [4X[25Xgap>[125X [27XSize(HeLP_sol[2]);[127X[104X
+    [4X[28X324[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YUsing  [9XHeLP_WithGivenOrder(C  mod  5,  2)[109X or [9XHeLP_WithGivenOrder(C mod 3, 2)[109X
+  takes much longer since in that case a bigger system of inequalities must be
+  solved.[133X
   
   [1X3.6-2 HeLP_FindAndVerifySolution[101X
   
@@ -380,6 +773,23 @@
   possibility    is    taking    too    long,   one   can   check   it   using
   [2XHeLP_WithGivenOrderAndPA[102X ([14X3.1-2[114X).[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info,4);[127X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(SmallGroup(160,91));[127X[104X
+    [4X[28XCharacterTable( <pc group of size 160 with 6 generators> )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,4);;[127X[104X
+    [4X[28X#I      Solutions for order 2 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 22; stored in HeLP_sol[4].   [128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,10);;[127X[104X
+    [4X[28X#I      Solutions for order 5 not yet calculated.  Restart for this order.[128X[104X
+    [4X[28X#I  Number of solutions for elements of order 10: 6; stored in HeLP_sol[10].  [128X[104X
+    [4X[25Xgap>[125X [27XLP := HeLP_PossiblePartialAugmentationsOfPowers(20);;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrderAndPA(Irr(C){[2..20]},20,LP[1]);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 20 with these partial augmentations[128X[104X
+    [4X[28X for the powers: 0.[128X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
   [1X3.6-4 HeLP_WriteTrivialSolution[101X
   
   [33X[1;0Y[29X[2XHeLP_WriteTrivialSolution[102X( [3XC[103X, [3Xk[103X ) [32X function[133X
@@ -392,6 +802,27 @@
   were  already  calculated,  they  are  overwritten by this function, so this
   function  can  be  used in particular if elements of order [23Xk[123X are known to be
   rationally conjugate to group elements by theoretical results.[133X
+  
+  [33X[0;0YWith  the  character  tables  that  are  currently  available  in  GAP,  the
+  Zassenhaus  Conjecture for elements of order [23X4[123X in [23X\text{PSL}(2,49)[123X cannot be
+  solved. However it was proved in [Her07] using the Brauer table modulo [23X7[123X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(49)");[127X[104X
+    [4X[28XCharacterTable( "L2(49)" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 4);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 14; stored in HeLP_sol[4].[128X[104X
+    [4X[28X[ [ [ 1 ], [ -6, 7 ] ], [ [ 1 ], [ -5, 6 ] ], [ [ 1 ], [ -4, 5 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ -3, 4 ] ], [ [ 1 ], [ -2, 3 ] ], [ [ 1 ], [ -1, 2 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ] ], [ [ 1 ], [ 1, 0 ] ], [ [ 1 ], [ 2, -1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 3, -2 ] ], [ [ 1 ], [ 4, -3 ] ], [ [ 1 ], [ 5, -4 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 6, -5 ] ], [ [ 1 ], [ 7, -6 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XC mod 7;[127X[104X
+    [4X[28Xfail[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WriteTrivialSolution(C, 4);;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ] ] ][128X[104X
+  [4X[32X[104X
   
   
   [1X3.7 [33X[0;0YThe Wagner test[133X[101X
@@ -410,6 +841,73 @@
   divisor    of    [3Xk[103X,   which   will   be   extracted   from   the   head   of
   [3XOrdinaryCharacterTable[103X.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("M11");[127X[104X
+    [4X[28XCharacterTable( "M11" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,8);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 8: 36; stored in HeLP_sol[8].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[8] := HeLP_WagnerTest(8);;[127X[104X
+    [4X[25Xgap>[125X [27XSize(HeLP_sol[8]);[127X[104X
+    [4X[28X24[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThus  the  Wagner-Test  eliminates  12  possible  partial  augmentations for
+  elements of order 8. Continuing the example:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,12);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 12: 7; stored in HeLP_sol[12].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 1 ], [ 2, -1 ], [ 0, 3, -2 ], [ 1, 0, -1, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 1, 0 ], [ 0, 3, -2 ], [ 0, 0, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ -1, 2 ], [ 0, 3, -2 ], [ 0, 0, 2, -1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 0, 1 ], [ 0, 3, -2 ], [ 1, 0, 1, -1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 0, 1 ], [ 0, 3, -2 ], [ -1, 0, 1, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 1, 0 ], [ 0, -3, 4 ], [ 0, 0, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ -1, 2 ], [ 0, -3, 4 ], [ 1, 0, -1, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[12] := HeLP_WagnerTest(12);[127X[104X
+    [4X[28X[ [ [ 1 ], [ 1 ], [ 1, 0 ], [ 0, 3, -2 ], [ 0, 0, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ -1, 2 ], [ 0, 3, -2 ], [ 0, 0, 2, -1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 1, 0 ], [ 0, -3, 4 ], [ 0, 0, 0, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4] := HeLP_WagnerTest(4);;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,12);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 12: 3; stored in HeLP_sol[12].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 1 ], [ 2, -1 ], [ 0, 3, -2 ], [ 1, 0, -1, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 0, 1 ], [ 0, 3, -2 ], [ 1, 0, 1, -1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1 ], [ 0, 1 ], [ 0, 3, -2 ], [ -1, 0, 1, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[12] := HeLP_WagnerTest(12);[127X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThus there are no normalized units of order 12 in the integral group ring of
+  [23XM_{11}.[123X[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("M22");[127X[104X
+    [4X[28XCharacterTable( "M22" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WagnerTest(12, [ [ [1], [1], [1,0], [0,0,1], [-3,3,2,3,-4] ] ],C);[127X[104X
+    [4X[28X[  ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis example is taken from the appendix of [BKL08].[133X
+  
+  [33X[0;0YSometimes the Wagner-Test may even prove the Zassenhaus Conjecture:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(96,187);[127X[104X
+    [4X[28X<pc group of size 96 with 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(G);[127X[104X
+    [4X[28XCharacterTable( <pc group of size 96 with 6 generators> )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C,4);;[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 4: 34; stored in HeLP_sol[4].[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_WagnerTest(4);       [127X[104X
+    [4X[28X[ [ [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 0, 1 ] ],[128X[104X
+    [4X[28X  [ [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 1, 0, 0 ] ],[128X[104X
+    [4X[28X  [ [ 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0, 0, 0 ] ], [128X[104X
+    [4X[28X  [ [ 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 0, 0, 0, 1, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
   
   [1X3.8 [33X[0;0YAction of the automorphism group[133X[101X
   
@@ -421,11 +919,20 @@
   [33X[0;0YFor  a  list  of  possible  partial  augmentations, this function calculates
   representatives  of  each orbit of the action of the automorphism group of [23XG[123X
   on them. The first two mandatory arguments are an ordinary character table [3XC[103X
-  (with  an  underlying  group  or  Identifier)  and the order [3Xk[103X for which the
-  partial  augmentations  should be filtered with respect to the action of the
+  (with   an  underlying  group)  and  the  order  [3Xk[103X  for  which  the  partial
+  augmentations  should  be  filtered  with  respect  to  the  action  of  the
   automorphism   group   of  [23XG[123X.  If  as  third  argument  a  list  of  partial
-  augmentations  is  given,  then  this  will  be  used, otherwise the partial
+  augmentations  is  given,  then  these  will  be used, otherwise the partial
   augmentations that are stored in [9XHeLP_sol[k][109X are used.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 6);[127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_AutomorphismOrbits(C, 6);[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ] ][128X[104X
+  [4X[32X[104X
   
   
   [1X3.9 [33X[0;0YOutput[133X[101X
@@ -439,7 +946,45 @@
   integer  [3Xk[103X  as  argument  is  given,  then  it prints the admissible partial
   augmentations  of  units  of  order [3Xk[103X, if they are already calculated. If no
   argument  is  given, the function prints information on all orders for which
-  there is already information.[133X
+  there is already some information available.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A5");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);          [127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution();[127X[104X
+    [4X[28XSolutions for elements of order 2:[128X[104X
+    [4X[28X[ [         u ],[128X[104X
+    [4X[28X  [  [ "2a" ] ],[128X[104X
+    [4X[28X  [       --- ],[128X[104X
+    [4X[28X  [     [ 1 ] ] ][128X[104X
+    [4X[28XSolutions for elements of order 3:[128X[104X
+    [4X[28X[ [         u ],[128X[104X
+    [4X[28X  [  [ "3a" ] ],[128X[104X
+    [4X[28X  [       --- ],[128X[104X
+    [4X[28X  [     [ 1 ] ] ][128X[104X
+    [4X[28XSolutions for elements of order 5:[128X[104X
+    [4X[28X[ [               u ],[128X[104X
+    [4X[28X  [  [ "5a", "5b" ] ],[128X[104X
+    [4X[28X  [             --- ],[128X[104X
+    [4X[28X  [        [ 0, 1 ] ],[128X[104X
+    [4X[28X  [        [ 1, 0 ] ] ][128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 6.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 10.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 15.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 30.[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);           [127X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(6);[127X[104X
+    [4X[28XSolutions for elements of order 6:[128X[104X
+    [4X[28X[ [                   u^3,                   u^2,                     u ],[128X[104X
+    [4X[28X  [              [ "2a" ],        [ "3a", "3b" ],  [ "2a", "3a", "3b" ] ],[128X[104X
+    [4X[28X  [                   ---,                   ---,                   --- ],[128X[104X
+    [4X[28X  [                 [ 1 ],              [ 0, 1 ],          [ -2, 2, 1 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],              [ 1, 0 ],          [ -2, 1, 2 ] ] ][128X[104X
+  [4X[32X[104X
   
   
   [1X3.10 [33X[0;0YEigenvalue multiplicities and character values[133X[101X
@@ -462,10 +1007,108 @@
   [33X[0;0YThe  function  returns the character value [22Xchi(u)[122X of an element [22Xu[122X of order [23Xk[123X
   having the partial augmentations [3Xparaug[103X.[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");;[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_WithGivenOrder(C, 6);                               [127X[104X
+    [4X[28X#I  Number of solutions for elements of order 6: 2; stored in HeLP_sol[6].[128X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27Xchi := Irr(C)[2];;   # a character of degree 5[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_MultiplicitiesOfEigenvalues(chi, 6, HeLP_sol[6][2]);[127X[104X
+    [4X[28X[ 1, 0, 1, 2, 1, 0 ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_CharacterValue(chi, 6, HeLP_sol[6][2][3]);          [127X[104X
+    [4X[28X-2[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_CharacterValue(chi, 6, [-2,1,2]);[127X[104X
+    [4X[28X-2[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_CharacterValue(chi, 6, [-2,2,1]);[127X[104X
+    [4X[28X1[128X[104X
+  [4X[32X[104X
   
-  [1X3.11 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X[101X
+  [33X[0;0YThese  eigenvalues were computed manually by M. Hertweck and may be found in
+  [Her08c].[133X
   
-  [1X3.11-1 HeLP_IsZCKnown[101X
+  
+  [1X3.11 [33X[0;0YCheck for triviality modulo normal subgroup[133X[101X
+  
+  [1X3.11-1 HeLP_IsOneModuloN[101X
+  
+  [33X[1;0Y[29X[2XHeLP_IsOneModuloN[102X( [3XUCT[103X, [3Xk[103X, [3Xpa[103X, [3XG[103X, [3XN[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YThis  function  checks,  if  the  image of a unit in [23X\mathrm{V}(\mathbb{Z}G)[123X
+  given  by  the  partial  augmentations of itself (not its powers) is trivial
+  modulo  a  normal  subgroup  [23XN[123X,  i.e.  if  it maps to the identity under the
+  natural homomorphism [23X\mathbb{Z}G \rightarrow \mathbb{Z}(G/N)[123X. The input is a
+  character table, the order of the unit, its partial augmentations, the group
+  and the normal subgroup.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(144,117);[127X[104X
+    [4X[28X<pc group of size 144 with 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable(G);[127X[104X
+    [4X[28XCharacterTable( <pc group of size 144 with 6 generators> )[128X[104X
+    [4X[25Xgap>[125X [27XN := PCore(G, 3);[127X[104X
+    [4X[28XGroup([ f5, f6 ])[128X[104X
+    [4X[25Xgap>[125X [27XSize(N);[127X[104X
+    [4X[28X9[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_IsOneModuloN(C, 3, [1,0], G, N);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  fact  that  the  unit of order 3 lies in the kernel of the map modulo [23XN[123X
+  explains  why  [9XHeLP_ZC[109X  produces a result different from the one recorded in
+  [BHK+18].  Namely,  the  unit  of  order 6 described there has non-vanishing
+  partial  augmentations  at  classes  of  order 6 with non-conjugate 3-parts,
+  which contradicts the p-adic criterion of Hertweck [Mar17], as the 3-part of
+  the unit is trivial modulo the 3-core of the group.[133X
+  
+  [1X3.11-2 HeLP_ForgetUnderlyingGroup[101X
+  
+  [33X[1;0Y[29X[2XHeLP_ForgetUnderlyingGroup[102X( [3XC[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10YSame character table as [9XC[109X but without underlying group[133X
+  
+  [33X[0;0YContinuing the previous example we see that the normal subgroup structure of
+  the group is needed here to get a positive solution for (ZC).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCCop := HeLP_ForgetUnderlyingGroup(C);[127X[104X
+    [4X[28XCharacterTable( "CT4" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(CCop);[127X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.12 [33X[0;0YCheck Kimmerle Problem for single units[133X[101X
+  
+  [1X3.12-1 HeLP_UnitSatisfiesKP[101X
+  
+  [33X[1;0Y[29X[2XHeLP_UnitSatisfiesKP[102X( [3XUCT[103X, [3Xk[103X, [3Xpa[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X or [9Xfalse[109X[133X
+  
+  [33X[0;0YDecides  if  a  unit  described  by  the partial augmentations of its powers
+  satisfies  the Kimmerle Problem. Input is Ordinary character table, order of
+  the unit and the partial augmentations.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A7");[127X[104X
+    [4X[28XCharacterTable( "A7" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 4, 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[4];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ] ], [ [ 1 ], [ 2, -1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_UnitSatisfiesKP(C, 4, HeLP_sol[4][1]);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_UnitSatisfiesKP(C, 4, HeLP_sol[4][2]);[127X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.13 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X[101X
+  
+  [1X3.13-1 HeLP_IsZCKnown[101X
   
   [33X[1;0Y[29X[2XHeLP_IsZCKnown[102X( [3XG[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  (ZC)  can  be  derived  from  theoretical results, [9Xfalse[109X

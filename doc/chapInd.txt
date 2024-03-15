@@ -4,19 +4,26 @@
   
   [2XHeLP_AddGaloisCharacterSums[102X 3.2-2 
   [2XHeLP_AllOrders[102X 3.3-1 
+  [2XHeLP_AllOrdersKP[102X 3.3-4 
   [2XHeLP_AllOrdersPQ[102X 3.3-2 
+  [2XHeLP_AllOrdersSP[102X 3.3-3 
   [2XHeLP_AutomorphismOrbits[102X 3.8-1 
   [2XHeLP_Change4ti2Precision[102X 3.5-3 
   [2XHeLP_ChangeCharKeepSols[102X 3.4-1 
   [2XHeLP_CharacterValue[102X 3.10-2 
   [2XHeLP_FindAndVerifySolution[102X 3.6-2 
-  [2XHeLP_IsZCKnown[102X 3.11-1 
+  [2XHeLP_ForgetUnderlyingGroup[102X 3.11-2 
+  [2XHeLP_IsOneModuloN[102X 3.11-1 
+  [2XHeLP_IsZCKnown[102X 3.13-1 
+  [2XHeLP_KP[102X 2.4-1 
   [2XHeLP_MultiplicitiesOfEigenvalues[102X 3.10-1 
   [2XHeLP_PossiblePartialAugmentationsOfPowers[102X 3.6-3 
   [2XHeLP_PQ[102X 2.2-1 
   [2XHeLP_PrintSolution[102X 3.9-1 
   [2XHeLP_Reset[102X 3.4-2 
   [2XHeLP_Solver[102X 3.5-1 
+  [2XHeLP_SP[102X 2.3-1 
+  [2XHeLP_UnitSatisfiesKP[102X 3.12-1 
   [2XHeLP_UseRedund[102X 3.5-2 
   [2XHeLP_VerifySolution[102X 3.6-1 
   [2XHeLP_Vertices[102X 3.5-4 

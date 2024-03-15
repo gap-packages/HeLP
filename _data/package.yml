@@ -1,20 +1,20 @@
 name: HeLP
-version: 3.5
-date: 2019-12-20
+version: 4.0
+date: 2024-02-29
 description: |
     Hertweck-Luthar-Passi method.
 
 authors:
     - name: Andreas Bächle
-      url: http://homepages.vub.ac.be/~abachle/
+      url: mailto:ABachle@gmx.net
     - name: Leo Margolis
-      url: http://homepages.vub.ac.be/~lmargoli/
+      url: https://margollo.github.io
 
 maintainers:
     - name: Andreas Bächle
-      url: http://homepages.vub.ac.be/~abachle/
+      url: mailto:ABachle@gmx.net
     - name: Leo Margolis
-      url: http://homepages.vub.ac.be/~lmargoli/
+      url: https://margollo.github.io
 
 GAP: ">=4.8.2"
 
@@ -22,15 +22,14 @@ needed-pkgs:
     - name: "io"
       version: ">=4.2"
       url: "https://gap-packages.github.io/io"
-    - name: "4ti2Interface"
-      version: ">= 2015.04.29"
-      url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
     - name: "CTblLib"
       version: ">= 1.2.2"
       url: "http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib"
-    - name: "atlasrep"
-      version: ">= 1.5"
-      url: "http://www.math.rwth-aachen.de/~Thomas.Breuer/atlasrep"
+
+suggested-pkgs:
+    - name: "4ti2Interface"
+      version: ">= 2015.04.29"
+      url: "http://homalg-project.github.io/homalg_project/4ti2Interface/"
     - name: "NormalizInterface"
       version: ">= 0.9.6"
       url: "https://gap-packages.github.io/NormalizInterface"
@@ -41,39 +40,40 @@ packageinfo: https://gap-packages.github.io/HeLP/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/HeLP/releases/download/v3.5/HeLP-3.5.tar.gz
+      url: https://github.com/gap-packages/HeLP/releases/download/v4.0/HeLP-4.0.tar.gz
 
 abstract: |
-    <span class="pkgname">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture and the Prime Graph Question for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities.
+    <span class="pkgname">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture, the Prime Graph Question, the Spectrum Problem and the Kimmerle Problem for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities or alternatively Normaliz.
 
 status: deposited
-doc-html: doc/chap0.html
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
 keywords: |
-    HeLP method, torsion units, rational conjugacy, Zassenhaus Conjecture, Prime Graph Question.
+    HeLP method, torsion units, rational conjugacy, Zassenhaus Conjecture, Prime Graph Question, Spectrum Problem, Kimmerle Problem.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>BM19</span>]   <b class='BibAuthor'>Bächle, A. and Margolis, L.</b>,
+    [<span class='BibKey'>BM24</span>]   <b class='BibAuthor'>Bächle, A. and Margolis, L.</b>,
      <i class='BibTitle'>HeLP, Hertweck-Luthar-Passi method.,
-             Version 3.5</i>
-     (<span class='BibYear'>2019</span>)<br />
+             Version 4.0</i>
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/HeLP">https://gap-packages.github.io/HeLP</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ HeLP3.5,
+    @misc{ HeLP4.0,
       author =           {B{\"a}chle, A. and Margolis, L.},
-      title =            {{HeLP}, Hertweck-Luthar-Passi method., {V}ersion 3.5},
-      month =            {Dec},
-      year =             {2019},
+      title =            {{HeLP}, Hertweck-Luthar-Passi method., {V}ersion 4.0},
+      month =            {Feb},
+      year =             {2024},
       note =             {GAP package},
       howpublished =     {\href            {https://gap-packages.github.io/HeLP}
                           {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{HeLP}}},
       keywords =         {HeLP   method;   torsion  units;  rational  conjugacy;
-                          Zassenhaus Conjecture; Prime Graph Question},
-      printedkey =       {BM19}
+                          Zassenhaus  Conjecture; Prime Graph Question; Spectrum
+                          Problem; Kimmerle Problem},
+      printedkey =       {BM24}
     }
 

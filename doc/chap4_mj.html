@@ -174,7 +174,7 @@ BrauerTable( "L3(7).2", 7 )
 
 <p>The most time consuming operation when using the functions of this package is solving the system of inequalities given by the HeLP method, see Section <a href="chap5_mj.html#X8663389F87B9CE62"><span class="RefLink">5.3</span></a>. This package uses the programs 4ti2 and/or normaliz to do this and it is not completely clear to the authors of this package which input is solved faster by these programs. In any case it is helpful to reduce the number of variables, using e.g. <span class="SimpleMath">\(p\)</span>-constant characters, and in many situations it is useful to reduce the number of inequalities, i.e. of used characters.</p>
 
-<p>To measure the time a function needs we use <code class="keyw">IO_gettimeofday</code> from the IO-package rather than functions like <code class="keyw">time</code> or <code class="keyw">Runtime</code>, since these measure only the GAP time, but do not return the time the functions spend using 4ti2 or normaliz. We used the following function (which is essentially due to Alexander Konovalov) to meassure the time used for the computation:</p>
+<p>To measure the time a function needs we use <code class="keyw">IO_gettimeofday</code> from the IO-package rather than functions like <code class="keyw">time</code> or <code class="keyw">Runtime</code>, since these measure only the GAP time, but do not return the time the functions spend using 4ti2 or normaliz. We used the following function (which is essentially due to Olexandr Konovalov) to meassure the time used for the computation:</p>
 
 
 <div class="example"><pre>

@@ -7,13 +7,9 @@
   [33X[0;0YFor  all  basic  functionalities  of the HeLP-package (using only the solver
   normaliz)  the  standard  GAP-installation should suffice to make everything
   work:     Get     the    most    recent    GAP    from    the    GAP-webpage
-  ([7Xhttp://www.gap-system.org/[107X)   by   following   the   instructions   on  the
-  Download-page.  Make  sure  to  also run [9XInstPackages.sh[109X as explained there.
-  This should install all packages needed to run HeLP. Just start GAP and type
-  [9XLoadPackage("HeLP");[109X.  In  GAP 4.8.2 the NormalizInterface has to be updated
-  to   version  0.9.6  or  newer  which  can  be  obtained  from  the  website
-  ([7Xhttp://gap-packages.github.io/NormalizInterface//[107X)  of the package. For GAP
-  4.8.3 or newer this should not be necessary anymore.[133X
+  ([7Xhttps://www.gap-system.org/[107X)   by   following   the   instructions  on  the
+  Download-page.  Make  sure  to also install all packages needed to run HeLP.
+  Then just start GAP and type [9XLoadPackage("HeLP");[109X.[133X
   
   [33X[0;0YHere  is  a  checklist  what to do, if the package does not work or you also
   want to use the solver 4ti2:[133X
@@ -21,27 +17,26 @@
   [30X    [33X[0;6YMake  sure  you  have  sufficiently  new  versions  of  the  following
         software:[133X
   
-        [30X    [33X[0;12YGAP ([7Xhttp://www.gap-system.org/[107X) (at least 4.8.2)[133X
+        [30X    [33X[0;12YGAP ([7Xhttps://www.gap-system.org/[107X) (at least 4.8.2)[133X
   
         [30X    [33X[0;12Ythe                      GAP-package                     CTblLib
-              ([7Xhttp://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/[107X)     (at
+              ([7Xhttps://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/[107X)    (at
               least 1.2.2)[133X
   
-        [30X    [33X[0;12Ythe GAP-package IO ([7Xhttp://gap-packages.github.io/io/[107X) (at least
-              4.2;  see  also the next bullet point if this package can not be
-              loaded)[133X
+        [30X    [33X[0;12Ythe   GAP-package  IO  ([7Xhttps://gap-packages.github.io/io/[107X)  (at
+              least  4.2;  see  also the next bullet point if this package can
+              not be loaded)[133X
   
         [30X    [33X[0;12Ythe                   GAP-package                  4ti2Interface
-              (
-              http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/
-              ) (at least 2015.04.29; this package needs the IO-package)[133X
+              ([7Xhttps://homalg-project.github.io/pkg/4ti2Interface/[107X)  (at least
+              2015.04.29; this package needs the IO-package)[133X
   
         [30X    [33X[0;12Ythe                 GAP-package                NormalizInterface
-              ([7Xhttp://gap-packages.github.io/NormalizInterface//[107X)   (at  least
+              ([7Xhttps://gap-packages.github.io/NormalizInterface//[107X)  (at  least
               0.9.6)[133X
   
   [33X[0;0YUsually   all   these  packages  should  come  with  a  sufficiently  recent
-  GAP-installation  (4.8.2 or newer) and should be contained in the pkg-folder
+  GAP-installation  (4.8.3 or newer) and should be contained in the pkg-folder
   of  the  GAP-installation.  To  see if they are working you can load them by
   typing  [9XLoadPackage("[name]");[109X  after starting GAP, where [9X[name][109X is the name
   of the package.[133X
@@ -52,28 +47,29 @@
         in  the  pkg-folder,  than most likely the C-part is not yet compiled.
         For  information  on  installation and in particular on how to compile
         the            C-part,            see            the            manual
-        ([7Xhttp://gap-packages.github.io/io/doc/chap0.html[107X)    (in    particular
+        ([7Xhttps://gap-packages.github.io/io/doc/chap0.html[107X)    (in   particular
         Chapter 2) or the README-file of that package.[133X
   
   [30X    [33X[0;6YThe   installation   of  normaliz  is  possible  via  the  GAP-package
-        NormalizInterface  ([7Xhttp://gap-packages.github.io/NormalizInterface//[107X)
+        NormalizInterface ([7Xhttps://gap-packages.github.io/NormalizInterface//[107X)
         (at  least  0.9.6).  Just  access  the  folder  in  a  terminal and do
         [9X./build-normaliz.sh; ./configure; make[109X.[133X
   
-  [30X    [33X[0;6YIf   you   want  to  use  4ti2,  please  make  sure  that  www.4ti2.de
-        ([7Xhttp://www.4ti2.de[107X)  (Version  1.6.5 or newer) is properly installed.
-        In  case  of an error-message "The executable 'zsolve' provided by the
-        software 4ti2 was not found." after typing [9XLoadPackage("HeLP");[109X either
-        the  software  is  not  properly installed or installed in a directory
-        where  GAP  can  not  find  it,  i.e. a directory not contained in the
-        path-variable. The content of this variable can typically be displayed
-        by  typing [9Xecho $PATH[109X (Linux, Mac) [9Xecho %PATH%[109X (Windows) in a terminal
-        or  a  command  prompt.  The  manual of 4ti2 contains several pages of
-        information  on how to install the program. Note that the installation
-        of  4ti2  requires  gcc  (g++) and gmp installed (which come with many
-        Linux installations or can be installed using a package manager). Make
-        sure  to  execute  all  four  commands  indicated  in  the 4ti2 manual
-        (possibly without the [9X--prefix=[109X-part):[133X
+  [30X    [33X[0;6YIf  you  want  to  use  4ti2,  please  make  sure  that 4ti2.github.io
+        ([7Xhttps://4ti2.github.io[107X)   (Version   1.6.5   or  newer)  is  properly
+        installed.  In  case  of  an  error-message  "The  executable 'zsolve'
+        provided   by   the   software  4ti2  was  not  found."  after  typing
+        [9XLoadPackage("HeLP");[109X  either the software is not properly installed or
+        installed  in  a directory where GAP can not find it, i.e. a directory
+        not  contained  in the path-variable. The content of this variable can
+        typically  be  displayed by typing [9Xecho $PATH[109X (Linux, Mac) [9Xecho %PATH%[109X
+        (Windows)  in  a  terminal  or  a  command  prompt. The manual of 4ti2
+        contains  several  pages of information on how to install the program.
+        Note  that  the  installation  of  4ti2  requires  gcc  (g++)  and gmp
+        installed  (which  come  with  many  Linux  installations  or  can  be
+        installed  using  a  package  manager).  Make sure to execute all four
+        commands   indicated   in   the  4ti2  manual  (possibly  without  the
+        [9X--prefix=[109X-part):[133X
   
         [33X[0;6Y[9X./configure --prefix=INSTALLATION-DIRECTORY[109X[133X
   
@@ -102,10 +98,9 @@
               (Linux) computers in Stuttgart.[133X
   
   [30X    [33X[0;6YIn   case   you   use  4ti2,  we  also  recommend  to  install  lrslib
-        ([7Xhttp://cgm.cs.mcgill.ca/~avis/C/lrs.html[107X), at least version 4.3 (note
-        that  version 4.2 or older sometimes produces unwanted behavior). This
-        software  provides  the 'redund' command, which can be switched on and
-        off  within  HeLP,  but  which often leads to better performances (cf.
+        ([7Xhttps://cgm.cs.mcgill.ca/~avis/C/lrs.html[107X),  at  least  version  4.3.
+        This  software provides the 'redund' command, which can be switched on
+        and off within HeLP, but which often leads to better performances (cf.
         [2XHeLP_UseRedund[102X  ([14X3.5-2[114X)). For installation see the User's Guide or the
         Readme-file  on the above mentioned homepage. Usually, after unpacking
         in  a  directory contained in the path-variable it should be enough to

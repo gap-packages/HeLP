@@ -6,10 +6,10 @@
                         [1X Hertweck-Luthar-Passi method. [101X
   
   
-                                      3.5
+                                      4.0
   
   
-                                20 December 2019
+                                29 February 2024
   
   
                                  Andreas Bächle
@@ -19,8 +19,7 @@
   
   
   Andreas Bächle
-      Email:    [7Xmailto:ABachle@vub.ac.be[107X
-      Homepage: [7Xhttp://homepages.vub.ac.be/~abachle/[107X
+      Email:    [7Xmailto:ABachle@gmx.net[107X
       Address:  [33X[0;14YVrije Universiteit Brussel[133X
                 [33X[0;14YVakgroep Wiskunde[133X
                 [33X[0;14YPleinlaan 2[133X
@@ -29,13 +28,14 @@
   
   
   Leo Margolis
-      Email:    [7Xmailto:Leo.Margolis@vub.be[107X
-      Homepage: [7Xhttp://homepages.vub.ac.be/~lmargoli/[107X
-      Address:  [33X[0;14YVrije Universiteit Brussel[133X
-                [33X[0;14YVakgroep Wiskunde[133X
-                [33X[0;14YPleinlaan 2[133X
-                [33X[0;14Y1050 Brussels[133X
-                [33X[0;14YBelgium[133X
+      Email:    [7Xmailto:Leo.Margolis@uam.es[107X
+      Homepage: [7Xhttps://margollo.github.io[107X
+      Address:  [33X[0;14YUniversidad Autonoma de Madrid[133X
+                [33X[0;14YCampus Cantoblanco[133X
+                [33X[0;14YFacultad de Ciencias[133X
+                [33X[0;14YDepartamento de Matematicas[133X
+                [33X[0;14Y28049 Madrid[133X
+                [33X[0;14YSpain[133X
   
   
   
@@ -44,8 +44,7 @@
   [33X[0;0Y© 2017 by Andreas Bächle and Leo Margolis[133X
   
   [33X[0;0YThis  package  is  free  software and may be distributed under the terms and
-  conditions  of  the  GNU  Public  License Version 2, or (at your option) any
-  later version.[133X
+  conditions of the GNU Public License Version 2.[133X
   
   
   -------------------------------------------------------
@@ -73,6 +72,10 @@
       2.1-1 HeLP_ZC
     2.2 [33X[0;0YPrime Graph Question[133X
       2.2-1 HeLP_PQ
+    2.3 [33X[0;0YSpectrum Problem[133X
+      2.3-1 HeLP_SP
+    2.4 [33X[0;0YKimmerle Problem[133X
+      2.4-1 HeLP_KP
   3 [33X[0;0YFurther functions[133X
     3.1 [33X[0;0YChecks for specific orders[133X
       3.1-1 HeLP_WithGivenOrder
@@ -86,6 +89,8 @@
     3.3 [33X[0;0YChecks for all orders[133X
       3.3-1 HeLP_AllOrders
       3.3-2 HeLP_AllOrdersPQ
+      3.3-3 HeLP_AllOrdersSP
+      3.3-4 HeLP_AllOrdersKP
     3.4 [33X[0;0YChanging the used Character Table[133X
       3.4-1 HeLP_ChangeCharKeepSols
       3.4-2 HeLP_Reset
@@ -108,8 +113,13 @@
     3.10 [33X[0;0YEigenvalue multiplicities and character values[133X
       3.10-1 HeLP_MultiplicitiesOfEigenvalues
       3.10-2 HeLP_CharacterValue
-    3.11 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X
-      3.11-1 HeLP_IsZCKnown
+    3.11 [33X[0;0YCheck for triviality modulo normal subgroup[133X
+      3.11-1 HeLP_IsOneModuloN
+      3.11-2 HeLP_ForgetUnderlyingGroup
+    3.12 [33X[0;0YCheck Kimmerle Problem for single units[133X
+      3.12-1 HeLP_UnitSatisfiesKP
+    3.13 [33X[0;0YCheck whether Zassenhaus Conjecture is known from theoretical results[133X
+      3.13-1 HeLP_IsZCKnown
   4 [33X[0;0YExtended examples[133X
     4.1 [33X[0;0YThe Character Table Library[133X
     4.2 [33X[0;0YThe behavior of the variable HeLP sol[133X
@@ -118,7 +128,7 @@
     4.5 [33X[0;0YNon-standard characters[133X
     4.6 [33X[0;0YA complete example: (PQ) for the MacLaughlin simple group[133X
   5 [33X[0;0YBackground[133X
-    5.1 [33X[0;0YThe Zassenhaus Conjecture and the Prime Graph Question[133X
+    5.1 [33X[0;0YThe Zassenhaus Conjecture and related questions[133X
     5.2 [33X[0;0YPartial augmentations and the structure of HeLP sol[133X
     5.3 [33X[0;0YThe HeLP equations[133X
     5.4 [33X[0;0YThe Wagner test[133X

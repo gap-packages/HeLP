@@ -36,7 +36,7 @@
 
 <h4>6.1 <span class="Heading">Making the HeLP-package run</span></h4>
 
-<p>For all basic functionalities of the HeLP-package (using only the solver normaliz) the standard GAP-installation should suffice to make everything work: Get the most recent GAP from the <span class="URL"><a href="http://www.gap-system.org/">GAP-webpage</a></span> by following the instructions on the Download-page. Make sure to also run <code class="keyw">InstPackages.sh</code> as explained there. This should install all packages needed to run HeLP. Just start GAP and type <code class="keyw">LoadPackage("HeLP");</code>. In GAP 4.8.2 the NormalizInterface has to be updated to version 0.9.6 or newer which can be obtained from the <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">website</a></span> of the package. For GAP 4.8.3 or newer this should not be necessary anymore.</p>
+<p>For all basic functionalities of the HeLP-package (using only the solver normaliz) the standard GAP-installation should suffice to make everything work: Get the most recent GAP from the <span class="URL"><a href="https://www.gap-system.org/">GAP-webpage</a></span> by following the instructions on the Download-page. Make sure to also install all packages needed to run HeLP. Then just start GAP and type <code class="keyw">LoadPackage("HeLP");</code>.</p>
 
 <p>Here is a checklist what to do, if the package does not work or you also want to use the solver 4ti2:</p>
 
@@ -46,35 +46,35 @@
 
 
 <ul>
-<li><p><span class="URL"><a href="http://www.gap-system.org/">GAP</a></span> (at least 4.8.2)</p>
+<li><p><span class="URL"><a href="https://www.gap-system.org/">GAP</a></span> (at least 4.8.2)</p>
 
 </li>
-<li><p>the GAP-package <span class="URL"><a href="http://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/">CTblLib</a></span> (at least 1.2.2)</p>
+<li><p>the GAP-package <span class="URL"><a href="https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/">CTblLib</a></span> (at least 1.2.2)</p>
 
 </li>
-<li><p>the GAP-package <span class="URL"><a href="http://gap-packages.github.io/io/">IO</a></span> (at least 4.2; see also the next bullet point if this package can not be loaded)</p>
+<li><p>the GAP-package <span class="URL"><a href="https://gap-packages.github.io/io/">IO</a></span> (at least 4.2; see also the next bullet point if this package can not be loaded)</p>
 
 </li>
-<li><p>the GAP-package <span class="URL"><a href="http://wwwb.math.rwth-aachen.de/~gutsche/gap_packages/4ti2Interface/">4ti2Interface</a></span> (at least 2015.04.29; this package needs the IO-package)</p>
+<li><p>the GAP-package <span class="URL"><a href="https://homalg-project.github.io/pkg/4ti2Interface/">4ti2Interface</a></span> (at least 2015.04.29; this package needs the IO-package)</p>
 
 </li>
-<li><p>the GAP-package <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6)</p>
+<li><p>the GAP-package <span class="URL"><a href="https://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6)</p>
 
 </li>
 </ul>
 </li>
 </ul>
-<p>Usually all these packages should come with a sufficiently recent GAP-installation (4.8.2 or newer) and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing <code class="keyw">LoadPackage("[name]");</code> after starting GAP, where <code class="keyw">[name]</code> is the name of the package.</p>
+<p>Usually all these packages should come with a sufficiently recent GAP-installation (4.8.3 or newer) and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing <code class="keyw">LoadPackage("[name]");</code> after starting GAP, where <code class="keyw">[name]</code> is the name of the package.</p>
 
 
 <ul>
-<li><p>The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter <code class="keyw">LoadPackage("IO");</code> after starting GAP. If the result is <code class="keyw">fail</code> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled. For information on installation and in particular on how to compile the C-part, see the <span class="URL"><a href="http://gap-packages.github.io/io/doc/chap0.html">manual</a></span> (in particular Chapter 2) or the README-file of that package.</p>
+<li><p>The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter <code class="keyw">LoadPackage("IO");</code> after starting GAP. If the result is <code class="keyw">fail</code> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled. For information on installation and in particular on how to compile the C-part, see the <span class="URL"><a href="https://gap-packages.github.io/io/doc/chap0.html">manual</a></span> (in particular Chapter 2) or the README-file of that package.</p>
 
 </li>
-<li><p>The installation of normaliz is possible via the GAP-package <span class="URL"><a href="http://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6). Just access the folder in a terminal and do <code class="keyw">./build-normaliz.sh; ./configure; make</code>.</p>
+<li><p>The installation of normaliz is possible via the GAP-package <span class="URL"><a href="https://gap-packages.github.io/NormalizInterface//">NormalizInterface</a></span> (at least 0.9.6). Just access the folder in a terminal and do <code class="keyw">./build-normaliz.sh; ./configure; make</code>.</p>
 
 </li>
-<li><p>If you want to use 4ti2, please make sure that <span class="URL"><a href="http://www.4ti2.de">www.4ti2.de</a></span> (Version 1.6.5 or newer) is properly installed. In case of an error-message "The executable 'zsolve' provided by the software 4ti2 was not found." after typing <code class="keyw">LoadPackage("HeLP");</code> either the software is not properly installed or installed in a directory where GAP can not find it, i.e. a directory not contained in the path-variable. The content of this variable can typically be displayed by typing <code class="keyw">echo $PATH</code> (Linux, Mac) <code class="keyw">echo %PATH%</code> (Windows) in a terminal or a command prompt. The manual of 4ti2 contains several pages of information on how to install the program. Note that the installation of 4ti2 requires gcc (g++) and gmp installed (which come with many Linux installations or can be installed using a package manager). Make sure to execute all four commands indicated in the 4ti2 manual (possibly without the <code class="keyw">--prefix=</code>-part):</p>
+<li><p>If you want to use 4ti2, please make sure that <span class="URL"><a href="https://4ti2.github.io">4ti2.github.io</a></span> (Version 1.6.5 or newer) is properly installed. In case of an error-message "The executable 'zsolve' provided by the software 4ti2 was not found." after typing <code class="keyw">LoadPackage("HeLP");</code> either the software is not properly installed or installed in a directory where GAP can not find it, i.e. a directory not contained in the path-variable. The content of this variable can typically be displayed by typing <code class="keyw">echo $PATH</code> (Linux, Mac) <code class="keyw">echo %PATH%</code> (Windows) in a terminal or a command prompt. The manual of 4ti2 contains several pages of information on how to install the program. Note that the installation of 4ti2 requires gcc (g++) and gmp installed (which come with many Linux installations or can be installed using a package manager). Make sure to execute all four commands indicated in the 4ti2 manual (possibly without the <code class="keyw">--prefix=</code>-part):</p>
 
 <p><code class="keyw">./configure --prefix=INSTALLATION-DIRECTORY</code></p>
 
@@ -96,7 +96,7 @@
 </li>
 </ul>
 </li>
-<li><p>In case you use 4ti2, we also recommend to install <span class="URL"><a href="http://cgm.cs.mcgill.ca/~avis/C/lrs.html">lrslib</a></span>, at least version 4.3 (note that version 4.2 or older sometimes produces unwanted behavior). This software provides the 'redund' command, which can be switched on and off within HeLP, but which often leads to better performances (cf. <code class="func">HeLP_UseRedund</code> (<a href="chap3.html#X7A7536D9790C1901"><span class="RefLink">3.5-2</span></a>)). For installation see the User's Guide or the Readme-file on the above mentioned homepage. Usually, after unpacking in a directory contained in the path-variable it should be enough to call</p>
+<li><p>In case you use 4ti2, we also recommend to install <span class="URL"><a href="https://cgm.cs.mcgill.ca/~avis/C/lrs.html">lrslib</a></span>, at least version 4.3. This software provides the 'redund' command, which can be switched on and off within HeLP, but which often leads to better performances (cf. <code class="func">HeLP_UseRedund</code> (<a href="chap3.html#X7A7536D9790C1901"><span class="RefLink">3.5-2</span></a>)). For installation see the User's Guide or the Readme-file on the above mentioned homepage. Usually, after unpacking in a directory contained in the path-variable it should be enough to call</p>
 
 <p><code class="keyw">make all</code></p>
 

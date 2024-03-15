@@ -168,7 +168,7 @@
   IO-package  rather  than functions like [9Xtime[109X or [9XRuntime[109X, since these measure
   only the GAP time, but do not return the time the functions spend using 4ti2
   or  normaliz.  We  used  the following function (which is essentially due to
-  Alexander Konovalov) to meassure the time used for the computation:[133X
+  Olexandr Konovalov) to meassure the time used for the computation:[133X
   
   [4X[32X  Example  [32X[104X
     [4X[28XTimeFunction := function(f, args)[128X[104X

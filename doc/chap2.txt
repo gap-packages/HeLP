@@ -37,6 +37,182 @@
   will  be  overwritten.  If  you  do  not  like  the  last  fact,  please use
   [2XHeLP_AllOrders[102X ([14X3.3-1[114X).[133X
   
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := AlternatingGroup(5);[127X[104X
+    [4X[28XAlt( [ 1 .. 5 ] )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(G);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A5");[127X[104X
+    [4X[28XCharacterTable( "A5" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol;[127X[104X
+    [4X[28X[ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ],, [128X[104X
+    [4X[28X  [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [  ],,,, [  ],,,,, [  ],,,,,,,,,,,,,,, [  ] [128X[104X
+    [4X[28X ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(); [127X[104X
+    [4X[28XSolutions for elements of order 2:[128X[104X
+    [4X[28X[ [         u ],[128X[104X
+    [4X[28X  [  [ "2a" ] ],[128X[104X
+    [4X[28X  [       --- ],[128X[104X
+    [4X[28X  [     [ 1 ] ] ][128X[104X
+    [4X[28XSolutions for elements of order 3:[128X[104X
+    [4X[28X[ [         u ],[128X[104X
+    [4X[28X  [  [ "3a" ] ],[128X[104X
+    [4X[28X  [       --- ],[128X[104X
+    [4X[28X  [     [ 1 ] ] ][128X[104X
+    [4X[28XSolutions for elements of order 5:[128X[104X
+    [4X[28X[ [               u ],[128X[104X
+    [4X[28X  [  [ "5a", "5b" ] ],[128X[104X
+    [4X[28X  [             --- ],[128X[104X
+    [4X[28X  [        [ 0, 1 ] ],[128X[104X
+    [4X[28X  [        [ 1, 0 ] ] ][128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 6.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 10.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 15.[128X[104X
+    [4X[28XThere are no admissible partial augmentations for elements of order 30.[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  is  the classical example of Luthar and Passi to verify the Zassenhaus
+  Conjecture  for  the alternating group of degree 5, cf. [LP89]. In the first
+  call  of  [9XHeLP_ZC[109X  this is checked using the character table computed by GAP
+  using  the  given  group,  the second call uses the character table from the
+  character table library. The entries of [9XHeLP_sol[109X are[133X
+  
+  [30X    [33X[0;6Ylists  with  entries  0  and  1  (at  the  spots  1, 2, 3 and 5, which
+        correspond to torsion units that are conjugate to group elements),[133X
+  
+  [30X    [33X[0;6Yempty  lists (at the spots 6, 10, 15 and 30, stating that there are no
+        admissible partial augmentations for these orders),[133X
+  
+  [30X    [33X[0;6Yor  are  not bound (these orders were not checked as they don't divide
+        the exponent of the group).[133X
+  
+  [33X[0;0YThe function [2XHeLP_PrintSolution[102X ([14X3.9-1[114X) can be used to display the result in
+  a pretty way.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable( "A6" );[127X[104X
+    [4X[28XCharacterTable( "A6" )[128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 2);[127X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28X#I  Checking order 2.[128X[104X
+    [4X[28X#I  Checking order 3.[128X[104X
+    [4X[28X#I  Checking order 4.[128X[104X
+    [4X[28X#I  Checking order 5.[128X[104X
+    [4X[28X#I  Checking order 6.[128X[104X
+    [4X[28X#I  Checking order 10.[128X[104X
+    [4X[28X#I  Checking order 12.[128X[104X
+    [4X[28X#I  Checking order 15.[128X[104X
+    [4X[28X#I  Checking order 20.[128X[104X
+    [4X[28X#I  Checking order 30.[128X[104X
+    [4X[28X#I  Checking order 60.[128X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[6];                                          [127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(6);                                [127X[104X
+    [4X[28XSolutions for elements of order 6:[128X[104X
+    [4X[28X[ [                   u^3,                   u^2,                     u ],[128X[104X
+    [4X[28X  [              [ "2a" ],        [ "3a", "3b" ],  [ "2a", "3a", "3b" ] ],[128X[104X
+    [4X[28X  [                   ---,                   ---,                   --- ],[128X[104X
+    [4X[28X  [                 [ 1 ],              [ 0, 1 ],          [ -2, 2, 1 ] ],[128X[104X
+    [4X[28X  [                 [ 1 ],              [ 1, 0 ],          [ -2, 1, 2 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info, 1);[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  is  the  example  M.  Hertweck deals with in his article [Her08c]. The
+  HeLP-method  is  not sufficient to verify the Zassenhaus Conjecture for this
+  group.  There  are  two tuples of possible partial augmentations for torsion
+  units of order 6 which are admissible by the HeLP method. M. Hertweck used a
+  different argument to eliminate these possibilities.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(48,30);;[127X[104X
+    [4X[25Xgap>[125X [27XStructureDescription(G);[127X[104X
+    [4X[28X"A4 : C4"[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(G);[127X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 4 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XSize(HeLP_sol[4]);[127X[104X
+    [4X[28X10[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  group SmallGroup(48,30) is the smallest group for which the HeLP method
+  does not suffice to prove the Zassenhaus Conjecture. However (ZC) was proved
+  for this group in [HK06], Proposition 4.2.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC1 := CharacterTable(SymmetricGroup(5));[127X[104X
+    [4X[28XCharacterTable( Sym( [ 1 .. 5 ] ) )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C1);[127X[104X
+    [4X[28X#I  The Brauer tables for the following primes are not available: [ 2, 3, 5 ].[128X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 4, 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XC2 := CharacterTable("S5");[127X[104X
+    [4X[28XCharacterTable( "A5.2" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C2); [127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  example  demonstrates  the  advantage of using the GAP character table
+  library:  Since  GAP can't compute the Brauer tables from the ordinary table
+  of  [23XS_5[123X  in  the  current  implementation,  they  are  not used in the first
+  calculation.  But  in  the  second  calculation  [9XHeLP_ZC[109X accesses the Brauer
+  tables  from  the  library  and can prove the Zassenhaus Conjecture for this
+  group,  see  [Her07], Section 5. This example might of course change as soon
+  as GAP will be able to compute the needed Brauer tables.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("M11");[127X[104X
+    [4X[28XCharacterTable( "M11" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28X#I  ZC can't be solved, using the given data, for the orders: [ 4, 6, 8 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[12];[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PrintSolution(8);[127X[104X
+    [4X[28XSolutions for elements of order 8:[128X[104X
+    [4X[28X[ [      u^4,                         u^2,                           u ],[128X[104X
+    [4X[28X  [ [ "2a" ],              [ "2a", "4a" ],  [ "2a", "4a", "8a", "8b" ] ],[128X[104X
+    [4X[28X  [      ---,                         ---,                         --- ],[128X[104X
+    [4X[28X  [    [ 1 ],                    [ 0, 1 ],              [ 0, 0, 0, 1 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                    [ 0, 1 ],              [ 0, 0, 1, 0 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                    [ 0, 1 ],             [ 0, 2, -1, 0 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                    [ 0, 1 ],             [ 0, 2, 0, -1 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                   [ 2, -1 ],              [ 0, 0, 0, 1 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                   [ 2, -1 ],              [ 0, 0, 1, 0 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                   [ 2, -1 ],             [ 0, 2, -1, 0 ] ],[128X[104X
+    [4X[28X  [    [ 1 ],                   [ 2, -1 ],             [ 0, 2, 0, -1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YComparing this example to the result in [BK07a] one sees, that the existence
+  of   elements  of  order  12  in  [23X\mathrm{V}(\mathbb{Z}M_{11})[123X  may  not  be
+  eliminated  using only the HeLP method. This may be done however by applying
+  also  the  Wagner  test,  cf.  Section  [14X5.4[114X and the example for the function
+  [2XHeLP_WagnerTest[102X ([14X3.7-1[114X).[133X
+  
+  [33X[0;0YThis  example  also  demonstrates, why also the partial augmentations of the
+  powers of [23Xu[123X must be stored (and not only the partial augmentations of [23Xu[123X). To
+  prove  that  all  elements  of  order  [23X8[123X in [23X\mathrm{V}(\mathbb{Z}M_{11})[123X are
+  rationally  conjugate  to group elements, it is not enough to prove that all
+  elements  [23Xu[123X  of  order  [23X8[123X  in  [23X\mathrm{V}(\mathbb{Z}M_{11})[123X have all partial
+  augmentations  [23X1[123X  and [23X0[123X, as the fifth and sixth possibility from above still
+  could  exist  in [23X\mathrm{V}(\mathbb{Z}M_{11})[123X, which would not be rationally
+  conjugate to group elements.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(144, 117);[127X[104X
+    [4X[28X<pc group of size 144 with 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(G);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  seems  to  contradict  the result of [BHK+18]. This is due to the fact
+  that  the  HeLP-package,  from  version  4.0  on,  does  include  additional
+  restrictions on partial augmentations, in particular a result of Hertweck on
+  p-adic conjugacy which is relevant for this group, cf. Section [14X5.2[114X.[133X
+  
   
   [1X2.2 [33X[0;0YPrime Graph Question[133X[101X
   
@@ -71,4 +247,210 @@
   function also does not use the previously computed partial augmentations for
   elements  of these orders but will overwrite the content of [9XHeLP_sol[109X. If you
   do not like the last fact, please use [2XHeLP_AllOrdersPQ[102X ([14X3.3-2[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A7");[127X[104X
+    [4X[28XCharacterTable( "A7" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  Prime  Graph  Question  for the alternating group of degree 7 was first
+  proved by M. Salim [Sal11].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(19)");[127X[104X
+    [4X[28XCharacterTable( "L2(19)" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C);                   [127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(C);[127X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 10 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[10];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ 0, -1, 1, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ], [ 0, 0, 0, 1, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1, 0 ], [ 0, 0, 0, 0, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1, 0 ], [ 0, 1, -1, 1, 0 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  HeLP  method provides an affirmative answer to the Prime Graph Question
+  for  the  group  L2(19),  although  the  method doesn't solve the Zassenhaus
+  Conjecture  for  that  group,  as  there  are  two  sets of possible partial
+  augmentations  for  units  of  order  10  left,  which  do not correspond to
+  elements  which  are  rationally conjugate to group elements. The Zassenhaus
+  Conjecture for this group is proved in [BM17b].[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC1 := CharacterTable(PSL(2,7));                                  [127X[104X
+    [4X[28XCharacterTable( Group([ (3,7,5)(4,8,6), (1,2,6)(3,4,8) ]) )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C1);[127X[104X
+    [4X[28X#I  The Brauer tables for the following primes are not available: [ 2, 3, 7 ].[128X[104X
+    [4X[28X#I  PQ can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XC2 := CharacterTable("L2(7)");  [127X[104X
+    [4X[28XCharacterTable( "L3(2)" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C2);                  [127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  example  demonstrates  the  advantage  of  using  tables  from the GAP
+  character  table  library:  Since  GAP  can  not  compute  the Brauer tables
+  corresponding  to  [9XC1[109X they are not used in the first calculation. But in the
+  second  calculation  [9XHeLP_PQ[109X accesses the Brauer tables from the library and
+  can  prove  the Prime Graph Question for this group, see [Her07], Section 6.
+  This example might change, as soon as GAP will be able to compute the Brauer
+  tables needed.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info,2);[127X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A6");[127X[104X
+    [4X[28XCharacterTable( "A6" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C);[127X[104X
+    [4X[28X#I  Checking order 2.[128X[104X
+    [4X[28X#I  Checking order 3.[128X[104X
+    [4X[28X#I  Checking order 5.[128X[104X
+    [4X[28X#I  Checking order 6.[128X[104X
+    [4X[28X#I  Checking order 10.[128X[104X
+    [4X[28X#I  Checking order 15.[128X[104X
+    [4X[28X#I  PQ can't be solved, using the given data, for the orders: [ 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XSetInfoLevel(HeLP_Info,1);[127X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  Prime  Graph Question can not be confirmed for the alternating group of
+  degree  6  with  the HeLP-method. This group is handled in [Her08c] by other
+  means.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(49)");[127X[104X
+    [4X[28XCharacterTable( "L2(49)" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C);[127X[104X
+    [4X[28X#I  The Brauer tables for the following primes are not available: [ 7 ].[128X[104X
+    [4X[28X#I  (PQ) can't be solved, using the given data, for the orders: [ 10, 15 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  example  shows  the limitations of the program. Using the Brauer table
+  for  the  prime  7  one  can  prove (PQ) for PSL(2,49), but this data is not
+  available  in GAP at the moment. The fact that there are no torsion units of
+  order 10 and 15 was proved in [Her07], Proposition 6.7. See also the example
+  in  Section  [14X4.5[114X.  The  other critical orders were handled in a more general
+  context in [BM17a].[133X
+  
+  
+  [1X2.3 [33X[0;0YSpectrum Problem[133X[101X
+  
+  [33X[0;0YThis  function  checks  whether  the  Spectrum  Problem ((SP) for short, cf.
+  Section  [14X5.1[114X)  can be verified using the HeLP method with the data available
+  in GAP.[133X
+  
+  [1X2.3-1 HeLP_SP[101X
+  
+  [33X[1;0Y[29X[2XHeLP_SP[102X( [3XOrdinaryCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (SP) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0Y[9XHeLP_SP[109X  checks  whether  an affirmative answer for the Spectrum Problem for
+  the  given  group  can  be  obtained  using  the  HeLP  method,  the  Wagner
+  restrictions  and  the  data  available. The argument of the function can be
+  either  an  ordinary  character table or a group. In the second case it will
+  first  calculate the corresponding ordinary character table. If the group in
+  question  is  solvable,  the Spectrum Problem has an affirmative answer by a
+  result  of  M. Hertweck and the function will return [9Xtrue[109X without performing
+  any calculations.[133X
+  
+  [33X[0;0YIf  the group is non-solvable, the ordinary character table and all [23Xp[123X-Brauer
+  tables  for  primes  [23Xp[123X  for  which the group is not [23Xp[123X-solvable and which are
+  available  in GAP will be used to produce as many constraints on the torsion
+  units  as possible. Additionally, the Wagner test is applied to the results,
+  cf.  Section  [14X5.4[114X. In case the information suffices to obtain an affirmative
+  answer  for  the Spectrum Problem, the function will return [9Xtrue[109X and it will
+  return  [9Xfalse[109X  otherwise. The possible partial augmentations for elements of
+  order  [22Xk[122X  and  all  its  powers  will  also  be  stored  in  the  list entry
+  [9XHeLP_sol[k][109X.[133X
+  
+  [33X[0;0YThe function also does not use the previously computed partial augmentations
+  for  elements of these orders but will overwrite the content of [9XHeLP_sol[109X. If
+  you do not like the last fact, please use [2XHeLP_AllOrdersSP[102X ([14X3.3-3[114X).[133X
+  
+  [33X[0;0YThe  Prime  Graph  Question for the first Janko group was studied in [BJK11]
+  and  solved  positively  using  the  HeLP-method.  We  note that this is not
+  possible for the Spectrum Problem.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("J1");[127X[104X
+    [4X[28XCharacterTable( "J1" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_PQ(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_SP(C);[127X[104X
+    [4X[28X#I  (SP) can't be solved, using the given data, for the orders: [ 30 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  Spectrum Problem is still known to have a positive answer for the first
+  Janko group by [BM21], Proposition 3.8.[133X
+  
+  
+  [1X2.4 [33X[0;0YKimmerle Problem[133X[101X
+  
+  [33X[0;0YThis  function  checks  whether  the  Kimmerle  Problem ((KP) for short, cf.
+  Section  [14X5.1[114X)  can be verified using the HeLP method with the data available
+  in GAP.[133X
+  
+  [1X2.4-1 HeLP_KP[101X
+  
+  [33X[1;0Y[29X[2XHeLP_KP[102X( [3XOrdinaryCharacterTable|Group[103X ) [32X function[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if (KP) can be solved using the given data, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0Y[9XHeLP_KP[109X  checks  whether  an affirmative answer for the Kimmerle Problem for
+  the  given  group  can  be  obtained  using  the  HeLP  method,  the  Wagner
+  restrictions  and  the  data  available. The argument of the function can be
+  either  an  ordinary  character table or a group. In the second case it will
+  first  calculate the corresponding ordinary character table. If the group in
+  question  is  nilpotent, then even the Zassenahus Conjecture and so also the
+  Kimmerle  Problem  has an affirmative answer by a result of Al Weiss and the
+  function will return [9Xtrue[109X without performing any calculations.[133X
+  
+  [33X[0;0YIf the group is non-nilpotent, the ordinary character table and all [23Xp[123X-Brauer
+  tables  for  primes  [23Xp[123X  for  which the group is not [23Xp[123X-solvable and which are
+  available  in GAP will be used to produce as many constraints on the torsion
+  units  as possible. Additionally, the Wagner test is applied to the results,
+  cf.  Section  [14X5.4[114X. In case the information suffices to obtain an affirmative
+  answer  for  the Kimmerle Problem, the function will return [9Xtrue[109X and it will
+  return  [9Xfalse[109X  otherwise. The possible partial augmentations for elements of
+  order  [22Xk[122X  and  all  its  powers  will  also  be  stored  in  the  list entry
+  [9XHeLP_sol[k][109X.[133X
+  
+  [33X[0;0YThe function also does not use the previously computed partial augmentations
+  for  elements of these orders but will overwrite the content of [9XHeLP_sol[109X. If
+  you do not like the last fact, please use [2XHeLP_AllOrdersKP[102X ([14X3.3-4[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := SmallGroup(216, 33);[127X[104X
+    [4X[28X<pc group of size 216 with 6 generators>[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_ZC(G);[127X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 12 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_KP(G);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("L2(19)");[127X[104X
+    [4X[28XCharacterTable( "L2(19)" )[128X[104X
+    [4X[28XHeLP_ZC(C);[128X[104X
+    [4X[28X#I  (ZC) can't be solved, using the given data, for the orders: [ 10 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_KP(C);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XC := CharacterTable("A7");[127X[104X
+    [4X[28XCharacterTable( "A7" )[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_KP(C);[127X[104X
+    [4X[28X#I  (KP) can't be solved, using the given data, for the orders: [ 4, 6 ].[128X[104X
+    [4X[28Xfalse[128X[104X
+    [4X[25Xgap>[125X [27XHeLP_sol[6];[127X[104X
+    [4X[28X[ [ [ 1 ], [ 0, 1 ], [ -2, 2, 1, 0 ] ], [ [ 1 ], [ 0, 1 ], [ 0, 1, -1, 1 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 0, 1 ], [ 2, -1, 1, -1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2, 0 ] ], [128X[104X
+    [4X[28X  [ [ 1 ], [ 1, 0 ], [ 0, 0, 0, 1 ] ], [ [ 1 ], [ 1, 0 ], [ 2, 0, 0, -1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe  see remark that units of order 6 are known to be rationally conjugate to
+  trivial  units  by  other  methods [BM21]. For order 4 however, this remains
+  open.[133X
   

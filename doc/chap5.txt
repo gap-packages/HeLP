@@ -6,42 +6,54 @@
   more detailed exposition see [BM18].[133X
   
   
-  [1X5.1 [33X[0;0YThe Zassenhaus Conjecture and the Prime Graph Question[133X[101X
+  [1X5.1 [33X[0;0YThe Zassenhaus Conjecture and related questions[133X[101X
   
   [33X[0;0YLet  [23XG[123X  be  a  finite  group  and let [22XZG[122X denote its integral group ring. Let
   [22XmathrmV(ZG)[122X  be  the  group  of  units  of augmentation one, aka. normalized
   units. An element of the unit group of [22XZG[122X is called a torsion element, if it
   has finite order.[133X
   
-  [33X[0;0YWhen  the  first versions of this package were published in 2015-2017 a long
-  standing  conjecture  of  H.J.  Zassenhaus  asserted  that  every normalized
-  torsion  unit  of  [22XZG[122X  is conjugate within [22XQG[122X ("rationally conjugate") to an
-  element  of [22XG[122X, see [Zas74] or [Seh93], Section 37. This was the first of his
-  three  famous  conjectures about integral group rings and the only one which
-  remained  open  at  the  time,  hence  it  is  referred to as the Zassenhaus
-  Conjecture (ZC).[133X
+  [33X[0;0YA  conjecture of H.J. Zassenhaus asserted that every normalized torsion unit
+  of  [22XZG[122X  is  conjugate within [22XQG[122X ("rationally conjugate") to an element of [22XG[122X,
+  see  [Zas74]  or  [Seh93], Section 37. This is the first of his three famous
+  conjectures  about  integral  group rings and the only one which is was open
+  when the first versions of this package appeared, hence it is referred to as
+  the  Zassenhaus  Conjecture  (ZC).  This conjecture asserts that the torsion
+  part of the units of [22XZG[122X is as far determined by [22XG[122X as possible.[133X
   
-  [33X[0;0YIn  October  2017 counterexamples to the Zassenhaus Conjecture were found by
-  F. Eisele and L. Margolis [EM18].[133X
+  [33X[0;0YNegative solutions to the conjecture were finally found in [EM18].[133X
   
-  [33X[0;0YConsidering  the  difficulty of the problem W. Kimmerle raised the question,
-  whether  the  Prime  Graph of the normalized units of [22XZG[122X coincides with that
-  one  of  [22XG[122X  (cf.  [Kim07]  Problem  21).  This  is the so called Prime Graph
-  Question (PQ). The prime graph of a group is the loop-free, undirected graph
-  having  as vertices those primes [22Xp[122X, for which there is an element of order [22Xp[122X
-  in  the group. Two vertices [22Xp[122X and [22Xq[122X are joined by an edge, provided there is
-  an  element  of order [22Xpq[122X in the group. In the light of this description, the
-  Prime  Graph Question asks, whether there exists an element of order [23Xpq[123X in [22XG[122X
-  provided  there  exists an element of order [23Xpq[123X in [22XmathrmV(ZG)[122X for every pair
-  of primes [23X(p, q)[123X.[133X
+  [33X[0;0YConsidering  the  difficulty of the Zassenhaus Conjecture W. Kimmerle raised
+  the  question,  whether  the  Prime  Graph  of  the  normalized  units of [22XZG[122X
+  coincides with that one of [22XG[122X (cf. [Kim07] Problem 21). This is the so called
+  Prime  Graph  Question  (PQ).  The  prime graph of a group is the loop-free,
+  undirected  graph  having  as vertices those primes [22Xp[122X, for which there is an
+  element of order [22Xp[122X in the group. Two vertices [22Xp[122X and [22Xq[122X are joined by an edge,
+  provided  there is an element of order [22Xpq[122X in the group. In the light of this
+  description,  the Prime Graph Question asks, whether there exists an element
+  of order [23Xpq[123X in [22XG[122X provided there exists an element of order [23Xpq[123X in [22XmathrmV(ZG)[122X
+  for every pair of primes [23X(p, q)[123X.[133X
   
-  [33X[0;0YIn  general,  by a result of J. A. Cohn and D. Livingstone [CL65], Corollary
-  4.1,  and a result of M. Hertweck [Her08a], the following is known about the
-  possible orders of torsion units in integral group rings:[133X
+  [33X[0;0YA  question which lies between the Zassenhaus Conjecture and the Prime Graph
+  Question  is  the  Spectrum Problem. It asks, if the orders of elements in [22XG[122X
+  and  [22XmathrmV(ZG)[122X  coincide.  In  general,  by  a result of J. A. Cohn and D.
+  Livingstone [CL65], Corollary 4.1, and a result of M. Hertweck [Her08a], the
+  following  is  known  about the possible orders of torsion units in integral
+  group rings:[133X
   
   [33X[0;0Y[13XTheorem:[113X  The exponents of [23X\mathrm{V}(\mathbb{Z}G)[123X and [23XG[123X coincide. Moreover,
   if  [23XG[123X  is solvable, any torsion unit in [23X\mathrm{V}(\mathbb{Z}G)[123X has the same
   order as some element in [23XG.[123X[133X
+  
+  [33X[0;0YFinally,  a  question  raised  by W. Kimmerle in [Kim07] asks if any unit of
+  finite order in [22XmathrmV(ZG)[122X is conjugate in the rational group algebra [22XQH[122X to
+  a  trivial  unit,  where  [22XH[122X is a finite group containing [22XG[122X. We call this the
+  Kimmerle  Problem.  This  question  did not receive much attention while the
+  Zassenhaus  Conjecture  was  still  open.  It  can be shown however that the
+  methods  used  in  [EM18]  to  construct  counterexamples  to the Zassenhaus
+  Conjecture can not yield negative solutions to the Kimmerle Problem. In this
+  sense  it  remains  the  strongest statement about torsion units in integral
+  group rings of finite group which could still be true.[133X
   
   
   [1X5.2 [33X[0;0YPartial augmentations and the structure of HeLP sol[133X[101X
@@ -91,6 +103,40 @@
   respectively,  and  so  on.  Note  that  this  format provides all necessary
   information  on  the  partial augmentations of [22Xu[122X and its powers by the above
   restrictions on the partial augmentations.[133X
+  
+  [33X[0;0YFrom   version   4   onwards  this  package  incorporates  more  theoretical
+  restrictions  on partial augmentations. More precisely, it uses more results
+  about  vanishing  partial  augmentations of normalized torsion units. One is
+  the  more  general  form of the Berman-Higman theorem, namely that if [22Xz[122X is a
+  central element in [22XG[122X and [22Xu ∈ mathrmV(ZG)[122X is a torsion unit different from [22Xz[122X,
+  then  [22Xε_z(u)= 0[122X. Moreover, two more elaborate criteria derived from the work
+  of Hertweck are used:[133X
+  
+  [33X[0;0Y[13XTheorem:[113X([Her08a],  Proposition  2;  [Her08b],  Lemma  2.2; [Mar17]) Let [22Xu ∈
+  mathrmV(ZG)[122X be of finite order and [22Xε_g(u) ≠ 0[122X for some [22Xg ∈ G[122X. Suppose that [22Xu[122X
+  has smaller order modulo some normal [22Xp[122X-subgroup [22XN[122X of [22XG[122X. Then the [22Xp[122X-part of [22Xg[122X
+  has  the  same  order as the [22Xp[122X-part of [22Xu[122X. Furthermore, if the [22Xp[122X-part of [22Xu[122X is
+  [22Xp[122X-adically  conjugate  to  an  element  in  [22XG[122X,  then the [22Xp[122X-part of [22Xg[122X is even
+  conjugate  in  [22XG[122X to the [22Xp[122X-part of [22Xu[122X. Such a [22Xp[122X-adic conjugation holds, if the
+  order  of  [22Xu[122X modulo a normal [22Xp[122X-subgroup of [22XG[122X is not divisible by [22Xp[122X, i.e. the
+  [23Xp[123X-part of [23Xu[123X is trivial modulo a normal [23Xp[123X-subgroup.[133X
+  
+  [33X[0;0YTo  apply  this  theorem,  some  knowledge  on  the normal subgroups of [22XG[122X is
+  necessary.  Hence it is only applied in the package when the character table
+  one works with possesses an underlying group.[133X
+  
+  [33X[0;0YIt  is  clear  the  Prime  Graph Question or Spectrum Problem can be studied
+  using  the  HeLP-method  (if  no  possible partial augmentations exist for a
+  given  order  neither  does  a unit of that order) and the possibility to do
+  this  for  the  Zassenhaus  Conjecture  is  given  via  the above theorem of
+  Marciniak-Ritter-Sehgal-Weiss.  For  the  Kimmerle Problem a somehow similar
+  result  states  that  a  unit  [23Xu  \in  \mathrm{V}(\mathbb{Z}G)[123X of order [23Xk[123X is
+  conjugate  in  [23X\mathbb{Q}H[123X, for [23XH[123X some group containing [23XG[123X, to a trivial unit
+  if  and  only  if  the  sum  of the coefficients of [23Xu[123X at elements of order [23Xk[123X
+  equals [23X1[123X and the sum of coefficients of elements of order [23Xm[123X equals [23X0[123X for any
+  [23Xm  \neq  k[123X [MdR19], Proposition 2.1. This shows that the Kimmerle Problem is
+  in  fact equvivalent to an earlier question of A. Bovdi and hence results on
+  Bovdi's Problem can also be applied.[133X
   
   [33X[0;0YFor  more details on when the variable [9XHeLP_sol[109X is modified or reset and how
   to  influence  this  behavior  see  Section  [14X4.2[114X and [2XHeLP_ChangeCharKeepSols[102X
@@ -167,9 +213,9 @@
   partial  augmentations  of  torsion  units.  Though the results was actually
   available before Wagner's work, cf. [BH08] Remark 6, we named the test after
   him,  since  he  was  the  first  to  use  the HeLP-method on a computer. We
-  included   it   into   the   functions  [2XHeLP_ZC[102X  ([14X2.1-1[114X),  [2XHeLP_PQ[102X  ([14X2.2-1[114X),
-  [2XHeLP_AllOrders[102X ([14X3.3-1[114X), [2XHeLP_AllOrdersPQ[102X ([14X3.3-2[114X) and [2XHeLP_WagnerTest[102X ([14X3.7-1[114X)
-  and call it "Wagner test".[133X
+  included  it  into  the  functions [2XHeLP_ZC[102X ([14X2.1-1[114X), [2XHeLP_PQ[102X ([14X2.2-1[114X), [2XHeLP_SP[102X
+  ([14X2.3-1[114X),  [2XHeLP_KP[102X  ([14X2.4-1[114X)  [2XHeLP_AllOrders[102X ([14X3.3-1[114X), [2XHeLP_AllOrdersPQ[102X ([14X3.3-2[114X)
+  and [2XHeLP_WagnerTest[102X ([14X3.7-1[114X) and call it "Wagner test".[133X
   
   [33X[0;0Y[13XTheorem:[113X  For  a  torsion unit [22Xu ∈ mathrmV(ZG)[122X, a group element [23Xs[123X, a prime [23Xp[123X
   and a natural number [23Xj[123X we have[133X
@@ -191,7 +237,7 @@
   
   [33X[0;0YIf  one  is  interested  in  units of mixed order [23Xs*t[123X for two primes [23Xs[123X and [23Xt[123X
   (e.g.  if  one  studies  the  Prime Graph Question) an idea to make the HeLP
-  method more efficient was introduced by V. Bovdi and A. Konovalov in [BK10],
+  method more efficient was introduced by V. Bovdi and O. Konovalov in [BK10],
   page 4. Assume one has several conjugacy classes of elements of order [23Xs[123X, and
   a  character  taking  the  same  value  on  all  of  these classes. Then the
   coefficient   of   every  of  these  conjugacy  classes  in  the  system  of
@@ -215,14 +261,9 @@
   [1X5.6  [33X[0;0YKnown  results  about  the  Zassenhaus  Conjecture  and the Prime Graph[101X
   [1XQuestion[133X[101X
   
-  [33X[0;0YA  survey  on  topics  touched  on  by this package has been written in 2018
-  [MdR18].  The  counterexamples  to the Zassenhaus Conjecture are of the form
-  [23X(C_{pq}  \times  C_{pq}) \rtimes A[123X where [23Xp[123X and [23Xq[123X are certain primes and [23XA[123X is
-  an abelian group with a specified action [EM18].[133X
-  
-  [33X[0;0YIn  December  2019,  to  the  best  of our knowledge, the following positive
-  results  were  available  for  the Zassenhaus Conjecture and the Prime Graph
-  Question:[133X
+  [33X[0;0YAt  the  moment  as  this  documentation  was  written,  to  the best of our
+  knowledge,   the   following  results  were  available  for  the  Zassenhaus
+  Conjecture and the Prime Graph Question:[133X
   
   [33X[0;0YFor the Zassenhaus Conjecture only the following reduction is available:[133X
   
@@ -231,11 +272,14 @@
   denotes  a  nilpotent  group  of  order  prime  to  the order of [23XG[123X [Her08b],
   Proposition 8.1.[133X
   
-  [33X[0;0YWith this reductions in mind the Zassenhaus Conjecture is known for:[133X
+  [33X[0;0YIt  is also known to go over to other types of direct products under certain
+  conditions  [BKS20].  With this reductions in mind the Zassenhaus Conjecture
+  is known for:[133X
   
   [30X    [33X[0;6YNilpotent groups [Wei91],[133X
   
-  [30X    [33X[0;6YCyclic-By-Abelian groups [CMdR13],[133X
+  [30X    [33X[0;6YCyclic-By-Abelian    groups    [CMdR13]   and   some   other   special
+        cyclic-by-nilpotent groups [CdR20],[133X
   
   [30X    [33X[0;6YGroups  containing  a  normal  Sylow  subgroup with abelian complement
         [Her06],[133X
@@ -247,24 +291,19 @@
         [23Xp[123X  such  that  [23Xp[123X  is  smaller then any prime divisor of the order of [23XX[123X
         [MRSW87],[133X
   
-  [30X    [33X[0;6YGroups with an abelian normal subgroup of index 2 [LP92],[133X
-  
-  [30X    [33X[0;6YSome more special classes of metabelian groups [MR18] and [MdR19],[133X
-  
-  [30X    [33X[0;6YDirect  products  of  an  abelian  group  and  a  Frobenius group with
-        complement of odd order [BKS18],[133X
-  
   [30X    [33X[0;6YAll groups of order up to 143 [BHK+18],[133X
   
   [30X    [33X[0;6YThe   non-abelian  simple  groups  [23XA_5[123X  [LP89],  [23XA_6  \simeq  PSL(2,9)[123X
         [Her08c],  [23XPSL(2,7)[123X, [23XPSL(2,11)[123X, [23XPSL(2,13)[123X [Her07], [23XPSL(2,8)[123X, [23XPSL(2,17)[123X
         [KK15]  [Gil13],  [23XPSL(2,19)[123X,  [23XPSL(2,23)[123X [BM17b], [23XPSL(2,25)[123X, [23XPSL(2,31)[123X,
         [23XPSL(2,32)[123X  [BM19b]  and  some extensions of these groups. Also for all
-        [23XPSL(2,p)[123X where [23Xp[123X is a fermat or a Mersenne prime [MdRS19],[133X
+        [23XPSL(2,p)[123X  where  [23Xp[123X  is  a  fermat  or  a  Mersenne prime [MdRS19], and
+        [23XPSL(2,p)[123X  and  [23XPSL(2,p^2)[123X if [23Xp \pm 1[123X or [23Xp^2 \pm 1[123X is 4 multiplied by a
+        prime [EM22],[133X
   
-  [30X    [33X[0;6YFor  the  following  non-solvable  and non-simple groups: [23XS_5[123X [Her07],
-        [23XGL(2,5)[123X  and  the  covering group of [23XS_5[123X [BH08] and the groups [23XSL(2,p)[123X
-        and [23XSL(2,p^2)[123X for any prime [23Xp[123X [dRS19].[133X
+  [30X    [33X[0;6YFor special linear groups [23XSL(2,p)[123X and [23XSL(2,p^2)[123X for [23Xp[123X a prime [dRS19].[133X
+  
+  [33X[0;0YThe only known counterexamples to the conjecture are exhibited in [EM18].[133X
   
   [33X[0;0YFor  the Prime Graph Question the following strong reduction was obtained in
   [KK15]:[133X
@@ -279,24 +318,24 @@
   
   [30X    [33X[0;6YSolvable groups [Kim06],[133X
   
-  [30X    [33X[0;6YGroups   whose   socle   is   isomorphic   to  an  alternating  group,
-        [LP89][Her08c][Sal11][Sal13][BM17b][BC17][BM19a],[133X
+  [30X    [33X[0;6YAll  but  two  of  the  sporadic  simple groups and their automorphism
+        groups  [CM21],  the exceptions being the Monster and the O'Nan group;
+        for an overview of early HeLP-results see [KK15],[133X
   
   [30X    [33X[0;6YGroups  whose  socle  is isomorphic to a group [23XPSL(2,p)[123X or [23XPSL(2,p^2)[123X,
         where [23Xp[123X denotes a prime, [Her07], [BM17a].[133X
   
-  [30X    [33X[0;6YA group with sporadic simple socle which is not the O'Nan group or the
-        Monster
-        [BK07a][BK07b][BKS07][BKL11][BKM08][BK08][BGK09][BJK11][BK12][BK09][BKL08]
-        [BK10][KK15][Mar19][BM19a][CM19],[133X
+  [30X    [33X[0;6YGroups  whose  socle  is  isomorphic  to an alternating group, [Sal11]
+        [Sal13][BC17][BM19a],[133X
   
   [30X    [33X[0;6YAlmost  simple  groups  whose  order  is  divisible  by  at most three
-        different  primes  [KK15]  and [BM17b]. This implies that it holds for
+        different  primes  [KK15] and [BM17b]. (This implies that it holds for
         all  groups with an order divisible by at most three primes, using the
-        reduction result above.[133X
+        reduction result above.)[133X
   
   [30X    [33X[0;6YMany  almost  simple groups whose order is divisible by four different
         primes [BM17a][BM19b],[133X
   
-  [30X    [33X[0;6YMany groups from the GAP character table library [CM19].[133X
+  [30X    [33X[0;6YCertain infinite series of simple groups of Lie type of small rank and
+        other groups from the character table library [CM21][133X
   

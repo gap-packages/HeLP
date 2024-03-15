@@ -5,7 +5,7 @@
   torsion  units  in  (integral)  group rings. It implements a method that was
   developed  by  I.S. Luthar and I.B.S. Passi in [LP89] and which was extended
   by  M.  Hertweck  in  [Her07].  These  names also constitute the name of the
-  method,  suggested by A. Konovalov: [13XHe[113Xrtweck-[13XL[113Xuthar-[13XP[113Xassi. The theory behind
+  method,  suggested by O. Konovalov: [13XHe[113Xrtweck-[13XL[113Xuthar-[13XP[113Xassi. The theory behind
   the  method is briefly described in Chapter [14X5[114X and also in the survey article
   [BM18].[133X
   
@@ -13,9 +13,9 @@
   only  properly  working  on  systems  which  have  at  least  one of the two
   installed.  normaliz is usually automatically installed with the GAP-package
   NormalizInterface,  see  the  documentation of that package for details. For
-  more  information  on  4ti2  and  to  download  it, please visit www.4ti2.de
-  ([7Xhttp://www.4ti2.de[107X).  To  interact with these external software the package
-  makes  use  of  the  4ti2-Interface  and  normaliz-Interface  written  by S.
+  more  information  on  4ti2  and to download it, please visit 4ti2.github.io
+  ([7Xhttps://4ti2.github.io[107X).  To  interact  with  these  external  software the
+  package makes use of the 4ti2-Interface and normaliz-Interface written by S.
   Gutsche,  C.  Söger and M. Horn. The 4ti2-Interface in turn uses the package
   IO,  that  needs  a  C-part  to  be  compiled;  see  the  readme-file or the
   documentation  of  the IO-package for details. The package also provides the
