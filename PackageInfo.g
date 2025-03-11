@@ -37,7 +37,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := ~.Subtitle,
-  Autoload  := false
 ),
 
 Persons :=
