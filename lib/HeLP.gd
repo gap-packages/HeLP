@@ -54,7 +54,6 @@
 #! @Returns <K>true</K> if (ZC) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_ZC" );
 #! @InsertChunk ZCExample
-#! @EndSection
 
 
 #! @Section Prime Graph Question
@@ -86,7 +85,6 @@ DeclareGlobalFunction( "HeLP_ZC" );
 #! @Returns <K>true</K> if (PQ) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_PQ" );
 #! @InsertChunk PQExample
-#! @EndSection
 
 #! @Section Spectrum Problem
 #!  This function checks whether the Spectrum Problem ((SP) for short, cf. Section 
@@ -117,7 +115,6 @@ DeclareGlobalFunction( "HeLP_PQ" );
 #! @Returns <K>true</K> if (SP) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_SP" );
 #! @InsertChunk SPExample
-#! @EndSection
 
 
 #! @Section Kimmerle Problem
@@ -149,7 +146,6 @@ DeclareGlobalFunction( "HeLP_SP" );
 #! @Returns <K>true</K> if (KP) can be solved using the given data, <K>false</K> otherwise
 DeclareGlobalFunction( "HeLP_KP" );
 #! @InsertChunk KPExample
-#! @EndSection
 
 
 
