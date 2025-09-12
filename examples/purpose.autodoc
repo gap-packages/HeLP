@@ -179,7 +179,7 @@ With this reductions in mind the Zassenhaus Conjecture is known for:
 * Frobenius groups whose order is divisible by at most two different primes <Cite Key="JuriaansMilies"/>,
 * Groups $X \rtimes A$, where $X$ and $A$ are abelian and $A$ is of prime order $p$ such that $p$ is smaller then any prime divisor of the order of $X$ <Cite Key="MRSW"/>,
 * All groups of order up to 143 <Cite Key="BaHeKoMaSi"/>, 
-* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/> <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>, and $PSL(2,p)$ and $PSL(2,p^2)$ if $p \pm 1$ or $p^2 \pm 1$ is 4 multiplied by a prime <Cite Key="EiseleMargolisDefect1"/>,
+* The non-abelian simple groups $A_5$ <Cite Key="LP"/>, $A_6 \simeq PSL(2,9)$ <Cite Key="HerA6"/>, $PSL(2,7)$, $PSL(2,11)$, $PSL(2,13)$ <Cite Key="HertweckBrauer"/>, $PSL(2,8)$, $PSL(2,17)$ <Cite Key="KonovalovKimmiStAndrews"/>, <Cite Key="Gildea"/>, $PSL(2,19)$, $PSL(2,23)$ <Cite Key="BaMaM10"/>, $PSL(2,25)$, $PSL(2,31)$, $PSL(2,32)$ <Cite Key="BaMa4prII"/> and some extensions of these groups. Also for all $PSL(2,p)$ where $p$ is a fermat or a Mersenne prime <Cite Key="FermatMersenne"/>, and $PSL(2,p)$ and $PSL(2,p^2)$ if $p \pm 1$ or $p^2 \pm 1$ is 4 multiplied by a prime <Cite Key="EiseleMargolisDefect1"/>,
 * For special linear groups $SL(2,p)$ and $SL(2,p^2)$ for $p$ a prime <Cite Key="delRioSerrano19"/>.
 
 The only known counterexamples to the conjecture are exhibited in <Cite Key="EiMa18"/>.<P/>
@@ -189,8 +189,8 @@ For the Prime Graph Question the following strong reduction was obtained in <Cit
 Here a group $G$ is called almost simple, if it is sandwiched between the inner automorphism group and the whole automorphism group of a non-abelian simple group $S$. I.e. $Inn(S) \leq G \leq Aut(S).$ Keeping this reduction in mind (PQ) is known for:
 * Solvable groups <Cite Key="KimmiPQ"/>,
 * All but two of the sporadic simple groups and their automorphism groups <Cite Key="CaMaBrauerTree"/>, the exceptions being the Monster and the O'Nan group; for an overview of early HeLP-results see <Cite Key="KonovalovKimmiStAndrews"/>,
-* Groups whose socle is isomorphic to a group $PSL(2,p)$ or $PSL(2,p^2)$, where $p$ denotes a prime, <Cite Key="HertweckBrauer"/>, <Cite Key="BaMa4prI"/>.
-* Groups whose socle is isomorphic to an alternating group, <Cite Key="SalimA7A8"/> <Cite Key="SalimA9A10"/><Cite Key="BaCa"/><Cite Key="BaMaAn"/>, 
+* Groups whose socle is isomorphic to a group $PSL(2,p)$ or $PSL(2,p^2)$, where $p$ denotes a prime, <Cite Key="HertweckBrauer"/>, <Cite Key="BaMa4prI"/> or $PSL(2,q)$ where $q$ is congruent to 1 or -1 modulo 8 and the odd part of $(q-1)(q+1)$ is squarefree <Cite Key="EiseleMargolisMod4"/>,
+* Groups whose socle is isomorphic to an alternating group, <Cite Key="SalimA7A8"/>, <Cite Key="SalimA9A10"/>, <Cite Key="BaCa"/>, <Cite Key="BaMaAn"/>, 
 * Almost simple groups whose order is divisible by at most three different primes <Cite Key="KonovalovKimmiStAndrews"/> and <Cite Key="BaMaM10"/>. (This implies that it holds for all groups with an order divisible by at most three primes, using the reduction result above.)
-* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/><Cite Key="BaMa4prII"/>,
-* Certain infinite series of simple groups of Lie type of small rank and other groups from the character table library <Cite Key="CaMaBrauerTree"/>
+* Many almost simple groups whose order is divisible by four different primes <Cite Key="BaMa4prI"/>, <Cite Key="BaMa4prII"/>, <Cite Key="EiseleMargolisMod4"/>
+* Certain infinite series of simple groups of Lie type of small rank, most sporadic simple groups and other groups from the character table library <Cite Key="CaMaBrauerTree"/> 

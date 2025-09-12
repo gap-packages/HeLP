@@ -9,7 +9,7 @@
 
  The package uses the software 4ti2 <Cite Key="4ti2"/> and/or normaliz 
  <Cite Key="Normaliz"/> and hence is only properly working
- on systems which have at least one of the two installed. normaliz
+ on systems which have at least one of the two installed. Some functions though work without any of the two and they are available even if none of the packages 4ti2Interface or NormalizInterface can be loaded. normaliz
  is usually automatically installed with the GAP-package NormalizInterface,
  see the documentation of that package for details.
  For more information on 4ti2 and to download it, please visit

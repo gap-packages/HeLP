@@ -49,6 +49,10 @@
 #!   directory contained in the path-variable it should be enough to call<P/> <K>make all</K><P/> (possibly as root) inside the lrslib-directory.
 #! * If this does not help to get HeLP running, please feel more than welcome to contact one of the maintainers of the package.
 
+@Section Running the package without 4ti2 and normaliz
+
+#! Even if none of the solvers is installed and even when none of the packages 4ti2Interface and NormalizInterface can be loaded, some restricted functionality is still available. For instance one can define partial augmentations manually and verify, if it satisfies the HeLP constraints using  <Ref Func='HeLP_VerifySolution'/>, obtain the corresponding eigenvalues under representations using <Ref Func='HeLP_MultiplicitiesOfEigenvalues'/> or apply the Wagner test to them using  <Ref Func='HeLP_WagnerTest'/>.  
+
 @Section How much 4ti2 and normaliz is really there?
 #! The reason, why the programs 4ti2 and normaliz are used in this package, is basically that they can solve systems 
 #! of linear inequalities efficiently and there
