@@ -3,17 +3,21 @@ gap> HeLP_Solver("normaliz");;
 
 gap> OldHeLPInfoLevel := InfoLevel(HeLP_Info);;
 gap> SetInfoLevel(HeLP_Info, 1);
-gap> G := AlternatingGroup(5);;
 
+#
 gap> HeLP_ZC(CyclicGroup(6));
 #I  Since the given group is nilpotent the Zassenhaus Conjecture holds by a result of Al Weiss.
 true
 
+#
+gap> G := AlternatingGroup(5);;
 gap> HeLP_ZC(G);
- true
+true
+
+#
 gap> C := CharacterTable("A5");;
 gap> HeLP_ZC(C);
- true
+true
 gap> List(HeLP_sol, x -> Set(x));
  [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ],, 
    [ [ [ 0, 1 ] ], [ [ 1, 0 ] ] ], [  ],,,, [  ],,,,, [  ],,,,,,,,,,,,,,, [  ] 
