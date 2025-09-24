@@ -33,12 +33,7 @@ end);
 BindGlobal("HeLP_INTERNAL_IsIntVect", function(v)
 # Arguments: a vector
 # Output: true if the vector has only integral entries, false otherwise
-local w, j;
-w := IsVector(v);
-for j in [1..Size(v)] do
-  w := w and IsInt(v[j]);
-od;
-return w;
+return IsVector(v) and ForAll(v, IsInt);
 end);
 
 ########################################################################################################
