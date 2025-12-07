@@ -13,16 +13,7 @@
 HeLP_settings[1] := "normaliz"; # th usually preferable solver
 
 
-####################################################################
-BindGlobal("HeLP_INTERNAL_TestSystem",  function(T,a,k,pa)
-# Arguments: A matrix, a vector, the order of the unit, the partial augmentations of the proper powers of the unit
-# Output: The possible partial augmentations given by the HeLP-method for this partial augmentations of the powers. 
-# This function is internal.
-# It relies on the 4ti2-interface and program. 
-local solutions, v, mue, intersol, Tscaled, ascaled, HeLP_TestConeForIntegralSolutionsINTERNAL, temp, T_temp, D, t, s, solext, uneq, interintersol, temptemp, HB, DoVertices;
-
-
-HeLP_TestConeForIntegralSolutionsINTERNAL := function(b, c, k, T, a)
+BindGlobal("HeLP_TestConeForIntegralSolutionsINTERNAL", function(b, c, k, T, a)
 # Arguments: set of basepoints, set of translations in non-negative direction,  order of the unit, matrix, vector of HeLP-system
 # returns true if there is an integral solution in the "non-negative cone", false otherwise
 local int, Tba, L, v, w;      
@@ -45,19 +36,12 @@ else
   od;
 fi;
 return int;
-end;
+end);
 
 
-if HeLP_settings[2] then        # if wished, use redund first to minimize the system
-  temp := HeLP_INTERNAL_Redund(T,a);
-  if temp = "nosystem" then
-    return [ ];
-  fi;
-else                      # redund is not used
-  temp := HeLP_INTERNAL_DuplicateFreeSystem(T, a);      # remove multiple times occuring inequalities
-fi;
 
-if HeLP_settings[1] = "normaliz" then
+BindGlobal("HeLP_INTERNAL_TestSystemNormaliz", function(T, a, k, pa, temp)
+local T_temp, temptemp, t, DoVertices, s, solext, uneq, intersol, D, interintersol, Tscaled, ascaled, v, mue, HB;
   T_temp := ListWithIdenticalEntries(Size(T[1]), 1);
   Add(T_temp,-1);
   temptemp := [ ];
@@ -129,6 +113,29 @@ if HeLP_settings[1] = "normaliz" then
     fi;
   fi;
 
+end);
+
+####################################################################
+BindGlobal("HeLP_INTERNAL_TestSystem",  function(T,a,k,pa)
+# Arguments: A matrix, a vector, the order of the unit, the partial augmentations of the proper powers of the unit
+# Output: The possible partial augmentations given by the HeLP-method for this partial augmentations of the powers. 
+# This function is internal.
+# It relies on the 4ti2-interface and program. 
+local solutions, v, mue, intersol, Tscaled, ascaled, temp;
+
+
+
+if HeLP_settings[2] then        # if wished, use redund first to minimize the system
+  temp := HeLP_INTERNAL_Redund(T,a);
+  if temp = "nosystem" then
+    return [ ];
+  fi;
+else                      # redund is not used
+  temp := HeLP_INTERNAL_DuplicateFreeSystem(T, a);      # remove multiple times occuring inequalities
+fi;
+
+if HeLP_settings[1] = "normaliz" then
+  HeLP_INTERNAL_TestSystemNormaliz(T, a, k, pa, temp);
 elif HeLP_settings[1] = "4ti2" then
   solutions := 4ti2Interface_zsolve_equalities_and_inequalities([ListWithIdenticalEntries(Size(T[1]), 1)], [1], temp[1], -temp[2] : precision := HeLP_settings[3]);
   # there are infinitely many solutions if there is a base-point, i.e. solutions[1] <> [], and there are translations,
