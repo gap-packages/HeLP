@@ -636,12 +636,17 @@ DeclareGlobalFunction( "HeLP_IsZCKnown" );
 
 
 
-# The following functions are the only internal one, which are
+# The following functions are only internal ones, which are
 # defined via DeclareGlobalFunction / InstallGlobalFunction 
-# as it seems otherwise not possible define it recursively
+# as it seems otherwise not possible to define them recursively
 DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrder" );
 DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrderAllTables" );
 DeclareGlobalFunction( "HeLP_v4_INTERNAL_WithGivenOrder");
+DeclareGlobalFunction( "HeLP_v4_INTERNAL_WithGivenOrderAllTables" );
+
+##
+DeclareGlobalFunction( "HeLP_INTERNAL_TestSystem_Normaliz" );
+DeclareGlobalFunction( "HeLP_INTERNAL_TestSystem_4ti2" );
 
 
 #E
