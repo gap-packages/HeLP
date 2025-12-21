@@ -13,7 +13,7 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "4.1",
-Date           := "12/09/2025", # dd/mm/yyyy format
+Date           := "22/12/2025", # dd/mm/yyyy format
 License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
@@ -91,6 +91,16 @@ Dependencies := rec(
   ],
   ExternalConditions     := [[ "zsolve", "https://4ti2.github.io" ] ]
 ),
+Extensions := [
+    rec( needed:= [
+             [ "4ti2Interface", ">= 2015.04.29" ],
+           ],
+         filename:= "lib/HeLP_internal_4ti2.gi" ),
+    rec( needed:= [
+             [ "NormalizInterface", ">= 0.9.6" ],
+           ],
+         filename:= "lib/HeLP_internal_normaliz.gi" ),
+  ], # the order of loading implies that if both solvers work, then normaliz is the active by default
 
 TestFile := "tst/testall.g",
 
