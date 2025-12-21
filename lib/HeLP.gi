@@ -610,9 +610,9 @@ if not IsSolvable(C) then
 fi;
 HeLP_INTERNAL_CheckChar(Irr(C));
 if "UnderlyingGroup" in KnownAttributesOfObject(CAct) then  # only when we know the group we can use its quotients
-  intersol := HeLP_v4_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
+  intersol := HeLP_v4_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
 else
-  intersol := HeLP_INTERNAL_WithGivenOrderAndPAAllTables(CAct, tables, ord);
+  intersol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
 fi;
 #intersol := HeLP_INTERNAL_WithGivenOrderAllTables(CAct, tables, ord);
 if intersol = "infinite" then

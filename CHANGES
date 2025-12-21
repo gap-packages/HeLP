@@ -1,8 +1,13 @@
+Changes v4.0 -> 4.1
+
+* When NormalizInterface or 4ti2 is not available, the functions which use them are now not loaded
+* Corrected mistake in HeLP_WithGivenOrderAllTables which appeared in version 4.0
+
 Changes v3.4 -> 4.0
 
 * Two new global functions: HeLP_SP and HeLP_KP to study the Spectrum Problem and the Kimmerle Problem and their companion functions HeLP_AllOrdersSP and HeLP_AllOrdersKP
-* More theoretical results are taken into account when the system to solve is generated, namely more partial augmentations are assumed to be 0 a priori. This includes three results: Berman-Higman (in the general form that the coefficient at a central element is 0, if the unit is not that element), Hertweck's Proposition 2 from [Hertweck08] (if a unit u has smaller order modulo a normal p-subgroup, elements with non-zero partial augmentations must have same p-power order as u) and Hertweck's p-adic criterion (units which map tp 1 modulo a normal p-subgroup are p-adically conjugate to elements in G and hence the p-part of any element with non-zero partial augmentation is unique up to conjugacy in G)
-* Three new minor global functions: HeLP_UnitSatisfiesKP to check manually for KP and given partial augmentaion; HeLP_IsOneModuloN to see if a unit is mapped to the identity modulo a normal subgroup N; HeLP_ForgetUnderlyingGroup to obtain same table without group structure. This way the new theretical restictions do not apply and one can obtain the results as in older versions
+* More theoretical results are taken into account when the system to solve is generated, namely more partial augmentations are assumed to be 0 a priori. This includes three results: Berman-Higman (in the general form that the coefficient at a central element is 0, if the unit is not that element), Hertweck's Proposition 2 from [Hertweck08] (if a unit u has smaller order modulo a normal p-subgroup, elements with non-zero partial augmentations must have same p-power order as u) and Hertweck's p-adic criterion (units which map to 1 modulo a normal p-subgroup are p-adically conjugate to elements in G and hence the p-part of any element with non-zero partial augmentation is unique up to conjugacy in G)
+* Three new minor global functions: HeLP_UnitSatisfiesKP to check manually for KP and given partial augmentaion; HeLP_IsOneModuloN to see if a unit is mapped to the identity modulo a normal subgroup N; HeLP_ForgetUnderlyingGroup to obtain same table without group structure. This way the new theoretical restictions do not apply and one can obtain the results as in older versions
 
 Minor chnages:
 * Noted that mistankenly the manual was shortened in version 3.3, reversed
