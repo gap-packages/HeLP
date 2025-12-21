@@ -23,7 +23,8 @@ extension.)
 Do this preferably (but not necessarily) inside the `pkg' subdirectory
 of your GAP 4 installation. It creates a subdirectory called `help'.
 
- The package uses the software 4ti2 <Cite Key="4ti2"/> and/or normaliz and hence is only properly working
+ The package uses the software 4ti2 <Cite Key="4ti2"/> and/or normaliz
+ and hence is only working to full capacity 
  on systems which have at least one of the two installed. normaliz
  may be installed via the GAP-package NormalizInterface,
  see the documentation of this package for details.
@@ -40,5 +41,5 @@ E-mail us if there are any questions, remarks, suggestions. Also, we
 would like to hear about applications of this package.
 
 
-Andreas Bächle, e-mail: ABachle@vub.be
+Andreas Bächle, e-mail: ABachle@gmx.net
 Leo Margolis, e-mail: Leo.Margolis@uam.es

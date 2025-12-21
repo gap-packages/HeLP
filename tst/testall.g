@@ -22,13 +22,13 @@ if TestPackageAvailability("4ti2Interface") = true and Filename(DirectoriesSyste
   fi;
 fi;
 
-if Filename(DirectoriesSystemPrograms(), "zsolve") = fail and not TestPackageAvailability("NormalizInterface") = true then
+#if Filename(DirectoriesSystemPrograms(), "zsolve") = fail and not TestPackageAvailability("NormalizInterface") = true then
   fn := Filename( pkgdir, "no_solver.tst" );
-  Print("No solver found\n");
+  Print("Testing functions whihc do not use solvers\n");
   if not Test( fn, rec(compareFunction := "uptowhitespace") ) then
     testresult := false;
   fi;
-fi;
+#fi;
 
 if testresult then
   Print("#I  No errors detected while testing package ", pkgname, "\n");

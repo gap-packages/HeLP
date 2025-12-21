@@ -80,7 +80,7 @@ Status := "deposited",
 AbstractHTML := "<span class=\"pkgname\">HeLP</span> is a package to compute constraints on partial augmentations of torsion units in integral group rings using a method developed by Luthar, Passi and Hertweck.  The package can be employed to verify the Zassenhaus Conjecture, the Prime Graph Question, the Spectrum Problem and the Kimmerle Problem for finite groups, once characters are known. It uses an interface to the software package 4ti2 to solve integral linear inequalities or alternatively Normaliz.",
                   
 Dependencies := rec(
-  GAP                    := ">=4.12",
+  GAP                    := ">=4.13",
   NeededOtherPackages    := [
     ["io", ">=4.2" ],
     ["CTblLib", ">= 1.2.2"],
@@ -97,7 +97,7 @@ Extensions := [
            ],
          filename:= "lib/HeLP_internal_4ti2.gi" ),
     rec( needed:= [
-             [ "NormalizInterface", ">= 0.9.6" ],
+             [ "NormalizInterface", ">= 1.4.1" ],
            ],
          filename:= "lib/HeLP_internal_normaliz.gi" ),
   ], # the order of loading implies that if both solvers work, then normaliz is the active by default
