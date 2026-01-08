@@ -8,15 +8,16 @@
 
 #! Here is a checklist what to do, if the package does not work or you also want to use the solver 4ti2:
 #! * Make sure you have sufficiently new versions of the following software: 
-#!   - <URL Text="GAP">https://www.gap-system.org/</URL> (at least 4.8.2)
+#!   - <URL Text="GAP">https://www.gap-system.org/</URL> (at least 4.13)
 #!   - the GAP-package <URL Text="CTblLib">https://www.math.rwth-aachen.de/~Thomas.Breuer/ctbllib/</URL> (at least 1.2.2)
 #!   - the GAP-package <URL Text="IO">https://gap-packages.github.io/io/</URL> (at least 4.2; see also the next bullet point if this package can not be loaded)
 #!   - the GAP-package <URL Text="4ti2Interface">https://homalg-project.github.io/pkg/4ti2Interface/</URL> (at least 2015.04.29; this package needs the IO-package)   <P/>
-#!   - the GAP-package <URL Text="NormalizInterface">https://gap-packages.github.io/NormalizInterface//</URL> (at least 0.9.6)   <P/>
+#!   - the GAP-package <URL Text="NormalizInterface">https://gap-packages.github.io/NormalizInterface//</URL> (at least 1.4.1)   <P/>
 #!   
-#!  Usually all these packages should come with a sufficiently recent GAP-installation (4.8.3 or newer)
+#!  Usually all these packages should come with a sufficiently recent GAP-installation (4.13 or newer)
 #!  and should be contained in the pkg-folder of the GAP-installation. To see if they are working you can load them by typing
 #!  <K>LoadPackage("[name]");</K> after starting GAP, where <K>[name]</K> is the name of the package.
+#!   The IO and CTblLib are strictly necessary for the package to load. 4ti2 and/or normaliz are needed for full functionality, but some useful functions also work without them.
 #! * The IO-package needs a C-part to be compiled. To see if this has already been done on your system, you can enter
 #!   <K>LoadPackage("IO");</K> after starting GAP. If the result is <K>fail</K> and the package is contained in the pkg-folder, than most likely the C-part is not yet compiled.
 #!   For information on installation and in particular on how to compile the C-part, see the

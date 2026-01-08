@@ -279,7 +279,7 @@ HeLP_sol[6];
 #!   [ [ 1 ], [ 0, 1 ], [ 2, -1, 1, -1 ] ], [ [ 1 ], [ 1, 0 ], [ -2, 1, 2, 0 ] ], 
 #!   [ [ 1 ], [ 1, 0 ], [ 0, 0, 0, 1 ] ], [ [ 1 ], [ 1, 0 ], [ 2, 0, 0, -1 ] ] ]
 #! @EndExample
-#! We see remark that units of order 6 are known to be rationally conjugate to trivial units by other methods <Cite Key="BachleMargolisExamplesToMethods"/>. 
+#! We remark that units of order 6 are known to be rationally conjugate to trivial units by other methods <Cite Key="BachleMargolisExamplesToMethods"/>. 
 #! For order 4 however, this remains open.
 #! @EndChunk
 
