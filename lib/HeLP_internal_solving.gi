@@ -8,7 +8,7 @@
 #############################################################################
 
 
-############################## the internal functions in case both packages only NormalizInterface could be loaded and 4ti2Interface could not
+############################## the internal functions which solve inequalities, but do not actually contain commands which use 4ti2 or normaliz directly
 
 # HeLP_settings[1] := "normaliz"; # the usually preferable solver
 

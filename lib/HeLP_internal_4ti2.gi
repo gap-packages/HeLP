@@ -1,3 +1,4 @@
+# only function which uses 4ti2 directly. This file is only loaded when the 4ti2Interface package is loaded
 HeLP_settings[1] := "4ti2"; #for the moment this file is loaded by the package
 
 InstallGlobalFunction("HeLP_INTERNAL_TestSystem_4ti2",  function(T,a,k,pa)

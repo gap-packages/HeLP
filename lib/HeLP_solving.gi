@@ -6,7 +6,7 @@
 ##
 #############################################################################
 
-#user oriented functions that need at least one of 4ti2 or Normaliz
+#user oriented functions that need at least one of 4ti2 or Normaliz to work, but no command which actually uses 4ti2 or normaliz appears in this file
 
 ########################################################################################################
 

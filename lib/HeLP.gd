@@ -644,7 +644,7 @@ DeclareGlobalFunction( "HeLP_INTERNAL_WithGivenOrderAllTables" );
 DeclareGlobalFunction( "HeLP_v4_INTERNAL_WithGivenOrder");
 DeclareGlobalFunction( "HeLP_v4_INTERNAL_WithGivenOrderAllTables" );
 
-##
+## these two functions are declared in any case but only installed when the corresponding package is loaded (using Extensions, see PackageInfo.g)
 DeclareGlobalFunction( "HeLP_INTERNAL_TestSystem_Normaliz" );
 DeclareGlobalFunction( "HeLP_INTERNAL_TestSystem_4ti2" );
 

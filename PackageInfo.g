@@ -13,7 +13,7 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "4.1",
-Date           := "22/12/2025", # dd/mm/yyyy format
+Date           := "08/01/2026", # dd/mm/yyyy format
 License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
@@ -87,7 +87,7 @@ Dependencies := rec(
   ],
   SuggestedOtherPackages := [
     ["4ti2Interface", ">= 2015.04.29"],
-    ["NormalizInterface", ">= 0.9.6"],
+    ["NormalizInterface", ">= 1.4.1"],
   ],
   ExternalConditions     := [[ "zsolve", "https://4ti2.github.io" ] ]
 ),
@@ -108,7 +108,7 @@ AvailabilityTest := function()
     return true;
   end,
 
-Keywords := ["HeLP method", "torsion units", 
+Keywords := ["HeLP method", "torsion units", "integral group rings",
              "rational conjugacy", "Zassenhaus Conjecture", "Prime Graph Question", "Spectrum Problem", "Kimmerle Problem"],
 
 AutoDoc := rec(

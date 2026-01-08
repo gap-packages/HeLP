@@ -1,3 +1,4 @@
+# only function which uses normaliz directly. Only loaded if NormalizInterface can be loaded
 HeLP_settings[1] := "normaliz"; #for the moment this file is loaded by the package
 
 InstallGlobalFunction("HeLP_INTERNAL_TestSystem_Normaliz",  function(T,a,k,pa)
