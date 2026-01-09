@@ -10,13 +10,9 @@ The current version of this package is version {{site.data.package.version}}, re
 For more information, please refer to [the package manual]({{site.data.package.doc-html}}).
 There is also a [README](README.html) file.
 
-A short article outlining the theory and algorithms is available [here](https://msp.org/jsag/2018/8-1/p01.xhtml) or in the [ArXiv version](https://arxiv.org/abs/1507.08174). 
-
-
-## Installation
-
-Download and unpack the archive provided below in the pkg subdirectory of your GAP installation. This completes the installation of the HeLP package. Note however that this package requires the 4ti2Interface, which in turn uses the package IO. The latter package needs a C-part to be compiled; see the readme-file or the documentation of that package. The HeLP-package also requires the GAP-package NormalizInterface which also has to be build before it can be loaded in GAP; see the readme-file or the documentation of that package. This package also makes use of the software Normaliz and, if installed, 4ti2 and lrslib. The first one should automatically be installed when building the NormalizInterface, the second and the third one need to be installed manually as described homepages of the packages.
-In case you have problems getting the HeLP-package running, see Section 6.1 of the manual for some trouble shooting. If this does not help, feel free to contact one of the maintainers of the package. 
+{% if site.data.package.license %}
+  License: [{{ site.data.package.license }}](https://spdx.org/licenses/{{ site.data.package.license }})
+{% endif %}
 
 ## Dependencies
 
@@ -63,13 +59,6 @@ You can get more info by typing `Cite("{{ site.data.package.name }}");` in the g
 {% include button-bibtex.html %}
 
 {% endif %}
-
-We would be grateful to hear if you are using this package. Just send an email to one of the maintainers. Comments and suggestion for improvements are very welcome. 
-
-
-## Acknowledgments
-
-The development of HeLP was partially supported by the DFG priority program SPP 1489 Algorithmic and Experimental Methods in Algebra, Geometry, and Number Theory and the Research Foundation Flanders (FWO - Vlaanderen).
 
 
 {% if site.github.issues_url %}
