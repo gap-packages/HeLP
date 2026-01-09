@@ -563,7 +563,7 @@ else
   if IsSolvable(C) then
      Info( HeLP_Info, 1, "The group is solvable, so only the given character table was used.");   
   fi;
-  if BT_not_available <> [ ] then 
+  if IsBound(BT_not_available) and BT_not_available <> [ ] then 
     Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
   fi;
   Info(HeLP_Info, 1,  "Number of solutions for elements of order ", ord, " with these partial augmentations for the powers: ", Size(intersol), ".");
@@ -624,7 +624,7 @@ else
   if IsSolvable(C) then
      Info( HeLP_Info, 1, "The group is solvable, so only the given character table was used.");   
   fi;
-  if BT_not_available <> [ ] then 
+  if IsBound(BT_not_available) and BT_not_available <> [ ] then 
     Info( HeLP_Info, 1, "The Brauer tables for the following primes are not available: ", Set(BT_not_available), ".");
   fi;
   Info(HeLP_Info, 1,  "Number of solutions for elements of order ", ord, " with these partial augmentations for the powers: ", Size(intersol), ".");
