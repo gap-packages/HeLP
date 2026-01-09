@@ -1,7 +1,10 @@
 Changes v4.0 -> 4.1
 
-* When NormalizInterface or 4ti2 is not available, the functions which use them are now not loaded
+* When NormalizInterface or 4ti2 is not available, the functions which use them are now not loaded. This is achieved by restucturing the files in /lib and using Extensions in PackageInfo.g. In particular, solving a system is now divided into two functions, one for normaliz and one for 4ti2, each of which has its own file which is only loaded if the corresponding interface package can be loaded by GAP. Accordingly adjustements have been made to the needed package versions, the GAP versiona and in the manual.
+* To resolve issues of failing tests and loading errors IO and CTblLib are now requiered
+* Test files adjusted to new structure and extended. Also by requiering new version of CTblLib an error which came up during testing is resolved.
 * Corrected mistake in HeLP_WithGivenOrderAllTables which appeared in version 4.0
+* Changes by the GAP admins about GitHub packages, release options etc
 
 Changes v3.4 -> 4.0
 

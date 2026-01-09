@@ -13,7 +13,7 @@ PackageName    := "HeLP",
 Subtitle       := Concatenation( [
                   "Hertweck-Luthar-Passi method." ] ),
 Version        := "4.1",
-Date           := "08/01/2026", # dd/mm/yyyy format
+Date           := "09/01/2026", # dd/mm/yyyy format
 License        := "GPL-2.0-or-later",
 
 SourceRepository := rec(
@@ -100,7 +100,7 @@ Extensions := [
              [ "NormalizInterface", ">= 1.4.1" ],
            ],
          filename:= "lib/HeLP_internal_normaliz.gi" ),
-  ], # the order of loading implies that if both solvers work, then normaliz is the active by default
+  ], # the order of loading implies that if both solvers work, then normaliz is the active by default. This is set by HeLP_internal_normaliz.gi
 
 TestFile := "tst/testall.g",
 

@@ -34,6 +34,9 @@ of your GAP 4 installation. It creates a subdirectory called `help'.
  4ti2-Interface and normaliz-Interface written by S. Gutsche, C. Söger and M. Horn, 
  The 4ti2-Interface in turn uses the package IO, that needs a C-part to be compiled;
  see the readme-file or the documentation of the IO-package for details.
+ The packages IO and CTblLib are requiered for loading the package.
+ 4ti2Interface and/or NormalizInterface are recommended, but some functions work
+ also without any of them being loaded.
 
 This completes the installation of the package.
 
