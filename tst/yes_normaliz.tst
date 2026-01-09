@@ -35,6 +35,9 @@ gap> HeLP_SP(C);
 false
 
 gap> G := SmallGroup(48,30);;
+gap> C := CharacterTable(G);;
+gap> HeLP_WithGivenOrderAllTables(C, 2);
+ [ [ [ 0, 0, 1 ] ], [ [ 0, 1, 0 ] ], [ [ 1, 0, 0 ] ] ]
 gap> HeLP_ZC(G);
  false
 gap> Size(HeLP_sol[4]);
