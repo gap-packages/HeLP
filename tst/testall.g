@@ -6,7 +6,7 @@ pkgdir := DirectoriesPackageLibrary( pkgname, "tst" );
 testresult := true;
 if TestPackageAvailability("NormalizInterface") = true then
   Print("normaliz found\n");
-  if exec := IO_FindExecutable( "lrs" ) <> fail then
+  if IO_FindExecutable( "lrs" ) <> fail then
     Print("Also found lrs, HeLP_UseRedund will be tested also\n");
     fn := Filename( pkgdir, "yes_normaliz_lrs.tst" );
     Print("#I  Testing ", fn, "\n");
@@ -24,7 +24,7 @@ fi;
 
 if TestPackageAvailability("4ti2Interface") = true and Filename(DirectoriesSystemPrograms(), "zsolve") <> fail then
   Print("4ti2 found\n");
-  if exec := IO_FindExecutable( "lrs" ) <> fail then
+  if IO_FindExecutable( "lrs" ) <> fail then
     Print("Also found lrs, HeLP_UseRedund will be tested also\n");
     fn := Filename( pkgdir, "yes_4ti2_lrs.tst" );
     Print("#I  Testing ", fn, "\n");
@@ -42,7 +42,7 @@ fi;
 
 # in any case test functions not requiring any solver 
 fn := Filename( pkgdir, "no_solver.tst" );
-Print("Testing functions whihc do not use solvers\n");
+Print("Testing functions which do not use solvers\n");
 if not Test( fn, rec(compareFunction := "uptowhitespace") ) then
   testresult := false;
 fi;
