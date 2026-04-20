@@ -14,14 +14,10 @@ gap> C := CharacterTable("A5");;
 gap> HeLP_ZC(C);
  true
  
-#
 gap> HeLP_UseRedund(true);;
-#I  'redund' will be used from now on.
 gap> HeLP_ZC(G);
 true
 gap> HeLP_UseRedund(false);;
-#I  The calculations will be performed without using 'redund' from now on.
-
  
 gap> List(HeLP_sol, x -> Set(x));
  [ [ [ [ 1 ] ] ], [ [ [ 1 ] ] ], [ [ [ 1 ] ] ],, 
