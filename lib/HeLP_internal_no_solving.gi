@@ -96,25 +96,25 @@ for i in [1..Length(A)] do
   od;
   IO_Write( filename, "\n" );
 od;
-IO_Write(filename, "end");
+IO_Write(filename, "end\nredund"); # the option redund in the sense of lrs is activated
 # IO_Flush(filename);  # done by the call of IO_Close afterwards
 IO_Close(filename);
 ###
-exec := IO_FindExecutable( "redund" );
+exec := IO_FindExecutable( "lrs" );
 if exec = fail then
-  Error("Executable redund (from package the lrslib-Package) not found.  Please check if it is installed in a directory contained in the PATH variable.");
+  Error("Executable lrs (from package the lrslib-Package) not found.  Please check if it is installed in a directory contained in the PATH variable.");
 fi;
 filename2 := Filename( dir, "redund_out.ine" );   # write the output of redund to this file
 filename := Filename( dir, "gap_redund.ine" );
 filestream := IO_Popen3( exec, [ filename, filename2 ] );
 # while IO_ReadLine( filestream.stdout ) <> "" do od;            # still busy - is this needed?
-std_err_out := Concatenation( IO_ReadLines( filestream.stderr ) );
+#std_err_out := Concatenation( IO_ReadLines( filestream.stderr ) );  ## this was used for earlier versions of lrs (before 7.1)
 IO_Close( filestream.stdin );
 IO_Close( filestream.stdout );
 IO_Close( filestream.stderr );
-if std_err_out <> "" then
-  Error( Concatenation( "redund Error:\n", std_err_out, "If you continue, your results might be wrong" ) );
-fi;
+#if std_err_out <> "" and std_err_out <> "\n" then ## this was used for earlier versions of lrs (before 7.1)
+#  Error( Concatenation( "redund Error:\n", std_err_out, "If you continue, your results might be wrong" ) );
+#fi;
 
 # convert data back to GAP-matrix form 
 filestream := IO_File( filename2, "r" );
@@ -153,6 +153,7 @@ fi;
 IO_Close( filestream );
 return [matrix, rhs];
 end);
+
 
 ########################################################################################################
 

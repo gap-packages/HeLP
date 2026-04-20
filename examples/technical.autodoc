@@ -43,7 +43,7 @@
 #!   - Start a terminal and access a path written in your bash or system_bash. Typically <K>usr/local/bin</K> should work. <P/>
 #!   - Run <K>ln -s /[PathToZsolve] zsolve</K>, where <K>[PathToZsolve]</K> is the path to the executable zsolve. This sets a symlink to the right place.
 #!   E.g. <K>ln -s /opt/4ti2/bin/zsolve zsolve</K> was used on the (Linux) computers in Stuttgart.
-#! * In case you use 4ti2, we also recommend to install <URL Text="lrslib">https://cgm.cs.mcgill.ca/~avis/C/lrs.html</URL>, at least version 4.3.
+#! * In case you use 4ti2, we also recommend to install <URL Text="lrslib">https://cgm.cs.mcgill.ca/~avis/C/lrs.html</URL>, at least version 7.1.
 #!   This software provides the 'redund' command, 
 #!   which can be switched on and off within HeLP, but which often leads to better performances (cf. <Ref Func='HeLP_UseRedund'/>).
 #!   For installation see the User's Guide or the Readme-file on the above mentioned homepage.  Usually, after unpacking in a 
@@ -52,7 +52,7 @@
 
 @Section Running the package without 4ti2 and normaliz
 
-#! Even if none of the solvers is installed and even when none of the packages 4ti2Interface and NormalizInterface can be loaded, some restricted functionality is still available. For instance one can define partial augmentations manually and verify, if it satisfies the HeLP constraints using  <Ref Func='HeLP_VerifySolution'/>, obtain the corresponding eigenvalues under representations using <Ref Func='HeLP_MultiplicitiesOfEigenvalues'/> or apply the Wagner test to them using  <Ref Func='HeLP_WagnerTest'/>.  
+#! Even if none of the solvers is installed and even when none of the packages 4ti2Interface and NormalizInterface can be loaded, some restricted functionality is still available. For instance one can define partial augmentations manually and verify, if they satisfy the HeLP constraints using  <Ref Func='HeLP_VerifySolution'/>, obtain the corresponding eigenvalues under representations using <Ref Func='HeLP_MultiplicitiesOfEigenvalues'/> or apply the Wagner test to them using  <Ref Func='HeLP_WagnerTest'/>.  
 
 @Section How much 4ti2 and normaliz is really there?
 #! The reason, why the programs 4ti2 and normaliz are used in this package, is basically that they can solve systems 

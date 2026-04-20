@@ -5,6 +5,10 @@
  the variable HeLP_sol. We also give hints how to use the package 
  more efficiently, to use characters
  not available in libraries and how InfoLevels can be helpful.
+ 
+ Most of the examples were calculated for the first public version 
+ of the package which appeared in 2015. Since then many of the auxilary
+ programs have changed, so that performancec are often hugely different. 
 
 @Section The Character Table Library
 
