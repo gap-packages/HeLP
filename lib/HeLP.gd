@@ -500,7 +500,7 @@ DeclareGlobalFunction( "HeLP_VerifySolution" );
 #! @Returns List of admissible partial augmentations or "infinite"
 DeclareGlobalFunction( "HeLP_FindAndVerifySolution" );
 
-#! @InsertChunk FCExample
+# #! @InsertChunk FCExample
 
 #! @Description
 #! This function provides the possible partial augmentations of the powers of units of a given order $n,$  
@@ -525,7 +525,7 @@ DeclareGlobalFunction( "HeLP_PossiblePartialAugmentationsOfPowers" );
 #! @Returns Trivial solutions.
 DeclareGlobalFunction( "HeLP_WriteTrivialSolution" ); 
 
-# #! @InsertChunk TSExample
+#! @InsertChunk TSExample
 
 #! @Section The Wagner test
 

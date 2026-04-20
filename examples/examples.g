@@ -726,7 +726,7 @@ HeLP_WithGivenOrderAndPA(Irr(C){[2..20]},20,LP[1]);
 
 #! @BeginChunk TSExample
 #! With the character tables that are currently available in GAP, the Zassenhaus Conjecture
-#! for elements of order $4$ in $\text{PSL}(2,49)$ cannot be solved. However it was proved in
+#! for elements of order $4$ in $PSL(2,49)$ cannot be solved. However it was proved in
 #! <Cite Key="HertweckBrauer"/> using the Brauer table modulo $7$.
 #! @BeginExample
 C := CharacterTable("L2(49)");
