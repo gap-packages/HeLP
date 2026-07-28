@@ -407,7 +407,7 @@ DeclareGlobalFunction( "HeLP_ChangeCharKeepSols" );
 
 #! @Description
 #!  This function delets all the values calculated so far and resets the global variables <K>HeLP_CT</K> 
-#!  and <K>HeLP_CT</K> to their initial value <K>[ [ [1] ] ]</K> and <K>CharacterTable(SmallGroup(1,1))</K>
+#!  and <K>HeLP_CT</K> to their initial value <K>[ [ [1] ] ]</K> and <K>CharacterTable(TrivialGroup())</K>
 #!  respectively.
 #! @Arguments
 #! @Returns nothing

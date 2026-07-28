@@ -51,7 +51,7 @@ InstallGlobalFunction(HeLP_Reset, function()
 # Delets all values calculated so far and rests the varaibles to the inital value
 MakeReadWriteGlobal("HeLP_CT");  
 UnbindGlobal("HeLP_CT");
-BindGlobal("HeLP_CT", CharacterTable(SmallGroup(1,1)));
+BindGlobal("HeLP_CT", CharacterTable(TrivialGroup()));
 HeLP_sol := [[[[1]]]];     
 end);
 
