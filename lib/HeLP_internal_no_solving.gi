@@ -2,7 +2,7 @@
 ## Internal functions that do not solve any inqualities, i.e. do not need 4ti2 or normaliz
 #########
 
-BindGlobal("HeLP_CT", CharacterTable(SmallGroup(1,1)));
+BindGlobal("HeLP_CT", CharacterTable(TrivialGroup()));
 BindGlobal("HeLP_sol", [[[[1]]]]);          # sol[k] contains the possible solutions for elements of order k
 MakeReadWriteGlobal("HeLP_sol");
 # HeLP_sol will be set as global variable when loading the package to have a warning in case it is already ued as a variable
